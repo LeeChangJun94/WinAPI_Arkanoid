@@ -47,6 +47,12 @@ public:
 		return Location;
 	}
 
+	//Ãß°¡
+	FVector2D GetActorScale()
+	{
+		return Scale;
+	}
+
 protected:
 
 private:

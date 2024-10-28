@@ -4,10 +4,13 @@
 #include <EnginePlatform/EngineInput.h>
 #include "Bullet.h"
 
+APlayer* APlayer::Ball = nullptr;
+
 APlayer::APlayer()
 {
-	// UEngineAPICore::GetCore()->CreateLevel("Title");
-	SetActorLocation({ 100, 100 });
+	Ball = this;
+
+	SetActorLocation({ 700, 700 });
 	SetActorScale({ 100, 100 });
 }
 

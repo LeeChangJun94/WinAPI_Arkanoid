@@ -9,6 +9,8 @@ public:
 	APlayer();
 	~APlayer();
 
+	static APlayer* Ball;
+
 	// delete Function
 	APlayer(const APlayer& _Other) = delete;
 	APlayer(APlayer&& _Other) noexcept = delete;
@@ -26,7 +28,7 @@ public:
 protected:
 
 private:
-	float Speed = 100.0f;
+	float Speed = 500.0f;
 
 };
 
