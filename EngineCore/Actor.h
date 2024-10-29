@@ -5,6 +5,8 @@
 class AActor
 {
 public:
+	typedef AActor Super;
+
 	friend class ULevel;
 
 	// constrcuter destructer
@@ -29,28 +31,28 @@ public:
 
 	void SetActorLocation(FVector2D _Location)
 	{
-		Location = _Location;
+		Transform.Location = _Location;
 	}
 
 	void AddActorLocation(FVector2D _Direction)
 	{
-		Location += _Direction;
+		Transform.Location += _Direction;
 	}
 
 	void SetActorScale(FVector2D _Scale)
 	{
-		Scale = _Scale;
+		Transform.Scale = _Scale;
 	}
 
 	FVector2D GetActorLocation()
 	{
-		return Location;
+		return Transform.Location;
 	}
 
 	//Ãß°¡
 	FVector2D GetActorScale()
 	{
-		return Scale;
+		return Transform.Scale;
 	}
 
 protected:
@@ -58,7 +60,6 @@ protected:
 private:
 	class ULevel* World = nullptr;
 
-	FVector2D Location = FVector2D::ZERO;
-	FVector2D Scale = FVector2D::ZERO;
+	FTransform Transform;
 };
 

@@ -2,6 +2,12 @@
 #include "ContentsCore.h"
 #include <EngineCore/EngineAPICore.h>
 
+#include <EngineBase/EngineDirectory.h>
+
+#include <EngineBase/EngineDebug.h>
+#include <EngineBase/EngineFile.h>
+#include <EngineCore/ImageManager.h>
+
 #include "PlayGameMode.h"
 #include "Player.h"
 
@@ -17,17 +23,45 @@ ContentsCore::~ContentsCore()
 // 엔진이 실행되고 단 1번 실행된다.
 void ContentsCore::BeginPlay()
 {
-	// MyWindow.Open();
+	// UEngineDirectory Dir = "C:\\AAA";
 
-	// 아무 쓸모 없는 코드.
-	// 애는 님들이 지워줘야한다.
-	// TitleLevel = new ULevel();
+	UEngineDirectory Dir;
 
-	// 객체를 생성하는 함수를 제공해주는데 무시하면 안된다는것.
-	// 이걸 통해서 안만든 애들 => 다 아무런 쓸모가 없을 가능성이 없다.
+	// 상대경로가 중요하다.
+	// 상대 경로의 핵심은 이것이다.
+	// 내가 어디서 실행됐는지는 중요하지 않아야 한다.
+	if (false == Dir.MoveParentToDirectory("Resources"))
+	{
+		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+		return;
+	}
+
+	std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+
+	for (size_t i = 0; i < ImageFiles.size(); i++)
+	{
+		std::string FilePath = ImageFiles[i].GetPathToString();
+		UImageManager::GetInst().Load(FilePath);
+	}
+
+	//UEngineDirectroy Dir;
+
+	//Dir.SetPath("C:\\Resources");
+
+	//std::vector<UEngineFile> AllFile = Dir.GetAllFile("*.Bmp", "*.Png");
+
+	//for (size_t i = 0; i < AllFile.size(); i++)
+	//{
+	//	ImageManager::Load(AllFile[i].GetPath());
+	//}
+
+
+
 
 	//UEngineAPICore::GetCore()->CreateLevel("Title");
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("Arkanoid");
+
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 1280, 720 });
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
 	//UEngineAPICore::GetCore()->CreateLevel("End");

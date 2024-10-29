@@ -151,6 +151,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="PlayMap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Brick.h">
       <SubType>
       </SubType>
@@ -171,6 +175,10 @@
     <ClInclude Include="PreCompile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PlayMap.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Brick.cpp">
       <SubType>
       </SubType>

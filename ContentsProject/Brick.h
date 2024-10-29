@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EngineBase/EngineMath.h>
 
 enum CollPos
 {
@@ -32,13 +33,22 @@ public:
 protected:
 
 private:
+	CollPos HitBallPos = CollPos::NONE;
+	
+	FTransform BallTrans;
 	int BallX = 0;
 	int BallY = 0;
 	int BallScaleX = 0;
 	int BallScaleY = 0;
+
+	FTransform BrickTrans;
 	int BrickX = 0;
 	int BrickY = 0;
 	int BrickScaleX = 0;
 	int BrickScaleY = 0;
+
+
+	float ratio = 0;
+	int line = 0;
 };
 

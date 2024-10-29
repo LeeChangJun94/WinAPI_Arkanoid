@@ -153,8 +153,16 @@
   <ItemGroup>
     <ClInclude Include="EngineDebug.h" />
     <ClInclude Include="EngineDelegate.h" />
+    <ClInclude Include="EngineDirectory.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EngineFile.h" />
     <ClInclude Include="EngineMath.h" />
+    <ClInclude Include="EnginePath.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EngineTimer.h">
       <SubType>
       </SubType>
@@ -164,8 +172,16 @@
   <ItemGroup>
     <ClCompile Include="EngineDebug.cpp" />
     <ClCompile Include="EngineDelegate.cpp" />
+    <ClCompile Include="EngineDirectory.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="EngineFile.cpp" />
     <ClCompile Include="EngineMath.cpp" />
+    <ClCompile Include="EnginePath.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="EngineTimer.cpp">
       <SubType>
       </SubType>

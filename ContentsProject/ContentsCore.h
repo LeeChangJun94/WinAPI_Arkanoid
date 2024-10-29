@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/EngineAPICore.h>
+#include <EnginePlatform/EngineWindow.h>
 
 // Ό³Έν :
 class ContentsCore : public UContentsCore
@@ -21,7 +22,7 @@ protected:
 	void Tick() override;
 
 private:
-
+	ULevel* TitleLevel;
 
 
 };
