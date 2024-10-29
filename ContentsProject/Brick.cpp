@@ -20,6 +20,7 @@ ABrick::~ABrick()
 
 void ABrick::BeginPlay()
 {
+
 }
 
 
@@ -27,7 +28,7 @@ void ABrick::Tick(float _DeltaTime)
 {
 	BallTrans.Location = { APlayer::Ball->GetActorLocation().iX(), APlayer::Ball->GetActorLocation().iY() };
 	BallTrans.Scale = { APlayer::Ball->GetActorScale().iX(), APlayer::Ball->GetActorScale().iY() };
-
+	
 	//BallX = APlayer::Ball->GetActorLocation().iX();
 	//BallY = APlayer::Ball->GetActorLocation().iY();
 	//BallScaleX = APlayer::Ball->GetActorScale().iX();
@@ -42,15 +43,104 @@ void ABrick::Tick(float _DeltaTime)
 	//BrickScaleY = GetActorScale().iY();
 
 	ratio = (BrickTrans.Scale.Y / 2) / (BrickTrans.Scale.X / 2);
-	line = ratio * (BallTrans.Scale.iX() / 2) - (BallTrans.Scale.iY() / 2);
+	//line = ratio * (BallTrans.Location.X / 2) - (BrickTrans.Scale.Y / 2);
+	
 
-	//¿ÞÂÊ
-	if (BallTrans.Location.iX() < BrickTrans.Location.iX() && BallTrans.Location.iX() > (BrickTrans.Location.iX() - (BrickTrans.Scale.iX() / 2)) &&
-		BallTrans.Location.iY() > (BrickTrans.Location.iY() - (BrickTrans.Scale.iY() / 2)) && BallTrans.Location.iY() < BrickTrans.Location.iY())
+
+	//Brick ¿ÞÂÊ
+	if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X > (BrickTrans.Location.X - (BrickTrans.Scale.X / 2)) &&
+		BallTrans.Location.Y > (BrickTrans.Location.Y - (BrickTrans.Scale.Y / 2)) && BallTrans.Location.Y < BrickTrans.Location.Y)
 	{
-
-			UEngineDebug::OutPutString("left");
+		line = (-ratio) * (BallTrans.Location.X - BrickTrans.Location.X);
 		
+		if ((line) > (BrickTrans.Location.Y - BallTrans.Location.Y))
+		{
+			UEngineDebug::OutPutString("Left");
+			if (APlayer::Ball->Dir.X > 0)
+			{
+				APlayer::Ball->Dir.X *= -1;
+			}
+		}
+		else
+		{
+			UEngineDebug::OutPutString("Top");
+			if (APlayer::Ball->Dir.Y > 0)
+			{
+				APlayer::Ball->Dir.Y *= -1;
+			}
+			
+		}
+	}
+
+	if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X > (BrickTrans.Location.X - (BrickTrans.Scale.X / 2)) &&
+		BallTrans.Location.Y < (BrickTrans.Location.Y + (BrickTrans.Scale.Y / 2)) && BallTrans.Location.Y > BrickTrans.Location.Y)
+	{
+		line = ratio * (BallTrans.Location.X - BrickTrans.Location.X);
+
+		if ((line) < (BrickTrans.Location.Y - BallTrans.Location.Y))
+		{
+			UEngineDebug::OutPutString("Left");
+			if (APlayer::Ball->Dir.X > 0)
+			{
+				APlayer::Ball->Dir.X *= -1;
+			}
+		}
+		else
+		{
+			UEngineDebug::OutPutString("Bottom");
+			if (APlayer::Ball->Dir.Y < 0)
+			{
+				APlayer::Ball->Dir.Y *= -1;
+			}
+		}
+	}
+
+
+	//Brick ¿À¸¥ÂÊ
+	if (BallTrans.Location.X > BrickTrans.Location.X && BallTrans.Location.X < (BrickTrans.Location.X + (BrickTrans.Scale.X / 2)) &&
+		BallTrans.Location.Y > (BrickTrans.Location.Y - (BrickTrans.Scale.Y / 2)) && BallTrans.Location.Y < BrickTrans.Location.Y)
+	{
+		line = ratio * (BallTrans.Location.X - BrickTrans.Location.X);
+
+		if ((line) > (BrickTrans.Location.Y - BallTrans.Location.Y))
+		{
+			UEngineDebug::OutPutString("Right");
+			if (APlayer::Ball->Dir.X < 0)
+			{
+				APlayer::Ball->Dir.X *= -1;
+			}
+		}
+		else
+		{
+			UEngineDebug::OutPutString("Top");
+			if (APlayer::Ball->Dir.Y > 0)
+			{
+				APlayer::Ball->Dir.Y *= -1;
+			}
+		}
+	}
+
+	if (BallTrans.Location.X > BrickTrans.Location.X && BallTrans.Location.X < (BrickTrans.Location.X + (BrickTrans.Scale.X / 2)) &&
+		BallTrans.Location.Y < (BrickTrans.Location.Y + (BrickTrans.Scale.Y / 2)) && BallTrans.Location.Y > BrickTrans.Location.Y)
+	{
+		line = (-ratio) * (BallTrans.Location.X - BrickTrans.Location.X);
+
+		if ((line) < (BrickTrans.Location.Y - BallTrans.Location.Y))
+		{
+			UEngineDebug::OutPutString("Right");
+			if (APlayer::Ball->Dir.X < 0)
+			{
+				APlayer::Ball->Dir.X *= -1;
+			}
+		}
+		else
+		{
+			UEngineDebug::OutPutString("Bottom");
+			if (APlayer::Ball->Dir.Y < 0)
+			{
+				APlayer::Ball->Dir.Y *= -1;
+			}
+		}
 	}
 
 

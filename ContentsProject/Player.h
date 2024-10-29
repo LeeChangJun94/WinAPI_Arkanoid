@@ -27,10 +27,12 @@ public:
 	//void UpMove(float _DeltaTime);
 	//void DownMove(float _DeltaTime);
 
+	FVector2D Dir = { 1.f , -1.f };
+	
 protected:
 
 private:
-	float Speed = 500.0f;
+	float Speed = 800.0f;
 
 };
 

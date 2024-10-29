@@ -49,6 +49,6 @@ private:
 
 
 	float ratio = 0;
-	int line = 0;
+	float line = 0;
 };
 

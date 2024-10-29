@@ -2,6 +2,7 @@
 #include "Player.h"
 #include <EngineCore/EngineAPICore.h>
 #include <EnginePlatform/EngineInput.h>
+#include <EnginePlatform/EngineWindow.h>
 #include "Bullet.h"
 
 APlayer* APlayer::Ball = nullptr;
@@ -10,7 +11,7 @@ APlayer::APlayer()
 {
 	Ball = this;
 
-	SetActorLocation({ 700, 700 });
+	SetActorLocation({ 300, 700 });
 	SetActorScale({ 20, 20 });
 }
 
@@ -97,6 +98,45 @@ void APlayer::MoveFunction(FVector2D _Dir/*, AMonster* Monster*/)
 void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	AddActorLocation(Dir * _DeltaTime * Speed);
+	
+	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+	
+	if (0 > GetActorLocation().X)
+	{
+		if (Dir.X < 0)
+		{
+			Dir.X *= -1;
+		}
+	}
+
+	if (WindowSize.X < GetActorLocation().X)
+	{
+		if (Dir.X > 0)
+		{
+			Dir.X *= -1;
+		}
+	}
+	
+	if (0 > GetActorLocation().Y)
+	{
+		if (Dir.Y < 0)
+		{
+			Dir.Y *= -1;
+		}
+
+	}
+	
+	if (WindowSize.Y < GetActorLocation().Y)
+	{
+		if (Dir.Y > 0)
+		{
+			Dir.Y *= -1;
+		}
+	}
+	
+	 
 	//if (UEngineInput::GetInst().IsDown('A'))
 	//{
 	//	int a = 0;
@@ -166,19 +206,19 @@ void APlayer::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsPress('D'))
 	{
-		AddActorLocation(FVector2D::RIGHT * _DeltaTime * Speed);
+		AddActorLocation(FVector2D::RIGHT * _DeltaTime * (Speed * 2));
 	}
 	if (true == UEngineInput::GetInst().IsPress('A'))
 	{
-		AddActorLocation(FVector2D::LEFT * _DeltaTime * Speed);
+		AddActorLocation(FVector2D::LEFT * _DeltaTime * (Speed * 2));
 	}
 	if (true == UEngineInput::GetInst().IsPress('S'))
 	{
-		AddActorLocation(FVector2D::DOWN * _DeltaTime * Speed);
+		AddActorLocation(FVector2D::DOWN * _DeltaTime * (Speed * 2));
 	}
 	if (true == UEngineInput::GetInst().IsPress('W'))
 	{
-		AddActorLocation(FVector2D::UP * _DeltaTime * Speed);
+		AddActorLocation(FVector2D::UP * _DeltaTime * (Speed * 2));
 	}
 
 	// 마우스 왼쪽 버튼입니다.
