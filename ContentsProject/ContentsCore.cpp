@@ -44,6 +44,13 @@ void ContentsCore::BeginPlay()
 		UImageManager::GetInst().Load(FilePath);
 	}
 
+
+	// 일반 텍스처가 다 로딩되면
+	// 자르는 작업을 아래서 해주는게 좋다.
+
+	UImageManager::GetInst().CuttingSprite("Player_Right.png", { 128, 128 });
+	UImageManager::GetInst().CuttingSprite("Bricks.png", { 16, 8 });
+
 	//UEngineDirectroy Dir;
 
 	//Dir.SetPath("C:\\Resources");

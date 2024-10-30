@@ -4,13 +4,17 @@
 #include "Brick.h"
 #include "Player.h"
 
-
+#include <EngineCore/ImageManager.h>
 
 
 ABrick::ABrick()
 {
 	SetActorLocation({ 600, 300});
-	SetActorScale({ 800, 300 });
+	SetActorScale({ 320, 160 });
+
+
+	SetSprite("Bricks.png");
+	
 } 
 
 ABrick::~ABrick()

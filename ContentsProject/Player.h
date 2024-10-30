@@ -27,12 +27,23 @@ public:
 	//void UpMove(float _DeltaTime);
 	//void DownMove(float _DeltaTime);
 
-	FVector2D Dir = { 1.f , -1.f };
+	void Normalize(FVector2D& _Vector)
+	{
+		_Vector.X * _Vector.X;
+		_Vector.Y * _Vector.Y;
+		float Sqrt = std::sqrt(_Vector.X * _Vector.X + _Vector.Y * _Vector.Y);
+		_Vector.X = _Vector.X / Sqrt;
+		_Vector.Y = _Vector.Y / Sqrt;
+	}
+	
+	
+	
+	FVector2D Dir = { 1.f , -2.f };
 	
 protected:
 
 private:
 	float Speed = 800.0f;
-
+	int MySpriteIndex = 0;
 };
 

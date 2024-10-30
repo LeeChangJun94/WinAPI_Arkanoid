@@ -12,7 +12,9 @@ APlayer::APlayer()
 	Ball = this;
 
 	SetActorLocation({ 300, 700 });
-	SetActorScale({ 20, 20 });
+	SetActorScale({ 256, 256 });
+
+	SetSprite("Player_Right.png");
 }
 
 APlayer::~APlayer()
@@ -98,7 +100,7 @@ void APlayer::MoveFunction(FVector2D _Dir/*, AMonster* Monster*/)
 void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-
+	Normalize(Dir);
 	AddActorLocation(Dir * _DeltaTime * Speed);
 	
 	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
@@ -229,5 +231,12 @@ void APlayer::Tick(float _DeltaTime)
 	//	ABullet* Ptr = GetWorld()->SpawnActor<ABullet>();
 	//	Ptr->SetActorLocation(GetActorLocation());
 	//}
+
+	if (true == UEngineInput::GetInst().IsDown('R'))
+	{
+		SetSprite("Player_Right.png", MySpriteIndex);
+		++MySpriteIndex;
+	}
+
 
 }
