@@ -8,8 +8,10 @@ APlayMap::APlayMap()
 	// 이거 자체도 사실 좋은건 아닙니다.
 	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 
-	SetActorScale(WindowSize.Half());
 	SetActorLocation(WindowSize.Half());
+	SetActorScale(WindowSize);
+	
+	SetSprite("Bricks.png");
 }
 
 APlayMap::~APlayMap()

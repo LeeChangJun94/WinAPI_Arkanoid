@@ -12,9 +12,9 @@ APlayer::APlayer()
 	Ball = this;
 
 	SetActorLocation({ 300, 700 });
-	SetActorScale({ 256, 256 });
+	SetActorScale({ 20, 16 });
 
-	SetSprite("Player_Right.png");
+	SetSprite("Ball.png");
 }
 
 APlayer::~APlayer()
@@ -26,6 +26,9 @@ void APlayer::BeginPlay()
 {
 
 	Super::BeginPlay();
+
+	Dir.Radian(10.f);
+	Dir.Normalize();
 	// 이벤트 방식으로 처리
 	// 인자를 호출할때 넣어주겠다는 명시해주는게 placeholders::
 	// 어떤 컨테츠를 짜냐에 따라서 델타타임이 필요할수도 있고
@@ -100,7 +103,7 @@ void APlayer::MoveFunction(FVector2D _Dir/*, AMonster* Monster*/)
 void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	Normalize(Dir);
+
 	AddActorLocation(Dir * _DeltaTime * Speed);
 	
 	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
@@ -232,11 +235,11 @@ void APlayer::Tick(float _DeltaTime)
 	//	Ptr->SetActorLocation(GetActorLocation());
 	//}
 
-	if (true == UEngineInput::GetInst().IsDown('R'))
-	{
-		SetSprite("Player_Right.png", MySpriteIndex);
-		++MySpriteIndex;
-	}
+	//if (true == UEngineInput::GetInst().IsDown('R'))
+	//{
+	//	SetSprite("Player_Right.png", MySpriteIndex);
+	//	++MySpriteIndex;
+	//}
 
 
 }

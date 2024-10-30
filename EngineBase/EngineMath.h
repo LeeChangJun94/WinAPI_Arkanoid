@@ -1,4 +1,7 @@
 #pragma once
+#include <math.h>
+
+#define PI 3.141592
 
 // FVector로 통일하겠습니다.
 // FVector2D xy
@@ -71,8 +74,15 @@ public:
 		if (0.0f < Len && false == isnan(Len))
 		{
 			X = X / Len;
-			X = Y / Len;
+			Y = Y / Len;
 		}
+		return;
+	}
+
+	void Radian(float _radian)
+	{
+		X = sinf(_radian * PI / 180);
+		Y = -cosf(_radian * PI / 180);
 		return;
 	}
 

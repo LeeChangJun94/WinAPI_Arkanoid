@@ -20,6 +20,8 @@ public:
 protected:
 
 private:
+	FVector2D BrickScale = { 64, 32 };
+
 
 };
 

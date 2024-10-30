@@ -9,9 +9,8 @@
 
 ABrick::ABrick()
 {
-	SetActorLocation({ 600, 300});
-	SetActorScale({ 320, 160 });
-
+	//SetActorLocation({ 600, 300});
+	//SetActorScale({ 32, 16 });
 
 	SetSprite("Bricks.png");
 	
