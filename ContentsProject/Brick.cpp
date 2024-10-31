@@ -62,7 +62,12 @@ void ABrick::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Left");
 			if (APlayer::Ball->Dir.X > 0)
 			{
-				APlayer::Ball->Dir.X *= -1;
+				FVector2D Dir;
+				Dir = APlayer::Ball->Dir.Reflect(FVector2D::LEFT);
+
+				APlayer::Ball->Dir = Dir;
+
+				//APlayer::Ball->Dir.X *= -1;
 			}
 		}
 		else
@@ -70,7 +75,12 @@ void ABrick::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Top");
 			if (APlayer::Ball->Dir.Y > 0)
 			{
-				APlayer::Ball->Dir.Y *= -1;
+				FVector2D Dir;
+				Dir = APlayer::Ball->Dir.Reflect(FVector2D::UP);
+
+				APlayer::Ball->Dir = Dir;
+
+				//APlayer::Ball->Dir.Y *= -1;
 			}
 			
 		}
@@ -86,7 +96,12 @@ void ABrick::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Left");
 			if (APlayer::Ball->Dir.X > 0)
 			{
-				APlayer::Ball->Dir.X *= -1;
+				FVector2D Dir;
+				Dir = APlayer::Ball->Dir.Reflect(FVector2D::LEFT);
+
+				APlayer::Ball->Dir = Dir;
+
+				//APlayer::Ball->Dir.X *= -1;
 			}
 		}
 		else
@@ -94,12 +109,12 @@ void ABrick::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Bottom");
 			if (APlayer::Ball->Dir.Y < 0)
 			{
-				//FVector2D Dir;
-				//Dir = APlayer::Ball->Dir.Reflect(FVector2D::DOWN);
-				//
-				//APlayer::Ball->Dir = Dir;
+				FVector2D Dir;
+				Dir = APlayer::Ball->Dir.Reflect(FVector2D::DOWN);
+				
+				APlayer::Ball->Dir = Dir;
 
-				APlayer::Ball->Dir.Y *= -1;
+				//APlayer::Ball->Dir.Y *= -1;
 			}
 		}
 	}
@@ -116,7 +131,12 @@ void ABrick::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Right");
 			if (APlayer::Ball->Dir.X < 0)
 			{
-				APlayer::Ball->Dir.X *= -1;
+				FVector2D Dir;
+				Dir = APlayer::Ball->Dir.Reflect(FVector2D::RIGHT);
+
+				APlayer::Ball->Dir = Dir;
+
+				//APlayer::Ball->Dir.X *= -1;
 			}
 		}
 		else
@@ -124,7 +144,12 @@ void ABrick::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Top");
 			if (APlayer::Ball->Dir.Y > 0)
 			{
-				APlayer::Ball->Dir.Y *= -1;
+				FVector2D Dir;
+				Dir = APlayer::Ball->Dir.Reflect(FVector2D::UP);
+
+				APlayer::Ball->Dir = Dir;
+
+				//APlayer::Ball->Dir.Y *= -1;
 			}
 		}
 	}
@@ -139,7 +164,12 @@ void ABrick::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Right");
 			if (APlayer::Ball->Dir.X < 0)
 			{
-				APlayer::Ball->Dir.X *= -1;
+				FVector2D Dir;
+				Dir = APlayer::Ball->Dir.Reflect(FVector2D::RIGHT);
+
+				APlayer::Ball->Dir = Dir;
+
+				//APlayer::Ball->Dir.X *= -1;
 			}
 		}
 		else
@@ -147,12 +177,12 @@ void ABrick::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Bottom");
 			if (APlayer::Ball->Dir.Y < 0)
 			{
-				//FVector2D Dir;
-				//Dir = APlayer::Ball->Dir.Reflect(FVector2D::DOWN);
-				//
-				//APlayer::Ball->Dir = Dir;
+				FVector2D Dir;
+				Dir = APlayer::Ball->Dir.Reflect(FVector2D::DOWN);
+				
+				APlayer::Ball->Dir = Dir;
 
-				APlayer::Ball->Dir.Y *= -1;
+				//APlayer::Ball->Dir.Y *= -1;
 			}
 		}
 	}

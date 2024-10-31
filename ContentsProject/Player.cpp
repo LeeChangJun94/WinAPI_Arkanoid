@@ -112,7 +112,7 @@ void APlayer::Tick(float _DeltaTime)
 	{
 		if (Dir.X < 0)
 		{
-			Dir.X *= -1;
+			Dir = Dir.Reflect(FVector2D::RIGHT);
 		}
 	}
 
@@ -120,7 +120,7 @@ void APlayer::Tick(float _DeltaTime)
 	{
 		if (Dir.X > 0)
 		{
-			Dir.X *= -1;
+			Dir = Dir.Reflect(FVector2D::LEFT);
 		}
 	}
 	
@@ -128,7 +128,7 @@ void APlayer::Tick(float _DeltaTime)
 	{
 		if (Dir.Y < 0)
 		{
-			Dir.Y *= -1;
+			Dir = Dir.Reflect(FVector2D::DOWN);
 		}
 
 	}
@@ -137,7 +137,7 @@ void APlayer::Tick(float _DeltaTime)
 	{
 		if (Dir.Y > 0)
 		{
-			Dir.Y *= -1;
+			Dir = Dir.Reflect(FVector2D::UP);
 		}
 	}
 	

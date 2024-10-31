@@ -41,6 +41,11 @@ public:
 
 	}
 
+	FVector2D(double _X, double _Y) : X(static_cast<float>(_X)), Y(static_cast<float>(_Y))
+	{
+
+	}
+
 	int iX() const
 	{
 		return static_cast<int>(X);
@@ -86,19 +91,19 @@ public:
 		return;
 	}
 
-	//float Dot(FVector2D _DirVector)
-	//{
-	//	float Result = X * _DirVector.X + Y * _DirVector.Y;
-	//	return Result;
-	//}
-	//
-	//FVector2D Reflect(FVector2D _N)
-	//{
-	//	FVector2D Result;
-	//	Result = *this + (_N * 2.f * (-this->Dot(_N)));
-	//
-	//	return Result;
-	//}
+	float Dot(FVector2D _DirVector)
+	{
+		float Result = X * _DirVector.X + Y * _DirVector.Y;
+		return Result;
+	}
+	
+	FVector2D Reflect(FVector2D _N)
+	{
+		FVector2D Result;
+		Result = *this + (_N * 2.f * (-this->Dot(_N)));
+	
+		return Result;
+	}
 
 	FVector2D operator*(float _Value) const
 	{
