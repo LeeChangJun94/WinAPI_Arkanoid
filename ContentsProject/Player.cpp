@@ -27,7 +27,7 @@ void APlayer::BeginPlay()
 
 	Super::BeginPlay();
 
-	Dir.Radian(10.f);
+	Dir.Radian(30.f);
 	Dir.Normalize();
 	// 이벤트 방식으로 처리
 	// 인자를 호출할때 넣어주겠다는 명시해주는게 placeholders::
@@ -108,7 +108,7 @@ void APlayer::Tick(float _DeltaTime)
 	
 	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 	
-	if (0 > GetActorLocation().X)
+	if (32 > GetActorLocation().X)
 	{
 		if (Dir.X < 0)
 		{
@@ -116,7 +116,7 @@ void APlayer::Tick(float _DeltaTime)
 		}
 	}
 
-	if (WindowSize.X < GetActorLocation().X)
+	if (WindowSize.X - 32 < GetActorLocation().X)
 	{
 		if (Dir.X > 0)
 		{
@@ -124,7 +124,7 @@ void APlayer::Tick(float _DeltaTime)
 		}
 	}
 	
-	if (0 > GetActorLocation().Y)
+	if (32 > GetActorLocation().Y)
 	{
 		if (Dir.Y < 0)
 		{

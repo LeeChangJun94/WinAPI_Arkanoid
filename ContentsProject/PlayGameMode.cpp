@@ -21,7 +21,7 @@ void APlayGameMode::BeginPlay()
 		for (int j = 0; j < 5; ++j)
 		{
 			ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
-			Ptr->SetActorLocation({ 320 + (BrickScale.iX() * i), 160 + (BrickScale.iY() * j) });
+			Ptr->SetActorLocation({ 64 + (BrickScale.iX() * i), 160 + (BrickScale.iY() * j) });
 			Ptr->SetActorScale({ BrickScale.iX(), BrickScale.iY() });
 		}
 	}

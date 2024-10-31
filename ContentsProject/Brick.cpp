@@ -93,7 +93,8 @@ void ABrick::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Bottom");
 			if (APlayer::Ball->Dir.Y < 0)
 			{
-				APlayer::Ball->Dir.Y *= -1;
+				APlayer::Ball->Dir = 
+				//APlayer::Ball->Dir.Y *= -1;
 			}
 		}
 	}

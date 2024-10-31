@@ -48,7 +48,7 @@ void ContentsCore::BeginPlay()
 	// 일반 텍스처가 다 로딩되면
 	// 자르는 작업을 아래서 해주는게 좋다.
 
-	//UImageManager::GetInst().CuttingSprite("Fields1.png", { 176, 216 });
+	UImageManager::GetInst().CuttingSprite("Fields1.png", { 176, 216 });
 	UImageManager::GetInst().CuttingSprite("Ball.png", { 10, 8 });
 	UImageManager::GetInst().CuttingSprite("Bricks.png", { 16, 8 });
 
@@ -69,7 +69,7 @@ void ContentsCore::BeginPlay()
 	//UEngineAPICore::GetCore()->CreateLevel("Title");
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("Arkanoid");
 
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 1280, 720 });
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 704, 864 });
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
 	//UEngineAPICore::GetCore()->CreateLevel("End");

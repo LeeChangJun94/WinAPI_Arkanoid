@@ -11,7 +11,7 @@ APlayMap::APlayMap()
 	SetActorLocation(WindowSize.Half());
 	SetActorScale(WindowSize);
 	
-	SetSprite("Bricks.png");
+	SetSprite("Fields1.png");
 }
 
 APlayMap::~APlayMap()
