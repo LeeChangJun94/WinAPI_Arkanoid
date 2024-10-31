@@ -234,13 +234,11 @@ void UEngineWinImage::Load(UEngineWinImage* _TargetImage, std::string_view _Path
 		delete pImage;
 
 
-		// 내부에 존재하는 bitmap을 꺼낸다.
-		// 윈도우는 결국 모든 이미지를 bitmap으로 본다.
-		// Gdiplus::* pImage = Gdiplus::Image::FromFile(WidePath.c_str());
-
-		int a = 0;
-
-		// 인코딩을 해야 합니다.
+	}
+	else if (".BMP" == UpperExt)
+	{
+		HANDLE NewHandle = LoadImageA(nullptr, _Path.data(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		NewBitmap = reinterpret_cast<HBITMAP>(NewHandle);
 
 
 

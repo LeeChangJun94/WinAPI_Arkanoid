@@ -14,6 +14,11 @@ UEngineDirectory::UEngineDirectory(std::string_view _Path)
 
 }
 
+UEngineDirectory::UEngineDirectory(std::filesystem::path _Path)
+	: UEnginePath(_Path)
+{
+
+}
 
 UEngineDirectory::~UEngineDirectory()
 {

@@ -18,25 +18,38 @@ AActor::AActor()
 
 AActor::~AActor()
 {
+	std::list<class UActorComponent*>::iterator StartIter = Components.begin();
+	std::list<class UActorComponent*>::iterator EndIter = Components.end();
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		UActorComponent* Component = *StartIter;
+
+		if (nullptr != Component)
+		{
+			delete Component;
+		}
+	}
+
+	Components.clear();
 }
 
 
 void AActor::Render()
 {
-	if (nullptr == Sprite)
-	{
-		MSGASSERT("스프라이트가 세팅되지 않은 액터를 랜더링을 할수 없습니다.");
-		return;
-	}
-
-	UEngineWindow& MainWindow = UEngineAPICore::GetCore()->GetMainWindow();
-	UEngineWinImage* BackBufferImage = MainWindow.GetBackBuffer();
-
-
-	UEngineSprite::USpriteData CurData = Sprite->GetSpriteData(CurIndex);
-	CurData.Image;
-	CurData.Transform;
-	CurData.Image->CopyToTrans(BackBufferImage, Transform, CurData.Transform);
+	//if (nullptr == Sprite)
+	//{
+	//	MSGASSERT("스프라이트가 세팅되지 않은 액터를 랜더링을 할수 없습니다.");
+	//	return;
+	//}
+	//
+	//UEngineWindow& MainWindow = UEngineAPICore::GetCore()->GetMainWindow();
+	//UEngineWinImage* BackBufferImage =	 MainWindow.GetBackBuffer();
+	//
+	//
+	//UEngineSprite::USpriteData CurData = Sprite->GetSpriteData(CurIndex);
+	//CurData.Image;
+	//CurData.Transform;
+	//CurData.Image->CopyToTrans(BackBufferImage, Transform, CurData.Transform);
 
 	// fhem
 
@@ -63,20 +76,20 @@ void AActor::Render()
 
 
 
-void AActor::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
-{
-	// 싱글톤에 대해서 설명할때
-// 값을 편하게 공유하기 위해서 사용하는 거라고 하면 틀렸다.
-// 객체를 단 1개 만드는 패턴이라는 것을 잊지 마시고
-
-// 액터가 만들어졌을때는 로드가 끝난 상황이어야 한다.
-	Sprite = UImageManager::GetInst().FindSprite(_Name);
-
-	if (nullptr == Sprite)
-	{
-		MSGASSERT("로드하지 않은 스프라이트를 사용하려고 했습니다" + std::string(_Name));
-		return;
-	}
-
-	CurIndex = _CurIndex;
-}
+//void AActor::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
+//{
+//	// 싱글톤에 대해서 설명할때
+//// 값을 편하게 공유하기 위해서 사용하는 거라고 하면 틀렸다.
+//// 객체를 단 1개 만드는 패턴이라는 것을 잊지 마시고
+//
+//// 액터가 만들어졌을때는 로드가 끝난 상황이어야 한다.
+//	Sprite = UImageManager::GetInst().FindSprite(_Name);
+//
+//	if (nullptr == Sprite)
+//	{
+//		MSGASSERT("로드하지 않은 스프라이트를 사용하려고 했습니다" + std::string(_Name));
+//		return;
+//	}
+//
+//	CurIndex = _CurIndex;
+//}

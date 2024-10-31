@@ -46,5 +46,7 @@ private:
 	float Speed = 800.0f;
 	float radian = 0.f;
 	int MySpriteIndex = 0;
+
+	class USpriteRenderer* SpriteRenderer;
 };
 

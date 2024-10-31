@@ -4,6 +4,8 @@
 #include <EngineBase/EnginePath.h>
 #include <EngineBase/EngineDebug.h>
 #include <EngineBase/EngineString.h>
+#include <EngineBase/EngineFile.h>
+#include <EngineBase/EngineDirectory.h>
 #include <EngineCore/EngineAPICore.h>
 
 UImageManager::UImageManager()
@@ -53,6 +55,16 @@ void UImageManager::Load(std::string_view Path)
 	Load(FileName, Path);
 }
 
+void UImageManager::LoadFolder(std::string_view Path)
+{
+	UEnginePath EnginePath = UEnginePath(Path);
+
+	std::string DirName = EnginePath.GetDirectoryName();
+
+	LoadFolder(DirName, Path);
+}
+
+
 
 void UImageManager::Load(std::string_view _KeyName, std::string_view Path)
 {
@@ -73,10 +85,24 @@ void UImageManager::Load(std::string_view _KeyName, std::string_view Path)
 	UEngineWinImage* WindowImage = UEngineAPICore::GetCore()->GetMainWindow().GetWindowImage();
 
 	std::string UpperName = UEngineString::ToUpper(_KeyName);
+
+	if (true == Images.contains(UpperName))
+	{
+		MSGASSERT("로드된 이미지를 또 로드할 수 없습니다." + UpperName);
+		return;
+	}
+
+	if (true == Sprites.contains(UpperName))
+	{
+		MSGASSERT("로드된 이미지를 또 로드할 수 없습니다." + UpperName);
+		return;
+	}
+
 	// 만들었다고 끝이 아닙니다.
 	UEngineWinImage* NewImage = new UEngineWinImage();
 	NewImage->Load(WindowImage, Path);
 
+	NewImage->SetName(UpperName);
 	Images.insert({ UpperName , NewImage });
 
 	UEngineSprite* NewSprite = new UEngineSprite();
@@ -88,8 +114,63 @@ void UImageManager::Load(std::string_view _KeyName, std::string_view Path)
 
 	NewSprite->PushData(NewImage, Trans);
 
+	NewSprite->SetName(UpperName);
 	Sprites.insert({ UpperName , NewSprite });
 }
+
+void UImageManager::LoadFolder(std::string_view _KeyName, std::string_view _Path)
+{
+	UEnginePath EnginePath = UEnginePath(_Path);
+
+	if (false == EnginePath.IsExists())
+	{
+		MSGASSERT("유효하지 않은 파일 경로 입니다." + std::string(_Path));
+		return;
+	}
+
+	std::string UpperName = UEngineString::ToUpper(_KeyName);
+
+	if (true == Sprites.contains(UpperName))
+	{
+		MSGASSERT("로드된 이미지를 또 로드할 수 없습니다." + UpperName);
+		return;
+	}
+
+
+	UEngineSprite* NewSprite = new UEngineSprite();
+	NewSprite->SetName(UpperName);
+	Sprites.insert({ UpperName , NewSprite });
+
+	// 로드하기 위해서 필요한 Window Main HDC
+	UEngineWinImage* WindowImage = UEngineAPICore::GetCore()->GetMainWindow().GetWindowImage();
+
+	UEngineDirectory Dir = _Path;
+	std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+	for (size_t i = 0; i < ImageFiles.size(); i++)
+	{
+		std::string FilePath = ImageFiles[i].GetPathToString();
+		std::string UpperFileName = UEngineString::ToUpper(ImageFiles[i].GetFileName());
+
+		UEngineWinImage* NewImage = FindImage(UpperFileName);
+		if (nullptr == NewImage)
+		{
+			NewImage = new UEngineWinImage();
+			NewImage->SetName(UpperFileName);
+			NewImage->Load(WindowImage, FilePath);
+		}
+		Images.insert({ UpperFileName,  NewImage });
+
+		// 이미지 로딩은 끝났으니
+
+
+		FTransform Transform;
+		Transform.Location = { 0, 0 };
+		Transform.Scale = NewImage->GetImageScale();
+
+		NewSprite->PushData(NewImage, Transform);
+	}
+}
+
 
 void UImageManager::CuttingSprite(std::string_view _KeyName, FVector2D _CuttingSize)
 {
@@ -151,6 +232,21 @@ bool UImageManager::IsLoadSprite(std::string_view _KeyName)
 
 	return Sprites.contains(UpperName);
 }
+
+UEngineWinImage* UImageManager::FindImage(std::string_view _KeyName)
+{
+	std::string UpperName = UEngineString::ToUpper(_KeyName);
+
+	if (false == Images.contains(UpperName))
+	{
+		MSGASSERT("로드하지 않은 스프라이트를 사용하려고 했습니다" + std::string(_KeyName));
+		return nullptr;
+	}
+
+	// 이걸로 
+	return Images[UpperName];
+}
+
 
 UEngineSprite* UImageManager::FindSprite(std::string_view _KeyName)
 {

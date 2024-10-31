@@ -36,6 +36,8 @@ void ContentsCore::BeginPlay()
 		return;
 	}
 
+
+
 	std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
 
 	for (size_t i = 0; i < ImageFiles.size(); i++)
@@ -51,6 +53,18 @@ void ContentsCore::BeginPlay()
 	UImageManager::GetInst().CuttingSprite("Fields2.png", { 224, 240 });
 	UImageManager::GetInst().CuttingSprite("Ball.png", { 10, 8 });
 	UImageManager::GetInst().CuttingSprite("Bricks.png", { 16, 8 });
+
+
+	{
+
+		UEngineDirectory BombDir;
+		BombDir.MoveParentToDirectory("Resources");
+		BombDir.Append("bomb");
+
+		UImageManager::GetInst().LoadFolder(BombDir.GetPathToString());
+
+	}
+
 
 	//UEngineDirectroy Dir;
 

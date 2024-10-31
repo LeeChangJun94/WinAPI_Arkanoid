@@ -1,7 +1,11 @@
 #include "PreCompile.h"
 #include "Player.h"
+
 #include <EngineCore/EngineAPICore.h>
+#include <EngineCore/SpriteRenderer.h>
+
 #include <EnginePlatform/EngineInput.h>
+
 #include <EnginePlatform/EngineWindow.h>
 #include "Bullet.h"
 
@@ -14,7 +18,10 @@ APlayer::APlayer()
 	SetActorLocation({ 300, 700 });
 	SetActorScale({ 20, 16 });
 
-	SetSprite("Ball.png");
+	// 랜더러를 하나 만든다.
+	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+	// SpriteRenderer->SetSprite("bomb");
+	// CreateDefaultSubObject<U2DCollision>();
 }
 
 APlayer::~APlayer()
@@ -224,6 +231,12 @@ void APlayer::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress('W'))
 	{
 		AddActorLocation(FVector2D::UP * _DeltaTime * (Speed * 2));
+	}
+
+	if (true == UEngineInput::GetInst().IsDown('R'))
+	{
+		SpriteRenderer->SetSprite("Ball.png", MySpriteIndex);
+		++MySpriteIndex;
 	}
 
 	// 마우스 왼쪽 버튼입니다.

@@ -58,6 +58,23 @@ public:
 		return Transform.Scale;
 	}
 
+	// 컴포넌트의 소유자는 액터 삭제도 액터가 해야한다.
+	// 다른 클래스는 절대로 삭제하면 안된다.
+	template<typename ComponentType>
+	ComponentType* CreateDefaultSubObject()
+	{
+		ComponentType* NewComponent = new ComponentType();
+
+		UActorComponent* ComponentPtr = dynamic_cast<UActorComponent*>(NewComponent);
+		// 내가 널 만든 레벨이야.
+		ComponentPtr->ParentActor = this;
+
+		NewComponent->BeginPlay();
+		Components.push_back(ComponentPtr);
+		return NewComponent;
+	}
+
+
 protected:
 
 private:
@@ -65,9 +82,6 @@ private:
 
 	FTransform Transform;
 
-public:
-	class UEngineSprite* Sprite = nullptr;
-	int CurIndex = 0;
-	void SetSprite(std::string_view _Name, int _CurIndex = 0);
+	std::list<class UActorComponent*> Components;
 };
 
