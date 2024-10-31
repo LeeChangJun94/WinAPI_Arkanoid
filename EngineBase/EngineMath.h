@@ -86,16 +86,19 @@ public:
 		return;
 	}
 
-	float Dot(FVector2D _DirVector)
-	{
-		float result = X * _DirVector.X + Y * _DirVector.Y;
-		return result;
-	}
-
-	FVector2D Reflect(FVector2D _P, FVector2D _N)
-	{
-
-	}
+	//float Dot(FVector2D _DirVector)
+	//{
+	//	float Result = X * _DirVector.X + Y * _DirVector.Y;
+	//	return Result;
+	//}
+	//
+	//FVector2D Reflect(FVector2D _N)
+	//{
+	//	FVector2D Result;
+	//	Result = *this + (_N * 2.f * (-this->Dot(_N)));
+	//
+	//	return Result;
+	//}
 
 	FVector2D operator*(float _Value) const
 	{

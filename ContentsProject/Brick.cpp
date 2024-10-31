@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include <EngineCore/EngineAPICore.h>
 #include <EnginePlatform/EngineInput.h>
+#include <EngineBase/EngineMath.h>
 #include "Brick.h"
 #include "Player.h"
 
@@ -93,8 +94,12 @@ void ABrick::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Bottom");
 			if (APlayer::Ball->Dir.Y < 0)
 			{
-				APlayer::Ball->Dir = 
-				//APlayer::Ball->Dir.Y *= -1;
+				//FVector2D Dir;
+				//Dir = APlayer::Ball->Dir.Reflect(FVector2D::DOWN);
+				//
+				//APlayer::Ball->Dir = Dir;
+
+				APlayer::Ball->Dir.Y *= -1;
 			}
 		}
 	}
@@ -142,6 +147,11 @@ void ABrick::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Bottom");
 			if (APlayer::Ball->Dir.Y < 0)
 			{
+				//FVector2D Dir;
+				//Dir = APlayer::Ball->Dir.Reflect(FVector2D::DOWN);
+				//
+				//APlayer::Ball->Dir = Dir;
+
 				APlayer::Ball->Dir.Y *= -1;
 			}
 		}
