@@ -22,6 +22,15 @@
     <ClInclude Include="PlayMap.h">
       <Filter>ContentsObject</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsEnum.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>ContentsObject\Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -45,6 +54,15 @@
     <ClCompile Include="PlayMap.cpp">
       <Filter>ContentsObject</Filter>
     </ClCompile>
+    <ClCompile Include="ContentsEnum.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>ContentsObject\Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -64,6 +82,12 @@
     </Filter>
     <Filter Include="ContentsObject\Player">
       <UniqueIdentifier>{1a7a027a-07e7-425e-9ac2-859a0fef5a7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{18e53341-6026-4fe3-a21e-f93f3ca4ea9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Title">
+      <UniqueIdentifier>{a83ec8ee-ad55-427e-a338-ac45dac2dda7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

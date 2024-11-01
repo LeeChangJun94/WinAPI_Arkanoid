@@ -3,6 +3,7 @@
 
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
+#include <EngineCore/EngineCoreDebug.h>
 
 #include <EnginePlatform/EngineInput.h>
 
@@ -11,17 +12,78 @@
 
 APlayer* APlayer::Ball = nullptr;
 
+void APlayer::RunSoundPlay()
+{
+	//UEngineDebug::OutPutString("SoundPlay");
+}
+
 APlayer::APlayer()
 {
 	Ball = this;
 
-	SetActorLocation({ 300, 700 });
-	SetActorScale({ 20, 16 });
+	//SetActorLocation({300, 700});
+	//SetActorScale({ 20, 16 });
+	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+	SpriteRenderer->SetSprite("Ball.png");
+	SpriteRenderer->SetComponentScale({ 20, 16 });
+	SetActorLocation({ 300,500 });
 
 	// 랜더러를 하나 만든다.
-	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	// SpriteRenderer->SetSprite("bomb");
-	// CreateDefaultSubObject<U2DCollision>();
+	// 언리얼에서는 생서에서 CreateDefaultSubObject <= 생성자에서밖에 못합니다.
+	// 무조건 만들어야 한다.
+	// 다른데서하면 무조건 터져요.
+	// 한번 생성자에서 만든 지울수도 없어.
+
+	//{
+	//	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+	//	SpriteRenderer->SetSprite("Player_Right.png");
+	//	SpriteRenderer->SetComponentScale({ 300, 300 });
+	//
+	//	// SpriteRenderer->CreateAnimation("bomb", 0, 2, 0.1f);
+	//
+	//	SpriteRenderer->CreateAnimation("Run_Right", "Player_Right.png", 2, 4, 0.1f);
+	//	SpriteRenderer->CreateAnimation("Idle_Right", "Player_Right.png", 0, 0, 0.1f);
+	//
+	//	SpriteRenderer->ChangeAnimation("Idle_Right");
+	//
+	//	// SpriteRenderer->CreateAnimation("Test", "Player_Right.png", { 5,  4,  3}, 0.1f);
+	//	SpriteRenderer->SetAnimationEvent("Run_Right", 2, std::bind(&APlayer::RunSoundPlay, this));
+	//}
+
+
+	//{
+	//	USpriteRenderer* Renderer = CreateDefaultSubObject<USpriteRenderer>();
+	//	Renderer->SetSprite("Player_Right.png");
+	//	Renderer->SetComponentLocation({ -100, 0 });
+	//	Renderer->SetComponentScale({ 50, 50 });
+	//}
+
+	//{
+	//	USpriteRenderer* Renderer = CreateDefaultSubObject<USpriteRenderer>();
+	//	Renderer->SetSprite("Player_Right.png");
+	//	Renderer->SetComponentLocation({ 100, 0 });
+	//	Renderer->SetComponentScale({ 50, 50 });
+	//}
+
+	//{
+	//	USpriteRenderer* Renderer = CreateDefaultSubObject<USpriteRenderer>();
+	//	Renderer->SetSprite("Player_Right.png");
+	//	Renderer->SetComponentLocation({ 0, -100 });
+	//	Renderer->SetComponentScale({ 50, 50 });
+	//}
+
+	//{
+	//	USpriteRenderer* Renderer = CreateDefaultSubObject<USpriteRenderer>();
+	//	Renderer->SetSprite("Player_Right.png");
+	//	Renderer->SetComponentLocation({ 0, 100 });
+	//	Renderer->SetComponentScale({ 50, 50 });
+	//}
+
+	// 부모의 크기에 영향 안받게 만들것이다.
+
+
+
+	//CreateDefaultSubObject<U2DCollision>();
 }
 
 APlayer::~APlayer()
@@ -36,31 +98,11 @@ void APlayer::BeginPlay()
 
 	Dir.Radian(30.f);
 	Dir.Normalize();
-	// 이벤트 방식으로 처리
-	// 인자를 호출할때 넣어주겠다는 명시해주는게 placeholders::
-	// 어떤 컨테츠를 짜냐에 따라서 델타타임이 필요할수도 있고
-	// 필요 없을수도 있다.
 
-	// 
-	//UEngineInput::GetInst().BindAction('A', KeyEvent::Press, std::bind(&APlayer::LeftMove, this));
-	//UEngineInput::GetInst().BindAction('D', KeyEvent::Press, std::bind(&APlayer::RightMove, this));
-	//UEngineInput::GetInst().BindAction('S', KeyEvent::Press, std::bind(&APlayer::DownMove, this));
-	//UEngineInput::GetInst().BindAction('W', KeyEvent::Press, std::bind(&APlayer::UpMove, this));
 
-	//UEngineInput::GetInst().BindAction('A', KeyEvent::Press, std::bind(&APlayer::MoveFunction, this, FVector2D::LEFT));
-	//UEngineInput::GetInst().BindAction('D', KeyEvent::Press, std::bind(&APlayer::MoveFunction, this, FVector2D::RIGHT));
-	//UEngineInput::GetInst().BindAction('S', KeyEvent::Press, std::bind(&APlayer::MoveFunction, this, FVector2D::DOWN));
-	//UEngineInput::GetInst().BindAction('W', KeyEvent::Press, std::bind(&APlayer::MoveFunction, this, FVector2D::UP));
-
-	// 기본크기가 존재하지 않으므로 
-	// 기본 크기 및 기본 스케일을 지정해줘야 합니다.
-
-	// 키를 만든다.
-	// 1번 케이스
-	// EngineInput::CreateKey("PlayerMove", 'A');
-	// EngineInput::CreateKey("PlayerMove", 'A', APlayer::PlayerLeftMove);
-	// 2번
-	// EngineInput::BindAction('A', APlayer::PlayerLeftMove);
+	// 직접 카메라 피봇을 설정해줘야 한다.
+	FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+	GetWorld()->SetCameraPivot(Size.Half() * -1.0f);
 
 
 }
@@ -110,6 +152,16 @@ void APlayer::MoveFunction(FVector2D _Dir/*, AMonster* Monster*/)
 void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+
+	UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
+
+	if (true == UEngineInput::GetInst().IsDown('R'))
+	{
+		UEngineAPICore::GetCore()->OpenLevel("Title");
+		//UEngineDebug::SwitchIsDebug();
+	}
 
 	AddActorLocation(Dir * _DeltaTime * Speed);
 	
@@ -216,28 +268,32 @@ void APlayer::Tick(float _DeltaTime)
 	// 입력버퍼는 윈도우가 알아서 처리해주기 때문에
 	// 입력이 있을때만 0이 아닌 수를 리턴하는 함수입니다.
 
-	if (true == UEngineInput::GetInst().IsPress('D'))
-	{
-		AddActorLocation(FVector2D::RIGHT * _DeltaTime * (Speed * 2));
-	}
-	if (true == UEngineInput::GetInst().IsPress('A'))
-	{
-		AddActorLocation(FVector2D::LEFT * _DeltaTime * (Speed * 2));
-	}
-	if (true == UEngineInput::GetInst().IsPress('S'))
-	{
-		AddActorLocation(FVector2D::DOWN * _DeltaTime * (Speed * 2));
-	}
-	if (true == UEngineInput::GetInst().IsPress('W'))
-	{
-		AddActorLocation(FVector2D::UP * _DeltaTime * (Speed * 2));
-	}
+	//if (true == UEngineInput::GetInst().IsPress('D'))
+	//{
+	//	SpriteRenderer->ChangeAnimation("Run_Right");
+	//	AddActorLocation(FVector2D::RIGHT * _DeltaTime * (Speed * 2));
+	//}
+	//if (true == UEngineInput::GetInst().IsPress('A'))
+	//{
+	//	SpriteRenderer->ChangeAnimation("Run_Right");
+	//	AddActorLocation(FVector2D::LEFT * _DeltaTime * (Speed * 2));
+	//}
+	//if (true == UEngineInput::GetInst().IsPress('S'))
+	//{
+	//	SpriteRenderer->ChangeAnimation("Run_Right");
+	//	AddActorLocation(FVector2D::DOWN * _DeltaTime * (Speed * 2));
+	//}
+	//if (true == UEngineInput::GetInst().IsPress('W'))
+	//{
+	//	SpriteRenderer->ChangeAnimation("Run_Right");
+	//	AddActorLocation(FVector2D::UP * _DeltaTime * (Speed * 2));
+	//}
 
-	if (true == UEngineInput::GetInst().IsDown('R'))
-	{
-		SpriteRenderer->SetSprite("Ball.png", MySpriteIndex);
-		++MySpriteIndex;
-	}
+	//if (true == UEngineInput::GetInst().IsDown('R'))
+	//{
+	//	SpriteRenderer->SetSprite("Ball.png", MySpriteIndex);
+	//	++MySpriteIndex;
+	//}
 
 	// 마우스 왼쪽 버튼입니다.
 	// 눌린 한순간만 체크할수 있는 기능이 필요하다.
@@ -248,11 +304,33 @@ void APlayer::Tick(float _DeltaTime)
 	//	Ptr->SetActorLocation(GetActorLocation());
 	//}
 
+	// FVector2D PrevTransform != GetTransform();
 	//if (true == UEngineInput::GetInst().IsDown('R'))
 	//{
-	//	SetSprite("Player_Right.png", MySpriteIndex);
-	//	++MySpriteIndex;
+	//	SpriteRenderer->SetOrder(-2000);
 	//}
+	//else if(true == UEngineInput::GetInst().IsUp('R'))
+	//{
+	//	SpriteRenderer->SetOrder(2000);
+	//}
+	//if (false == UEngineInput::GetInst().IsPress('A') &&
+	//	false == UEngineInput::GetInst().IsPress('D') &&
+	//	false == UEngineInput::GetInst().IsPress('W') &&
+	//	false == UEngineInput::GetInst().IsPress('S'))
+	//{
+	//	SpriteRenderer->ChangeAnimation("Idle_Right");
+	//}
+
+}
+
+void APlayer::LevelChangeStart()
+{
+	Super::LevelChangeStart();
+}
+
+void APlayer::LevelChangeEnd()
+{
+	Super::LevelChangeEnd();
 
 
 }

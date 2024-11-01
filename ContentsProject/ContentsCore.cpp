@@ -8,6 +8,7 @@
 #include <EngineBase/EngineFile.h>
 #include <EngineCore/ImageManager.h>
 
+#include "TitleGameMode.h"
 #include "PlayGameMode.h"
 #include "Player.h"
 
@@ -53,17 +54,19 @@ void ContentsCore::BeginPlay()
 	UImageManager::GetInst().CuttingSprite("Fields2.png", { 224, 240 });
 	UImageManager::GetInst().CuttingSprite("Ball.png", { 10, 8 });
 	UImageManager::GetInst().CuttingSprite("Bricks.png", { 16, 8 });
+	UImageManager::GetInst().CuttingSprite("Title1.png", { 896, 1024 });
+	UImageManager::GetInst().CuttingSprite("Title2.png", { 896, 224 });
 
 
-	{
-
-		UEngineDirectory BombDir;
-		BombDir.MoveParentToDirectory("Resources");
-		BombDir.Append("bomb");
-
-		UImageManager::GetInst().LoadFolder(BombDir.GetPathToString());
-
-	}
+	//{
+	//
+	//	UEngineDirectory BombDir;
+	//	BombDir.MoveParentToDirectory("Resources");
+	//	BombDir.Append("bomb");
+	//
+	//	UImageManager::GetInst().LoadFolder(BombDir.GetPathToString());
+	//
+	//}
 
 
 	//UEngineDirectroy Dir;
@@ -83,12 +86,14 @@ void ContentsCore::BeginPlay()
 	//UEngineAPICore::GetCore()->CreateLevel("Title");
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("Arkanoid");
 
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 704, 864 });
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 896, 1024 });
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
+
+	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
 	//UEngineAPICore::GetCore()->CreateLevel("End");
 
-	UEngineAPICore::GetCore()->OpenLevel("Play");
+	UEngineAPICore::GetCore()->OpenLevel("Title");
 
 }
 

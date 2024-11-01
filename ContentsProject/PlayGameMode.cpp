@@ -15,15 +15,19 @@ APlayGameMode::~APlayGameMode()
 
 void APlayGameMode::BeginPlay()
 {
-	APlayMap* PMAP0 = GetWorld()->SpawnActor<APlayMap>();
+	{
+		APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
+	}
+
 	for (int i = 0; i < 10; ++i)
 	{
 		for (int j = 0; j < 5; ++j)
 		{
 			ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
-			Ptr->SetActorLocation({ 64 + (BrickScale.iX() * i), 160 + (BrickScale.iY() * j) });
-			Ptr->SetActorScale({ BrickScale.iX(), BrickScale.iY() });
+			Ptr->SetActorLocation({ 64 + (Ptr->GetActorScale().X * i), 160 + (Ptr->GetActorScale().Y * j) });
+			Ptr->SetActorScale({ Ptr->GetActorScale().X, Ptr->GetActorScale().Y });
 		}
 	}
 	//ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
+
 }

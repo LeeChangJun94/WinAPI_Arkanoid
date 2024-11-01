@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineBase/EngineMath.h>
+#include <EngineCore/SpriteRenderer.h>
 
 enum CollPos
 {
@@ -47,6 +48,7 @@ private:
 	int BrickScaleX = 0;
 	int BrickScaleY = 0;
 
+	USpriteRenderer* SpriteRenderer;
 
 	float ratio = 0;
 	float line = 0;

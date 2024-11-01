@@ -13,8 +13,10 @@ ABrick::ABrick()
 	//SetActorLocation({ 600, 300});
 	//SetActorScale({ 32, 16 });
 
-	SetSprite("Bricks.png");
-	
+	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+	SpriteRenderer->SetSprite("Bricks.png");
+	SpriteRenderer->SetComponentScale({ 64, 32 });
+	SetActorScale(SpriteRenderer->GetComponentScale());
 } 
 
 ABrick::~ABrick()

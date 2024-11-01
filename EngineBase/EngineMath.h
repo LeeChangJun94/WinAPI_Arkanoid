@@ -1,7 +1,7 @@
 #pragma once
 #include <math.h>
 
-#define PI 3.141592
+#define PI 3.141592f
 
 // FVector로 통일하겠습니다.
 // FVector2D xy
@@ -167,6 +167,20 @@ public:
 		Y += _Other.Y;
 		return *this;
 	}
+
+
+	std::string ToString()
+	{
+		std::string Stream;
+
+		Stream += "X : [";
+		Stream += std::to_string(X);
+		Stream += "] Y : [";
+		Stream += std::to_string(Y);
+		Stream += "]";
+		return Stream;
+	}
+
 };
 
 

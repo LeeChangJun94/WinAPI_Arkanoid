@@ -40,6 +40,11 @@ public:
 	
 	FVector2D Dir = { 0.f , 0.f };
 	
+	void RunSoundPlay();
+
+	void LevelChangeStart();
+	void LevelChangeEnd();
+
 protected:
 
 private:
@@ -48,5 +53,8 @@ private:
 	int MySpriteIndex = 0;
 
 	class USpriteRenderer* SpriteRenderer;
+
+	// class std::vector< USpriteRenderer* LeftRenderer;
+
 };
 

@@ -20,7 +20,7 @@ public:
 protected:
 
 private:
-	FVector2D BrickScale = { 64, 32 };
+	//FVector2D BrickScale = { 32, 16 };
 
 
 };

@@ -25,7 +25,10 @@ public:
 	virtual void BeginPlay() {}
 	// 델타타임이란 무엇인가?
 	virtual void Tick(float _DeltaTime) {}
-	virtual void Render();
+
+	virtual void LevelChangeStart() {}
+	virtual void LevelChangeEnd() {}
+
 
 	class ULevel* GetWorld()
 	{
@@ -52,6 +55,11 @@ public:
 		return Transform.Location;
 	}
 
+	FTransform GetTransform()
+	{
+		return Transform;
+	}
+
 	//추가
 	FVector2D GetActorScale()
 	{
@@ -69,8 +77,13 @@ public:
 		// 내가 널 만든 레벨이야.
 		ComponentPtr->ParentActor = this;
 
-		NewComponent->BeginPlay();
-		Components.push_back(ComponentPtr);
+		// 생성될때 하지 않습니다.
+		// NewComponent->BeginPlay();
+		// 만들기만 하고 실행 안한 상태가 된것.
+		Components.push_back(NewComponent);
+
+		// BeginPlay가 실행안된 컴포넌트들을 다 자료구조에 담는다.
+		ComponentList.push_back(NewComponent);
 		return NewComponent;
 	}
 
@@ -78,6 +91,11 @@ public:
 protected:
 
 private:
+	static void ComponentBeginPlay();
+
+	static bool IsNewActorCreate;
+	static std::list<class UActorComponent*> ComponentList;
+
 	class ULevel* World = nullptr;
 
 	FTransform Transform;
