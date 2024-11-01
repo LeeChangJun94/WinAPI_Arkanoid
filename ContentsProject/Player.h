@@ -9,7 +9,7 @@ public:
 	APlayer();
 	~APlayer();
 
-	static APlayer* Ball;
+	static APlayer* Vaus;
 
 	// delete Function
 	APlayer(const APlayer& _Other) = delete;
@@ -20,7 +20,7 @@ public:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void MoveFunction(FVector2D _Dir);
+	//void MoveFunction(FVector2D _Dir);
 
 	//void LeftMove(float _DeltaTime);
 	//void RightMove(float _DeltaTime);
@@ -48,11 +48,17 @@ public:
 protected:
 
 private:
-	float Speed = 800.0f;
+	float Speed = 300.0f;
 	float radian = 0.f;
 	int MySpriteIndex = 0;
 
-	class USpriteRenderer* SpriteRenderer;
+	class USpriteRenderer* SpriteRenderer = nullptr;
+
+	FTransform BallTrans;
+	FTransform VausTrans;
+
+	float Ratio = 0;
+	float Line = 0;
 
 	// class std::vector< USpriteRenderer* LeftRenderer;
 

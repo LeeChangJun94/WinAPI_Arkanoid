@@ -2,8 +2,11 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineBase/EngineMath.h>
+#include <EngineCore/SpriteRenderer.h>
 #include "Brick.h"
 #include "Player.h"
+#include "Ball.h"
+#include "Item.h"
 
 #include <EngineCore/ImageManager.h>
 
@@ -32,8 +35,8 @@ void ABrick::BeginPlay()
 
 void ABrick::Tick(float _DeltaTime)
 {
-	BallTrans.Location = { APlayer::Ball->GetActorLocation().iX(), APlayer::Ball->GetActorLocation().iY() };
-	BallTrans.Scale = { APlayer::Ball->GetActorScale().iX(), APlayer::Ball->GetActorScale().iY() };
+	BallTrans.Location = { ABall::Ball->GetActorLocation().iX(), ABall::Ball->GetActorLocation().iY() };
+	BallTrans.Scale = { ABall::Ball->GetActorScale().iX(), ABall::Ball->GetActorScale().iY() };
 	
 	//BallX = APlayer::Ball->GetActorLocation().iX();
 	//BallY = APlayer::Ball->GetActorLocation().iY();
@@ -48,7 +51,7 @@ void ABrick::Tick(float _DeltaTime)
 	//BrickScaleX = GetActorScale().iX();
 	//BrickScaleY = GetActorScale().iY();
 
-	ratio = (BrickTrans.Scale.Y / 2) / (BrickTrans.Scale.X / 2);
+	Ratio = (BrickTrans.Scale.Y / 2) / (BrickTrans.Scale.X / 2);
 	//line = ratio * (BallTrans.Location.X / 2) - (BrickTrans.Scale.Y / 2);
 	
 
@@ -57,32 +60,33 @@ void ABrick::Tick(float _DeltaTime)
 	if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X > (BrickTrans.Location.X - (BrickTrans.Scale.X / 2)) &&
 		BallTrans.Location.Y > (BrickTrans.Location.Y - (BrickTrans.Scale.Y / 2)) && BallTrans.Location.Y < BrickTrans.Location.Y)
 	{
-		line = (-ratio) * (BallTrans.Location.X - BrickTrans.Location.X);
+		Line = (-Ratio) * (BallTrans.Location.X - BrickTrans.Location.X);
 		
-		if ((line) > (BrickTrans.Location.Y - BallTrans.Location.Y))
+		if ((Line) > (BrickTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Left");
-			if (APlayer::Ball->Dir.X > 0)
+			if (ABall::Ball->Dir.X > 0)
 			{
 				FVector2D Dir;
-				Dir = APlayer::Ball->Dir.Reflect(FVector2D::LEFT);
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::LEFT);
 
-				APlayer::Ball->Dir = Dir;
+				ABall::Ball->Dir = Dir;
 
 				//APlayer::Ball->Dir.X *= -1;
+
 			}
 		}
 		else
 		{
 			UEngineDebug::OutPutString("Top");
-			if (APlayer::Ball->Dir.Y > 0)
+			if (ABall::Ball->Dir.Y > 0)
 			{
 				FVector2D Dir;
-				Dir = APlayer::Ball->Dir.Reflect(FVector2D::UP);
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::UP);
 
-				APlayer::Ball->Dir = Dir;
+				ABall::Ball->Dir = Dir;
 
-				//APlayer::Ball->Dir.Y *= -1;
+				//ABall::Ball->Dir.Y *= -1;
 			}
 			
 		}
@@ -91,31 +95,35 @@ void ABrick::Tick(float _DeltaTime)
 	if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X > (BrickTrans.Location.X - (BrickTrans.Scale.X / 2)) &&
 		BallTrans.Location.Y < (BrickTrans.Location.Y + (BrickTrans.Scale.Y / 2)) && BallTrans.Location.Y > BrickTrans.Location.Y)
 	{
-		line = ratio * (BallTrans.Location.X - BrickTrans.Location.X);
+		Line = Ratio * (BallTrans.Location.X - BrickTrans.Location.X);
 
-		if ((line) < (BrickTrans.Location.Y - BallTrans.Location.Y))
+		if ((Line) < (BrickTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Left");
-			if (APlayer::Ball->Dir.X > 0)
+			if (ABall::Ball->Dir.X > 0)
 			{
 				FVector2D Dir;
-				Dir = APlayer::Ball->Dir.Reflect(FVector2D::LEFT);
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::LEFT);
 
-				APlayer::Ball->Dir = Dir;
+				ABall::Ball->Dir = Dir;
 
-				//APlayer::Ball->Dir.X *= -1;
+				//ABall::Ball->Dir.X *= -1;
 			}
 		}
 		else
 		{
 			UEngineDebug::OutPutString("Bottom");
-			if (APlayer::Ball->Dir.Y < 0)
+			if (ABall::Ball->Dir.Y < 0)
 			{
 				FVector2D Dir;
-				Dir = APlayer::Ball->Dir.Reflect(FVector2D::DOWN);
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::DOWN);
 				
-				APlayer::Ball->Dir = Dir;
+				ABall::Ball->Dir = Dir;
 
+				AItem* Ptr = GetWorld()->SpawnActor<AItem>();
+				Ptr->SetActorLocation(GetActorLocation());
+
+				//Ptr->USpriteRenderer::ChangeAnimation("Player");
 				//APlayer::Ball->Dir.Y *= -1;
 			}
 		}
@@ -126,32 +134,32 @@ void ABrick::Tick(float _DeltaTime)
 	if (BallTrans.Location.X > BrickTrans.Location.X && BallTrans.Location.X < (BrickTrans.Location.X + (BrickTrans.Scale.X / 2)) &&
 		BallTrans.Location.Y > (BrickTrans.Location.Y - (BrickTrans.Scale.Y / 2)) && BallTrans.Location.Y < BrickTrans.Location.Y)
 	{
-		line = ratio * (BallTrans.Location.X - BrickTrans.Location.X);
+		Line = Ratio * (BallTrans.Location.X - BrickTrans.Location.X);
 
-		if ((line) > (BrickTrans.Location.Y - BallTrans.Location.Y))
+		if ((Line) > (BrickTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Right");
-			if (APlayer::Ball->Dir.X < 0)
+			if (ABall::Ball->Dir.X < 0)
 			{
 				FVector2D Dir;
-				Dir = APlayer::Ball->Dir.Reflect(FVector2D::RIGHT);
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::RIGHT);
 
-				APlayer::Ball->Dir = Dir;
+				ABall::Ball->Dir = Dir;
 
-				//APlayer::Ball->Dir.X *= -1;
+				//ABall::Ball->Dir.X *= -1;
 			}
 		}
 		else
 		{
 			UEngineDebug::OutPutString("Top");
-			if (APlayer::Ball->Dir.Y > 0)
+			if (ABall::Ball->Dir.Y > 0)
 			{
 				FVector2D Dir;
-				Dir = APlayer::Ball->Dir.Reflect(FVector2D::UP);
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::UP);
 
-				APlayer::Ball->Dir = Dir;
+				ABall::Ball->Dir = Dir;
 
-				//APlayer::Ball->Dir.Y *= -1;
+				//ABall::Ball->Dir.Y *= -1;
 			}
 		}
 	}
@@ -159,32 +167,37 @@ void ABrick::Tick(float _DeltaTime)
 	if (BallTrans.Location.X > BrickTrans.Location.X && BallTrans.Location.X < (BrickTrans.Location.X + (BrickTrans.Scale.X / 2)) &&
 		BallTrans.Location.Y < (BrickTrans.Location.Y + (BrickTrans.Scale.Y / 2)) && BallTrans.Location.Y > BrickTrans.Location.Y)
 	{
-		line = (-ratio) * (BallTrans.Location.X - BrickTrans.Location.X);
+		Line = (-Ratio) * (BallTrans.Location.X - BrickTrans.Location.X);
 
-		if ((line) < (BrickTrans.Location.Y - BallTrans.Location.Y))
+		if ((Line) < (BrickTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Right");
-			if (APlayer::Ball->Dir.X < 0)
+			if (ABall::Ball->Dir.X < 0)
 			{
 				FVector2D Dir;
-				Dir = APlayer::Ball->Dir.Reflect(FVector2D::RIGHT);
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::RIGHT);
 
-				APlayer::Ball->Dir = Dir;
+				ABall::Ball->Dir = Dir;
 
-				//APlayer::Ball->Dir.X *= -1;
+				//ABall::Ball->Dir.X *= -1;
 			}
 		}
 		else
 		{
 			UEngineDebug::OutPutString("Bottom");
-			if (APlayer::Ball->Dir.Y < 0)
+			if (ABall::Ball->Dir.Y < 0)
 			{
 				FVector2D Dir;
-				Dir = APlayer::Ball->Dir.Reflect(FVector2D::DOWN);
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::DOWN);
 				
-				APlayer::Ball->Dir = Dir;
+				ABall::Ball->Dir = Dir;
 
-				//APlayer::Ball->Dir.Y *= -1;
+				AItem* Ptr = GetWorld()->SpawnActor<AItem>();
+				Ptr->SetActorLocation(GetActorLocation());
+				//Ptr->USpriteRenderer::SpriteRenderer2
+				//Ptr->USpriteRenderer::ChangeAnimation("Player");
+
+				//ABall::Ball->Dir.Y *= -1;
 			}
 		}
 	}

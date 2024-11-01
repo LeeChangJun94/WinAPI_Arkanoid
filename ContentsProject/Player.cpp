@@ -1,5 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
+#include "Ball.h"
+#include "Brick.h"
 
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
@@ -10,7 +12,7 @@
 #include <EnginePlatform/EngineWindow.h>
 #include "Bullet.h"
 
-APlayer* APlayer::Ball = nullptr;
+APlayer* APlayer::Vaus = nullptr;
 
 void APlayer::RunSoundPlay()
 {
@@ -19,14 +21,19 @@ void APlayer::RunSoundPlay()
 
 APlayer::APlayer()
 {
-	Ball = this;
+	Vaus = this;
 
 	//SetActorLocation({300, 700});
-	//SetActorScale({ 20, 16 });
+
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	SpriteRenderer->SetSprite("Ball.png");
-	SpriteRenderer->SetComponentScale({ 20, 16 });
-	SetActorLocation({ 300,500 });
+	SpriteRenderer->SetSprite("Vaus.png");
+	SpriteRenderer->SetComponentScale({ 144, 24 });
+	SetActorLocation({ 300,900 });
+	SetActorScale(SpriteRenderer->GetComponentScale());
+
+	SpriteRenderer->CreateAnimation("Idle", "Vaus.png", 0, 5, 0.1f);
+	SpriteRenderer->ChangeAnimation("Idle");
+
 
 	// 랜더러를 하나 만든다.
 	// 언리얼에서는 생서에서 CreateDefaultSubObject <= 생성자에서밖에 못합니다.
@@ -94,15 +101,15 @@ APlayer::~APlayer()
 void APlayer::BeginPlay()
 {
 
-	Super::BeginPlay();
-
-	Dir.Radian(30.f);
-	Dir.Normalize();
+	//Super::BeginPlay();
+	//
+	//Dir.Radian(30.f);
+	//Dir.Normalize();
 
 
 	// 직접 카메라 피봇을 설정해줘야 한다.
-	FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
-	GetWorld()->SetCameraPivot(Size.Half() * -1.0f);
+	//FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+	//GetWorld()->SetCameraPivot(Size.Half() * -1.0f);
 
 
 }
@@ -110,16 +117,16 @@ void APlayer::BeginPlay()
 // class LeftPlayer
 // class RightPlayer
 // 고생하기
-void APlayer::MoveFunction(FVector2D _Dir/*, AMonster* Monster*/)
-{
-	// 몬스터를 찾아오는 함수가 존재할것이다.
-	// 액터 전체르 관리하기 때문에.
-	// 찾아오는 함수가 존재합니다.
-
-	float DeltaTime = UEngineAPICore::GetCore()->GetDeltaTime();
-
-	AddActorLocation(_Dir * DeltaTime * Speed);
-}
+//void APlayer::MoveFunction(FVector2D _Dir/*, AMonster* Monster*/)
+//{
+//	// 몬스터를 찾아오는 함수가 존재할것이다.
+//	// 액터 전체르 관리하기 때문에.
+//	// 찾아오는 함수가 존재합니다.
+//
+//	float DeltaTime = UEngineAPICore::GetCore()->GetDeltaTime();
+//
+//	AddActorLocation(_Dir * DeltaTime * Speed);
+//}
 
 //void APlayer::LeftMove()
 //{
@@ -163,42 +170,199 @@ void APlayer::Tick(float _DeltaTime)
 		//UEngineDebug::SwitchIsDebug();
 	}
 
-	AddActorLocation(Dir * _DeltaTime * Speed);
+	BallTrans.Location = { ABall::Ball->GetActorLocation().iX(), ABall::Ball->GetActorLocation().iY() };
+	BallTrans.Scale = { ABall::Ball->GetActorScale().iX(), ABall::Ball->GetActorScale().iY() };
 	
-	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+	//BallX = APlayer::Ball->GetActorLocation().iX();
+	//BallY = APlayer::Ball->GetActorLocation().iY();
+	//BallScaleX = APlayer::Ball->GetActorScale().iX();
+	//BallScaleY = APlayer::Ball->GetActorScale().iY();
 	
-	if (32 > GetActorLocation().X)
+	VausTrans.Location = { GetActorLocation().iX(), GetActorLocation().iY() };
+	VausTrans.Scale = { GetActorScale().iX(), GetActorScale().iY() };
+	
+	//BrickX = GetActorLocation().iX();
+	//BrickY = GetActorLocation().iY();
+	//BrickScaleX = GetActorScale().iX();
+	//BrickScaleY = GetActorScale().iY();
+	
+	Ratio = (VausTrans.Scale.Y / 2) / (VausTrans.Scale.X / 2);
+	//line = ratio * (BallTrans.Location.X / 2) - (BrickTrans.Scale.Y / 2);
+	
+	
+	
+	//Brick 왼쪽
+	if (BallTrans.Location.X < VausTrans.Location.X && BallTrans.Location.X >(VausTrans.Location.X - (VausTrans.Scale.X / 2)) &&
+		BallTrans.Location.Y > (VausTrans.Location.Y - (VausTrans.Scale.Y / 2)) && BallTrans.Location.Y < VausTrans.Location.Y)
 	{
-		if (Dir.X < 0)
+		Line = (-Ratio) * (BallTrans.Location.X - VausTrans.Location.X);
+	
+		if ((Line) > (VausTrans.Location.Y - BallTrans.Location.Y))
 		{
-			Dir = Dir.Reflect(FVector2D::RIGHT);
+			UEngineDebug::OutPutString("Left");
+			if (ABall::Ball->Dir.X > 0)
+			{
+				FVector2D Dir;
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::LEFT);
+	
+				ABall::Ball->Dir = Dir;
+	
+				//APlayer::Ball->Dir.X *= -1;
+			}
+		}
+		else
+		{
+			UEngineDebug::OutPutString("Top");
+			if (ABall::Ball->Dir.Y > 0)
+			{
+				FVector2D Dir;
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::UP);
+	
+				ABall::Ball->Dir = Dir;
+	
+				//ABall::Ball->Dir.Y *= -1;
+			}
+	
+		}
+	}
+	
+	if (BallTrans.Location.X < VausTrans.Location.X && BallTrans.Location.X >(VausTrans.Location.X - (VausTrans.Scale.X / 2)) &&
+		BallTrans.Location.Y < (VausTrans.Location.Y + (VausTrans.Scale.Y / 2)) && BallTrans.Location.Y > VausTrans.Location.Y)
+	{
+		Line = Ratio * (BallTrans.Location.X - VausTrans.Location.X);
+	
+		if ((Line) < (VausTrans.Location.Y - BallTrans.Location.Y))
+		{
+			UEngineDebug::OutPutString("Left");
+			if (ABall::Ball->Dir.X > 0)
+			{
+				FVector2D Dir;
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::LEFT);
+	
+				ABall::Ball->Dir = Dir;
+	
+				//ABall::Ball->Dir.X *= -1;
+			}
+		}
+		else
+		{
+			UEngineDebug::OutPutString("Bottom");
+			if (ABall::Ball->Dir.Y < 0)
+			{
+				FVector2D Dir;
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::DOWN);
+	
+				ABall::Ball->Dir = Dir;
+	
+				//APlayer::Ball->Dir.Y *= -1;
+			}
+		}
+	}
+	
+	
+	//Brick 오른쪽
+	if (BallTrans.Location.X > VausTrans.Location.X && BallTrans.Location.X < (VausTrans.Location.X + (VausTrans.Scale.X / 2)) &&
+		BallTrans.Location.Y >(VausTrans.Location.Y - (VausTrans.Scale.Y / 2)) && BallTrans.Location.Y < VausTrans.Location.Y)
+	{
+		Line = Ratio * (BallTrans.Location.X - VausTrans.Location.X);
+	
+		if ((Line) > (VausTrans.Location.Y - BallTrans.Location.Y))
+		{
+			UEngineDebug::OutPutString("Right");
+			if (ABall::Ball->Dir.X < 0)
+			{
+				FVector2D Dir;
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::RIGHT);
+	
+				ABall::Ball->Dir = Dir;
+	
+				//ABall::Ball->Dir.X *= -1;
+			}
+		}
+		else
+		{
+			UEngineDebug::OutPutString("Top");
+			if (ABall::Ball->Dir.Y > 0)
+			{
+				FVector2D Dir;
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::UP);
+	
+				ABall::Ball->Dir = Dir;
+	
+				//ABall::Ball->Dir.Y *= -1;
+			}
+		}
+	}
+	
+	if (BallTrans.Location.X > VausTrans.Location.X && BallTrans.Location.X < (VausTrans.Location.X + (VausTrans.Scale.X / 2)) &&
+		BallTrans.Location.Y < (VausTrans.Location.Y + (VausTrans.Scale.Y / 2)) && BallTrans.Location.Y > VausTrans.Location.Y)
+	{
+		Line = (-Ratio) * (BallTrans.Location.X - VausTrans.Location.X);
+	
+		if ((Line) < (VausTrans.Location.Y - BallTrans.Location.Y))
+		{
+			UEngineDebug::OutPutString("Right");
+			if (ABall::Ball->Dir.X < 0)
+			{
+				FVector2D Dir;
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::RIGHT);
+	
+				ABall::Ball->Dir = Dir;
+	
+				//ABall::Ball->Dir.X *= -1;
+			}
+		}
+		else
+		{
+			UEngineDebug::OutPutString("Bottom");
+			if (ABall::Ball->Dir.Y < 0)
+			{
+				FVector2D Dir;
+				Dir = ABall::Ball->Dir.Reflect(FVector2D::DOWN);
+	
+				ABall::Ball->Dir = Dir;
+	
+				//ABall::Ball->Dir.Y *= -1;
+			}
 		}
 	}
 
-	if (WindowSize.X - 32 < GetActorLocation().X)
-	{
-		if (Dir.X > 0)
-		{
-			Dir = Dir.Reflect(FVector2D::LEFT);
-		}
-	}
+	//AddActorLocation(Dir * _DeltaTime * Speed);
 	
-	if (32 > GetActorLocation().Y)
-	{
-		if (Dir.Y < 0)
-		{
-			Dir = Dir.Reflect(FVector2D::DOWN);
-		}
-
-	}
-	
-	if (WindowSize.Y < GetActorLocation().Y)
-	{
-		if (Dir.Y > 0)
-		{
-			Dir = Dir.Reflect(FVector2D::UP);
-		}
-	}
+	//FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+	//
+	//if (32 > GetActorLocation().X)
+	//{
+	//	if (Dir.X < 0)
+	//	{
+	//		Dir = Dir.Reflect(FVector2D::RIGHT);
+	//	}
+	//}
+	//
+	//if (WindowSize.X - 32 < GetActorLocation().X)
+	//{
+	//	if (Dir.X > 0)
+	//	{
+	//		Dir = Dir.Reflect(FVector2D::LEFT);
+	//	}
+	//}
+	//
+	//if (32 > GetActorLocation().Y)
+	//{
+	//	if (Dir.Y < 0)
+	//	{
+	//		Dir = Dir.Reflect(FVector2D::DOWN);
+	//	}
+	//
+	//}
+	//
+	//if (WindowSize.Y < GetActorLocation().Y)
+	//{
+	//	if (Dir.Y > 0)
+	//	{
+	//		Dir = Dir.Reflect(FVector2D::UP);
+	//	}
+	//}
 	
 	 
 	//if (UEngineInput::GetInst().IsDown('A'))
@@ -268,24 +432,32 @@ void APlayer::Tick(float _DeltaTime)
 	// 입력버퍼는 윈도우가 알아서 처리해주기 때문에
 	// 입력이 있을때만 0이 아닌 수를 리턴하는 함수입니다.
 
-	//if (true == UEngineInput::GetInst().IsPress('D'))
-	//{
-	//	SpriteRenderer->ChangeAnimation("Run_Right");
-	//	AddActorLocation(FVector2D::RIGHT * _DeltaTime * (Speed * 2));
-	//}
-	//if (true == UEngineInput::GetInst().IsPress('A'))
-	//{
-	//	SpriteRenderer->ChangeAnimation("Run_Right");
-	//	AddActorLocation(FVector2D::LEFT * _DeltaTime * (Speed * 2));
-	//}
+	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+
+	if (true == UEngineInput::GetInst().IsPress('D'))
+	{
+		//SpriteRenderer->ChangeAnimation("Run_Right");
+		if (WindowSize.X - 32 > GetActorLocation().X + GetActorScale().Half().X)
+		{
+			AddActorLocation(FVector2D::RIGHT * _DeltaTime * (Speed * 2));
+		}
+	}
+	if (true == UEngineInput::GetInst().IsPress('A'))
+	{
+		if (32 < GetActorLocation().X - GetActorScale().Half().X)
+		{
+			//SpriteRenderer->ChangeAnimation("Run_Right");
+			AddActorLocation(FVector2D::LEFT * _DeltaTime * (Speed * 2));
+		}
+	}
 	//if (true == UEngineInput::GetInst().IsPress('S'))
 	//{
-	//	SpriteRenderer->ChangeAnimation("Run_Right");
+	//	//SpriteRenderer->ChangeAnimation("Run_Right");
 	//	AddActorLocation(FVector2D::DOWN * _DeltaTime * (Speed * 2));
 	//}
 	//if (true == UEngineInput::GetInst().IsPress('W'))
 	//{
-	//	SpriteRenderer->ChangeAnimation("Run_Right");
+	//	//SpriteRenderer->ChangeAnimation("Run_Right");
 	//	AddActorLocation(FVector2D::UP * _DeltaTime * (Speed * 2));
 	//}
 

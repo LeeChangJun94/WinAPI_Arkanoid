@@ -3,16 +3,6 @@
 #include <EngineBase/EngineMath.h>
 #include <EngineCore/SpriteRenderer.h>
 
-enum CollPos
-{
-	NONE,
-	TOP,
-	BOTTOM,
-	LEFT,
-	RIGHT,
-	END
-};
-
 // Ό³Έν :
 class ABrick : public AActor
 {
@@ -34,7 +24,6 @@ public:
 protected:
 
 private:
-	CollPos HitBallPos = CollPos::NONE;
 	
 	FTransform BallTrans;
 	int BallX = 0;
@@ -50,7 +39,7 @@ private:
 
 	USpriteRenderer* SpriteRenderer;
 
-	float ratio = 0;
-	float line = 0;
+	float Ratio = 0;
+	float Line = 0;
 };
 

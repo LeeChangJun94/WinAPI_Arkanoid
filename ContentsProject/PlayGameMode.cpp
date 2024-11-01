@@ -4,6 +4,7 @@
 #include <EngineCore/Level.h>
 #include "PlayMap.h"
 #include "Brick.h"
+#include "Ball.h"
 
 APlayGameMode::APlayGameMode()
 {
@@ -18,6 +19,7 @@ void APlayGameMode::BeginPlay()
 	{
 		APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
 	}
+	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
 
 	for (int i = 0; i < 10; ++i)
 	{

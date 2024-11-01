@@ -52,11 +52,13 @@ void ContentsCore::BeginPlay()
 	// 자르는 작업을 아래서 해주는게 좋다.
 
 	UImageManager::GetInst().CuttingSprite("Fields2.png", { 224, 240 });
+	UImageManager::GetInst().CuttingSprite("Vaus.png", { 144, 24 });
 	UImageManager::GetInst().CuttingSprite("Ball.png", { 10, 8 });
 	UImageManager::GetInst().CuttingSprite("Bricks.png", { 16, 8 });
 	UImageManager::GetInst().CuttingSprite("Title1.png", { 896, 1024 });
 	UImageManager::GetInst().CuttingSprite("Title2.png", { 896, 224 });
-
+	UImageManager::GetInst().CuttingSprite("Item1.png", { 32, 14 });
+	UImageManager::GetInst().CuttingSprite("Item2.png", { 32, 14 });
 
 	//{
 	//

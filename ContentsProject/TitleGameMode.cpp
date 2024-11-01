@@ -25,7 +25,7 @@ void ATitleGameMode::BeginPlay()
 	TitleLogo* NewActor = GetWorld()->SpawnActor<TitleLogo>();
 }
 
-float CheckTime = 0.0f;
+
 void ATitleGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);

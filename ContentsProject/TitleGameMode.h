@@ -22,5 +22,6 @@ protected:
 
 private:
 	class USpriteRenderer* SpriteRenderer;
+	float CheckTime = 0.0f;
 };
 

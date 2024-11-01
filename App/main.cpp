@@ -1,10 +1,9 @@
 #include "PreCompile.h"
 #include <ContentsProject/ContentsCore.h>
-
-
 #include <EngineCore/EngineAPICore.h>
 
 #pragma comment (lib, "EngineCore.lib")
+#pragma comment (lib, "EngineBase.lib")
 #pragma comment (lib, "ContentsProject.lib")
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
