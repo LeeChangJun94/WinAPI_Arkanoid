@@ -20,6 +20,11 @@ public:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void SetBrickSize(FVector2D _Size)
+	{
+		SpriteRenderer->SetComponentScale(_Size);
+	}
+
 
 protected:
 

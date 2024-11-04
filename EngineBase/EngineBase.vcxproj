@@ -163,6 +163,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineRandom.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineSerializer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EngineString.h">
       <SubType>
       </SubType>
@@ -187,6 +195,14 @@
     <ClCompile Include="EngineFile.cpp" />
     <ClCompile Include="EngineMath.cpp" />
     <ClCompile Include="EnginePath.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineRandom.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineSerializer.cpp">
       <SubType>
       </SubType>
     </ClCompile>

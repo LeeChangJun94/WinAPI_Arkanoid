@@ -23,9 +23,9 @@ public:
 	// 나 이제 새로운 레벨로 바뀔거야.
 	void LevelChangeEnd();
 
-
 	void Tick(float _DeltaTime);
 	void Render(float _DeltaTime);
+	void Release(float _DeltaTime);
 
 	template<typename ActorType>
 	ActorType* SpawnActor()
@@ -37,9 +37,8 @@ public:
 		ActorPtr->World = this;
 
 		BeginPlayList.push_back(ActorPtr);
-		
-		//NewActor->BeginPlay();
-		//AllActors.push_back(NewActor);
+		// NewActor->BeginPlay();
+		// AllActors.push_back(NewActor);
 		return NewActor;
 	}
 
@@ -52,6 +51,22 @@ public:
 	{
 		CameraPivot = _Pivot;
 	}
+
+	void SetCameraPos(FVector2D _Pos)
+	{
+		CameraPos = _Pos;
+	}
+
+	FVector2D GetCameraPivot()
+	{
+		return CameraPivot;
+	}
+
+	FVector2D GetCameraPos()
+	{
+		return CameraPos;
+	}
+
 
 protected:
 
@@ -82,6 +97,7 @@ private:
 		//AllActors.push_back(MainPawn);
 	}
 
+
 	// 아무나 함부로 호출하지 못하게 하기 위해서 private 이어야 한다.
 	void PushRenderer(class USpriteRenderer* _Renderer);
 	void ChangeRenderOrder(class USpriteRenderer* _Renderer, int _PrevOrder);
@@ -110,3 +126,4 @@ private:
 	// 오더링을 할것이다.
 	std::map<int, std::list<class USpriteRenderer*>> Renderers;
 };
+

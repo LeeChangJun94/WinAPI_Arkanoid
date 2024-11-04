@@ -129,6 +129,9 @@ void UEngineAPICore::Tick()
 	//  UEngineInput::GetInst().EventCheck(DeltaTime);
 	CurLevel->Render(DeltaTime);
 
+	// 틱돌고 랜더돌고 릴리즈
+	CurLevel->Release(DeltaTime);
+
 }
 
 

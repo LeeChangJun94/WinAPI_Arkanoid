@@ -26,6 +26,11 @@ public:
 
 	void RunSoundPlay();
 
+	//FVector2D GetBallScale()
+	//{
+	//	return SpriteRenderer->GetComponentScale();
+	//}
+
 protected:
 
 private:

@@ -19,7 +19,7 @@ ABrick::ABrick()
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetSprite("Bricks.png");
 	SpriteRenderer->SetComponentScale({ 64, 32 });
-	SetActorScale(SpriteRenderer->GetComponentScale());
+	//SetActorScale(SpriteRenderer->GetComponentScale());
 } 
 
 ABrick::~ABrick()
@@ -36,29 +36,32 @@ void ABrick::BeginPlay()
 void ABrick::Tick(float _DeltaTime)
 {
 	BallTrans.Location = { ABall::Ball->GetActorLocation().iX(), ABall::Ball->GetActorLocation().iY() };
-	BallTrans.Scale = { ABall::Ball->GetActorScale().iX(), ABall::Ball->GetActorScale().iY() };
+	//BallTrans.Scale = { ABall::Ball->GetActorScale().iX(), ABall::Ball->GetActorScale().iY() };
 	
 	//BallX = APlayer::Ball->GetActorLocation().iX();
 	//BallY = APlayer::Ball->GetActorLocation().iY();
 	//BallScaleX = APlayer::Ball->GetActorScale().iX();
 	//BallScaleY = APlayer::Ball->GetActorScale().iY();
 
-	BrickTrans.Location = { GetActorLocation().iX(), GetActorLocation().iY() };
-	BrickTrans.Scale = { GetActorScale().iX(), GetActorScale().iY() };
+	//FVector2D BallSize = ABall::Ball->GetBallScale();
 
+	BrickTrans.Location = { GetActorLocation().iX(), GetActorLocation().iY() };
+	//BrickTrans.Scale= { GetActorScale().iX(), GetActorScale().iY() };*/
+
+	FVector2D BrickSize = SpriteRenderer->GetComponentScale();
 	//BrickX = GetActorLocation().iX();
 	//BrickY = GetActorLocation().iY();
 	//BrickScaleX = GetActorScale().iX();
 	//BrickScaleY = GetActorScale().iY();
 
-	Ratio = (BrickTrans.Scale.Y / 2) / (BrickTrans.Scale.X / 2);
-	//line = ratio * (BallTrans.Location.X / 2) - (BrickTrans.Scale.Y / 2);
+	Ratio = (BrickSize.Y / 2) / (BrickSize.X / 2);
+	//line = ratio * (BallTrans.Location.X / 2) - (BrickSize.Y / 2);
 	
 
 
 	//Brick ¿ÞÂÊ
-	if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X > (BrickTrans.Location.X - (BrickTrans.Scale.X / 2)) &&
-		BallTrans.Location.Y > (BrickTrans.Location.Y - (BrickTrans.Scale.Y / 2)) && BallTrans.Location.Y < BrickTrans.Location.Y)
+	if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X > (BrickTrans.Location.X - (BrickSize.X / 2)) &&
+		BallTrans.Location.Y > (BrickTrans.Location.Y - (BrickSize.Y / 2)) && BallTrans.Location.Y < BrickTrans.Location.Y)
 	{
 		Line = (-Ratio) * (BallTrans.Location.X - BrickTrans.Location.X);
 		
@@ -92,8 +95,8 @@ void ABrick::Tick(float _DeltaTime)
 		}
 	}
 
-	if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X > (BrickTrans.Location.X - (BrickTrans.Scale.X / 2)) &&
-		BallTrans.Location.Y < (BrickTrans.Location.Y + (BrickTrans.Scale.Y / 2)) && BallTrans.Location.Y > BrickTrans.Location.Y)
+	if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X > (BrickTrans.Location.X - (BrickSize.X / 2)) &&
+		BallTrans.Location.Y < (BrickTrans.Location.Y + (BrickSize.Y / 2)) && BallTrans.Location.Y > BrickTrans.Location.Y)
 	{
 		Line = Ratio * (BallTrans.Location.X - BrickTrans.Location.X);
 
@@ -131,8 +134,8 @@ void ABrick::Tick(float _DeltaTime)
 
 
 	//Brick ¿À¸¥ÂÊ
-	if (BallTrans.Location.X > BrickTrans.Location.X && BallTrans.Location.X < (BrickTrans.Location.X + (BrickTrans.Scale.X / 2)) &&
-		BallTrans.Location.Y > (BrickTrans.Location.Y - (BrickTrans.Scale.Y / 2)) && BallTrans.Location.Y < BrickTrans.Location.Y)
+	if (BallTrans.Location.X > BrickTrans.Location.X && BallTrans.Location.X < (BrickTrans.Location.X + (BrickSize.X / 2)) &&
+		BallTrans.Location.Y > (BrickTrans.Location.Y - (BrickSize.Y / 2)) && BallTrans.Location.Y < BrickTrans.Location.Y)
 	{
 		Line = Ratio * (BallTrans.Location.X - BrickTrans.Location.X);
 
@@ -164,8 +167,8 @@ void ABrick::Tick(float _DeltaTime)
 		}
 	}
 
-	if (BallTrans.Location.X > BrickTrans.Location.X && BallTrans.Location.X < (BrickTrans.Location.X + (BrickTrans.Scale.X / 2)) &&
-		BallTrans.Location.Y < (BrickTrans.Location.Y + (BrickTrans.Scale.Y / 2)) && BallTrans.Location.Y > BrickTrans.Location.Y)
+	if (BallTrans.Location.X > BrickTrans.Location.X && BallTrans.Location.X < (BrickTrans.Location.X + (BrickSize.X / 2)) &&
+		BallTrans.Location.Y < (BrickTrans.Location.Y + (BrickSize.Y / 2)) && BallTrans.Location.Y > BrickTrans.Location.Y)
 	{
 		Line = (-Ratio) * (BallTrans.Location.X - BrickTrans.Location.X);
 

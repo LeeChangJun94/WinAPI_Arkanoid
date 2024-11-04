@@ -10,6 +10,7 @@
 
 #include "TitleGameMode.h"
 #include "PlayGameMode.h"
+#include "TileMapGameMode.h"
 #include "Player.h"
 
 
@@ -37,7 +38,7 @@ void ContentsCore::BeginPlay()
 		return;
 	}
 
-
+	//Dir.Append("Image");
 
 	std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
 
@@ -70,6 +71,15 @@ void ContentsCore::BeginPlay()
 	//
 	//}
 
+	//{
+	//	// 타일셋 로드
+	//	UEngineDirectory Dir;
+	//	Dir.MoveParentToDirectory("Resources");
+	//	Dir.Append("TileMap//TileSet");
+	//
+	//	UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+	//
+	//}
 
 	//UEngineDirectroy Dir;
 
@@ -94,8 +104,13 @@ void ContentsCore::BeginPlay()
 
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
 	//UEngineAPICore::GetCore()->CreateLevel("End");
+	//UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 
 	UEngineAPICore::GetCore()->OpenLevel("Title");
+
+	//UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
+
+	//UEngineAPICore::GetCore()->OpenLevel("Tile");
 
 }
 

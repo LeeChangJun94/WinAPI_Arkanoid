@@ -91,7 +91,7 @@ public:
 		return;
 	}
 
-	float Dot(FVector2D _DirVector)
+	float Dot(const FVector2D _DirVector) const
 	{
 		float Result = X * _DirVector.X + Y * _DirVector.Y;
 		return Result;
@@ -113,6 +113,13 @@ public:
 		return Result;
 	}
 
+	FVector2D operator/(const FVector2D& Other) const
+	{
+		FVector2D Result;
+		Result.X = X / Other.X;
+		Result.Y = Y / Other.Y;
+		return Result;
+	}
 
 
 	FVector2D operator+(FVector2D _Other) const

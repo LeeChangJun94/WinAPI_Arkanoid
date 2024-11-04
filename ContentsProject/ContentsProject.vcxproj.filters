@@ -35,6 +35,12 @@
       <Filter>ContentsObject</Filter>
     </ClInclude>
     <ClInclude Include="Item.h" />
+    <ClInclude Include="TileMap.h">
+      <Filter>Tilemap</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -71,6 +77,12 @@
       <Filter>ContentsObject</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Tilemap</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -96,6 +108,9 @@
     </Filter>
     <Filter Include="ContentsObject\Title">
       <UniqueIdentifier>{a83ec8ee-ad55-427e-a338-ac45dac2dda7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tilemap">
+      <UniqueIdentifier>{423538cd-9bfb-4f53-b2d7-e7e89a45463d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

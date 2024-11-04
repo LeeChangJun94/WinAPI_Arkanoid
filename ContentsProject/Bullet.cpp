@@ -3,7 +3,7 @@
 
 ABullet::ABullet()
 {
-	SetActorScale({ 50, 50 });
+	//SetActorScale({ 50, 50 });
 }
 
 ABullet::~ABullet()

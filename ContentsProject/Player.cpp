@@ -29,7 +29,7 @@ APlayer::APlayer()
 	SpriteRenderer->SetSprite("Vaus.png");
 	SpriteRenderer->SetComponentScale({ 144, 24 });
 	SetActorLocation({ 300,900 });
-	SetActorScale(SpriteRenderer->GetComponentScale());
+	//SetActorScale(SpriteRenderer->GetComponentScale());
 
 	SpriteRenderer->CreateAnimation("Idle", "Vaus.png", 0, 5, 0.1f);
 	SpriteRenderer->ChangeAnimation("Idle");
@@ -171,29 +171,30 @@ void APlayer::Tick(float _DeltaTime)
 	}
 
 	BallTrans.Location = { ABall::Ball->GetActorLocation().iX(), ABall::Ball->GetActorLocation().iY() };
-	BallTrans.Scale = { ABall::Ball->GetActorScale().iX(), ABall::Ball->GetActorScale().iY() };
+	//BallTrans.Scale = { ABall::Ball->GetActorScale().iX(), ABall::Ball->GetActorScale().iY() };
 	
 	//BallX = APlayer::Ball->GetActorLocation().iX();
 	//BallY = APlayer::Ball->GetActorLocation().iY();
 	//BallScaleX = APlayer::Ball->GetActorScale().iX();
 	//BallScaleY = APlayer::Ball->GetActorScale().iY();
 	
+	FVector2D VausSize = SpriteRenderer->GetComponentScale();
 	VausTrans.Location = { GetActorLocation().iX(), GetActorLocation().iY() };
-	VausTrans.Scale = { GetActorScale().iX(), GetActorScale().iY() };
+	//VausSize = { GetActorScale().iX(), GetActorScale().iY() };
 	
 	//BrickX = GetActorLocation().iX();
 	//BrickY = GetActorLocation().iY();
 	//BrickScaleX = GetActorScale().iX();
 	//BrickScaleY = GetActorScale().iY();
 	
-	Ratio = (VausTrans.Scale.Y / 2) / (VausTrans.Scale.X / 2);
-	//line = ratio * (BallTrans.Location.X / 2) - (BrickTrans.Scale.Y / 2);
+	Ratio = (VausSize.Y / 2) / (VausSize.X / 2);
+	//line = ratio * (BallTrans.Location.X / 2) - (BrickSize.Y / 2);
 	
 	
 	
-	//Brick ¿ÞÂÊ
-	if (BallTrans.Location.X < VausTrans.Location.X && BallTrans.Location.X >(VausTrans.Location.X - (VausTrans.Scale.X / 2)) &&
-		BallTrans.Location.Y > (VausTrans.Location.Y - (VausTrans.Scale.Y / 2)) && BallTrans.Location.Y < VausTrans.Location.Y)
+
+	if (BallTrans.Location.X < VausTrans.Location.X && BallTrans.Location.X >(VausTrans.Location.X - (VausSize.X / 2)) &&
+		BallTrans.Location.Y > (VausTrans.Location.Y - (VausSize.Y / 2)) && BallTrans.Location.Y < VausTrans.Location.Y)
 	{
 		Line = (-Ratio) * (BallTrans.Location.X - VausTrans.Location.X);
 	
@@ -226,8 +227,8 @@ void APlayer::Tick(float _DeltaTime)
 		}
 	}
 	
-	if (BallTrans.Location.X < VausTrans.Location.X && BallTrans.Location.X >(VausTrans.Location.X - (VausTrans.Scale.X / 2)) &&
-		BallTrans.Location.Y < (VausTrans.Location.Y + (VausTrans.Scale.Y / 2)) && BallTrans.Location.Y > VausTrans.Location.Y)
+	if (BallTrans.Location.X < VausTrans.Location.X && BallTrans.Location.X >(VausTrans.Location.X - (VausSize.X / 2)) &&
+		BallTrans.Location.Y < (VausTrans.Location.Y + (VausSize.Y / 2)) && BallTrans.Location.Y > VausTrans.Location.Y)
 	{
 		Line = Ratio * (BallTrans.Location.X - VausTrans.Location.X);
 	
@@ -260,9 +261,9 @@ void APlayer::Tick(float _DeltaTime)
 	}
 	
 	
-	//Brick ¿À¸¥ÂÊ
-	if (BallTrans.Location.X > VausTrans.Location.X && BallTrans.Location.X < (VausTrans.Location.X + (VausTrans.Scale.X / 2)) &&
-		BallTrans.Location.Y >(VausTrans.Location.Y - (VausTrans.Scale.Y / 2)) && BallTrans.Location.Y < VausTrans.Location.Y)
+
+	if (BallTrans.Location.X > VausTrans.Location.X && BallTrans.Location.X < (VausTrans.Location.X + (VausSize.X / 2)) &&
+		BallTrans.Location.Y >(VausTrans.Location.Y - (VausSize.Y / 2)) && BallTrans.Location.Y < VausTrans.Location.Y)
 	{
 		Line = Ratio * (BallTrans.Location.X - VausTrans.Location.X);
 	
@@ -294,8 +295,8 @@ void APlayer::Tick(float _DeltaTime)
 		}
 	}
 	
-	if (BallTrans.Location.X > VausTrans.Location.X && BallTrans.Location.X < (VausTrans.Location.X + (VausTrans.Scale.X / 2)) &&
-		BallTrans.Location.Y < (VausTrans.Location.Y + (VausTrans.Scale.Y / 2)) && BallTrans.Location.Y > VausTrans.Location.Y)
+	if (BallTrans.Location.X > VausTrans.Location.X && BallTrans.Location.X < (VausTrans.Location.X + (VausSize.X / 2)) &&
+		BallTrans.Location.Y < (VausTrans.Location.Y + (VausSize.Y / 2)) && BallTrans.Location.Y > VausTrans.Location.Y)
 	{
 		Line = (-Ratio) * (BallTrans.Location.X - VausTrans.Location.X);
 	
@@ -437,14 +438,14 @@ void APlayer::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress('D'))
 	{
 		//SpriteRenderer->ChangeAnimation("Run_Right");
-		if (WindowSize.X - 32 > GetActorLocation().X + GetActorScale().Half().X)
+		if (WindowSize.X - 32 > GetActorLocation().X + VausSize.Half().X)
 		{
 			AddActorLocation(FVector2D::RIGHT * _DeltaTime * (Speed * 2));
 		}
 	}
 	if (true == UEngineInput::GetInst().IsPress('A'))
 	{
-		if (32 < GetActorLocation().X - GetActorScale().Half().X)
+		if (32 < GetActorLocation().X - VausSize.Half().X)
 		{
 			//SpriteRenderer->ChangeAnimation("Run_Right");
 			AddActorLocation(FVector2D::LEFT * _DeltaTime * (Speed * 2));

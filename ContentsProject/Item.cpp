@@ -16,8 +16,8 @@ AItem::AItem()
 	SpriteRenderer1->SetComponentScale({ 32, 14 });
 	SpriteRenderer2->SetComponentScale(SpriteRenderer1->GetComponentScale());
 	SpriteRenderer2->SetComponentLocation({ SpriteRenderer1->GetComponentLocation().X + 1.0f, SpriteRenderer1->GetComponentLocation().Y + 1.0f});
-	SetActorScale(SpriteRenderer1->GetComponentScale());
-	//SpriteRenderer2->SetComponentLocation({  })
+	//SetActorScale(SpriteRenderer1->GetComponentScale());
+	
 	SpriteRenderer1->SetOrder(1);
 	SpriteRenderer2->SetOrder(0);
 	SpriteRenderer1->CreateAnimation("Player", "Item1.png", 0,   7, 0.1f);

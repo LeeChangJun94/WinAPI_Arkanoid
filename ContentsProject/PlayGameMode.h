@@ -1,6 +1,8 @@
 #pragma once
 #include <EngineCore/GameMode.h>
 
+#include "TileMap.h"
+
 // Ό³Έν :
 class APlayGameMode : public AGameMode
 {
@@ -21,6 +23,7 @@ protected:
 
 private:
 	//FVector2D BrickScale = { 32, 16 };
+	ATileMap* GameTileMap = nullptr;
 
 
 };
