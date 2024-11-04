@@ -23,7 +23,7 @@ protected:
 
 private:
 	//FVector2D BrickScale = { 32, 16 };
-	ATileMap* GameTileMap = nullptr;
+	ATileMap* BrickTileMap = nullptr;
 
 
 };

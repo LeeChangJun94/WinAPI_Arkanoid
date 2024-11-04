@@ -30,14 +30,25 @@ void APlayGameMode::BeginPlay()
 
 	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
 
-	for (int i = 0; i < 10; ++i)
+	BrickTileMap = GetWorld()->SpawnActor<ATileMap>();
+	BrickTileMap->Create("Bricks.png", { 10, 10 }, { 64, 32 });
+
+	for (int x = 0; x < 10; ++x)
 	{
-		for (int j = 0; j < 5; ++j)
+		for (int y = 0; y < 5; ++y)
 		{
-			ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
-			Ptr->SetActorLocation({ 64 + (64 * i), 160 + (32 * j) });
+			BrickTileMap->SetTileIndex({ x, y}, {32 , 160}, {64, 32}, 0);
 		}
 	}
+
+	//for (int i = 0; i < 10; ++i)
+	//{
+	//	for (int j = 0; j < 5; ++j)
+	//	{
+	//		ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
+	//		Ptr->SetActorLocation({ 64 + (64 * i), 160 + (32 * j) });
+	//	}
+	//}
 	//ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
 
 }
