@@ -60,6 +60,14 @@ public:
 		return { Info.bmWidth, Info.bmHeight };
 	}
 
+	UColor GetColor(FVector2D _Point, UColor _DefaultColor = UColor::WHITE)
+	{
+		return GetColor(_Point.ConvertToPoint(), _DefaultColor);
+	}
+
+	UColor GetColor(FIntPoint _Point, UColor _DefaultColor);
+
+
 protected:
 
 private:

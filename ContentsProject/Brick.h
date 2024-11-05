@@ -31,16 +31,8 @@ protected:
 private:
 	
 	FTransform BallTrans;
-	int BallX = 0;
-	int BallY = 0;
-	int BallScaleX = 0;
-	int BallScaleY = 0;
 
 	FTransform BrickTrans;
-	int BrickX = 0;
-	int BrickY = 0;
-	int BrickScaleX = 0;
-	int BrickScaleY = 0;
 
 	USpriteRenderer* SpriteRenderer;
 

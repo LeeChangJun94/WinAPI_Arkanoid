@@ -41,6 +41,9 @@
     <ClInclude Include="TileMapGameMode.h">
       <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -83,6 +86,9 @@
     <ClCompile Include="TileMapGameMode.cpp">
       <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -111,6 +117,9 @@
     </Filter>
     <Filter Include="Tilemap">
       <UniqueIdentifier>{423538cd-9bfb-4f53-b2d7-e7e89a45463d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Global">
+      <UniqueIdentifier>{ff599378-e4fd-4f08-8c83-c53b4f212876}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,6 +1,14 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+//enum class PlayerState
+//{
+//	Idle,
+//	Move,
+//	Jump,
+//};
+
+
 // 설명 :
 class APlayer : public AActor
 {
@@ -42,7 +50,8 @@ public:
 	
 	void RunSoundPlay();
 
-	void LevelChangeStart();
+	void LevelChangeStart() override;
+
 	void LevelChangeEnd();
 
 protected:
@@ -61,6 +70,31 @@ private:
 	float Line = 0;
 
 	// class std::vector< USpriteRenderer* LeftRenderer;
+
+	//PlayerState CurPlayerState = PlayerState::Idle;
+
+	//// 점프
+	//// 공격
+	//// 점프공격
+	//// 
+
+	//void ChangeState(PlayerState CurPlayerState);
+
+	//void IdleStart();
+	//void Idle(float _DeltaTime);
+	//void MoveStart();
+	//void Move(float _DeltaTime);
+	//void Fly(float _DeltaTime);
+
+	//// 상태는 아니지만 도움이나 체크에 처리되는 함수
+	//void Gravity()
+	//{
+
+	//}
+
+
+	//// void Jump();
+
 
 };
 

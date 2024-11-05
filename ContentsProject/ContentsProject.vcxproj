@@ -151,6 +151,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Score.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TileMap.h">
       <SubType>
       </SubType>
@@ -203,6 +207,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Score.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <SubType>
       </SubType>

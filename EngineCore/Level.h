@@ -67,6 +67,12 @@ public:
 		return CameraPos;
 	}
 
+	template<typename ConvertType>
+	ConvertType* GetPawn()
+	{
+		return dynamic_cast<ConvertType*>(MainPawn);
+	}
+
 
 protected:
 

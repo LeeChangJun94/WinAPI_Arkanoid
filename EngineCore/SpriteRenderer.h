@@ -101,13 +101,17 @@ public:
 		return UObject::IsDestroy() || GetActor()->IsDestroy();
 	}
 
+	void SetCameraEffect(bool _Value)
+	{
+		IsCameraEffect = _Value;
+	}
 
 protected:
 
 public:
 	int Order = 0;
 	int CurIndex = 0;
-
+	bool IsCameraEffect = true;
 	class UEngineSprite* Sprite = nullptr;
 	void SetSprite(std::string_view _Name, int _CurIndex = 0);
 

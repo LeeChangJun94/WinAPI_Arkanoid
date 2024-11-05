@@ -110,9 +110,35 @@ void APlayer::BeginPlay()
 	// 직접 카메라 피봇을 설정해줘야 한다.
 	//FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 	//GetWorld()->SetCameraPivot(Size.Half() * -1.0f);
-
-
 }
+
+//	ChangeState(PlayerState::Idle);
+//}
+//
+//void APlayer::IdleStart()
+//{
+//	SpriteRenderer->ChangeAnimation("Idle_Right");
+//}
+//
+//void APlayer::ChangeState(PlayerState _CurPlayerState)
+//{
+//	switch (_CurPlayerState)
+//	{
+//	case PlayerState::Idle:
+//		IdleStart();
+//		break;
+//	case PlayerState::Move:
+//		MoveStart();
+//		break;
+//	case PlayerState::Jump:
+//		break;
+//	default:
+//		break;
+//	}
+//
+//	CurPlayerState = _CurPlayerState;
+//
+//}
 
 // class LeftPlayer
 // class RightPlayer
@@ -216,10 +242,28 @@ void APlayer::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Top");
 			if (ABall::Ball->Dir.Y > 0)
 			{
-				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::UP);
-	
-				ABall::Ball->Dir = Dir;
+				if (BallTrans.Location.X > VausTrans.Location.X - ((VausSize.X / 2) * 0.2))
+				{
+					FVector2D Dir;
+					Dir.Radian(-30.0f);//ABall::Ball->Dir.Reflect(FVector2D::UP);
+
+					ABall::Ball->Dir = Dir;
+				}
+				else if (BallTrans.Location.X > VausTrans.Location.X - ((VausSize.X / 2) * 0.6))
+				{
+					FVector2D Dir;
+					Dir.Radian(-45.0f);
+
+					ABall::Ball->Dir = Dir;
+				}
+				else
+				{
+					FVector2D Dir;
+					Dir.Radian(-60.0f);
+
+					ABall::Ball->Dir = Dir;
+				}
+
 	
 				//ABall::Ball->Dir.Y *= -1;
 			}
@@ -285,12 +329,27 @@ void APlayer::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString("Top");
 			if (ABall::Ball->Dir.Y > 0)
 			{
-				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::UP);
-	
-				ABall::Ball->Dir = Dir;
-	
-				//ABall::Ball->Dir.Y *= -1;
+				if (BallTrans.Location.X < VausTrans.Location.X + ((VausSize.X / 2) * 0.2))
+				{
+					FVector2D Dir;
+					Dir.Radian(30.0f);//ABall::Ball->Dir.Reflect(FVector2D::UP);
+
+					ABall::Ball->Dir = Dir;
+				}
+				else if (BallTrans.Location.X < VausTrans.Location.X + ((VausSize.X / 2) * 0.6))
+				{
+					FVector2D Dir;
+					Dir.Radian(45.0f);
+
+					ABall::Ball->Dir = Dir;
+				}
+				else
+				{
+					FVector2D Dir;
+					Dir.Radian(60.0f);
+
+					ABall::Ball->Dir = Dir;
+				}
 			}
 		}
 	}
@@ -327,6 +386,22 @@ void APlayer::Tick(float _DeltaTime)
 			}
 		}
 	}
+
+	//switch (CurPlayerState)
+	//{
+	//case PlayerState::Idle:
+	//	Idle(_DeltaTime);
+	//	break;
+	//case PlayerState::Move:
+	//	Move(_DeltaTime);
+	//	break;
+	//case PlayerState::Jump:
+	//	// 하이퍼 FSM이라고 합니다
+	//	// FSM의 변종입니다.
+	//	break;
+	//default:
+	//	break;
+	//}
 
 	//AddActorLocation(Dir * _DeltaTime * Speed);
 	
@@ -507,3 +582,36 @@ void APlayer::LevelChangeEnd()
 
 
 }
+
+//void APlayer::Idle(float _DeltaTime)
+//{
+//	Gravity();
+//
+//
+//	SpriteRenderer->ChangeAnimation("Idle_Right");
+//
+//	// 아이들이라는 상태는 가만히 있는 상태이다.
+//
+//	// 전이에 대한 판단은 해야 합니다.
+//	// 각스테이트에서 쳐야할 코드는
+//	// 1. 전이조건
+//
+//
+//	if (true == UEngineInput::GetInst().IsPress('A') ||
+//		true == UEngineInput::GetInst().IsPress('D') ||
+//		true == UEngineInput::GetInst().IsPress('W') ||
+//		true == UEngineInput::GetInst().IsPress('S'))
+//	{
+//		// 상태를 바꾸는 순간은 그 바로 종료하는게 좋다.
+//		// 최종적으로 상태를 바꿨다면 종료해라.
+//		ChangeState(PlayerState::Move);
+//		return;
+//	}
+//
+//	if (true == UEngineInput::GetInst().IsPress(VK_SPACE))
+//	{
+//		ChangeState(PlayerState::Jump);
+//		return;
+//	}
+//
+//}

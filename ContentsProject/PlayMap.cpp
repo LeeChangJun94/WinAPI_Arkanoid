@@ -15,8 +15,8 @@ APlayMap::APlayMap()
 		SpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
 		SpriteRenderer->SetSprite("Fields2.png");
 
-		SpriteRenderer->SetComponentScale(WindowSize);
-		SpriteRenderer->SetComponentLocation(WindowSize.Half());
+		SpriteRenderer->SetComponentScale({ 896, 960 });
+		SpriteRenderer->SetComponentLocation({ 448, 544 });
 	}
 	
 	//SetSprite("Fields2.png");

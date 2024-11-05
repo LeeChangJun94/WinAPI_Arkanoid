@@ -74,7 +74,8 @@ void ABrick::Tick(float _DeltaTime)
 				Dir = ABall::Ball->Dir.Reflect(FVector2D::LEFT);
 
 				ABall::Ball->Dir = Dir;
-
+				
+				this->Destroy();
 				//APlayer::Ball->Dir.X *= -1;
 
 			}
@@ -89,7 +90,9 @@ void ABrick::Tick(float _DeltaTime)
 
 				ABall::Ball->Dir = Dir;
 
+				this->Destroy();
 				//ABall::Ball->Dir.Y *= -1;
+
 			}
 			
 		}
@@ -110,7 +113,9 @@ void ABrick::Tick(float _DeltaTime)
 
 				ABall::Ball->Dir = Dir;
 
+				this->Destroy();
 				//ABall::Ball->Dir.X *= -1;
+
 			}
 		}
 		else
@@ -125,6 +130,8 @@ void ABrick::Tick(float _DeltaTime)
 
 				AItem* Ptr = GetWorld()->SpawnActor<AItem>();
 				Ptr->SetActorLocation(GetActorLocation());
+
+				this->Destroy();
 
 				//Ptr->USpriteRenderer::ChangeAnimation("Player");
 				//APlayer::Ball->Dir.Y *= -1;
@@ -149,6 +156,8 @@ void ABrick::Tick(float _DeltaTime)
 
 				ABall::Ball->Dir = Dir;
 
+				this->Destroy();
+
 				//ABall::Ball->Dir.X *= -1;
 			}
 		}
@@ -161,6 +170,8 @@ void ABrick::Tick(float _DeltaTime)
 				Dir = ABall::Ball->Dir.Reflect(FVector2D::UP);
 
 				ABall::Ball->Dir = Dir;
+
+				this->Destroy();
 
 				//ABall::Ball->Dir.Y *= -1;
 			}
@@ -182,6 +193,8 @@ void ABrick::Tick(float _DeltaTime)
 
 				ABall::Ball->Dir = Dir;
 
+				this->Destroy();
+
 				//ABall::Ball->Dir.X *= -1;
 			}
 		}
@@ -197,6 +210,9 @@ void ABrick::Tick(float _DeltaTime)
 
 				AItem* Ptr = GetWorld()->SpawnActor<AItem>();
 				Ptr->SetActorLocation(GetActorLocation());
+
+				this->Destroy();
+
 				//Ptr->USpriteRenderer::SpriteRenderer2
 				//Ptr->USpriteRenderer::ChangeAnimation("Player");
 
