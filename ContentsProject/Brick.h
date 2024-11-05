@@ -38,5 +38,7 @@ private:
 
 	float Ratio = 0;
 	float Line = 0;
+
+	int PlayerScore = 0;
 };
 

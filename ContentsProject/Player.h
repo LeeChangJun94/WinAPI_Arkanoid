@@ -28,6 +28,15 @@ public:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	int GetPlayerScore() const
+	{
+		return PlayerScore;
+	}
+
+	void AddPlayerScore(int _PlayerScore)
+	{
+		PlayerScore += _PlayerScore;
+	}
 	//void MoveFunction(FVector2D _Dir);
 
 	//void LeftMove(float _DeltaTime);
@@ -68,6 +77,8 @@ private:
 
 	float Ratio = 0;
 	float Line = 0;
+
+	int PlayerScore = 0;
 
 	// class std::vector< USpriteRenderer* LeftRenderer;
 

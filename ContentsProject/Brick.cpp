@@ -17,8 +17,8 @@ ABrick::ABrick()
 	//SetActorScale({ 32, 16 });
 
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	SpriteRenderer->SetSprite("Bricks.png");
-	SpriteRenderer->SetComponentScale({ 64, 32 });
+	SpriteRenderer->SetSprite("Bricks1.png");
+	SpriteRenderer->SetComponentScale({ 48, 24 });
 	//SetActorScale(SpriteRenderer->GetComponentScale());
 } 
 
@@ -76,6 +76,8 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 				
 				this->Destroy();
+
+				APlayer::Vaus->AddPlayerScore(1000);
 				//APlayer::Ball->Dir.X *= -1;
 
 			}
@@ -91,6 +93,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
+				APlayer::Vaus->AddPlayerScore(1000);
 				//ABall::Ball->Dir.Y *= -1;
 
 			}
@@ -114,6 +117,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
+				APlayer::Vaus->AddPlayerScore(1000);
 				//ABall::Ball->Dir.X *= -1;
 
 			}
@@ -132,7 +136,7 @@ void ABrick::Tick(float _DeltaTime)
 				Ptr->SetActorLocation(GetActorLocation());
 
 				this->Destroy();
-
+				APlayer::Vaus->AddPlayerScore(1000);
 				//Ptr->USpriteRenderer::ChangeAnimation("Player");
 				//APlayer::Ball->Dir.Y *= -1;
 			}
@@ -157,7 +161,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-
+				APlayer::Vaus->AddPlayerScore(1000);
 				//ABall::Ball->Dir.X *= -1;
 			}
 		}
@@ -172,7 +176,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-
+				APlayer::Vaus->AddPlayerScore(1000);
 				//ABall::Ball->Dir.Y *= -1;
 			}
 		}
@@ -194,7 +198,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-
+				APlayer::Vaus->AddPlayerScore(1000);
 				//ABall::Ball->Dir.X *= -1;
 			}
 		}
@@ -212,7 +216,7 @@ void ABrick::Tick(float _DeltaTime)
 				Ptr->SetActorLocation(GetActorLocation());
 
 				this->Destroy();
-
+				APlayer::Vaus->AddPlayerScore(1000);
 				//Ptr->USpriteRenderer::SpriteRenderer2
 				//Ptr->USpriteRenderer::ChangeAnimation("Player");
 

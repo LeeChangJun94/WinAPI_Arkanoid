@@ -18,13 +18,15 @@ public:
 	APlayGameMode& operator=(APlayGameMode&& _Other) noexcept = delete;
 
 	void BeginPlay();
+	void Tick(float _DeltaTime) override;
 
 
 protected:
 
 private:
 	//FVector2D BrickScale = { 32, 16 };
-	ATileMap* BrickTileMap = nullptr;
+	//ATileMap* BrickTileMap = nullptr;
+	//AScore* Score = nullptr;
 
 
 };

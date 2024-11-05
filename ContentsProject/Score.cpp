@@ -45,7 +45,7 @@ void AScore::SetOrder(int _Order)
 
 }
 
-void AScore::SetValue(int _Score)
+void AScore::SetValue(int _Score = 0)
 {
 	std::string Number = std::to_string(_Score);
 
@@ -64,13 +64,13 @@ void AScore::SetValue(int _Score)
 
 	FVector2D Pos = FVector2D::ZERO;
 
-	for (size_t i = 0; i < Number.size(); i++)
+	for (int i = Number.size() - 1; i >= 0; i--)
 	{
 		char Value = Number[i] - '0';
 		Renders[i]->SetSprite(TextSpriteName, Value);
 		Renders[i]->SetComponentScale(TextScale);
 		Renders[i]->SetComponentLocation(Pos);
-		Pos.X += TextScale.X;
+		Pos.X -= TextScale.X;
 		Renders[i]->SetActive(true);
 	}
 

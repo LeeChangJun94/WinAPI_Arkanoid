@@ -6,6 +6,7 @@
 #include "Brick.h"
 #include "Ball.h"
 #include "Score.h"
+#include "Player.h"
 
 #include "ContentsEnum.h"
 
@@ -30,7 +31,9 @@ void APlayGameMode::BeginPlay()
 	//	}
 	//}
 	
-	APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
+	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
+
+	
 
 	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
 
@@ -50,9 +53,18 @@ void APlayGameMode::BeginPlay()
 		for (int j = 0; j < 5; ++j)
 		{
 			ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
-			Ptr->SetActorLocation({ 64 + (64 * i), 160 + (32 * j) });
+			Ptr->SetActorLocation({ 48 + (48 * i), 160 + (24 * j) });
 		}
 	}
+
+	//AScore* Score = GetWorld()->SpawnActor<AScore>();
+	//
+	//Score->SetTextSpriteName("Text");
+	//Score->SetOrder(ERenderOrder::UI);
+	//Score->SetTextScale({ 24, 24 });
+	//Score->SetActorLocation({ 156, 36 });
+	//Score->SetValue(APlayer::Vaus->GetPlayerScore());
+
 	//ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
 
 	//{
@@ -67,3 +79,12 @@ void APlayGameMode::BeginPlay()
 	//}
 
 }
+
+void APlayGameMode::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+
+	
+}
+

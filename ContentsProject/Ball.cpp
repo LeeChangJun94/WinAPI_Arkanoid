@@ -63,7 +63,7 @@ void ABall::Tick(float _DeltaTime)
 		}
 	}
 
-	if (32 > GetActorLocation().Y)
+	if (80 > GetActorLocation().Y)
 	{
 		if (Dir.Y < 0)
 		{

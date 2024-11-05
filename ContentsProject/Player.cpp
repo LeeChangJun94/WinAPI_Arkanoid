@@ -22,13 +22,13 @@ void APlayer::RunSoundPlay()
 APlayer::APlayer()
 {
 	Vaus = this;
-
+	
 	//SetActorLocation({300, 700});
 
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetSprite("Vaus.png");
-	SpriteRenderer->SetComponentScale({ 144, 24 });
-	SetActorLocation({ 300,900 });
+	SpriteRenderer->SetComponentScale({ 108, 18 });
+	SetActorLocation({ 300,700 });
 	//SetActorScale(SpriteRenderer->GetComponentScale());
 
 	SpriteRenderer->CreateAnimation("Idle", "Vaus.png", 0, 5, 0.1f);
@@ -186,9 +186,9 @@ void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+	//UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 
-	UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
+	//UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
 
 	if (true == UEngineInput::GetInst().IsDown('R'))
 	{
@@ -513,14 +513,14 @@ void APlayer::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress('D'))
 	{
 		//SpriteRenderer->ChangeAnimation("Run_Right");
-		if (WindowSize.X - 32 > GetActorLocation().X + VausSize.Half().X)
+		if (WindowSize.X - 24 > GetActorLocation().X + VausSize.Half().X)
 		{
 			AddActorLocation(FVector2D::RIGHT * _DeltaTime * (Speed * 2));
 		}
 	}
 	if (true == UEngineInput::GetInst().IsPress('A'))
 	{
-		if (32 < GetActorLocation().X - VausSize.Half().X)
+		if (24 < GetActorLocation().X - VausSize.Half().X)
 		{
 			//SpriteRenderer->ChangeAnimation("Run_Right");
 			AddActorLocation(FVector2D::LEFT * _DeltaTime * (Speed * 2));

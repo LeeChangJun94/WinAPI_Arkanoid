@@ -34,7 +34,7 @@ public:
 protected:
 
 private:
-	float Speed = 800.0f;
+	float Speed = 600.0f;
 	float radian = 0.f;
 
 	class USpriteRenderer* SpriteRenderer;

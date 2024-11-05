@@ -51,13 +51,24 @@ void ContentsCore::BeginPlay()
 
 	// 일반 텍스처가 다 로딩되면
 	// 자르는 작업을 아래서 해주는게 좋다.
+	{
+
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources");
+		Dir.Append("Text");
+
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+
+	}
+	//UImageManager::GetInst().CuttingSprite("Text.png", { 24, 24 });
 
 	UImageManager::GetInst().CuttingSprite("Fields2.png", { 224, 240 });
-	UImageManager::GetInst().CuttingSprite("Vaus.png", { 144, 24 });
+	UImageManager::GetInst().CuttingSprite("UI_TOP.png", { 672, 48 });
+	UImageManager::GetInst().CuttingSprite("Vaus.png", { 108, 18 });
 	UImageManager::GetInst().CuttingSprite("Ball.png", { 10, 8 });
-	UImageManager::GetInst().CuttingSprite("Bricks.png", { 16, 8 });
-	UImageManager::GetInst().CuttingSprite("Title1.png", { 896, 1024 });
-	UImageManager::GetInst().CuttingSprite("Title2.png", { 896, 224 });
+	UImageManager::GetInst().CuttingSprite("Bricks1.png", { 48, 24 });
+	UImageManager::GetInst().CuttingSprite("Title1.png", { 672, 768 });
+	UImageManager::GetInst().CuttingSprite("Title2.png", { 672, 168 });
 	UImageManager::GetInst().CuttingSprite("Item1.png", { 32, 14 });
 	UImageManager::GetInst().CuttingSprite("Item2.png", { 32, 14 });
 
@@ -98,7 +109,7 @@ void ContentsCore::BeginPlay()
 	//UEngineAPICore::GetCore()->CreateLevel("Title");
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("Arkanoid");
 
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 896, 1024 });
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 672, 768 });
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
 
