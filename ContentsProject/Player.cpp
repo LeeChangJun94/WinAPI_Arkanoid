@@ -32,6 +32,7 @@ APlayer::APlayer()
 	//SetActorScale(SpriteRenderer->GetComponentScale());
 
 	SpriteRenderer->CreateAnimation("Vaus_Idle", "Vaus_Idle.png", 0, 5, 0.1f);
+	SpriteRenderer->CreateAnimation("Vaus_Create", "Vaus_Create.png", 0, 4, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_TEnlarge", "Vaus_TEnlarge.png", 0, 4, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_Enlarge", "Vaus_Enlarge.png", 0, 5, 0.1f);
 	//SpriteRenderer->CreateAnimation("Vaus_Catch", "Vaus_Enlarge.png", 0, 5, 0.1f);
@@ -39,13 +40,15 @@ APlayer::APlayer()
 	SpriteRenderer->CreateAnimation("Vaus_Laser", "Vaus_Laser.png", 0, 5, 0.1f);
 	//SpriteRenderer->CreateAnimation("Vaus_Lasers", "Vaus_Enlarge.png", 0, 5, 0.1f);
 	//SpriteRenderer->CreateAnimation("Vaus_Lasers", "Vaus_Enlarge.png", 0, 5, 0.1f);
-	SpriteRenderer->CreateAnimation("Vaus_Destroy1", "Vaus_Destroy1.png", 0, 2, 0.1f);
-	SpriteRenderer->CreateAnimation("Vaus_Destroy2", "Vaus_Destroy2.png", 0, 3, 0.1f);
+	SpriteRenderer->CreateAnimation("Vaus_Destroy1", "Vaus_Destroy1.png", 0, 2, 0.2f);
+	SpriteRenderer->CreateAnimation("Vaus_Destroy2", "Vaus_Destroy2.png", 0, 3, 0.2f);
 	//IdleStart();
 
 	SpriteRenderer->SetAnimationEvent("Vaus_TEnlarge", 4, std::bind(&APlayer::EnlargeDone, this));
 	SpriteRenderer->SetAnimationEvent("Vaus_TLaser", 8, std::bind(&APlayer::LaserDone, this));
 	SpriteRenderer->SetAnimationEvent("Vaus_Destroy1", 2, std::bind(&APlayer::DestroyDone, this));
+	SpriteRenderer->SetAnimationEvent("Vaus_Destroy2", 3, std::bind(&APlayer::VausReset, this));
+	SpriteRenderer->SetAnimationEvent("Vaus_Create", 4, std::bind(&APlayer::CreateDone, this));
 	//SpriteRenderer->SetAnimationEvent("Vaus_TLaser", 8, std::bind(&APlayer::LaserDone, this));
 	
 
@@ -117,7 +120,7 @@ void APlayer::BeginPlay()
 
 	Super::BeginPlay();
 	
-	ChangeState(PlayerState::Idle);
+	ChangeState(PlayerState::Create);
 	//Dir.Radian(30.f);
 	//Dir.Normalize();
 
@@ -201,10 +204,11 @@ void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	//if (true == UEngineInput::GetInst().IsDown('Z'))
-	//{
-	//	ChangeState(PlayerState::Enlarge);
-	//}
+	if (true == UEngineInput::GetInst().IsDown('Z'))
+	{
+		//ChangeState(PlayerState::Enlarge);
+		DestroyStart();
+	}
 
 
 	//UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
@@ -604,6 +608,9 @@ void APlayer::ChangeState(PlayerState _CurPlayerState)
 {
 	switch (_CurPlayerState)
 	{
+	case PlayerState::Create:
+		VausReset();
+		break;
 	case PlayerState::Idle:
 		IdleStart();
 		break;
@@ -671,7 +678,6 @@ void APlayer::LevelChangeEnd()
 
 void APlayer::IdleStart()
 {
-	SpriteRenderer->SetComponentScale({ 96, 24 });
 	SpriteRenderer->ChangeAnimation("Vaus_Idle");
 }
 
@@ -693,7 +699,7 @@ void APlayer::LaserDone()
 
 void APlayer::Laser(float _DeltaTime)
 {
-	if (true == UEngineInput::GetInst().IsDown('Z'))
+	if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
 	{
 		ABullet* Ptr = GetWorld()->SpawnActor<ABullet>();
 		Ptr->SetActorLocation(GetActorLocation());
@@ -714,10 +720,24 @@ void APlayer::EnlargeDone()
 
 void APlayer::DestroyStart()
 {
-	SpriteRenderer->ChangeAnimation("Vaus_Destroy2");
+	SpriteRenderer->ChangeAnimation("Vaus_Destroy1");
 }
 
 void APlayer::DestroyDone()
+{
+	SpriteRenderer->SetComponentScale({ 144, 72 });
+	SpriteRenderer->ChangeAnimation("Vaus_Destroy2");
+}
+
+void APlayer::VausReset()
+{
+	SetActorLocation({ 336,700 });
+	SpriteRenderer->SetComponentScale({ 96, 24 });
+	SpriteRenderer->ChangeAnimation("Vaus_Create");
+	
+}
+
+void APlayer::CreateDone()
 {
 	ChangeState(PlayerState::Idle);
 }

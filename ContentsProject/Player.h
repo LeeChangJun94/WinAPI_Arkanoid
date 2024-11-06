@@ -3,6 +3,7 @@
 
 enum class PlayerState
 {
+	Create,
 	Idle,
 	Laser,
 	Enlarge,
@@ -92,6 +93,9 @@ private:
 	void EnlargeDone();
 	void DestroyStart();
 	void DestroyDone();
+	void VausReset();
+	void CreateDone();
+	
 
 	void IdleStart();
 	void Idle(float _DeltaTime);

@@ -77,6 +77,7 @@ void ContentsCore::BeginPlay()
 		UImageManager::GetInst().CuttingSprite("Vaus_Laser.png", { 96, 24 });
 		UImageManager::GetInst().CuttingSprite("Vaus_Destroy1.png", { 96, 24 });
 		UImageManager::GetInst().CuttingSprite("Vaus_Destroy2.png", { 144, 72 });
+		UImageManager::GetInst().CuttingSprite("Vaus_Create.png", { 96, 24 });
 	}
 	
 	{
