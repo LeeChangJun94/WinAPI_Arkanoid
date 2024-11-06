@@ -1,12 +1,13 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
-//enum class PlayerState
-//{
-//	Idle,
-//	Move,
-//	Jump,
-//};
+enum class PlayerState
+{
+	Idle,
+	Laser,
+	Enlarge,
+	Catch,
+};
 
 
 // Ό³Έν :
@@ -52,11 +53,11 @@ public:
 	//	_Vector.X = _Vector.X / Sqrt;
 	//	_Vector.Y = _Vector.Y / Sqrt;
 	//}
-	
-	
-	
+		
 	FVector2D Dir = { 0.f , 0.f };
-	
+
+
+
 	void RunSoundPlay();
 
 	void LevelChangeStart() override;
@@ -69,8 +70,13 @@ private:
 	float Speed = 300.0f;
 	float radian = 0.f;
 	int MySpriteIndex = 0;
+	//bool IsTransformEnd = false;
 
 	class USpriteRenderer* SpriteRenderer = nullptr;
+
+	PlayerState CurPlayerState = PlayerState::Idle;
+
+	void ChangeState(PlayerState CurPlayerState);
 
 	FTransform BallTrans;
 	FTransform VausTrans;
@@ -80,6 +86,21 @@ private:
 
 	int PlayerScore = 0;
 
+	void LaserStart();
+	void LaserDone();
+	void EnlargeStart();
+	void EnlargeDone();
+	void DestroyStart();
+	void DestroyDone();
+
+	void IdleStart();
+	void Idle(float _DeltaTime);
+
+	void Laser(float _DeltaTime);
+	void Enlarge(float _DeltaTime);
+	void CatchStart();
+	void Catch(float _DeltaTime);
+	//inline void AnimationEnd() { IsTransformEnd = true; }
 	// class std::vector< USpriteRenderer* LeftRenderer;
 
 	//PlayerState CurPlayerState = PlayerState::Idle;

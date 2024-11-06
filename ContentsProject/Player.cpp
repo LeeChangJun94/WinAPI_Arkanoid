@@ -26,14 +26,28 @@ APlayer::APlayer()
 	//SetActorLocation({300, 700});
 
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	SpriteRenderer->SetSprite("Vaus.png");
-	SpriteRenderer->SetComponentScale({ 108, 18 });
-	SetActorLocation({ 300,700 });
+	//SpriteRenderer->SetSprite("Vaus_Idle.png");
+	//SpriteRenderer->SetComponentScale({ 96, 24 });
+	SetActorLocation({ 336,700 });
 	//SetActorScale(SpriteRenderer->GetComponentScale());
 
-	SpriteRenderer->CreateAnimation("Idle", "Vaus.png", 0, 5, 0.1f);
-	SpriteRenderer->ChangeAnimation("Idle");
+	SpriteRenderer->CreateAnimation("Vaus_Idle", "Vaus_Idle.png", 0, 5, 0.1f);
+	SpriteRenderer->CreateAnimation("Vaus_TEnlarge", "Vaus_TEnlarge.png", 0, 4, 0.1f);
+	SpriteRenderer->CreateAnimation("Vaus_Enlarge", "Vaus_Enlarge.png", 0, 5, 0.1f);
+	//SpriteRenderer->CreateAnimation("Vaus_Catch", "Vaus_Enlarge.png", 0, 5, 0.1f);
+	SpriteRenderer->CreateAnimation("Vaus_TLaser", "Vaus_TLaser.png", 0, 8, 0.1f);
+	SpriteRenderer->CreateAnimation("Vaus_Laser", "Vaus_Laser.png", 0, 5, 0.1f);
+	//SpriteRenderer->CreateAnimation("Vaus_Lasers", "Vaus_Enlarge.png", 0, 5, 0.1f);
+	//SpriteRenderer->CreateAnimation("Vaus_Lasers", "Vaus_Enlarge.png", 0, 5, 0.1f);
+	SpriteRenderer->CreateAnimation("Vaus_Destroy1", "Vaus_Destroy1.png", 0, 2, 0.1f);
+	SpriteRenderer->CreateAnimation("Vaus_Destroy2", "Vaus_Destroy2.png", 0, 3, 0.1f);
+	//IdleStart();
 
+	SpriteRenderer->SetAnimationEvent("Vaus_TEnlarge", 4, std::bind(&APlayer::EnlargeDone, this));
+	SpriteRenderer->SetAnimationEvent("Vaus_TLaser", 8, std::bind(&APlayer::LaserDone, this));
+	SpriteRenderer->SetAnimationEvent("Vaus_Destroy1", 2, std::bind(&APlayer::DestroyDone, this));
+	//SpriteRenderer->SetAnimationEvent("Vaus_TLaser", 8, std::bind(&APlayer::LaserDone, this));
+	
 
 	// 랜더러를 하나 만든다.
 	// 언리얼에서는 생서에서 CreateDefaultSubObject <= 생성자에서밖에 못합니다.
@@ -101,8 +115,9 @@ APlayer::~APlayer()
 void APlayer::BeginPlay()
 {
 
-	//Super::BeginPlay();
-	//
+	Super::BeginPlay();
+	
+	ChangeState(PlayerState::Idle);
 	//Dir.Radian(30.f);
 	//Dir.Normalize();
 
@@ -186,6 +201,12 @@ void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	//if (true == UEngineInput::GetInst().IsDown('Z'))
+	//{
+	//	ChangeState(PlayerState::Enlarge);
+	//}
+
+
 	//UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 
 	//UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
@@ -248,6 +269,7 @@ void APlayer::Tick(float _DeltaTime)
 					Dir.Radian(-30.0f);//ABall::Ball->Dir.Reflect(FVector2D::UP);
 
 					ABall::Ball->Dir = Dir;
+					ChangeState(PlayerState::Laser);
 				}
 				else if (BallTrans.Location.X > VausTrans.Location.X - ((VausSize.X / 2) * 0.6))
 				{
@@ -255,6 +277,7 @@ void APlayer::Tick(float _DeltaTime)
 					Dir.Radian(-45.0f);
 
 					ABall::Ball->Dir = Dir;
+					ChangeState(PlayerState::Laser);
 				}
 				else
 				{
@@ -262,6 +285,7 @@ void APlayer::Tick(float _DeltaTime)
 					Dir.Radian(-60.0f);
 
 					ABall::Ball->Dir = Dir;
+					ChangeState(PlayerState::Laser);
 				}
 
 	
@@ -335,6 +359,7 @@ void APlayer::Tick(float _DeltaTime)
 					Dir.Radian(30.0f);//ABall::Ball->Dir.Reflect(FVector2D::UP);
 
 					ABall::Ball->Dir = Dir;
+					ChangeState(PlayerState::Laser);
 				}
 				else if (BallTrans.Location.X < VausTrans.Location.X + ((VausSize.X / 2) * 0.6))
 				{
@@ -342,6 +367,7 @@ void APlayer::Tick(float _DeltaTime)
 					Dir.Radian(45.0f);
 
 					ABall::Ball->Dir = Dir;
+					ChangeState(PlayerState::Laser);
 				}
 				else
 				{
@@ -349,6 +375,7 @@ void APlayer::Tick(float _DeltaTime)
 					Dir.Radian(60.0f);
 
 					ABall::Ball->Dir = Dir;
+					ChangeState(PlayerState::Laser);
 				}
 			}
 		}
@@ -387,21 +414,23 @@ void APlayer::Tick(float _DeltaTime)
 		}
 	}
 
-	//switch (CurPlayerState)
-	//{
-	//case PlayerState::Idle:
-	//	Idle(_DeltaTime);
-	//	break;
-	//case PlayerState::Move:
-	//	Move(_DeltaTime);
-	//	break;
-	//case PlayerState::Jump:
-	//	// 하이퍼 FSM이라고 합니다
-	//	// FSM의 변종입니다.
-	//	break;
-	//default:
-	//	break;
-	//}
+	switch (CurPlayerState)
+	{
+	case PlayerState::Idle:
+		Idle(_DeltaTime);
+		break;
+	case PlayerState::Laser:
+		Laser(_DeltaTime);
+		break;
+	case PlayerState::Enlarge:
+		Enlarge(_DeltaTime);
+		break;
+	case PlayerState::Catch:
+		Catch(_DeltaTime);
+		break;
+	default:
+		break;
+	}
 
 	//AddActorLocation(Dir * _DeltaTime * Speed);
 	
@@ -571,6 +600,30 @@ void APlayer::Tick(float _DeltaTime)
 
 }
 
+void APlayer::ChangeState(PlayerState _CurPlayerState)
+{
+	switch (_CurPlayerState)
+	{
+	case PlayerState::Idle:
+		IdleStart();
+		break;
+	case PlayerState::Laser:
+		LaserStart();
+		break;
+	case PlayerState::Enlarge:
+		EnlargeStart();
+		break;
+	case PlayerState::Catch:
+		break;
+	default:
+		break;
+	}
+
+
+	CurPlayerState = _CurPlayerState;
+
+}
+
 void APlayer::LevelChangeStart()
 {
 	Super::LevelChangeStart();
@@ -615,3 +668,69 @@ void APlayer::LevelChangeEnd()
 //	}
 //
 //}
+
+void APlayer::IdleStart()
+{
+	SpriteRenderer->SetComponentScale({ 96, 24 });
+	SpriteRenderer->ChangeAnimation("Vaus_Idle");
+}
+
+void APlayer::Idle(float _DeltaTime)
+{
+}
+
+void APlayer::LaserStart()
+{
+	SpriteRenderer->SetComponentScale({ 96, 24 });
+	SpriteRenderer->ChangeAnimation("Vaus_TLaser");
+}
+
+void APlayer::LaserDone()
+{
+	SpriteRenderer->ChangeAnimation("Vaus_Laser");
+
+}
+
+void APlayer::Laser(float _DeltaTime)
+{
+	if (true == UEngineInput::GetInst().IsDown('Z'))
+	{
+		ABullet* Ptr = GetWorld()->SpawnActor<ABullet>();
+		Ptr->SetActorLocation(GetActorLocation());
+	}
+
+}
+
+void APlayer::EnlargeStart()
+{
+	SpriteRenderer->SetComponentScale({ 144, 24 });
+	SpriteRenderer->ChangeAnimation("");
+}
+
+void APlayer::EnlargeDone()
+{
+	SpriteRenderer->ChangeAnimation("Vaus_Enlarge");
+}
+
+void APlayer::DestroyStart()
+{
+	SpriteRenderer->ChangeAnimation("Vaus_Destroy2");
+}
+
+void APlayer::DestroyDone()
+{
+	ChangeState(PlayerState::Idle);
+}
+
+void APlayer::Enlarge(float _DeltaTime)
+{
+
+}
+
+void APlayer::CatchStart()
+{
+}
+
+void APlayer::Catch(float _DeltaTime)
+{
+}

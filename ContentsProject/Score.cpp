@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "Score.h"
+#include "Player.h"
 
 AScore::AScore()
 {
@@ -33,7 +34,9 @@ void AScore::BeginPlay()
 
 void AScore::Tick(float _DeltaTime)
 {
+	Super::Tick(_DeltaTime);
 
+	SetValue(APlayer::Vaus->GetPlayerScore());
 }
 
 void AScore::SetOrder(int _Order)

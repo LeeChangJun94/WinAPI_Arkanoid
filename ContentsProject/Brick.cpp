@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Ball.h"
 #include "Item.h"
+#include "Score.h"
 
 #include <EngineCore/ImageManager.h>
 
@@ -77,7 +78,8 @@ void ABrick::Tick(float _DeltaTime)
 				
 				this->Destroy();
 
-				APlayer::Vaus->AddPlayerScore(1000);
+				APlayer::Vaus->AddPlayerScore(80);
+				
 				//APlayer::Ball->Dir.X *= -1;
 
 			}
@@ -93,7 +95,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(1000);
+				APlayer::Vaus->AddPlayerScore(80);
 				//ABall::Ball->Dir.Y *= -1;
 
 			}
@@ -117,7 +119,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(1000);
+				APlayer::Vaus->AddPlayerScore(80);
 				//ABall::Ball->Dir.X *= -1;
 
 			}
@@ -136,7 +138,7 @@ void ABrick::Tick(float _DeltaTime)
 				Ptr->SetActorLocation(GetActorLocation());
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(1000);
+				APlayer::Vaus->AddPlayerScore(80);
 				//Ptr->USpriteRenderer::ChangeAnimation("Player");
 				//APlayer::Ball->Dir.Y *= -1;
 			}
@@ -161,7 +163,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(1000);
+				APlayer::Vaus->AddPlayerScore(80);
 				//ABall::Ball->Dir.X *= -1;
 			}
 		}
@@ -176,7 +178,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(1000);
+				APlayer::Vaus->AddPlayerScore(80);
 				//ABall::Ball->Dir.Y *= -1;
 			}
 		}
@@ -198,7 +200,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(1000);
+				APlayer::Vaus->AddPlayerScore(80);
 				//ABall::Ball->Dir.X *= -1;
 			}
 		}
@@ -216,7 +218,7 @@ void ABrick::Tick(float _DeltaTime)
 				Ptr->SetActorLocation(GetActorLocation());
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(1000);
+				APlayer::Vaus->AddPlayerScore(80);
 				//Ptr->USpriteRenderer::SpriteRenderer2
 				//Ptr->USpriteRenderer::ChangeAnimation("Player");
 

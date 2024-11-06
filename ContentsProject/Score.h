@@ -44,5 +44,6 @@ private:
 	std::string TextSpriteName;
 	FVector2D TextScale;
 	std::vector<class USpriteRenderer*> Renders;
+
 };
 

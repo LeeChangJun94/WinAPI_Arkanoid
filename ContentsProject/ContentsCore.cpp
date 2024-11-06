@@ -62,15 +62,30 @@ void ContentsCore::BeginPlay()
 	}
 	//UImageManager::GetInst().CuttingSprite("Text.png", { 24, 24 });
 
-	UImageManager::GetInst().CuttingSprite("Fields2.png", { 224, 240 });
-	UImageManager::GetInst().CuttingSprite("UI_TOP.png", { 672, 48 });
-	UImageManager::GetInst().CuttingSprite("Vaus.png", { 108, 18 });
-	UImageManager::GetInst().CuttingSprite("Ball.png", { 10, 8 });
-	UImageManager::GetInst().CuttingSprite("Bricks1.png", { 48, 24 });
-	UImageManager::GetInst().CuttingSprite("Title1.png", { 672, 768 });
-	UImageManager::GetInst().CuttingSprite("Title2.png", { 672, 168 });
-	UImageManager::GetInst().CuttingSprite("Item1.png", { 32, 14 });
-	UImageManager::GetInst().CuttingSprite("Item2.png", { 32, 14 });
+	{
+		UImageManager::GetInst().CuttingSprite("Fields2.png", { 224, 240 });
+		UImageManager::GetInst().CuttingSprite("UI_TOP.png", { 672, 48 });
+		UImageManager::GetInst().CuttingSprite("Title1.png", { 672, 768 });
+		UImageManager::GetInst().CuttingSprite("Title2.png", { 672, 168 });
+	}
+	
+	{
+		UImageManager::GetInst().CuttingSprite("Vaus_Idle.png", { 96, 24 });
+		UImageManager::GetInst().CuttingSprite("Vaus_TEnlarge.png", { 144, 24 });
+		UImageManager::GetInst().CuttingSprite("Vaus_Enlarge.png", { 144, 24 });
+		UImageManager::GetInst().CuttingSprite("Vaus_TLaser.png", { 96, 24 });
+		UImageManager::GetInst().CuttingSprite("Vaus_Laser.png", { 96, 24 });
+		UImageManager::GetInst().CuttingSprite("Vaus_Destroy1.png", { 96, 24 });
+		UImageManager::GetInst().CuttingSprite("Vaus_Destroy2.png", { 144, 72 });
+	}
+	
+	{
+		UImageManager::GetInst().CuttingSprite("Ball.png", { 10, 8 });
+		UImageManager::GetInst().CuttingSprite("Bullet.png", { 48, 72 });
+		UImageManager::GetInst().CuttingSprite("Bricks1.png", { 48, 24 });
+		UImageManager::GetInst().CuttingSprite("Item1.png", { 32, 14 });
+		UImageManager::GetInst().CuttingSprite("Item2.png", { 32, 14 });
+	}
 
 	//{
 	//

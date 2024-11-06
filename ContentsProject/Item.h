@@ -1,6 +1,19 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+enum class ModeState
+{
+	None,
+	Slow,
+	Catch,
+	Laser,
+	Enlarge,
+	Disruption,
+	Break,
+	Player,
+};
+
+
 // Ό³Έν :
 class AItem : public AActor
 {

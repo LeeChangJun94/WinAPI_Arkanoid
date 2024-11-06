@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EngineCore/SpriteRenderer.h>
 
 // Ό³Έν :
 class ABullet : public AActor
@@ -20,5 +21,6 @@ protected:
 
 private:
 
+	USpriteRenderer* SpriteRenderer;
 };
 

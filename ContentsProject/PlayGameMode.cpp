@@ -33,7 +33,23 @@ void APlayGameMode::BeginPlay()
 	
 	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
 
-	
+	{
+		AScore* Score = GetWorld()->SpawnActor<AScore>();
+
+		Score->SetTextSpriteName("Text");
+		Score->SetOrder(ERenderOrder::UI);
+		Score->SetTextScale({ 24, 24 });
+		Score->SetActorLocation({ 156, 36 });
+	}
+
+	{
+		AScore* HighScore = GetWorld()->SpawnActor<AScore>();
+
+		HighScore->SetTextSpriteName("Text");
+		HighScore->SetOrder(ERenderOrder::UI);
+		HighScore->SetTextScale({ 24, 24 });
+		HighScore->SetActorLocation({ 396, 36 });
+	}
 
 	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
 
@@ -48,6 +64,8 @@ void APlayGameMode::BeginPlay()
 	//	}
 	//}
 
+	
+
 	for (int i = 0; i < 10; ++i)
 	{
 		for (int j = 0; j < 5; ++j)
@@ -57,13 +75,7 @@ void APlayGameMode::BeginPlay()
 		}
 	}
 
-	//AScore* Score = GetWorld()->SpawnActor<AScore>();
-	//
-	//Score->SetTextSpriteName("Text");
-	//Score->SetOrder(ERenderOrder::UI);
-	//Score->SetTextScale({ 24, 24 });
-	//Score->SetActorLocation({ 156, 36 });
-	//Score->SetValue(APlayer::Vaus->GetPlayerScore());
+
 
 	//ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
 
@@ -78,13 +90,5 @@ void APlayGameMode::BeginPlay()
 
 	//}
 
-}
-
-void APlayGameMode::Tick(float _DeltaTime)
-{
-	Super::Tick(_DeltaTime);
-
-
-	
 }
 
