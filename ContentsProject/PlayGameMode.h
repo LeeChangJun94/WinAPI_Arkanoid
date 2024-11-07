@@ -1,7 +1,9 @@
 #pragma once
 #include <EngineCore/GameMode.h>
+#include <vector>
 
 #include "TileMap.h"
+#include "Brick.h"
 
 // Ό³Έν :
 class APlayGameMode : public AGameMode
@@ -19,6 +21,7 @@ public:
 
 	void BeginPlay();
 
+	std::list<ABrick*> BrickPtr;
 
 protected:
 

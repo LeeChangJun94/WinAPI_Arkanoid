@@ -82,7 +82,7 @@ void ContentsCore::BeginPlay()
 	
 	{
 		UImageManager::GetInst().CuttingSprite("Ball.png", { 10, 8 });
-		UImageManager::GetInst().CuttingSprite("Bullet.png", { 48, 72 });
+		UImageManager::GetInst().CuttingSprite("Bullet.png", { 48, 24 });
 		UImageManager::GetInst().CuttingSprite("Bricks1.png", { 48, 24 });
 		UImageManager::GetInst().CuttingSprite("Item1.png", { 32, 14 });
 		UImageManager::GetInst().CuttingSprite("Item2.png", { 32, 14 });

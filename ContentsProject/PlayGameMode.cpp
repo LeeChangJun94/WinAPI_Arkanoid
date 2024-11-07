@@ -72,9 +72,13 @@ void APlayGameMode::BeginPlay()
 		{
 			ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
 			Ptr->SetActorLocation({ 48 + (48 * i), 160 + (24 * j) });
+
+			BrickPtr.push_back(Ptr);
 		}
 	}
 
+
+	
 
 
 	//ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
