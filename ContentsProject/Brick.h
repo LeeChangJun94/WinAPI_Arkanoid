@@ -3,6 +3,15 @@
 #include <EngineBase/EngineMath.h>
 #include <EngineCore/SpriteRenderer.h>
 
+enum class EReflectionDir
+{
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+	MAX,
+};
+
 // Ό³Έν :
 class ABrick : public AActor
 {
@@ -26,9 +35,14 @@ public:
 	}
 
 
+
+	bool RectCheck();
+	EReflectionDir ReflectionDirCheck();
+
 protected:
 
 private:
+	static FVector2D ReflectionVector[static_cast<int>(EReflectionDir::MAX)];
 	
 	FTransform BallTrans;
 

@@ -21,16 +21,9 @@ APlayGameMode::~APlayGameMode()
 
 void APlayGameMode::BeginPlay()
 {
-	//GameTileMap = GetWorld()->SpawnActor<ATileMap>();
-	//
-	//for (int y = 0; y < 5; y++)
-	//{
-	//	for (int x = 0; x < 10; x++)
-	//	{
-	//		GameTileMap->SetTileIndex({ y,x }, { 0, -6 }, { 32, 44 }, 2);
-	//	}
-	//}
+	Super::BeginPlay();
 	
+	//
 	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
 
 	{
@@ -53,20 +46,7 @@ void APlayGameMode::BeginPlay()
 
 	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
 
-	//BrickTileMap = GetWorld()->SpawnActor<ATileMap>();
-	//BrickTileMap->Create("Bricks.png", { 10, 10 }, { 64, 32 });
-	//
-	//for (int x = 0; x < 10; ++x)
-	//{
-	//	for (int y = 0; y < 5; ++y)
-	//	{
-	//		BrickTileMap->SetTileIndex({ x, y}, {32 , 160}, {64, 32}, 0);
-	//	}
-	//}
-
-	
-
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 11; ++i)
 	{
 		for (int j = 0; j < 5; ++j)
 		{
@@ -76,23 +56,5 @@ void APlayGameMode::BeginPlay()
 			BrickPtr.push_back(Ptr);
 		}
 	}
-
-
-	
-
-
-	//ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
-
-	//{
-	//	AScore* NewActor = GetWorld()->SpawnActor<AScore>();
-
-	//	// NewActor->SetActorLocation({300, 300});
-	//	NewActor->SetTextSpriteName("Text.bmp");
-	//	NewActor->SetOrder(ERenderOrder::UI);
-	//	NewActor->SetTextScale({ 50, 100 });
-	//	NewActor->SetValue(45362784);
-
-	//}
-
 }
 

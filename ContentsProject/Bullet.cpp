@@ -17,9 +17,8 @@ ABullet::~ABullet()
 
 void ABullet::Tick(float _DeltaTime)
 {
+	Super::Tick(_DeltaTime);
 
 	AddActorLocation(FVector2D::UP * _DeltaTime * 600.0f);
-
-
 
 }

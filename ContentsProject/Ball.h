@@ -31,6 +31,8 @@ public:
 	//	return SpriteRenderer->GetComponentScale();
 	//}
 
+	//void BallReflection(FVector2D up);
+
 protected:
 
 private:
