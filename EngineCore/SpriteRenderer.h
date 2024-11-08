@@ -4,6 +4,14 @@
 #include <EngineBase/EngineDelegate.h>
 #include <map>
 
+enum class PivotType
+{
+	Center,
+	Bot,
+	Top,
+};
+
+
 // 설명 :
 class USpriteRenderer : public USceneComponent
 {
@@ -87,24 +95,33 @@ public:
 		return Sprite->GetName();
 	}
 
-	bool IsActive() override
-	{
-		// 랜더러는 자신을 가진 액터에게 종속된다.
-		// 부모도        true            true
-		return UObject::IsActive() && GetActor()->IsActive();
-	}
-
-
-	bool IsDestroy() override
-	{
-		// 부모도        true            true
-		return UObject::IsDestroy() || GetActor()->IsDestroy();
-	}
+	//bool IsActive() override
+	//{p.
+	//	// 랜더러는 자신을 가진 액터에게 종속된다.
+	//	// 부모도        true            true
+	//	return UObject::IsActive() && GetActor()->IsActive();
+	//}
+	//
+	//
+	//bool IsDestroy() override
+	//{
+	//	// 부모도        true            true
+	//	return UObject::IsDestroy() || GetActor()->IsDestroy();
+	//}
 
 	void SetCameraEffect(bool _Value)
 	{
 		IsCameraEffect = _Value;
 	}
+
+	void SetPivot(FVector2D _Pivot)
+	{
+		Pivot = _Pivot;
+	}
+
+	void SetPivotType(PivotType _Type);
+	void SetSprite(std::string_view _Name, int _CurIndex = 0);
+
 
 protected:
 
@@ -113,7 +130,7 @@ public:
 	int CurIndex = 0;
 	bool IsCameraEffect = true;
 	class UEngineSprite* Sprite = nullptr;
-	void SetSprite(std::string_view _Name, int _CurIndex = 0);
+	FVector2D Pivot = FVector2D::ZERO;
 
 	std::map<std::string, FrameAnimation> FrameAnimations;
 	FrameAnimation* CurAnimation = nullptr;

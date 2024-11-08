@@ -29,7 +29,7 @@ private:
 	//FVector2D BrickScale = { 32, 16 };
 	//ATileMap* BrickTileMap = nullptr;
 	//AScore* Score = nullptr;
-
+	//class AScore* Score;
 
 };
 
