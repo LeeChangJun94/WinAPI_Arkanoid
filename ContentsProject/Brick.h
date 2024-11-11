@@ -50,6 +50,12 @@ private:
 
 	USpriteRenderer* SpriteRenderer;
 
+	bool LeftTop = false;
+	bool LeftBottom = false;
+	bool RightTop = false;
+	bool RightBottom = false;
+
+
 	float Ratio = 0;
 	float Line = 0;
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EngineCore/SpriteRenderer.h>
 
 // Ό³Έν :
 class ABall : public AActor
@@ -26,18 +27,24 @@ public:
 
 	void RunSoundPlay();
 
-	//FVector2D GetBallScale()
-	//{
-	//	return SpriteRenderer->GetComponentScale();
-	//}
+	void BorderReflect();
+
+	
+
+	FVector2D GetBallScale()
+	{
+		return SpriteRenderer->GetComponentScale();
+	}
 
 	//void BallReflection(FVector2D up);
 
 protected:
 
 private:
-	float Speed = 600.0f;
-	float radian = 0.f;
+	float Speed = 300.0f;
+	float radian = 0.0f;
+	float CheckTime = 0.0f;
+	bool StartTime = true;
 
 	class USpriteRenderer* SpriteRenderer;
 };

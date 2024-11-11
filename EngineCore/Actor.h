@@ -24,7 +24,6 @@ public:
 	AActor& operator=(AActor&& _Other) noexcept = delete;
 
 	virtual void BeginPlay() {}
-	// 델타타임이란 무엇인가?
 	virtual void Tick(float _DeltaTime);
 
 	virtual void LevelChangeStart() {}
