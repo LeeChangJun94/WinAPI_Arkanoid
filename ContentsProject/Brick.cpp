@@ -97,7 +97,7 @@ bool ABrick::RectCheck()
 	}
 
 	if (BallTransform.Location.X > BrickTransform.Location.X && BallTransform.Location.X < (BrickTransform.Location.X + (BrickTransform.Scale.X / 2)) &&
-		BallTransform.Location.Y >(BrickTransform.Location.Y - (BrickTransform.Scale.Y / 2)) && BallTransform.Location.Y < BrickTransform.Location.Y)
+		BallTransform.Location.Y > (BrickTransform.Location.Y - (BrickTransform.Scale.Y / 2)) && BallTransform.Location.Y < BrickTransform.Location.Y)
 	{
 		RightTop = true;
 		return RightTop;
@@ -216,7 +216,7 @@ EReflectionDir ABrick::ReflectionDirCheck()
 
 	if (true == RightBottom)
 	{
-		if (LeftLine > (BrickTrans.Location.Y - BallTrans.Location.Y))
+		if (LeftLine < (BrickTrans.Location.Y - BallTrans.Location.Y))
 		{
 			Dir = EReflectionDir::RIGHT;
 		}
@@ -249,38 +249,20 @@ void ABrick::Tick(float _DeltaTime)
 	//
 	//return;
 
-
-	BallTrans.Location = { ABall::Ball->GetActorLocation().iX(), ABall::Ball->GetActorLocation().iY() };
-	//BallTrans.Scale = { ABall::Ball->GetActorScale().iX(), ABall::Ball->GetActorScale().iY() };
-	
-	//BallX = APlayer::Ball->GetActorLocation().iX();
-	//BallY = APlayer::Ball->GetActorLocation().iY();
-	//BallScaleX = APlayer::Ball->GetActorScale().iX();
-	//BallScaleY = APlayer::Ball->GetActorScale().iY();
-
-	//FVector2D BallSize = ABall::Ball->GetBallScale();
-
-	BrickTrans.Location = { GetActorLocation().iX(), GetActorLocation().iY() };
-	//BrickTrans.Scale= { GetActorScale().iX(), GetActorScale().iY() };*/
+	BallTrans.Location = { ABall::Ball->GetActorLocation().X, ABall::Ball->GetActorLocation().Y };
+	BrickTrans.Location = { GetActorLocation().X, GetActorLocation().Y };
 
 	FVector2D BrickSize = SpriteRenderer->GetComponentScale();
-	//BrickX = GetActorLocation().iX();
-	//BrickY = GetActorLocation().iY();
-	//BrickScaleX = GetActorScale().iX();
-	//BrickScaleY = GetActorScale().iY();
-
-
-	
 
 	Ratio = (BrickSize.Y / 2) / (BrickSize.X / 2);
 	//line = ratio * (BallTrans.Location.X / 2) - (BrickSize.Y / 2);
 
 	//Brick 왼쪽
-	if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X > (BrickTrans.Location.X - (BrickSize.X / 2)) &&
+	if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X >(BrickTrans.Location.X - (BrickSize.X / 2)) &&
 		BallTrans.Location.Y > (BrickTrans.Location.Y - (BrickSize.Y / 2)) && BallTrans.Location.Y < BrickTrans.Location.Y)
 	{
 		Line = (-Ratio) * (BallTrans.Location.X - BrickTrans.Location.X);
-		
+
 		if ((Line) > (BrickTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Left");
@@ -292,11 +274,11 @@ void ABrick::Tick(float _DeltaTime)
 				//ABall::Ball->BallReflection(FVector2D::LEFT);
 
 				ABall::Ball->Dir = Dir;
-				
+
 				this->Destroy();
 
 				APlayer::Vaus->AddPlayerScore(80);
-				
+
 				//APlayer::Ball->Dir.X *= -1;
 
 			}
@@ -316,11 +298,11 @@ void ABrick::Tick(float _DeltaTime)
 				//ABall::Ball->Dir.Y *= -1;
 
 			}
-			
+
 		}
 	}
 
-	if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X > (BrickTrans.Location.X - (BrickSize.X / 2)) &&
+	if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X >(BrickTrans.Location.X - (BrickSize.X / 2)) &&
 		BallTrans.Location.Y < (BrickTrans.Location.Y + (BrickSize.Y / 2)) && BallTrans.Location.Y > BrickTrans.Location.Y)
 	{
 		Line = Ratio * (BallTrans.Location.X - BrickTrans.Location.X);
@@ -348,7 +330,7 @@ void ABrick::Tick(float _DeltaTime)
 			{
 				FVector2D Dir;
 				Dir = ABall::Ball->Dir.Reflect(FVector2D::DOWN);
-				
+
 				ABall::Ball->Dir = Dir;
 
 				AItem* Ptr = GetWorld()->SpawnActor<AItem>();
@@ -365,7 +347,7 @@ void ABrick::Tick(float _DeltaTime)
 
 	//Brick 오른쪽
 	if (BallTrans.Location.X > BrickTrans.Location.X && BallTrans.Location.X < (BrickTrans.Location.X + (BrickSize.X / 2)) &&
-		BallTrans.Location.Y > (BrickTrans.Location.Y - (BrickSize.Y / 2)) && BallTrans.Location.Y < BrickTrans.Location.Y)
+		BallTrans.Location.Y >(BrickTrans.Location.Y - (BrickSize.Y / 2)) && BallTrans.Location.Y < BrickTrans.Location.Y)
 	{
 		Line = Ratio * (BallTrans.Location.X - BrickTrans.Location.X);
 
@@ -428,7 +410,7 @@ void ABrick::Tick(float _DeltaTime)
 			{
 				FVector2D Dir;
 				Dir = ABall::Ball->Dir.Reflect(FVector2D::DOWN);
-				
+
 				ABall::Ball->Dir = Dir;
 
 				AItem* Ptr = GetWorld()->SpawnActor<AItem>();
@@ -443,43 +425,5 @@ void ABrick::Tick(float _DeltaTime)
 			}
 		}
 	}
-
-
-	//왼쪽
-	/*if ((BrickX - (BrickScaleX / 2) - (BallScaleX / 2) == BallX))
-	{
-		if (BallY > GetActorLocation().iY() - (BrickScaleY / 2  + BallScaleY / 2) && BallY < GetActorLocation().iY() + (BrickScaleY / 2 + BallScaleY / 2))
-		{
-			UEngineDebug::OutPutString("left");
-		}
-	}*/
-
-	//오른쪽
-	//if ((BrickX + (BrickScaleX / 2) + (BallScaleX / 2) == BallX))
-	//{
-	//	if (BallY > GetActorLocation().iY() - (BrickScaleY / 2 + BallScaleY / 2) && BallY < GetActorLocation().iY() + (BrickScaleY / 2 + BallScaleY / 2))
-	//	{
-	//		UEngineDebug::OutPutString("right");
-	//	}
-	//}
-	//
-	////위쪽
-	//if ((BrickY - (BrickScaleY / 2) - (BallScaleY / 2) == BallY))
-	//{
-	//	if (BallX > GetActorLocation().iX() - (BrickScaleX / 2 + BallScaleX / 2) && BallX < GetActorLocation().iX() + (BrickScaleX / 2 + BallScaleX / 2))
-	//	{
-	//		UEngineDebug::OutPutString("up");
-	//	}
-	//}
-	//
-	////아래쪽
-	//if ((BrickY + (BrickScaleY / 2) + (BallScaleY / 2) == BallY))
-	//{
-	//	if (BallX > GetActorLocation().iX() - (BrickScaleX / 2 + BallScaleX / 2) && BallX < GetActorLocation().iX() + (BrickScaleX / 2 + BallScaleX / 2))
-	//	{
-	//		UEngineDebug::OutPutString("down");
-	//	}
-	//}
-
 }
 
