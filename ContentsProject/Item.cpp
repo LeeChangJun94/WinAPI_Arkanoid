@@ -1,7 +1,10 @@
 #include "PreCompile.h"
 #include "Item.h"
+#include "Ball.h"
+#include "Player.h"
 
 #include <EngineCore/SpriteRenderer.h>
+#include <EnginePlatform/EngineInput.h>
 
 AItem* AItem::Item = nullptr;
 
@@ -35,6 +38,43 @@ AItem::~AItem()
 {
 }
 
+void AItem::ItemSlow()
+{
+	ABall::Ball->SetBallSpeed(500.0f);
+}
+
+void AItem::ItemCatch()
+{
+	//APlayer* Vaus = GetWorld()->GetPawn<APlayer>();
+	//ABall::Ball->SetActorLocation({ Vaus->GetActorLocation().X + 5.0f, Vaus->GetActorLocation().Y - ABall::Ball->GetBallScale().Y });
+
+	if (true == UEngineInput::GetInst().IsDown('J'))
+	{
+		//AddActorLocation(ABall::Ball->Dir * _DeltaTime * Speed);
+	}
+}
+
+void AItem::ItemLaser()
+{
+
+}
+
+void AItem::ItemEnlarge()
+{
+}
+
+void AItem::ItemDisruption()
+{
+}
+
+void AItem::ItemBreak()
+{
+}
+
+void AItem::ItemPlayer()
+{
+}
+
 void AItem::BeginPlay()
 {
 
@@ -51,4 +91,5 @@ void AItem::Tick(float _DeltaTime)
 
 
 }
+
 

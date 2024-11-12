@@ -31,5 +31,7 @@ private:
 	//AScore* Score = nullptr;
 	//class AScore* Score;
 
+	//ABall* BallActor = nullptr;
+
 };
 

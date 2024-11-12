@@ -10,6 +10,7 @@
 #include "Score.h"
 
 #include <EngineCore/ImageManager.h>
+#include <EngineBase/EngineRandom.h>
 
 FVector2D ABrick::ReflectionVector[static_cast<int>(EReflectionDir::MAX)] = {
 	{1, 0},	// LEFT,
@@ -332,6 +333,13 @@ void ABrick::Tick(float _DeltaTime)
 				Dir = ABall::Ball->Dir.Reflect(FVector2D::DOWN);
 
 				ABall::Ball->Dir = Dir;
+
+				UEngineRandom Random;
+				int RandomValue = Random.RandomInt(0, 100);
+				if (70 <= RandomValue)
+				{
+
+				}
 
 				AItem* Ptr = GetWorld()->SpawnActor<AItem>();
 				Ptr->SetActorLocation(GetActorLocation());

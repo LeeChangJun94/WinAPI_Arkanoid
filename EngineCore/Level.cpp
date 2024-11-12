@@ -122,7 +122,7 @@ void ULevel::Tick(float _DeltaTime)
 
 		BeginPlayList.clear();
 
-		// todtjdtl 
+
 		AActor::ComponentBeginPlay();
 	}
 

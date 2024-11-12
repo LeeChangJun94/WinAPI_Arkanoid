@@ -78,6 +78,13 @@ void ContentsCore::BeginPlay()
 		UImageManager::GetInst().CuttingSprite("Vaus_Destroy1.png", { 96, 24 });
 		UImageManager::GetInst().CuttingSprite("Vaus_Destroy2.png", { 144, 72 });
 		UImageManager::GetInst().CuttingSprite("Vaus_Create.png", { 96, 24 });
+
+		UImageManager::GetInst().CuttingSprite("PlayerLife_0.png", { 240, 24 });
+		UImageManager::GetInst().CuttingSprite("PlayerLife_1.png", { 240, 24 });
+		UImageManager::GetInst().CuttingSprite("PlayerLife_2.png", { 240, 24 });
+		UImageManager::GetInst().CuttingSprite("PlayerLife_3.png", { 240, 24 });
+		UImageManager::GetInst().CuttingSprite("PlayerLife_4.png", { 240, 24 });
+		UImageManager::GetInst().CuttingSprite("PlayerLife_5.png", { 240, 24 });
 	}
 	
 	{

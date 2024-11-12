@@ -27,8 +27,8 @@ public:
 
 	void RunSoundPlay();
 
-	void BorderReflect();
-
+	void BorderReflect(float _DeltaTime);
+	void ReStart(float _DeltaTime);
 	
 
 	FVector2D GetBallScale()
@@ -36,12 +36,16 @@ public:
 		return SpriteRenderer->GetComponentScale();
 	}
 
-	//void BallReflection(FVector2D up);
+	float SetBallSpeed(float _Speed)
+	{
+		Speed = _Speed;
+	}
+	
 
 protected:
 
 private:
-	float Speed = 300.0f;
+	float Speed = 800.0f;
 	float radian = 0.0f;
 	float CheckTime = 0.0f;
 	bool StartTime = true;

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Ball.h"
 #include "Player.h"
+#include "PlayerLife.h"
 
 #include <EngineCore/Level.h>
 #include <EngineCore/EngineAPICore.h>
@@ -38,7 +39,7 @@ ABall::~ABall()
 {
 }
 
-void ABall::BorderReflect()
+void ABall::BorderReflect(float _DeltaTime)
 {
 	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 
@@ -69,9 +70,23 @@ void ABall::BorderReflect()
 
 	if (WindowSize.Y < GetActorLocation().Y)
 	{
-		if (Dir.Y > 0)
+		//APlayerLife::PlayerLife->SetLifeCount(-1);
+		//ReStart(_DeltaTime);
+	}
+}
+
+void ABall::ReStart(float _DeltaTime)
+{
+	StartTime = true;
+	CheckTime = 0.0f;
+	CheckTime += _DeltaTime;
+	if (CheckTime < 5.0f && true == StartTime)
+	{
+		APlayer* Vaus = GetWorld()->GetPawn<APlayer>();
+		SetActorLocation({ Vaus->GetActorLocation().X + 5.0f, Vaus->GetActorLocation().Y - SpriteRenderer->GetComponentScale().Y });
+		if (true == UEngineInput::GetInst().IsDown('J'))
 		{
-			Dir = Dir.Reflect(FVector2D::UP);
+			StartTime = false;
 		}
 	}
 }
@@ -95,7 +110,7 @@ void ABall::Tick(float _DeltaTime)
 
 	AddActorLocation(Dir * _DeltaTime * Speed);
 
-	BorderReflect();
+	BorderReflect(_DeltaTime);
 
 	if (CheckTime < 5.0f && true == StartTime)
 	{

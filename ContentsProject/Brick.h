@@ -12,6 +12,8 @@ enum class EReflectionDir
 	MAX,
 };
 
+class ABall;
+
 // Ό³Έν :
 class ABrick : public AActor
 {
@@ -39,6 +41,16 @@ public:
 	bool RectCheck();
 	EReflectionDir ReflectionDirCheck();
 
+	void SetBallActor(ABall* BallActor)
+	{
+		this->BallActor = BallActor;
+	}
+
+	ABall* GetBallActor()
+	{
+		return this->BallActor;
+	}
+
 protected:
 
 private:
@@ -60,5 +72,7 @@ private:
 	float Line = 0;
 
 	int PlayerScore = 0;
+
+	ABall* BallActor = nullptr;
 };
 

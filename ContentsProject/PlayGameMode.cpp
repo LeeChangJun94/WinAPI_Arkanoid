@@ -7,6 +7,7 @@
 #include "Ball.h"
 #include "Score.h"
 #include "Player.h"
+#include "PlayerLife.h"
 
 #include "ContentsEnum.h"
 
@@ -45,6 +46,8 @@ void APlayGameMode::BeginPlay()
 	}
 
 	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
+	APlayerLife* PlayerLifeActor = GetWorld()->SpawnActor<APlayerLife>();
+
 
 	for (int i = 0; i < 11; ++i)
 	{
@@ -52,6 +55,7 @@ void APlayGameMode::BeginPlay()
 		{
 			ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
 			Ptr->SetActorLocation({ 48 + (48 * i), 160 + (24 * j) });
+			//Ptr->SetBallActor(this->BallActor);
 
 			BrickPtr.push_back(Ptr);
 		}

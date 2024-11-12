@@ -117,7 +117,6 @@ APlayer::~APlayer()
 
 void APlayer::BeginPlay()
 {
-
 	Super::BeginPlay();
 	
 	ChangeState(PlayerState::Create);
@@ -221,16 +220,10 @@ void APlayer::Tick(float _DeltaTime)
 		//UEngineDebug::SwitchIsDebug();
 	}
 
-	BallTrans.Location = { ABall::Ball->GetActorLocation().iX(), ABall::Ball->GetActorLocation().iY() };
-	//BallTrans.Scale = { ABall::Ball->GetActorScale().iX(), ABall::Ball->GetActorScale().iY() };
-	
-	//BallX = APlayer::Ball->GetActorLocation().iX();
-	//BallY = APlayer::Ball->GetActorLocation().iY();
-	//BallScaleX = APlayer::Ball->GetActorScale().iX();
-	//BallScaleY = APlayer::Ball->GetActorScale().iY();
+	BallTrans.Location = { ABall::Ball->GetActorLocation().X, ABall::Ball->GetActorLocation().Y };
 	
 	FVector2D VausSize = SpriteRenderer->GetComponentScale();
-	VausTrans.Location = { GetActorLocation().iX(), GetActorLocation().iY() };
+	VausTrans.Location = { GetActorLocation().X, GetActorLocation().Y };
 	//VausSize = { GetActorScale().iX(), GetActorScale().iY() };
 	
 	//BrickX = GetActorLocation().iX();
@@ -626,9 +619,7 @@ void APlayer::ChangeState(PlayerState _CurPlayerState)
 		break;
 	}
 
-
 	CurPlayerState = _CurPlayerState;
-
 }
 
 void APlayer::LevelChangeStart()
@@ -639,8 +630,6 @@ void APlayer::LevelChangeStart()
 void APlayer::LevelChangeEnd()
 {
 	Super::LevelChangeEnd();
-
-
 }
 
 //void APlayer::Idle(float _DeltaTime)
@@ -734,7 +723,6 @@ void APlayer::VausReset()
 	SetActorLocation({ 336,700 });
 	SpriteRenderer->SetComponentScale({ 96, 24 });
 	SpriteRenderer->ChangeAnimation("Vaus_Create");
-	
 }
 
 void APlayer::CreateDone()

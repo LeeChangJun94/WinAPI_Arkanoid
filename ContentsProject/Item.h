@@ -1,6 +1,8 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+class ABall;
+
 enum class ModeState
 {
 	None,
@@ -35,11 +37,31 @@ public:
 
 	int ItemType = 0;
 
+	void ItemSlow();
+	void ItemCatch();
+	void ItemLaser();
+	void ItemEnlarge();
+	void ItemDisruption();
+	void ItemBreak();
+	void ItemPlayer();
+
+
+	void SetBallActor(ABall* BallActor)
+	{
+		this->BallActor = BallActor;
+	}
+
+	ABall* GetBallActor()
+	{
+		return this->BallActor;
+	}
+
 protected:
 
 private:
-	float Speed = 400.0f;
+	float Speed = 300.0f;
 	class USpriteRenderer* SpriteRenderer1 = nullptr;
 	class USpriteRenderer* SpriteRenderer2 = nullptr;
+	ABall* BallActor = nullptr;
 };
 
