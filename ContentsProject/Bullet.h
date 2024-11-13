@@ -16,11 +16,18 @@ public:
 	ABullet& operator=(const ABullet& _Other) = delete;
 	ABullet& operator=(ABullet&& _Other) noexcept = delete;
 
+	void Attack();
+	void AttackDone();
+
+
+
 protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-
 	USpriteRenderer* SpriteRenderer;
+	U2DCollision* CollisionComponent;
+	
+	float Speed = 600.0f;
 };
 

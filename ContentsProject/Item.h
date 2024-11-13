@@ -56,10 +56,13 @@ public:
 		return this->BallActor;
 	}
 
+	ModeState RandomItemCreate();
+
+
 protected:
 
 private:
-	float Speed = 300.0f;
+	float Speed = 200.0f;
 	class USpriteRenderer* SpriteRenderer1 = nullptr;
 	class USpriteRenderer* SpriteRenderer2 = nullptr;
 	ABall* BallActor = nullptr;

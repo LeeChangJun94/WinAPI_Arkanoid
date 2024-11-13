@@ -2,9 +2,12 @@
 #include "Item.h"
 #include "Ball.h"
 #include "Player.h"
+#include "EngineBase/EngineRandom.h"
 
 #include <EngineCore/SpriteRenderer.h>
 #include <EnginePlatform/EngineInput.h>
+#include <EngineCore/2DCollision.h>
+#include "ContentsEnum.h"
 
 AItem* AItem::Item = nullptr;
 
@@ -32,6 +35,8 @@ AItem::AItem()
 	SpriteRenderer1->CreateAnimation("Player", "Item1.png", 48, 55, 0.1f);
 
 	SpriteRenderer1->ChangeAnimation("Laser");
+
+
 }
 
 AItem::~AItem()
@@ -40,11 +45,13 @@ AItem::~AItem()
 
 void AItem::ItemSlow()
 {
+	SpriteRenderer1->ChangeAnimation("Slow");
 	ABall::Ball->SetBallSpeed(500.0f);
 }
 
 void AItem::ItemCatch()
 {
+	SpriteRenderer1->ChangeAnimation("Catch");
 	//APlayer* Vaus = GetWorld()->GetPawn<APlayer>();
 	//ABall::Ball->SetActorLocation({ Vaus->GetActorLocation().X + 5.0f, Vaus->GetActorLocation().Y - ABall::Ball->GetBallScale().Y });
 
@@ -56,24 +63,69 @@ void AItem::ItemCatch()
 
 void AItem::ItemLaser()
 {
-
+	SpriteRenderer1->ChangeAnimation("Laser");
 }
 
 void AItem::ItemEnlarge()
 {
+	SpriteRenderer1->ChangeAnimation("Enlarge");
 }
 
 void AItem::ItemDisruption()
 {
+	SpriteRenderer1->ChangeAnimation("Disruption");
 }
 
 void AItem::ItemBreak()
 {
+	SpriteRenderer1->ChangeAnimation("Break");
 }
 
 void AItem::ItemPlayer()
 {
+	SpriteRenderer1->ChangeAnimation("Player");
 }
+
+ModeState AItem::RandomItemCreate()
+{
+	ModeState Item = ModeState::None;
+	UEngineRandom Random;
+	int RandomValue = Random.RandomInt(1, 100);
+	if (70 < RandomValue)
+	{
+		Item = ModeState::None;
+	}
+	else if (60 < RandomValue)
+	{
+		Item = ModeState::Slow;
+	}
+	else if (50 < RandomValue)
+	{
+		Item = ModeState::Catch;
+	}
+	else if (40 < RandomValue)
+	{
+		Item = ModeState::Laser;
+	}
+	else if (30 < RandomValue)
+	{
+		Item = ModeState::Enlarge;
+	}
+	else if (20 < RandomValue)
+	{
+		Item = ModeState::Disruption;
+	}
+	else if (10 < RandomValue)
+	{
+		Item = ModeState::Break;
+	}
+	else if (0 < RandomValue)
+	{
+		Item = ModeState::Player;
+	}
+	return Item;
+}
+
 
 void AItem::BeginPlay()
 {

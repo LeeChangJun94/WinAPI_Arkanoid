@@ -13,6 +13,7 @@ enum class ERenderOrder
 
 enum class ECollisionGroup
 {
-	PlayerBody,
-	MonsterBody,
+	Brick,
+	Bullet,
+	Item,
 };

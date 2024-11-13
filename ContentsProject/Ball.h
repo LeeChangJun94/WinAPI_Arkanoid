@@ -36,7 +36,7 @@ public:
 		return SpriteRenderer->GetComponentScale();
 	}
 
-	float SetBallSpeed(float _Speed)
+	void SetBallSpeed(float _Speed)
 	{
 		Speed = _Speed;
 	}

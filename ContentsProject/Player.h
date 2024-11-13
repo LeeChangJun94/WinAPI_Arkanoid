@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include "Bullet.h"
 
 enum class PlayerState
 {
@@ -57,13 +58,18 @@ public:
 		
 	FVector2D Dir = { 0.f , 0.f };
 
-
+	std::list<ABullet*> BulletPtr;
 
 	void RunSoundPlay();
 
 	void LevelChangeStart() override;
 
 	void LevelChangeEnd();
+
+	std::list<ABullet*>& GetBulletPtr()
+	{
+		return BulletPtr;;
+	}
 
 protected:
 

@@ -3,6 +3,8 @@
 #include <EnginePlatform/EngineInput.h>
 #include <EngineBase/EngineMath.h>
 #include <EngineCore/SpriteRenderer.h>
+#include <EngineCore/2DCollision.h>
+#include "ContentsEnum.h"
 #include "Brick.h"
 #include "Player.h"
 #include "Ball.h"
@@ -12,12 +14,12 @@
 #include <EngineCore/ImageManager.h>
 #include <EngineBase/EngineRandom.h>
 
-FVector2D ABrick::ReflectionVector[static_cast<int>(EReflectionDir::MAX)] = {
-	{1, 0},	// LEFT,
-	{-1, 0},	// RIGHT,
-	{0, 1},					// UP,
-	{0, -1},					// DOWN,
-};
+//FVector2D ABrick::ReflectionVector[static_cast<int>(EReflectionDir::MAX)] = {
+//	{1, 0},	// LEFT,
+//	{-1, 0},	// RIGHT,
+//	{0, 1},					// UP,
+//	{0, -1},					// DOWN,
+//};
 
 ABrick::ABrick()
 {
@@ -28,6 +30,12 @@ ABrick::ABrick()
 	SpriteRenderer->SetSprite("Bricks1.png");
 	SpriteRenderer->SetComponentScale({ 48, 24 });
 	//SetActorScale(SpriteRenderer->GetComponentScale());
+
+	U2DCollision* CollisionComponent = CreateDefaultSubObject<U2DCollision>();
+	CollisionComponent->SetComponentLocation({ 0, 0 });
+	CollisionComponent->SetComponentScale({ 48, 24 });
+	CollisionComponent->SetCollisionGroup(ECollisionGroup::Brick);
+	CollisionComponent->SetCollisionType(ECollisionType::Rect);
 } 
 
 ABrick::~ABrick()

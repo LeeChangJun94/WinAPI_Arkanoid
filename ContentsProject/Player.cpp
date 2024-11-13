@@ -33,9 +33,9 @@ APlayer::APlayer()
 
 	SpriteRenderer->CreateAnimation("Vaus_Idle", "Vaus_Idle.png", 0, 5, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_Create", "Vaus_Create.png", 0, 4, 0.1f);
-	//SpriteRenderer->CreateAnimation("Vaus_TEnlarge", "Vaus_TEnlarge.png", 0, 4, 0.1f);
+	SpriteRenderer->CreateAnimation("Vaus_TEnlarge", "Vaus_TEnlarge.png", 0, 4, 0.1f);
+	SpriteRenderer->CreateAnimation("Vaus_RTEnlarge", "Vaus_TEnlarge.png", 4, 0, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_Enlarge", "Vaus_Enlarge.png", 0, 5, 0.1f);
-	//SpriteRenderer->CreateAnimation("Vaus_RTEnlarge", "Vaus_TEnlarge.png", 5, 0, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_TLaser", "Vaus_TLaser.png", 0, 8, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_RTLaser", "Vaus_TLaser.png", 8, 0, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_Laser", "Vaus_Laser.png", 0, 5, 0.1f);
@@ -46,6 +46,7 @@ APlayer::APlayer()
 	//IdleStart();
 
 	SpriteRenderer->SetAnimationEvent("Vaus_TEnlarge", 4, std::bind(&APlayer::EnlargeDone, this));
+	SpriteRenderer->SetAnimationEvent("Vaus_RTEnlarge", 4, std::bind(&APlayer::IdleStart, this));
 	SpriteRenderer->SetAnimationEvent("Vaus_TLaser", 8, std::bind(&APlayer::LaserDone, this));
 	SpriteRenderer->SetAnimationEvent("Vaus_Destroy1", 2, std::bind(&APlayer::DestroyDone, this));
 	SpriteRenderer->SetAnimationEvent("Vaus_Destroy2", 3, std::bind(&APlayer::VausReset, this));
@@ -691,8 +692,12 @@ void APlayer::Laser(float _DeltaTime)
 {
 	if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
 	{
-		ABullet* Ptr = GetWorld()->SpawnActor<ABullet>();
-		Ptr->SetActorLocation(GetActorLocation());
+		if (2 >= BulletPtr.size())
+		{
+			ABullet* Ptr = GetWorld()->SpawnActor<ABullet>();
+			Ptr->SetActorLocation(GetActorLocation());
+			BulletPtr.push_back(Ptr);
+		}
 	}
 
 }
