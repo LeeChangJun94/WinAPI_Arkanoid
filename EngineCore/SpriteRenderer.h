@@ -3,6 +3,7 @@
 #include "EngineSprite.h"
 #include <EngineBase/EngineDelegate.h>
 #include <map>
+#include <EngineBase/EngineMath.h>
 
 enum class PivotType
 {
@@ -10,7 +11,6 @@ enum class PivotType
 	Bot,
 	Top,
 };
-
 
 // 설명 :
 class USpriteRenderer : public USceneComponent
@@ -30,6 +30,7 @@ public:
 		int ResultIndex = 0;
 		float CurTime = 0.0f;
 		bool Loop = true;
+		bool IsEnd = false;
 
 		void Reset()
 		{
@@ -95,20 +96,6 @@ public:
 		return Sprite->GetName();
 	}
 
-	//bool IsActive() override
-	//{p.
-	//	// 랜더러는 자신을 가진 액터에게 종속된다.
-	//	// 부모도        true            true
-	//	return UObject::IsActive() && GetActor()->IsActive();
-	//}
-	//
-	//
-	//bool IsDestroy() override
-	//{
-	//	// 부모도        true            true
-	//	return UObject::IsDestroy() || GetActor()->IsDestroy();
-	//}
-
 	void SetCameraEffect(bool _Value)
 	{
 		IsCameraEffect = _Value;
@@ -120,17 +107,47 @@ public:
 	}
 
 	void SetPivotType(PivotType _Type);
+
+	void SetCameraEffectScale(float _Effect);
 	void SetSprite(std::string_view _Name, int _CurIndex = 0);
 
+	// 애니메이션이 실행되고 있다면.
+	// 그 애니메이션이 끝난 순간을 체크하고 싶은것.
+	bool IsCurAnimationEnd()
+	{
+		return CurAnimation->IsEnd;
+	}
+
+	// 0 완전투명 255면 불투명
+	void SetAlphaChar(unsigned char _Value)
+	{
+		Alpha = _Value;
+	}
+
+	void SetAlphafloat(float _Value)
+	{
+		_Value = UEngineMath::Clamp(_Value, 0.0f, 1.0f);
+		// 언제든지 쉽게 다른 차원의 값으로 변경될수 있다.
+		// 다이렉트가 색깔 단위를 0~1을 기준으로 하는 이유이다.
+		// 그래픽 라이브러리는 색깔을 데이터일 뿐이므로 이걸 언제든지
+		// 다른 데이터로 변환하는 일을 수행할때 0~1단위가 유리하기 때문에 0~1단위를 사용한다.
+		Alpha = static_cast<unsigned char>(_Value * 255.0f);
+	}
 
 protected:
 
-public:
+private:
 	int Order = 0;
 	int CurIndex = 0;
 	bool IsCameraEffect = true;
-	class UEngineSprite* Sprite = nullptr;
+	float CameraEffectScale = 1.0f;
+
+	// 다이렉트는 모든 색상을 0~1.0f로 표현한다.
+	unsigned char Alpha = 255;
+
 	FVector2D Pivot = FVector2D::ZERO;
+
+	class UEngineSprite* Sprite = nullptr;
 
 	std::map<std::string, FrameAnimation> FrameAnimations;
 	FrameAnimation* CurAnimation = nullptr;

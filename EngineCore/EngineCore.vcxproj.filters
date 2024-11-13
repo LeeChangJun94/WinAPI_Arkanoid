@@ -31,6 +31,9 @@
     <Filter Include="Debug">
       <UniqueIdentifier>{633e4190-8b8d-43c1-a70e-358ec0348d1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{4f3fa938-47fb-4c6b-b47f-06a53321718f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -69,6 +72,9 @@
     <ClInclude Include="EngineCoreDebug.h">
       <Filter>Debug</Filter>
     </ClInclude>
+    <ClInclude Include="PathFindAStar.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -106,6 +112,9 @@
     </ClCompile>
     <ClCompile Include="EngineCoreDebug.cpp">
       <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="PathFindAStar.cpp">
+      <Filter>Contents</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

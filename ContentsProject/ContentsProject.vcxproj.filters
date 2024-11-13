@@ -47,6 +47,7 @@
     <ClInclude Include="PlayerLife.h">
       <Filter>ContentsObject\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Fade.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -95,6 +96,7 @@
     <ClCompile Include="PlayerLife.cpp">
       <Filter>ContentsObject\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Fade.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">

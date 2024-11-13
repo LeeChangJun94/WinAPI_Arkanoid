@@ -111,11 +111,12 @@ private:
 		bool IsFree = true;
 
 		float PressTime = 0.0f;
+		float FreeTime = 0.0f;
 
-		std::vector<std::function<void(float)>> PressEvents;
-		std::vector<std::function<void(float)>> DownEvents;
-		std::vector<std::function<void(float)>> UpEvents;
-		std::vector<std::function<void(float)>> FreeEvents;
+		std::vector<std::function<void()>> PressEvents;
+		std::vector<std::function<void()>> DownEvents;
+		std::vector<std::function<void()>> UpEvents;
+		std::vector<std::function<void()>> FreeEvents;
 
 
 		// 벡터나 리스트를 사용하면 에러가 난다.
@@ -131,7 +132,7 @@ private:
 		{
 		}
 
-		void EventCheck(float _DeltaTime);
+		void EventCheck();
 
 		void KeyCheck(float _DeltaTime);
 
@@ -143,6 +144,17 @@ public:
 	void EventCheck(float _DeltaTime);
 
 	// UEngineInput::GetInst().IsDown('A')
+
+	bool IsDoubleClick(int _KeyIndex, float _Time)
+	{
+		if (false == Keys.contains(_KeyIndex))
+		{
+			MSGASSERT("아직도 등록되지 않은 키가 존재합니다.");
+			return false;
+		}
+
+		return Keys[_KeyIndex].IsDown && Keys[_KeyIndex].FreeTime < _Time;
+	}
 
 	bool IsDown(int _KeyIndex)
 	{
@@ -207,7 +219,7 @@ public:
 		return Keys[_KeyIndex].IsFree;
 	}
 
-	void BindAction(int _KeyIndex, KeyEvent _EventType, std::function<void(float)> _Function);
+	void BindAction(int _KeyIndex, KeyEvent _EventType, std::function<void()> _Function);
 
 protected:
 

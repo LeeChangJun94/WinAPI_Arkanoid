@@ -33,10 +33,11 @@ APlayer::APlayer()
 
 	SpriteRenderer->CreateAnimation("Vaus_Idle", "Vaus_Idle.png", 0, 5, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_Create", "Vaus_Create.png", 0, 4, 0.1f);
-	SpriteRenderer->CreateAnimation("Vaus_TEnlarge", "Vaus_TEnlarge.png", 0, 4, 0.1f);
+	//SpriteRenderer->CreateAnimation("Vaus_TEnlarge", "Vaus_TEnlarge.png", 0, 4, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_Enlarge", "Vaus_Enlarge.png", 0, 5, 0.1f);
-	//SpriteRenderer->CreateAnimation("Vaus_Catch", "Vaus_Enlarge.png", 0, 5, 0.1f);
+	//SpriteRenderer->CreateAnimation("Vaus_RTEnlarge", "Vaus_TEnlarge.png", 5, 0, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_TLaser", "Vaus_TLaser.png", 0, 8, 0.1f);
+	SpriteRenderer->CreateAnimation("Vaus_RTLaser", "Vaus_TLaser.png", 8, 0, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_Laser", "Vaus_Laser.png", 0, 5, 0.1f);
 	//SpriteRenderer->CreateAnimation("Vaus_Lasers", "Vaus_Enlarge.png", 0, 5, 0.1f);
 	//SpriteRenderer->CreateAnimation("Vaus_Lasers", "Vaus_Enlarge.png", 0, 5, 0.1f);

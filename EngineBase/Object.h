@@ -60,7 +60,7 @@ public:
 		IsDestroyValue = true;
 	}
 
-	virtual void ReleaseCheck(float _DeltaTime)
+	virtual void ReleaseTimeCheck(float _DeltaTime)
 	{
 		if (false == IsDeathTimeCheck)
 		{
@@ -73,6 +73,11 @@ public:
 		{
 			IsDestroyValue = true;
 		}
+	}
+
+	virtual void ReleaseCheck(float _DeltaTime)
+	{
+
 	}
 
 	// 모든 기능 정지.
@@ -106,7 +111,6 @@ public:
 	{
 		IsDebugValue = !IsDebugValue;
 	}
-
 
 protected:
 

@@ -1,9 +1,10 @@
 #pragma once
 #include <EngineBase/Object.h>
 #include <EngineBase/EngineMath.h>
+#include <EngineBase/TimeEvent.h>
+
 
 #include "EngineSprite.h"
-
 
 // 설명 :
 class AActor : public UObject
@@ -23,12 +24,14 @@ public:
 	AActor& operator=(const AActor& _Other) = delete;
 	AActor& operator=(AActor&& _Other) noexcept = delete;
 
+	// 이 객체가 레벨에서 처음 Tick을 돌리기 직전에 실행된다.
 	virtual void BeginPlay() {}
+
+	// 델타타임이란 무엇인가?
 	virtual void Tick(float _DeltaTime);
 
 	virtual void LevelChangeStart() {}
 	virtual void LevelChangeEnd() {}
-
 
 	class ULevel* GetWorld()
 	{
@@ -45,25 +48,14 @@ public:
 		Transform.Location += _Direction;
 	}
 
-	//void SetActorScale(FVector2D _Scale)
-	//{
-	//	Transform.Scale = _Scale;
-	//}
-	
-	FVector2D GetActorLocation()
-	{
-		return Transform.Location;
-	}
-
 	FTransform GetTransform()
 	{
 		return Transform;
 	}
 
-	//추가
-	FVector2D GetActorScale()
+	FVector2D GetActorLocation()
 	{
-		return Transform.Scale;
+		return Transform.Location;
 	}
 
 	// 컴포넌트의 소유자는 액터 삭제도 액터가 해야한다.
@@ -88,8 +80,8 @@ public:
 	}
 
 
-
 protected:
+	UTimeEvent TimeEventer;
 
 private:
 	static void ComponentBeginPlay();
@@ -98,11 +90,11 @@ private:
 	static std::list<class UActorComponent*> ComponentList;
 
 	void ReleaseCheck(float _DeltaTime) override;
-
+	void ReleaseTimeCheck(float _DeltaTime) override;
 
 	class ULevel* World = nullptr;
-
 	FTransform Transform;
+
 
 	std::list<class UActorComponent*> Components;
 };

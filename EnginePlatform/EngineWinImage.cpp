@@ -17,7 +17,6 @@
 // PNG 를 통한 window 네이티브 그래픽 확장용 라이브러리
 #pragma comment(lib, "Gdiplus.lib")
 
-
 UEngineWinImage::UEngineWinImage()
 {
 }
@@ -39,7 +38,6 @@ UEngineWinImage::~UEngineWinImage()
 	}
 
 }
-
 
 void UEngineWinImage::Create(UEngineWinImage* _TargetImage, FVector2D _Scale)
 {
@@ -128,7 +126,6 @@ void UEngineWinImage::CopyToBit(UEngineWinImage* _TargetImage, const FTransform&
 	// SRCCOPY 카피할때 
 
 	FVector2D Vector;
-
 }
 
 void UEngineWinImage::CopyToTrans(UEngineWinImage* _TargetImage, const FTransform& _RenderTrans, const FTransform& _LTImageTrans, UColor _Color /*= UColor(255, 0, 255, 255)*/)
@@ -166,6 +163,47 @@ void UEngineWinImage::CopyToTrans(UEngineWinImage* _TargetImage, const FTransfor
 		_LTImageTrans.Scale.iX(),
 		_LTImageTrans.Scale.iY(),
 		_Color.Color
+	);
+}
+
+void UEngineWinImage::CopyToAlpha(UEngineWinImage* _TargetImage,
+	const FTransform& _RenderTrans,
+	const FTransform& _LTImageTrans,
+	unsigned char _Alpha)
+{
+
+	// 알파 블랜드는 알파 채널이라는 것을 이용해서 알파를 적용시킨다.
+	// 이미지는 
+	// R G B A 로 이루어져 있다. 컬러채널이라고 부른다.
+
+	// 0이면 검은색
+	// 255면 흰색입니다.
+	// 알파블랜드가 알파를 적용시키는 부분은
+	// 알파채널이 255인 부분만 적용시킵니다.
+	// 이 채널은 포토샵에서 윈도우 => 채널창에서 확인할 수 있습니다.
+
+	BLENDFUNCTION BLEND;
+	BLEND.BlendOp = AC_SRC_OVER;
+	BLEND.BlendFlags = 0;
+	BLEND.AlphaFormat = AC_SRC_ALPHA;
+	BLEND.SourceConstantAlpha = _Alpha;
+
+	HDC CopyDC = ImageDC;
+	HDC TargetDC = _TargetImage->ImageDC;
+	FVector2D LeftTop = _RenderTrans.CenterLeftTop();
+
+	AlphaBlend(
+		TargetDC,
+		LeftTop.iX(),
+		LeftTop.iY(),
+		_RenderTrans.Scale.iX(),
+		_RenderTrans.Scale.iY(),
+		CopyDC,
+		_LTImageTrans.Location.iX(),
+		_LTImageTrans.Location.iY(),
+		_LTImageTrans.Scale.iX(),
+		_LTImageTrans.Scale.iY(),
+		BLEND
 	);
 }
 
@@ -232,23 +270,13 @@ void UEngineWinImage::Load(UEngineWinImage* _TargetImage, std::string_view _Path
 		// 
 		delete pBitMap;
 		delete pImage;
-
-
 	}
 	else if (".BMP" == UpperExt)
 	{
 		HANDLE NewHandle = LoadImageA(nullptr, _Path.data(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		NewBitmap = reinterpret_cast<HBITMAP>(NewHandle);
-
-
-
-	}
-	else if (".BMP" == UpperExt)
-	{
-
 	}
 
-	// LoadImageA()
 	if (nullptr == NewBitmap)
 	{
 		MSGASSERT("이미지 로딩에 실패했습니다");

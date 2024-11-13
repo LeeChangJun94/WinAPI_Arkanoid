@@ -21,6 +21,7 @@ void USpriteRenderer::Render(float _DeltaTime)
 	// 일단 여기서 다 짠다.
 	if (nullptr != CurAnimation)
 	{
+		CurAnimation->IsEnd = false;
 		std::vector<int>& Indexs = CurAnimation->FrameIndex;
 		std::vector<float>& Times = CurAnimation->FrameTime;
 
@@ -42,6 +43,12 @@ void USpriteRenderer::Render(float _DeltaTime)
 				CurAnimation->Events[CurAnimation->CurIndex]();
 			}
 
+			// 애니메이션 앤드
+			if (CurAnimation->CurIndex >= Indexs.size())
+			{
+				CurAnimation->IsEnd = true;
+			}
+
 			if (CurAnimation->CurIndex >= Indexs.size())
 			{
 				if (true == CurAnimation->Loop)
@@ -56,6 +63,7 @@ void USpriteRenderer::Render(float _DeltaTime)
 				}
 				else
 				{
+					CurAnimation->IsEnd = true;
 					--CurAnimation->CurIndex;
 				}
 			}
@@ -82,13 +90,23 @@ void USpriteRenderer::Render(float _DeltaTime)
 
 	ULevel* Level = GetActor()->GetWorld();
 
-	Trans.Location = Trans.Location - Level->CameraPos;
+	if (true == IsCameraEffect)
+	{
+		Trans.Location = Trans.Location - (Level->CameraPos * CameraEffectScale);
+	}
 
 	Trans.Location += Pivot;
 
 	// Trans.Location -= 카메라포스
 
-	CurData.Image->CopyToTrans(BackBufferImage, Trans, CurData.Transform);
+	if (Alpha == 255)
+	{
+		CurData.Image->CopyToTrans(BackBufferImage, Trans, CurData.Transform);
+	}
+	else
+	{
+		CurData.Image->CopyToAlpha(BackBufferImage, Trans, CurData.Transform, Alpha);
+	}
 }
 
 void USpriteRenderer::BeginPlay()
@@ -170,17 +188,33 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 		return;
 	}
 
-	int Inter = (_End - _Start) + 1;
+	int Inter = 0;
 
 	std::vector<int> Indexs;
 	std::vector<float> Times;
 
-	for (size_t i = 0; i < Inter; i++)
+	if (_Start < _End)
 	{
-		Indexs.push_back(_Start);
-		Times.push_back(Time);
-		++_Start;
+		Inter = (_End - _Start) + 1;
+		for (size_t i = 0; i < Inter; i++)
+		{
+			Indexs.push_back(_Start);
+			Times.push_back(Time);
+			++_Start;
+		}
+
 	}
+	else
+	{
+		Inter = (_Start - _End) + 1;
+		for (size_t i = 0; i < Inter; i++)
+		{
+			Indexs.push_back(_End);
+			Times.push_back(Time);
+			++_End;
+		}
+	}
+
 
 	CreateAnimation(_AnimationName, _SpriteName, Indexs, Times, _Loop);
 }
@@ -292,6 +326,11 @@ void USpriteRenderer::SetAnimationEvent(std::string_view _AnimationName, int _Fr
 
 	ChangeAnimation->Events[_Frame] += _Function;
 
+}
+
+void USpriteRenderer::SetCameraEffectScale(float _Effect)
+{
+	CameraEffectScale = _Effect;
 }
 
 // 여러분들이 애니메이션을 하거나

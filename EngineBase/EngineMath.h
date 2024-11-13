@@ -9,6 +9,33 @@
 // FVector4D xyzw
 // FVector4D == FVector;
 
+class UEngineMath
+{
+public:
+	template <typename DataType>
+	DataType ClampMax(DataType value, DataType maxValue)
+	{
+		return (value > maxValue) ? maxValue : value;
+	}
+
+	template <typename DataType>
+	DataType ClampMin(DataType value, DataType minValue)
+	{
+		return (value < minValue) ? minValue : value;
+	}
+
+	template <typename DataType>
+	static DataType Clamp(DataType value, DataType minValue, DataType maxValue)
+	{
+		if (value < minValue)
+			return minValue;
+		else if (value > maxValue)
+			return maxValue;
+		else
+			return value;
+	}
+};
+
 class FVector2D
 {
 public:
@@ -244,18 +271,31 @@ public:
 	static bool Collision(ECollisionType _LeftType, const FTransform& _Left, ECollisionType _RightType, const FTransform& _Right);
 
 	// 완전히 같은 형의 함수죠?
+	static bool PointToCirCle(const FTransform& _Left, const FTransform& _Right);
+	static bool PointToRect(const FTransform& _Left, const FTransform& _Right);
+
 	static bool RectToRect(const FTransform& _Left, const FTransform& _Right);
-	//static bool RectToCirCle(const FTransform& _Left, const FTransform& _Right);
+	static bool RectToCirCle(const FTransform& _Left, const FTransform& _Right);
 
 	static bool CirCleToCirCle(const FTransform& _Left, const FTransform& _Right);
-	//static bool CirCleToRect(const FTransform& _Left, const FTransform& _Right);
+	static bool CirCleToRect(const FTransform& _Left, const FTransform& _Right);
+
 
 	FVector2D Scale;
 	FVector2D Location;
 
+
 	FVector2D CenterLeftTop() const
 	{
 		return Location - Scale.Half();
+	}
+
+	FVector2D CenterLeftBottom() const
+	{
+		FVector2D Location;
+		Location.X = Location.X - Scale.hX();
+		Location.Y = Location.Y + Scale.hY();
+		return Location;
 	}
 
 	float CenterLeft() const
@@ -266,6 +306,14 @@ public:
 	float CenterTop() const
 	{
 		return Location.Y - Scale.hY();
+	}
+
+	FVector2D CenterRightTop() const
+	{
+		FVector2D Location;
+		Location.X = Location.X + Scale.hX();
+		Location.Y = Location.Y - Scale.hY();
+		return Location;
 	}
 
 	FVector2D CenterRightBottom() const

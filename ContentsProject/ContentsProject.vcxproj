@@ -151,6 +151,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Fade.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PlayerLife.h">
       <SubType>
       </SubType>
@@ -211,6 +215,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Fade.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PlayerLife.cpp">
       <SubType>
       </SubType>

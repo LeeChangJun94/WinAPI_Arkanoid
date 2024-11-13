@@ -129,9 +129,11 @@ void UEngineAPICore::Tick()
 	//  UEngineInput::GetInst().EventCheck(DeltaTime);
 	CurLevel->Render(DeltaTime);
 
+	// 저는 이걸 싫어한다.
+	CurLevel->Collision(DeltaTime);
+
 	// 틱돌고 랜더돌고 릴리즈
 	CurLevel->Release(DeltaTime);
-
 }
 
 

@@ -8,6 +8,7 @@
 #include "Score.h"
 #include "Player.h"
 #include "PlayerLife.h"
+#include "Fade.h"
 
 #include "ContentsEnum.h"
 
@@ -26,6 +27,19 @@ void APlayGameMode::BeginPlay()
 	
 	//
 	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
+
+	//{
+	//	ANewPlayer* Actor = GetWorld()->GetPawn<ANewPlayer>();
+	//	Actor->SetColImage("bg001_Col.png");
+	//}
+	//
+	//{
+	//	APlayMap* Actor = GetWorld()->SpawnActor<APlayMap>();
+	//}
+	//
+	//{
+	//	AFade* Actor = GetWorld()->SpawnActor<AFade>();
+	//}
 
 	{
 		AScore* Score = GetWorld()->SpawnActor<AScore>();
