@@ -3,6 +3,7 @@
 #include "Ball.h"
 #include "Brick.h"
 #include "Bullet.h"
+#include "Item.h"
 
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>

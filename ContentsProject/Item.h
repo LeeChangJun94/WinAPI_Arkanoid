@@ -59,6 +59,7 @@ public:
 
 	ModeState RandomItemCreate();
 
+	ModeState ItemState = ModeState::None;
 
 protected:
 

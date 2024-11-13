@@ -51,6 +51,8 @@ public:
 		return this->BallActor;
 	}
 
+	ModeState ItemStats;
+
 protected:
 
 private:
@@ -59,7 +61,7 @@ private:
 	FTransform BallTrans;
 
 	FTransform BrickTrans;
-
+	
 	USpriteRenderer* SpriteRenderer;
 
 	bool LeftTop = false;

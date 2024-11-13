@@ -103,6 +103,8 @@ private:
 	void CreateDone();
 	
 	U2DCollision* CollisionComponent;
+	
+	
 
 	void IdleStart();
 	void Idle(float _DeltaTime);

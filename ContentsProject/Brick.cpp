@@ -342,15 +342,9 @@ void ABrick::Tick(float _DeltaTime)
 
 				ABall::Ball->Dir = Dir;
 
-				UEngineRandom Random;
-				int RandomValue = Random.RandomInt(0, 100);
-				if (70 <= RandomValue)
-				{
-
-				}
-
 				AItem* Ptr = GetWorld()->SpawnActor<AItem>();
 				Ptr->SetActorLocation(GetActorLocation());
+				
 
 				this->Destroy();
 				APlayer::Vaus->AddPlayerScore(80);

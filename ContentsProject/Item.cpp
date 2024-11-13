@@ -42,6 +42,7 @@ AItem::AItem()
 	CollisionComponent->SetCollisionGroup(ECollisionGroup::Item);
 	CollisionComponent->SetCollisionType(ECollisionType::Rect);
 
+	ItemState = RandomItemCreate();
 }
 
 AItem::~AItem()
@@ -102,42 +103,41 @@ void AItem::ItemCheck()
 
 ModeState AItem::RandomItemCreate()
 {
-	ModeState Item = ModeState::None;
 	UEngineRandom Random;
 	int RandomValue = Random.RandomInt(1, 100);
 	if (70 < RandomValue)
 	{
-		Item = ModeState::None;
+		ItemState = ModeState::None;
 	}
 	else if (60 < RandomValue)
 	{
-		Item = ModeState::Slow;
+		ItemState = ModeState::Slow;
 	}
 	else if (50 < RandomValue)
 	{
-		Item = ModeState::Catch;
+		ItemState = ModeState::Catch;
 	}
 	else if (40 < RandomValue)
 	{
-		Item = ModeState::Laser;
+		ItemState = ModeState::Laser;
 	}
 	else if (30 < RandomValue)
 	{
-		Item = ModeState::Enlarge;
+		ItemState = ModeState::Enlarge;
 	}
 	else if (20 < RandomValue)
 	{
-		Item = ModeState::Disruption;
+		ItemState = ModeState::Disruption;
 	}
 	else if (10 < RandomValue)
 	{
-		Item = ModeState::Break;
+		ItemState = ModeState::Break;
 	}
 	else if (0 < RandomValue)
 	{
-		Item = ModeState::Player;
+		ItemState = ModeState::Player;
 	}
-	return Item;
+	return ItemState;
 }
 
 
