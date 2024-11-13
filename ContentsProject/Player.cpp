@@ -2,15 +2,15 @@
 #include "Player.h"
 #include "Ball.h"
 #include "Brick.h"
+#include "Bullet.h"
 
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineCoreDebug.h>
-
+#include <EngineCore/2DCollision.h>
 #include <EnginePlatform/EngineInput.h>
-
 #include <EnginePlatform/EngineWindow.h>
-#include "Bullet.h"
+#include "ContentsEnum.h"
 
 APlayer* APlayer::Vaus = nullptr;
 
@@ -53,6 +53,11 @@ APlayer::APlayer()
 	SpriteRenderer->SetAnimationEvent("Vaus_Create", 4, std::bind(&APlayer::CreateDone, this));
 	//SpriteRenderer->SetAnimationEvent("Vaus_TLaser", 8, std::bind(&APlayer::LaserDone, this));
 	
+	CollisionComponent = CreateDefaultSubObject<U2DCollision>();
+	CollisionComponent->SetComponentLocation({ 0, 0 });
+	CollisionComponent->SetComponentScale({ 96, 24 });
+	CollisionComponent->SetCollisionGroup(ECollisionGroup::Vaus);
+	CollisionComponent->SetCollisionType(ECollisionType::Rect);
 
 	// 랜더러를 하나 만든다.
 	// 언리얼에서는 생서에서 CreateDefaultSubObject <= 생성자에서밖에 못합니다.

@@ -45,6 +45,7 @@ public:
 	void ItemBreak();
 	void ItemPlayer();
 
+	void ItemCheck();
 
 	void SetBallActor(ABall* BallActor)
 	{
@@ -66,5 +67,8 @@ private:
 	class USpriteRenderer* SpriteRenderer1 = nullptr;
 	class USpriteRenderer* SpriteRenderer2 = nullptr;
 	ABall* BallActor = nullptr;
+
+	U2DCollision* CollisionComponent;
+
 };
 

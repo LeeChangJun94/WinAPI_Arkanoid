@@ -36,6 +36,11 @@ AItem::AItem()
 
 	SpriteRenderer1->ChangeAnimation("Laser");
 
+	CollisionComponent = CreateDefaultSubObject<U2DCollision>();
+	CollisionComponent->SetComponentLocation({ 0, 0 });
+	CollisionComponent->SetComponentScale({ 32, 14 });
+	CollisionComponent->SetCollisionGroup(ECollisionGroup::Item);
+	CollisionComponent->SetCollisionType(ECollisionType::Rect);
 
 }
 
@@ -84,6 +89,15 @@ void AItem::ItemBreak()
 void AItem::ItemPlayer()
 {
 	SpriteRenderer1->ChangeAnimation("Player");
+}
+
+void AItem::ItemCheck()
+{
+	AActor* Result = CollisionComponent->CollisionOnce(ECollisionGroup::Vaus);
+	if (nullptr != Result)
+	{
+		this->Destroy();
+	}
 }
 
 ModeState AItem::RandomItemCreate()
@@ -138,7 +152,7 @@ void AItem::Tick(float _DeltaTime)
 
 	AddActorLocation(FVector2D::DOWN * _DeltaTime * Speed);
 
-
+	ItemCheck();
 
 
 

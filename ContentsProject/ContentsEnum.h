@@ -16,4 +16,5 @@ enum class ECollisionGroup
 	Brick,
 	Bullet,
 	Item,
+	Vaus,
 };
