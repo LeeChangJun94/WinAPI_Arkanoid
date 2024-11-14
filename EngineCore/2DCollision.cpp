@@ -70,7 +70,7 @@ bool U2DCollision::Collision(int _OtherCollisionGroup, std::vector<AActor*>& _Re
 
 	if (false == ThisCollision->IsActive())
 	{
-		return;
+		return false;
 	}
 
 	// 호출한 충돌체
