@@ -38,9 +38,9 @@ void USpriteRenderer::Render(float _DeltaTime)
 			CurAnimation->CurTime -= CurFrameTime;
 			++CurAnimation->CurIndex;
 
-			if (CurAnimation->Events.contains(CurAnimation->CurIndex))
+			if (CurAnimation->Events.contains(CurIndex))
 			{
-				CurAnimation->Events[CurAnimation->CurIndex]();
+				CurAnimation->Events[CurIndex]();
 			}
 
 			// 애니메이션 앤드
@@ -55,9 +55,9 @@ void USpriteRenderer::Render(float _DeltaTime)
 				{
 					CurAnimation->CurIndex = 0;
 
-					if (CurAnimation->Events.contains(CurAnimation->CurIndex))
+					if (CurAnimation->Events.contains(CurIndex))
 					{
-						CurAnimation->Events[CurAnimation->CurIndex]();
+						CurAnimation->Events[CurIndex]();
 					}
 
 				}
@@ -182,11 +182,11 @@ FVector2D USpriteRenderer::SetSpriteScale(float _Ratio /*= 1.0f*/, int _CurIndex
 
 void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time /*= 0.1f*/, bool _Loop /*= true*/)
 {
-	//if (_Start > _End)
-	//{
-	//	MSGASSERT("애니메이션에서 Start가 End보다 클수는 없습니다. " + std::string(_AnimationName));
-	//	return;
-	//}
+	if (_Start > _End)
+	{
+		MSGASSERT("애니메이션에서 Start가 End보다 클수는 없습니다. " + std::string(_AnimationName));
+		return;
+	}
 
 	int Inter = 0;
 
