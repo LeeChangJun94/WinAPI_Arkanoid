@@ -2,6 +2,9 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
 
+class APlayerLife;
+class U2DCollision;
+
 // Ό³Έν :
 class ABall : public AActor
 {
@@ -36,11 +39,20 @@ public:
 		return SpriteRenderer->GetComponentScale();
 	}
 
-	void SetBallSpeed(float _Speed)
-	{
-		Speed = _Speed;
-	}
+	void SetBallSpeed(float _Speed) override;
+	//{
+	//	Speed = _Speed;
+	//}
 	
+	FVector2D GetBallDir() override;
+	//{
+	//	return Dir;
+	//}
+
+	void SetBallDir(FVector2D _Dir) override;
+	//{
+	//	Dir = _Dir;
+	//}
 	//APlayerLife* SetPlayerLife(APlayerLife* _PlayerLife)
 	//{
 	//	PlayerLife = _PlayerLife;
@@ -55,7 +67,8 @@ private:
 	float CheckTime = 0.0f;
 	bool StartTime = true;
 
-	class APlayerLife* PlayerLife = nullptr;
+	APlayerLife* PlayerLife = nullptr;
 	class USpriteRenderer* SpriteRenderer;
+	U2DCollision* CollisionComponent = nullptr;
 };
 

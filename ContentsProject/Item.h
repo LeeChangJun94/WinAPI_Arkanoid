@@ -56,7 +56,7 @@ public:
 
 	void ItemCollisionCheck();
 
-	void SetBall(ABall* _Ball)
+	void SetBall(AActor* _Ball)
 	{
 		Ball = _Ball;
 	}
@@ -84,7 +84,7 @@ private:
 
 	APlayer* Vaus = nullptr;
 	APlayerLife* PlayerLife = nullptr;;
-	ABall* Ball = nullptr;
+	AActor* Ball = nullptr;
 
 };
 

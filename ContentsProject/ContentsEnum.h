@@ -14,6 +14,7 @@ enum class ERenderOrder
 enum class ECollisionGroup
 {
 	Brick,
+	Ball,
 	Bullet,
 	Item,
 	Vaus,

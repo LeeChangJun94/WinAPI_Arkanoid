@@ -15,6 +15,7 @@ enum class EReflectionDir
 class APlayer;
 class APlayerLife;
 class ABall;
+class U2DCollision;
 
 // Ό³Έν :
 class ABrick : public AActor
@@ -40,13 +41,13 @@ public:
 
 
 
-	bool RectCheck();
-	EReflectionDir ReflectionDirCheck();
+	//bool RectCheck();
+	//EReflectionDir ReflectionDirCheck();
 
-	void SetBall(ABall* _Ball)
-	{
-		Ball = _Ball;
-	}
+	//void SetBall(ABall* _Ball)
+	//{
+	//	Ball = _Ball;
+	//}
 
 	//ABall* GetBallActor()
 	//{
@@ -76,9 +77,11 @@ private:
 	float Line = 0;
 
 	int PlayerScore = 0;
+	
+	U2DCollision* CollisionComponent = nullptr;
 
 	APlayer* Vaus = nullptr;
-	ABall* Ball = nullptr;
+	//ABall* Ball = nullptr;
 	APlayerLife* PlayerLife = nullptr;
 
 };

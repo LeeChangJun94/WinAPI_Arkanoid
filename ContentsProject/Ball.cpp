@@ -7,6 +7,7 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineCoreDebug.h>
+#include <EngineCore/2DCollision.h>
 
 #include <EnginePlatform/EngineInput.h>
 
@@ -30,6 +31,12 @@ ABall::ABall()
 	SpriteRenderer->SetSprite("Ball.png");
 	SpriteRenderer->SetComponentScale({ 20, 16 });
 	SpriteRenderer->SetOrder(ERenderOrder::BALL);
+
+	CollisionComponent = CreateDefaultSubObject<U2DCollision>();
+	CollisionComponent->SetComponentLocation({ 0, 0 });
+	CollisionComponent->SetComponentScale({ 1, 1 });
+	CollisionComponent->SetCollisionGroup(ECollisionGroup::Ball);
+	CollisionComponent->SetCollisionType(ECollisionType::CirCle);
 
 }
 
@@ -87,6 +94,21 @@ void ABall::ReStart(float _DeltaTime)
 			StartTime = false;
 		}
 	}
+}
+
+void ABall::SetBallSpeed(float _Speed)
+{
+	Speed = _Speed;
+}
+
+FVector2D ABall::GetBallDir()
+{
+	return Dir;
+}
+
+void ABall::SetBallDir(FVector2D _Dir)
+{
+	Dir = _Dir;
 }
 
 void ABall::BeginPlay()
