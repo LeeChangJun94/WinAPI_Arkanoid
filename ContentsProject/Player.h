@@ -23,7 +23,7 @@ public:
 	APlayer();
 	~APlayer();
 
-	static APlayer* Vaus;
+	//static APlayer* Vaus;
 
 	// delete Function
 	APlayer(const APlayer& _Other) = delete;

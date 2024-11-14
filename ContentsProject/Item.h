@@ -81,7 +81,9 @@ private:
 
 	U2DCollision* CollisionComponent;
 
-	APlayerLife* PlayerLife;
+	class APlayer* Vaus = nullptr;
+	class APlayerLife* PlayerLife;
+
 
 };
 

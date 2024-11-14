@@ -14,7 +14,7 @@
 #include <EnginePlatform/EngineWindow.h>
 #include "ContentsEnum.h"
 
-APlayer* APlayer::Vaus = nullptr;
+//APlayer* APlayer::Vaus = nullptr;
 
 void APlayer::RunSoundPlay()
 {
@@ -23,7 +23,7 @@ void APlayer::RunSoundPlay()
 
 APlayer::APlayer()
 {
-	Vaus = this;
+	//Vaus = this;
 	
 	//SetActorLocation({300, 700});
 

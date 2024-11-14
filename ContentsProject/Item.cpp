@@ -85,7 +85,7 @@ void AItem::ItemLaser()
 
 void AItem::ItemLaserEffect()
 {
-	APlayer::Vaus->ChangeState(PlayerState::Laser);
+	Vaus->ChangeState(PlayerState::Laser);
 }
 
 void AItem::ItemEnlarge()
@@ -95,7 +95,7 @@ void AItem::ItemEnlarge()
 
 void AItem::ItemEnlargeEffect()
 {
-	APlayer::Vaus->ChangeState(PlayerState::Enlarge);
+	Vaus->ChangeState(PlayerState::Enlarge);
 }
 
 void AItem::ItemDisruption()
@@ -205,6 +205,8 @@ ModeState AItem::RandomItemCreate()
 
 void AItem::BeginPlay()
 {
+	Vaus = GetWorld()->GetPawn<APlayer>();
+
 	switch (ItemState)
 	{
 	case ModeState::None:

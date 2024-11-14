@@ -77,6 +77,7 @@ private:
 
 	int PlayerScore = 0;
 
+	class APlayer* Vaus = nullptr;
 	ABall* BallActor = nullptr;
 	APlayerLife* PlayerLife;
 

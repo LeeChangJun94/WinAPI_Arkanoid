@@ -45,5 +45,7 @@ private:
 	FVector2D TextScale;
 	std::vector<class USpriteRenderer*> Renders;
 
+	class APlayer* Vaus = nullptr;
+
 };
 

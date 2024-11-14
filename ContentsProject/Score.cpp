@@ -30,13 +30,14 @@ void AScore::SetTextSpriteName(const std::string _Text)
 
 void AScore::BeginPlay()
 {
+	Vaus = GetWorld()->GetPawn<APlayer>();
 }
 
 void AScore::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	SetValue(APlayer::Vaus->GetPlayerScore());
+	SetValue(Vaus->GetPlayerScore());
 }
 
 void AScore::SetOrder(int _Order)
@@ -52,18 +53,11 @@ void AScore::SetValue(int _Score = 0)
 {
 	std::string Number = std::to_string(_Score);
 
-	// 2000;
-	// 0000002000
 	if (Renders.size() <= Number.size())
 	{
 		MSGASSERT("자리수를 넘겼습니다.");
 		return;
 	}
-
-	// 0000000000
-	// 2000
-
-	// 
 
 	FVector2D Pos = FVector2D::ZERO;
 

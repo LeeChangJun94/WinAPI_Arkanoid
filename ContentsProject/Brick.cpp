@@ -45,7 +45,7 @@ ABrick::~ABrick()
 
 void ABrick::BeginPlay()
 {
-
+	Vaus = GetWorld()->GetPawn<APlayer>();
 }
 
 //bool ABrick::RectCheck()
@@ -286,7 +286,7 @@ void ABrick::Tick(float _DeltaTime)
 
 				this->Destroy();
 
-				APlayer::Vaus->AddPlayerScore(80);
+				Vaus->AddPlayerScore(80);
 
 				//APlayer::Ball->Dir.X *= -1;
 
@@ -303,7 +303,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(80);
+				Vaus->AddPlayerScore(80);
 				//ABall::Ball->Dir.Y *= -1;
 
 			}
@@ -327,7 +327,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(80);
+				Vaus->AddPlayerScore(80);
 				//ABall::Ball->Dir.X *= -1;
 
 			}
@@ -348,7 +348,7 @@ void ABrick::Tick(float _DeltaTime)
 				
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(80);
+				Vaus->AddPlayerScore(80);
 				//Ptr->USpriteRenderer::ChangeAnimation("Player");
 				//APlayer::Ball->Dir.Y *= -1;
 			}
@@ -373,7 +373,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(80);
+				Vaus->AddPlayerScore(80);
 				//ABall::Ball->Dir.X *= -1;
 			}
 		}
@@ -388,7 +388,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(80);
+				Vaus->AddPlayerScore(80);
 				//ABall::Ball->Dir.Y *= -1;
 			}
 		}
@@ -410,7 +410,7 @@ void ABrick::Tick(float _DeltaTime)
 				ABall::Ball->Dir = Dir;
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(80);
+				Vaus->AddPlayerScore(80);
 				//ABall::Ball->Dir.X *= -1;
 			}
 		}
@@ -430,7 +430,7 @@ void ABrick::Tick(float _DeltaTime)
 
 
 				this->Destroy();
-				APlayer::Vaus->AddPlayerScore(80);
+				Vaus->AddPlayerScore(80);
 				//Ptr->USpriteRenderer::SpriteRenderer2
 				//Ptr->USpriteRenderer::ChangeAnimation("Player");
 

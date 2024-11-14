@@ -16,8 +16,6 @@
 
 ABall* ABall::Ball = nullptr;
 
-
-
 void ABall::RunSoundPlay()
 {
 	//UEngineDebug::OutPutString("SoundPlay");
