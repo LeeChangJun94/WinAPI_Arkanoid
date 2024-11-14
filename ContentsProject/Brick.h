@@ -2,6 +2,7 @@
 #include <EngineCore/Actor.h>
 #include <EngineBase/EngineMath.h>
 #include <EngineCore/SpriteRenderer.h>
+#include "PlayerLife.h"
 
 enum class EReflectionDir
 {
@@ -51,7 +52,8 @@ public:
 		return this->BallActor;
 	}
 
-	ModeState ItemStats;
+	//ModeState ItemStats;
+	inline void SetPlayerLife(APlayerLife* _Player) { PlayerLife = _Player; }
 
 protected:
 
@@ -76,5 +78,7 @@ private:
 	int PlayerScore = 0;
 
 	ABall* BallActor = nullptr;
+	APlayerLife* PlayerLife;
+
 };
 

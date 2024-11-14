@@ -30,27 +30,36 @@ void ABullet::Attack()
 	if (nullptr != Result)
 	{
 		Result->Destroy();
-		SpriteRenderer->ChangeAnimation("BulletDone");
 		this->Speed = 0.0f;
+		SpriteRenderer->ChangeAnimation("BulletDone");
 	}
 }
 
 void ABullet::AttackDone()
 {
-	this->Destroy();
-	std::list<ABullet*>& List = APlayer::Vaus->GetBulletPtr();
-	std::list<ABullet*>::iterator StartIter = List.begin();
-	std::list<ABullet*>::iterator EndIter = List.end();
-	for (; StartIter != EndIter; )
+	if (true == this->IsDestroy())
 	{
-		if (this != *StartIter)
-		{
-			StartIter++;
-		}
-	
-		List.erase(StartIter);
-		break;
+		return;
 	}
+
+	this->Destroy();
+	//APlayer::Vaus->SetBulletCount(-1);
+	std::list<ABullet*>& List = Player->GetBulletPtr();
+	List.remove(this);
+
+	///*std::list<ABullet*>::iterator*/auto StartIter = List.begin();
+	///*std::list<ABullet*>::iterator*/auto EndIter = List.end();
+	//for (; StartIter != EndIter; )
+	//{
+	//	if (this != *StartIter)
+	//	{
+	//		StartIter++;
+	//		continue;
+	//	}
+	//
+	//	List.erase(StartIter);
+	//	break;
+	//}
 }
 
 void ABullet::Tick(float _DeltaTime)
@@ -63,7 +72,15 @@ void ABullet::Tick(float _DeltaTime)
 
 	if (84 > GetActorLocation().Y)
 	{
-		SpriteRenderer->ChangeAnimation("BulletDone");
 		this->Speed = 0.0f;
+		//APlayer::Vaus->SetBulletCount(-1);
+		SpriteRenderer->ChangeAnimation("BulletDone");
 	}
+}
+
+void ABullet::BeginPlay()
+{
+	Super::BeginPlay();
+
+	Player = GetWorld()->GetPawn<APlayer>();
 }

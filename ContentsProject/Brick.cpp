@@ -344,6 +344,7 @@ void ABrick::Tick(float _DeltaTime)
 
 				AItem* Ptr = GetWorld()->SpawnActor<AItem>();
 				Ptr->SetActorLocation(GetActorLocation());
+				Ptr->SetPlayerLife(PlayerLife);
 				
 
 				this->Destroy();
@@ -425,6 +426,8 @@ void ABrick::Tick(float _DeltaTime)
 
 				AItem* Ptr = GetWorld()->SpawnActor<AItem>();
 				Ptr->SetActorLocation(GetActorLocation());
+				Ptr->SetPlayerLife(PlayerLife);
+
 
 				this->Destroy();
 				APlayer::Vaus->AddPlayerScore(80);

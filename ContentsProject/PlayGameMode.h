@@ -5,6 +5,8 @@
 #include "TileMap.h"
 #include "Brick.h"
 
+class APlayer;
+
 // Ό³Έν :
 class APlayGameMode : public AGameMode
 {
@@ -32,6 +34,6 @@ private:
 	//class AScore* Score;
 
 	//ABall* BallActor = nullptr;
-
+	APlayer* Player = nullptr;
 };
 

@@ -5,9 +5,7 @@
 class APlayerLife : public AActor
 {
 public:
-	
-	static APlayerLife* PlayerLife;
-	
+		
 	// constrcuter destructer
 	APlayerLife();
 	~APlayerLife();
@@ -31,8 +29,14 @@ public:
 		return LifeCount;
 	}
 
+	//inline void SetPlayerLife(APlayerLife* _PlayerLife)
+	//{
+	//	PlayerLife = _PlayerLife;
+	//}
+
 	void LifeCheck();	
 	bool DeathCheck();
+
 
 	
 	
@@ -43,6 +47,7 @@ private:
 	int LifeCount = 2;
 
 	class USpriteRenderer* SpriteRenderer;
+	//APlayerLife* PlayerLife = nullptr;
 
 };
 

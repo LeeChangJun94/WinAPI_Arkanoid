@@ -2,6 +2,7 @@
 #include "Item.h"
 #include "Ball.h"
 #include "Player.h"
+#include "PlayerLife.h"
 #include "EngineBase/EngineRandom.h"
 
 #include <EngineCore/SpriteRenderer.h>
@@ -34,7 +35,7 @@ AItem::AItem()
 	SpriteRenderer1->CreateAnimation("Break", "Item1.png", 40, 47, 0.1f);
 	SpriteRenderer1->CreateAnimation("Player", "Item1.png", 48, 55, 0.1f);
 
-	SpriteRenderer1->ChangeAnimation("Laser");
+	//SpriteRenderer1->ChangeAnimation("Laser");
 
 	CollisionComponent = CreateDefaultSubObject<U2DCollision>();
 	CollisionComponent->SetComponentLocation({ 0, 0 });
@@ -52,8 +53,14 @@ AItem::~AItem()
 void AItem::ItemSlow()
 {
 	SpriteRenderer1->ChangeAnimation("Slow");
+}
+
+void AItem::ItemSlowEffect()
+{
 	ABall::Ball->SetBallSpeed(500.0f);
 }
+
+
 
 void AItem::ItemCatch()
 {
@@ -61,6 +68,10 @@ void AItem::ItemCatch()
 	//APlayer* Vaus = GetWorld()->GetPawn<APlayer>();
 	//ABall::Ball->SetActorLocation({ Vaus->GetActorLocation().X + 5.0f, Vaus->GetActorLocation().Y - ABall::Ball->GetBallScale().Y });
 
+}
+
+void AItem::ItemCatchEffect()
+{
 	if (true == UEngineInput::GetInst().IsDown('J'))
 	{
 		//AddActorLocation(ABall::Ball->Dir * _DeltaTime * Speed);
@@ -72,9 +83,19 @@ void AItem::ItemLaser()
 	SpriteRenderer1->ChangeAnimation("Laser");
 }
 
+void AItem::ItemLaserEffect()
+{
+	APlayer::Vaus->ChangeState(PlayerState::Laser);
+}
+
 void AItem::ItemEnlarge()
 {
 	SpriteRenderer1->ChangeAnimation("Enlarge");
+}
+
+void AItem::ItemEnlargeEffect()
+{
+	APlayer::Vaus->ChangeState(PlayerState::Enlarge);
 }
 
 void AItem::ItemDisruption()
@@ -82,9 +103,17 @@ void AItem::ItemDisruption()
 	SpriteRenderer1->ChangeAnimation("Disruption");
 }
 
+void AItem::ItemDisruptionEffect()
+{
+}
+
 void AItem::ItemBreak()
 {
 	SpriteRenderer1->ChangeAnimation("Break");
+}
+
+void AItem::ItemBreakEffect()
+{
 }
 
 void AItem::ItemPlayer()
@@ -92,11 +121,45 @@ void AItem::ItemPlayer()
 	SpriteRenderer1->ChangeAnimation("Player");
 }
 
-void AItem::ItemCheck()
+void AItem::ItemPlayerEffect()
+{
+	PlayerLife->SetLifeCount(1);
+	PlayerLife->LifeCheck();
+}
+
+void AItem::ItemCollisionCheck()
 {
 	AActor* Result = CollisionComponent->CollisionOnce(ECollisionGroup::Vaus);
+
 	if (nullptr != Result)
 	{
+		switch (ItemState)
+		{
+		case ModeState::Slow:
+			ItemSlowEffect();
+			break;
+		case ModeState::Catch:
+			ItemCatchEffect();
+			break;
+		case ModeState::Laser:
+			ItemLaserEffect();
+			break;
+		case ModeState::Enlarge:
+			ItemEnlargeEffect();
+			break;
+		case ModeState::Disruption:
+			ItemDisruptionEffect();
+			break;
+		case ModeState::Break:
+			ItemBreakEffect();
+			break;
+		case ModeState::Player:
+			ItemPlayerEffect();
+			break;
+		default:
+			break;
+		}
+
 		this->Destroy();
 	}
 }
@@ -140,22 +203,48 @@ ModeState AItem::RandomItemCreate()
 	return ItemState;
 }
 
-
 void AItem::BeginPlay()
 {
-
+	switch (ItemState)
+	{
+	case ModeState::None:
+		this->Destroy();
+		break;
+	case ModeState::Slow:
+		ItemSlow();
+		break;
+	case ModeState::Catch:
+		ItemCatch();
+		break;
+	case ModeState::Laser:
+		ItemLaser();
+		break;
+	case ModeState::Enlarge:
+		ItemEnlarge();
+		break;
+	case ModeState::Disruption:
+		ItemDisruption();
+		break;
+	case ModeState::Break:
+		ItemBreak();
+		break;
+	case ModeState::Player:
+		ItemPlayer();
+		break;
+	default:
+		break;
+	}
 }
 
 void AItem::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-
+	
 	AddActorLocation(FVector2D::DOWN * _DeltaTime * Speed);
 
-	ItemCheck();
+	ItemCollisionCheck();
 
-
-
+	
 }
 
 

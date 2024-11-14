@@ -2,6 +2,9 @@
 #include <EngineCore/Actor.h>
 #include "Bullet.h"
 
+class U2DCollision;
+class APlayerLife;
+
 enum class PlayerState
 {
 	Create,
@@ -68,8 +71,24 @@ public:
 
 	std::list<ABullet*>& GetBulletPtr()
 	{
-		return BulletPtr;;
+		return BulletPtr;
 	}
+
+	void SetBulletCount(int _BulletCount)
+	{
+		BulletCount += _BulletCount;
+	}
+	void ChangeState(PlayerState CurPlayerState);
+
+	//inline void SetPlayerLife(APlayerLife* _PlayerLife)
+	//{
+	//	PlayerLife = _PlayerLife;
+	//}
+	APlayerLife* GetPlayerLife()
+	{
+		return PlayerLife;
+	}
+
 
 protected:
 
@@ -78,12 +97,12 @@ private:
 	float radian = 0.f;
 	int MySpriteIndex = 0;
 	//bool IsTransformEnd = false;
-
+	int BulletCount = 0;
 	class USpriteRenderer* SpriteRenderer = nullptr;
 
 	PlayerState CurPlayerState = PlayerState::Idle;
 
-	void ChangeState(PlayerState CurPlayerState);
+	APlayerLife* PlayerLife = nullptr;
 
 	FTransform BallTrans;
 	FTransform VausTrans;

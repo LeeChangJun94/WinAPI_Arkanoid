@@ -2,6 +2,8 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
 
+class APlayer;
+
 // Ό³Έν :
 class ABullet : public AActor
 {
@@ -23,10 +25,12 @@ public:
 
 protected:
 	void Tick(float _DeltaTime) override;
+	void BeginPlay() override;
 
 private:
-	USpriteRenderer* SpriteRenderer;
-	U2DCollision* CollisionComponent;
+	USpriteRenderer* SpriteRenderer = nullptr;
+	U2DCollision* CollisionComponent = nullptr;
+	APlayer* Player = nullptr;
 	
 	float Speed = 600.0f;
 };

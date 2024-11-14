@@ -1,4 +1,5 @@
 #pragma once
+#include "PlayerLife.h"
 #include <EngineCore/Actor.h>
 
 class ABall;
@@ -38,14 +39,21 @@ public:
 	int ItemType = 0;
 
 	void ItemSlow();
+	void ItemSlowEffect();
 	void ItemCatch();
+	void ItemCatchEffect();
 	void ItemLaser();
+	void ItemLaserEffect();
 	void ItemEnlarge();
+	void ItemEnlargeEffect();
 	void ItemDisruption();
+	void ItemDisruptionEffect();
 	void ItemBreak();
+	void ItemBreakEffect();
 	void ItemPlayer();
+	void ItemPlayerEffect();
 
-	void ItemCheck();
+	void ItemCollisionCheck();
 
 	void SetBallActor(ABall* BallActor)
 	{
@@ -61,6 +69,8 @@ public:
 
 	ModeState ItemState = ModeState::None;
 
+	inline void SetPlayerLife(APlayerLife* _Player) { PlayerLife = _Player; }
+
 protected:
 
 private:
@@ -70,6 +80,8 @@ private:
 	ABall* BallActor = nullptr;
 
 	U2DCollision* CollisionComponent;
+
+	APlayerLife* PlayerLife;
 
 };
 

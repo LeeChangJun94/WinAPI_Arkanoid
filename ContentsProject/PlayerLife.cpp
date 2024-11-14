@@ -9,12 +9,9 @@
 #include <EnginePlatform/EngineWindow.h>
 #include "ContentsEnum.h"
 
-APlayerLife* APlayerLife::PlayerLife = nullptr;
 
 APlayerLife::APlayerLife()
 {
-	PlayerLife = this;
-
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetComponentScale({ 240, 24 });
 	SpriteRenderer->SetOrder(ERenderOrder::UI);
@@ -89,7 +86,6 @@ void APlayerLife::Tick(float _DeltaTime)
 	{
 		LifeCheck();
 	}
-
 }
 
 
