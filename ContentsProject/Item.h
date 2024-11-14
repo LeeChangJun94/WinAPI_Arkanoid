@@ -1,7 +1,8 @@
 #pragma once
-#include "PlayerLife.h"
 #include <EngineCore/Actor.h>
 
+class APlayer;
+class APlayerLife;
 class ABall;
 
 enum class ModeState
@@ -55,15 +56,15 @@ public:
 
 	void ItemCollisionCheck();
 
-	void SetBallActor(ABall* BallActor)
+	void SetBall(ABall* _Ball)
 	{
-		this->BallActor = BallActor;
+		Ball = _Ball;
 	}
 
-	ABall* GetBallActor()
-	{
-		return this->BallActor;
-	}
+	//ABall* GetBallActor()
+	//{
+	//	return this->BallActor;
+	//}
 
 	ModeState RandomItemCreate();
 
@@ -77,13 +78,13 @@ private:
 	float Speed = 200.0f;
 	class USpriteRenderer* SpriteRenderer1 = nullptr;
 	class USpriteRenderer* SpriteRenderer2 = nullptr;
-	ABall* BallActor = nullptr;
+	
 
 	U2DCollision* CollisionComponent;
 
-	class APlayer* Vaus = nullptr;
-	class APlayerLife* PlayerLife;
-
+	APlayer* Vaus = nullptr;
+	APlayerLife* PlayerLife = nullptr;;
+	ABall* Ball = nullptr;
 
 };
 

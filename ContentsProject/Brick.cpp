@@ -88,7 +88,7 @@ void ABrick::BeginPlay()
 
 bool ABrick::RectCheck()
 {
-	FTransform BallTransform = ABall::Ball->GetTransform();
+	FTransform BallTransform = Ball->GetTransform();
 	FTransform BrickTransform = SpriteRenderer->GetActorTransform();
 
 	if (BallTransform.Location.X < BrickTransform.Location.X && BallTransform.Location.X > (BrickTransform.Location.X - (BrickTransform.Scale.X / 2)) &&
@@ -177,7 +177,7 @@ bool ABrick::RectCheck()
 
 EReflectionDir ABrick::ReflectionDirCheck()
 {
-	FTransform BallTransform = ABall::Ball->GetTransform();
+	FTransform BallTransform = Ball->GetTransform();
 	FTransform BrickTransform = SpriteRenderer->GetActorTransform();
 
 	float Ratio = (BrickTransform.Scale.Y / 2) / (BrickTransform.Scale.X / 2);
@@ -258,7 +258,7 @@ void ABrick::Tick(float _DeltaTime)
 	//
 	//return;
 
-	BallTrans.Location = { ABall::Ball->GetActorLocation().X, ABall::Ball->GetActorLocation().Y };
+	BallTrans.Location = { Ball->GetActorLocation().X, Ball->GetActorLocation().Y };
 	BrickTrans.Location = { GetActorLocation().X, GetActorLocation().Y };
 
 	FVector2D BrickSize = SpriteRenderer->GetComponentScale();
@@ -275,14 +275,14 @@ void ABrick::Tick(float _DeltaTime)
 		if ((Line) > (BrickTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Left");
-			if (ABall::Ball->Dir.X > 0)
+			if (Ball->Dir.X > 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::LEFT);
+				Dir = Ball->Dir.Reflect(FVector2D::LEFT);
 
 				//ABall::Ball->BallReflection(FVector2D::LEFT);
 
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 
 				this->Destroy();
 
@@ -295,12 +295,12 @@ void ABrick::Tick(float _DeltaTime)
 		else
 		{
 			UEngineDebug::OutPutString("Top");
-			if (ABall::Ball->Dir.Y > 0)
+			if (Ball->Dir.Y > 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::UP);
+				Dir = Ball->Dir.Reflect(FVector2D::UP);
 
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 
 				this->Destroy();
 				Vaus->AddPlayerScore(80);
@@ -319,12 +319,12 @@ void ABrick::Tick(float _DeltaTime)
 		if ((Line) < (BrickTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Left");
-			if (ABall::Ball->Dir.X > 0)
+			if (Ball->Dir.X > 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::LEFT);
+				Dir = Ball->Dir.Reflect(FVector2D::LEFT);
 
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 
 				this->Destroy();
 				Vaus->AddPlayerScore(80);
@@ -335,17 +335,17 @@ void ABrick::Tick(float _DeltaTime)
 		else
 		{
 			UEngineDebug::OutPutString("Bottom");
-			if (ABall::Ball->Dir.Y < 0)
+			if (Ball->Dir.Y < 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::DOWN);
+				Dir = Ball->Dir.Reflect(FVector2D::DOWN);
 
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 
 				AItem* Ptr = GetWorld()->SpawnActor<AItem>();
 				Ptr->SetActorLocation(GetActorLocation());
 				Ptr->SetPlayerLife(PlayerLife);
-				
+				Ptr->SetBall(Ball);
 
 				this->Destroy();
 				Vaus->AddPlayerScore(80);
@@ -365,12 +365,12 @@ void ABrick::Tick(float _DeltaTime)
 		if ((Line) > (BrickTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Right");
-			if (ABall::Ball->Dir.X < 0)
+			if (Ball->Dir.X < 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::RIGHT);
+				Dir = Ball->Dir.Reflect(FVector2D::RIGHT);
 
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 
 				this->Destroy();
 				Vaus->AddPlayerScore(80);
@@ -380,12 +380,12 @@ void ABrick::Tick(float _DeltaTime)
 		else
 		{
 			UEngineDebug::OutPutString("Top");
-			if (ABall::Ball->Dir.Y > 0)
+			if (Ball->Dir.Y > 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::UP);
+				Dir = Ball->Dir.Reflect(FVector2D::UP);
 
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 
 				this->Destroy();
 				Vaus->AddPlayerScore(80);
@@ -402,12 +402,12 @@ void ABrick::Tick(float _DeltaTime)
 		if ((Line) < (BrickTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Right");
-			if (ABall::Ball->Dir.X < 0)
+			if (Ball->Dir.X < 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::RIGHT);
+				Dir = Ball->Dir.Reflect(FVector2D::RIGHT);
 
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 
 				this->Destroy();
 				Vaus->AddPlayerScore(80);
@@ -417,16 +417,17 @@ void ABrick::Tick(float _DeltaTime)
 		else
 		{
 			UEngineDebug::OutPutString("Bottom");
-			if (ABall::Ball->Dir.Y < 0)
+			if (Ball->Dir.Y < 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::DOWN);
+				Dir = Ball->Dir.Reflect(FVector2D::DOWN);
 
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 
 				AItem* Ptr = GetWorld()->SpawnActor<AItem>();
 				Ptr->SetActorLocation(GetActorLocation());
 				Ptr->SetPlayerLife(PlayerLife);
+				Ptr->SetBall(Ball);
 
 
 				this->Destroy();

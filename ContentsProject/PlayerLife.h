@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include "Ball.h"
 
 // Ό³Έν :
 class APlayerLife : public AActor
@@ -37,7 +38,10 @@ public:
 	void LifeCheck();	
 	bool DeathCheck();
 
-
+	void SetBall(ABall* _Ball)
+	{
+		Ball = _Ball;
+	}
 	
 	
 
@@ -46,7 +50,9 @@ protected:
 private:
 	int LifeCount = 2;
 
+	class ABall* Ball;
 	class USpriteRenderer* SpriteRenderer;
+
 	//APlayerLife* PlayerLife = nullptr;
 
 };

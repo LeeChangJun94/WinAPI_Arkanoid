@@ -25,6 +25,7 @@ void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	Player = GetWorld()->GetPawn<APlayer>();
 	//
 	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
 
@@ -60,8 +61,9 @@ void APlayGameMode::BeginPlay()
 	}
 
 	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
+	Player->SetBall(BallActor);
 	APlayerLife* PlayerLifeActor = GetWorld()->SpawnActor<APlayerLife>();
-
+	PlayerLifeActor->SetBall(BallActor);
 
 	for (int i = 0; i < 11; ++i)
 	{
@@ -70,6 +72,7 @@ void APlayGameMode::BeginPlay()
 			ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
 			Ptr->SetActorLocation({ 48 + (48 * i), 160 + (24 * j) });
 			Ptr->SetPlayerLife(PlayerLifeActor);
+			Ptr->SetBall(BallActor);
 			//Ptr->SetBallActor(this->BallActor);
 
 			BrickPtr.push_back(Ptr);

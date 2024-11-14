@@ -2,8 +2,10 @@
 #include <EngineCore/Actor.h>
 #include "Bullet.h"
 
+
 class U2DCollision;
 class APlayerLife;
+class ABall;
 
 enum class PlayerState
 {
@@ -89,6 +91,11 @@ public:
 		return PlayerLife;
 	}
 
+	void SetBall(ABall* _Ball)
+	{
+		Ball = _Ball;
+	}
+
 
 protected:
 
@@ -102,7 +109,8 @@ private:
 
 	PlayerState CurPlayerState = PlayerState::Idle;
 
-	APlayerLife* PlayerLife = nullptr;
+	class APlayerLife* PlayerLife = nullptr;
+	ABall* Ball = nullptr;
 
 	FTransform BallTrans;
 	FTransform VausTrans;

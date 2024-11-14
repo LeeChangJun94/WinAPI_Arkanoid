@@ -40,13 +40,13 @@ void APlayerLife::BeginPlay()
 bool APlayerLife::DeathCheck()
 {
 	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
-	float BallY = ABall::Ball->GetActorLocation().Y;
+	float BallY = Ball->GetActorLocation().Y;
 	if (WindowSize.Y > BallY)
 	{
 		return false;
 	}
 	LifeCount -= 1;
-	ABall::Ball->ReStart(0.0f);
+	Ball->ReStart(0.0f);
 	return true;
 }
 

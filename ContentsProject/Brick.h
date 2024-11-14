@@ -2,7 +2,6 @@
 #include <EngineCore/Actor.h>
 #include <EngineBase/EngineMath.h>
 #include <EngineCore/SpriteRenderer.h>
-#include "PlayerLife.h"
 
 enum class EReflectionDir
 {
@@ -13,6 +12,8 @@ enum class EReflectionDir
 	MAX,
 };
 
+class APlayer;
+class APlayerLife;
 class ABall;
 
 // Ό³Έν :
@@ -42,15 +43,15 @@ public:
 	bool RectCheck();
 	EReflectionDir ReflectionDirCheck();
 
-	void SetBallActor(ABall* BallActor)
+	void SetBall(ABall* _Ball)
 	{
-		this->BallActor = BallActor;
+		Ball = _Ball;
 	}
 
-	ABall* GetBallActor()
-	{
-		return this->BallActor;
-	}
+	//ABall* GetBallActor()
+	//{
+	//	return this->BallActor;
+	//}
 
 	//ModeState ItemStats;
 	inline void SetPlayerLife(APlayerLife* _Player) { PlayerLife = _Player; }
@@ -77,9 +78,9 @@ private:
 
 	int PlayerScore = 0;
 
-	class APlayer* Vaus = nullptr;
-	ABall* BallActor = nullptr;
-	APlayerLife* PlayerLife;
+	APlayer* Vaus = nullptr;
+	ABall* Ball = nullptr;
+	APlayerLife* PlayerLife = nullptr;
 
 };
 

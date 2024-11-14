@@ -57,7 +57,7 @@ void AItem::ItemSlow()
 
 void AItem::ItemSlowEffect()
 {
-	ABall::Ball->SetBallSpeed(500.0f);
+	Ball->SetBallSpeed(500.0f);
 }
 
 

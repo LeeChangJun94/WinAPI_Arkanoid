@@ -14,7 +14,7 @@
 
 #include "ContentsEnum.h"
 
-ABall* ABall::Ball = nullptr;
+//ABall* ABall::Ball = nullptr;
 
 void ABall::RunSoundPlay()
 {
@@ -24,7 +24,7 @@ void ABall::RunSoundPlay()
 ABall::ABall()
 {
 	
-	Ball = this;
+	//Ball = this;
 
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetSprite("Ball.png");

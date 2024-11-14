@@ -10,7 +10,7 @@ public:
 	ABall();
 	~ABall();
 
-	static ABall* Ball;
+	//static ABall* Ball;
 
 	// delete Function
 	ABall(const ABall& _Other) = delete;
@@ -41,6 +41,11 @@ public:
 		Speed = _Speed;
 	}
 	
+	//APlayerLife* SetPlayerLife(APlayerLife* _PlayerLife)
+	//{
+	//	PlayerLife = _PlayerLife;
+	//}
+
 
 protected:
 
@@ -50,6 +55,7 @@ private:
 	float CheckTime = 0.0f;
 	bool StartTime = true;
 
+	class APlayerLife* PlayerLife = nullptr;
 	class USpriteRenderer* SpriteRenderer;
 };
 

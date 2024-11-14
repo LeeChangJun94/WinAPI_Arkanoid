@@ -106,7 +106,7 @@ void APlayer::Tick(float _DeltaTime)
 		//UEngineDebug::SwitchIsDebug();
 	}
 
-	BallTrans.Location = { ABall::Ball->GetActorLocation().X, ABall::Ball->GetActorLocation().Y };
+	BallTrans.Location = { Ball->GetActorLocation().X, Ball->GetActorLocation().Y };
 	
 	FVector2D VausSize = SpriteRenderer->GetComponentScale();
 	VausTrans.Location = { GetActorLocation().X, GetActorLocation().Y };
@@ -120,12 +120,12 @@ void APlayer::Tick(float _DeltaTime)
 		if ((Line) > (VausTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Left");
-			if (ABall::Ball->Dir.X > 0)
+			if (Ball->Dir.X > 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::LEFT);
+				Dir = Ball->Dir.Reflect(FVector2D::LEFT);
 	
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 	
 				//APlayer::Ball->Dir.X *= -1;
 			}
@@ -133,14 +133,14 @@ void APlayer::Tick(float _DeltaTime)
 		else
 		{
 			UEngineDebug::OutPutString("Top");
-			if (ABall::Ball->Dir.Y > 0)
+			if (Ball->Dir.Y > 0)
 			{
 				if (BallTrans.Location.X > VausTrans.Location.X - ((VausSize.X / 2) * 0.2))
 				{
 					FVector2D Dir;
 					Dir.Radian(-30.0f);
 
-					ABall::Ball->Dir = Dir;
+					Ball->Dir = Dir;
 					//ChangeState(PlayerState::Laser);
 				}
 				else if (BallTrans.Location.X > VausTrans.Location.X - ((VausSize.X / 2) * 0.6))
@@ -148,7 +148,7 @@ void APlayer::Tick(float _DeltaTime)
 					FVector2D Dir;
 					Dir.Radian(-45.0f);
 
-					ABall::Ball->Dir = Dir;
+					Ball->Dir = Dir;
 					//ChangeState(PlayerState::Laser);
 				}
 				else
@@ -156,7 +156,7 @@ void APlayer::Tick(float _DeltaTime)
 					FVector2D Dir;
 					Dir.Radian(-60.0f);
 
-					ABall::Ball->Dir = Dir;
+					Ball->Dir = Dir;
 					//ChangeState(PlayerState::Laser);
 				}
 
@@ -175,12 +175,12 @@ void APlayer::Tick(float _DeltaTime)
 		if ((Line) < (VausTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Left");
-			if (ABall::Ball->Dir.X > 0)
+			if (Ball->Dir.X > 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::LEFT);
+				Dir = Ball->Dir.Reflect(FVector2D::LEFT);
 	
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 	
 				//ABall::Ball->Dir.X *= -1;
 			}
@@ -188,12 +188,12 @@ void APlayer::Tick(float _DeltaTime)
 		else
 		{
 			UEngineDebug::OutPutString("Bottom");
-			if (ABall::Ball->Dir.Y < 0)
+			if (Ball->Dir.Y < 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::DOWN);
+				Dir = Ball->Dir.Reflect(FVector2D::DOWN);
 	
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 	
 				//APlayer::Ball->Dir.Y *= -1;
 			}
@@ -210,12 +210,12 @@ void APlayer::Tick(float _DeltaTime)
 		if ((Line) > (VausTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Right");
-			if (ABall::Ball->Dir.X < 0)
+			if (Ball->Dir.X < 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::RIGHT);
+				Dir = Ball->Dir.Reflect(FVector2D::RIGHT);
 	
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 	
 				//ABall::Ball->Dir.X *= -1;
 			}
@@ -223,14 +223,14 @@ void APlayer::Tick(float _DeltaTime)
 		else
 		{
 			UEngineDebug::OutPutString("Top");
-			if (ABall::Ball->Dir.Y > 0)
+			if (Ball->Dir.Y > 0)
 			{
 				if (BallTrans.Location.X < VausTrans.Location.X + ((VausSize.X / 2) * 0.2))
 				{
 					FVector2D Dir;
 					Dir.Radian(30.0f);
 
-					ABall::Ball->Dir = Dir;
+					Ball->Dir = Dir;
 					//ChangeState(PlayerState::Laser);
 				}
 				else if (BallTrans.Location.X < VausTrans.Location.X + ((VausSize.X / 2) * 0.6))
@@ -238,7 +238,7 @@ void APlayer::Tick(float _DeltaTime)
 					FVector2D Dir;
 					Dir.Radian(45.0f);
 
-					ABall::Ball->Dir = Dir;
+					Ball->Dir = Dir;
 					//ChangeState(PlayerState::Laser);
 				}
 				else
@@ -246,7 +246,7 @@ void APlayer::Tick(float _DeltaTime)
 					FVector2D Dir;
 					Dir.Radian(60.0f);
 
-					ABall::Ball->Dir = Dir;
+					Ball->Dir = Dir;
 					//ChangeState(PlayerState::Laser);
 				}
 			}
@@ -261,12 +261,12 @@ void APlayer::Tick(float _DeltaTime)
 		if ((Line) < (VausTrans.Location.Y - BallTrans.Location.Y))
 		{
 			UEngineDebug::OutPutString("Right");
-			if (ABall::Ball->Dir.X < 0)
+			if (Ball->Dir.X < 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::RIGHT);
+				Ball->Dir.Reflect(FVector2D::RIGHT);
 	
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 	
 				//ABall::Ball->Dir.X *= -1;
 			}
@@ -274,12 +274,12 @@ void APlayer::Tick(float _DeltaTime)
 		else
 		{
 			UEngineDebug::OutPutString("Bottom");
-			if (ABall::Ball->Dir.Y < 0)
+			if (Ball->Dir.Y < 0)
 			{
 				FVector2D Dir;
-				Dir = ABall::Ball->Dir.Reflect(FVector2D::DOWN);
+				Dir = Ball->Dir.Reflect(FVector2D::DOWN);
 	
-				ABall::Ball->Dir = Dir;
+				Ball->Dir = Dir;
 	
 				//ABall::Ball->Dir.Y *= -1;
 			}
