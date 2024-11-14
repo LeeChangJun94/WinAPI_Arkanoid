@@ -72,7 +72,6 @@ private:
 	bool RightTop = false;
 	bool RightBottom = false;
 
-
 	float Ratio = 0;
 	float Line = 0;
 

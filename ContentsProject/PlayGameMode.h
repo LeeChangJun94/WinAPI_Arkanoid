@@ -35,5 +35,6 @@ private:
 
 	//ABall* BallActor = nullptr;
 	APlayer* Player = nullptr;
+
 };
 

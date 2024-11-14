@@ -105,6 +105,12 @@ void AItem::ItemDisruption()
 
 void AItem::ItemDisruptionEffect()
 {
+	//for (int i = 0; i < 2; ++i)
+	//{
+	//	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
+	//	Player->SetBall(BallActor);
+	//	BallPtr.push_back(BallActor);
+	//}
 }
 
 void AItem::ItemBreak()

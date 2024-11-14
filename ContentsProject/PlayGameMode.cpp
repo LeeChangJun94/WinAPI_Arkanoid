@@ -62,6 +62,7 @@ void APlayGameMode::BeginPlay()
 
 	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
 	Player->SetBall(BallActor);
+	
 	APlayerLife* PlayerLifeActor = GetWorld()->SpawnActor<APlayerLife>();
 	PlayerLifeActor->SetBall(BallActor);
 
