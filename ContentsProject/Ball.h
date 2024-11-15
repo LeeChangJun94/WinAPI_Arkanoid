@@ -2,6 +2,7 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
 
+class APlayer;
 class APlayerLife;
 class U2DCollision;
 
@@ -28,6 +29,7 @@ public:
 
 	FVector2D Dir = { 0.f , 0.f };
 
+
 	void RunSoundPlay();
 
 	void BorderReflect(float _DeltaTime);
@@ -39,17 +41,17 @@ public:
 		return SpriteRenderer->GetComponentScale();
 	}
 
-	void SetBallSpeed(float _Speed) override;
+	void SetBallSpeed(float _Speed);
 	//{
 	//	Speed = _Speed;
 	//}
 	
-	FVector2D GetBallDir() override;
+	FVector2D GetBallDir();
 	//{
 	//	return Dir;
 	//}
 
-	void SetBallDir(FVector2D _Dir) override;
+	void SetBallDir(FVector2D _Dir);
 	//{
 	//	Dir = _Dir;
 	//}
@@ -68,6 +70,7 @@ private:
 	bool StartTime = true;
 
 	APlayerLife* PlayerLife = nullptr;
+	APlayer* Vaus = nullptr;
 	class USpriteRenderer* SpriteRenderer;
 	U2DCollision* CollisionComponent = nullptr;
 };

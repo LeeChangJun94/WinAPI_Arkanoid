@@ -3,6 +3,7 @@
 
 enum class ERenderOrder
 {
+	DETHLINE = -1500,
 	BACKGROUND = -1000,
 	COLMAP = -999,
 	BALL = -2,
@@ -18,4 +19,5 @@ enum class ECollisionGroup
 	Bullet,
 	Item,
 	Vaus,
+	DethLine,
 };

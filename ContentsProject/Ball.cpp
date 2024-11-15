@@ -115,7 +115,7 @@ void ABall::BeginPlay()
 {
 	Super::BeginPlay();
 
-	APlayer* Vaus = GetWorld()->GetPawn<APlayer>();
+	Vaus = GetWorld()->GetPawn<APlayer>();
 	SetActorLocation({ Vaus->GetActorLocation().X, Vaus->GetActorLocation().Y - SpriteRenderer->GetComponentScale().Y});
 	Dir.Radian(30.f);
 	Dir.Normalize();

@@ -58,15 +58,6 @@ public:
 		return Transform.Location;
 	}
 
-	virtual FVector2D GetBallDir()
-	{
-		return Dir;
-	};
-
-	virtual void SetBallDir(FVector2D _Dir) {};
-
-	virtual void SetBallSpeed(float _Speed) {};
-
 	// 컴포넌트의 소유자는 액터 삭제도 액터가 해야한다.
 	// 다른 클래스는 절대로 삭제하면 안된다.
 	template<typename ComponentType>
@@ -103,7 +94,6 @@ private:
 
 	class ULevel* World = nullptr;
 	FTransform Transform;
-	FVector2D Dir;
 
 	std::list<class UActorComponent*> Components;
 };

@@ -48,6 +48,9 @@
       <Filter>ContentsObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="Fade.h" />
+    <ClInclude Include="DethLine.h">
+      <Filter>ContentsObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -97,6 +100,9 @@
       <Filter>ContentsObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="Fade.cpp" />
+    <ClCompile Include="DethLine.cpp">
+      <Filter>ContentsObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">

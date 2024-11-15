@@ -106,185 +106,192 @@ void APlayer::Tick(float _DeltaTime)
 		//UEngineDebug::SwitchIsDebug();
 	}
 
-	BallTrans.Location = { Ball->GetActorLocation().X, Ball->GetActorLocation().Y };
-	
+
+	ABall* ResultBall = reinterpret_cast<ABall*>(CollisionComponent->CollisionOnce(ECollisionGroup::Ball));
+
 	FVector2D VausSize = SpriteRenderer->GetComponentScale();
-	VausTrans.Location = { GetActorLocation().X, GetActorLocation().Y };
+	VausTrans.Location = { GetActorLocation() };
 	Ratio = (VausSize.Y / 2) / (VausSize.X / 2);
 	
-	if (BallTrans.Location.X < VausTrans.Location.X && BallTrans.Location.X >(VausTrans.Location.X - (VausSize.X / 2)) &&
-		BallTrans.Location.Y > (VausTrans.Location.Y - (VausSize.Y / 2)) && BallTrans.Location.Y < VausTrans.Location.Y)
+	if (nullptr != ResultBall)
 	{
-		Line = (-Ratio) * (BallTrans.Location.X - VausTrans.Location.X);
-	
-		if ((Line) > (VausTrans.Location.Y - BallTrans.Location.Y))
+		BallTrans.Location = { ResultBall->GetActorLocation() };
+		if (BallTrans.Location.X < VausTrans.Location.X && BallTrans.Location.X >(VausTrans.Location.X - (VausSize.X / 2)) &&
+			BallTrans.Location.Y > (VausTrans.Location.Y - (VausSize.Y / 2)) && BallTrans.Location.Y < VausTrans.Location.Y)
 		{
-			UEngineDebug::OutPutString("Left");
-			if (Ball->Dir.X > 0)
+			Line = (-Ratio) * (BallTrans.Location.X - VausTrans.Location.X);
+
+			if ((Line) > (VausTrans.Location.Y - BallTrans.Location.Y))
 			{
-				FVector2D Dir;
-				Dir = Ball->Dir.Reflect(FVector2D::LEFT);
-	
-				Ball->Dir = Dir;
-	
-				//APlayer::Ball->Dir.X *= -1;
+				UEngineDebug::OutPutString("Left");
+				if (ResultBall->GetBallDir().X > 0)
+				{
+					FVector2D Dir;
+					Dir = ResultBall->GetBallDir().Reflect(FVector2D::LEFT);
+
+					ResultBall->SetBallDir(Dir);
+
+					//APlayer::Ball->Dir.X *= -1;
+				}
+			}
+			else
+			{
+				UEngineDebug::OutPutString("Top");
+				if (ResultBall->GetBallDir().Y > 0)
+				{
+					if (BallTrans.Location.X > VausTrans.Location.X - ((VausSize.X / 2) * 0.2))
+					{
+						FVector2D Dir;
+						Dir.Radian(-30.0f);
+
+						ResultBall->SetBallDir(Dir);
+						//ChangeState(PlayerState::Laser);
+					}
+					else if (BallTrans.Location.X > VausTrans.Location.X - ((VausSize.X / 2) * 0.6))
+					{
+						FVector2D Dir;
+						Dir.Radian(-45.0f);
+
+						ResultBall->SetBallDir(Dir);
+						//ChangeState(PlayerState::Laser);
+					}
+					else
+					{
+						FVector2D Dir;
+						Dir.Radian(-60.0f);
+
+						ResultBall->SetBallDir(Dir);
+						//ChangeState(PlayerState::Laser);
+					}
+
+
+					//ABall::Ball->Dir.Y *= -1;
+				}
+
 			}
 		}
-		else
+
+		if (BallTrans.Location.X < VausTrans.Location.X && BallTrans.Location.X >(VausTrans.Location.X - (VausSize.X / 2)) &&
+			BallTrans.Location.Y < (VausTrans.Location.Y + (VausSize.Y / 2)) && BallTrans.Location.Y > VausTrans.Location.Y)
 		{
-			UEngineDebug::OutPutString("Top");
-			if (Ball->Dir.Y > 0)
+			Line = Ratio * (BallTrans.Location.X - VausTrans.Location.X);
+
+			if ((Line) < (VausTrans.Location.Y - BallTrans.Location.Y))
 			{
-				if (BallTrans.Location.X > VausTrans.Location.X - ((VausSize.X / 2) * 0.2))
+				UEngineDebug::OutPutString("Left");
+				if (ResultBall->GetBallDir().X > 0)
 				{
 					FVector2D Dir;
-					Dir.Radian(-30.0f);
+					Dir = ResultBall->GetBallDir().Reflect(FVector2D::LEFT);
 
-					Ball->Dir = Dir;
-					//ChangeState(PlayerState::Laser);
+					ResultBall->SetBallDir(Dir);
+
+					//ABall::Ball->Dir.X *= -1;
 				}
-				else if (BallTrans.Location.X > VausTrans.Location.X - ((VausSize.X / 2) * 0.6))
-				{
-					FVector2D Dir;
-					Dir.Radian(-45.0f);
-
-					Ball->Dir = Dir;
-					//ChangeState(PlayerState::Laser);
-				}
-				else
-				{
-					FVector2D Dir;
-					Dir.Radian(-60.0f);
-
-					Ball->Dir = Dir;
-					//ChangeState(PlayerState::Laser);
-				}
-
-	
-				//ABall::Ball->Dir.Y *= -1;
 			}
-	
+			else
+			{
+				UEngineDebug::OutPutString("Bottom");
+				if (ResultBall->GetBallDir().Y < 0)
+				{
+					FVector2D Dir;
+					Dir = ResultBall->GetBallDir().Reflect(FVector2D::DOWN);
+
+					ResultBall->SetBallDir(Dir);
+
+					//APlayer::Ball->Dir.Y *= -1;
+				}
+			}
+		}
+
+
+
+		if (BallTrans.Location.X > VausTrans.Location.X && BallTrans.Location.X < (VausTrans.Location.X + (VausSize.X / 2)) &&
+			BallTrans.Location.Y >(VausTrans.Location.Y - (VausSize.Y / 2)) && BallTrans.Location.Y < VausTrans.Location.Y)
+		{
+			Line = Ratio * (BallTrans.Location.X - VausTrans.Location.X);
+
+			if ((Line) > (VausTrans.Location.Y - BallTrans.Location.Y))
+			{
+				UEngineDebug::OutPutString("Right");
+				if (ResultBall->GetBallDir().X < 0)
+				{
+					FVector2D Dir;
+					Dir = ResultBall->GetBallDir().Reflect(FVector2D::RIGHT);
+
+					ResultBall->SetBallDir(Dir);
+
+					//ABall::Ball->Dir.X *= -1;
+				}
+			}
+			else
+			{
+				UEngineDebug::OutPutString("Top");
+				if (ResultBall->GetBallDir().Y > 0)
+				{
+					if (BallTrans.Location.X < VausTrans.Location.X + ((VausSize.X / 2) * 0.2))
+					{
+						FVector2D Dir;
+						Dir.Radian(30.0f);
+
+						ResultBall->SetBallDir(Dir);
+						//ChangeState(PlayerState::Laser);
+					}
+					else if (BallTrans.Location.X < VausTrans.Location.X + ((VausSize.X / 2) * 0.6))
+					{
+						FVector2D Dir;
+						Dir.Radian(45.0f);
+
+						ResultBall->SetBallDir(Dir);
+						//ChangeState(PlayerState::Laser);
+					}
+					else
+					{
+						FVector2D Dir;
+						Dir.Radian(60.0f);
+
+						ResultBall->SetBallDir(Dir);
+						//ChangeState(PlayerState::Laser);
+					}
+				}
+			}
+		}
+
+		if (BallTrans.Location.X > VausTrans.Location.X && BallTrans.Location.X < (VausTrans.Location.X + (VausSize.X / 2)) &&
+			BallTrans.Location.Y < (VausTrans.Location.Y + (VausSize.Y / 2)) && BallTrans.Location.Y > VausTrans.Location.Y)
+		{
+			Line = (-Ratio) * (BallTrans.Location.X - VausTrans.Location.X);
+
+			if ((Line) < (VausTrans.Location.Y - BallTrans.Location.Y))
+			{
+				UEngineDebug::OutPutString("Right");
+				if (ResultBall->GetBallDir().X < 0)
+				{
+					FVector2D Dir;
+					Dir = ResultBall->GetBallDir().Reflect(FVector2D::RIGHT);
+
+					ResultBall->SetBallDir(Dir);
+
+					//ABall::Ball->Dir.X *= -1;
+				}
+			}
+			else
+			{
+				UEngineDebug::OutPutString("Bottom");
+				if (ResultBall->GetBallDir().Y < 0)
+				{
+					FVector2D Dir;
+					Dir = ResultBall->GetBallDir().Reflect(FVector2D::DOWN);
+
+					ResultBall->SetBallDir(Dir);
+
+					//ABall::Ball->Dir.Y *= -1;
+				}
+			}
 		}
 	}
-	
-	if (BallTrans.Location.X < VausTrans.Location.X && BallTrans.Location.X >(VausTrans.Location.X - (VausSize.X / 2)) &&
-		BallTrans.Location.Y < (VausTrans.Location.Y + (VausSize.Y / 2)) && BallTrans.Location.Y > VausTrans.Location.Y)
-	{
-		Line = Ratio * (BallTrans.Location.X - VausTrans.Location.X);
-	
-		if ((Line) < (VausTrans.Location.Y - BallTrans.Location.Y))
-		{
-			UEngineDebug::OutPutString("Left");
-			if (Ball->Dir.X > 0)
-			{
-				FVector2D Dir;
-				Dir = Ball->Dir.Reflect(FVector2D::LEFT);
-	
-				Ball->Dir = Dir;
-	
-				//ABall::Ball->Dir.X *= -1;
-			}
-		}
-		else
-		{
-			UEngineDebug::OutPutString("Bottom");
-			if (Ball->Dir.Y < 0)
-			{
-				FVector2D Dir;
-				Dir = Ball->Dir.Reflect(FVector2D::DOWN);
-	
-				Ball->Dir = Dir;
-	
-				//APlayer::Ball->Dir.Y *= -1;
-			}
-		}
-	}
-	
-	
 
-	if (BallTrans.Location.X > VausTrans.Location.X && BallTrans.Location.X < (VausTrans.Location.X + (VausSize.X / 2)) &&
-		BallTrans.Location.Y >(VausTrans.Location.Y - (VausSize.Y / 2)) && BallTrans.Location.Y < VausTrans.Location.Y)
-	{
-		Line = Ratio * (BallTrans.Location.X - VausTrans.Location.X);
 	
-		if ((Line) > (VausTrans.Location.Y - BallTrans.Location.Y))
-		{
-			UEngineDebug::OutPutString("Right");
-			if (Ball->Dir.X < 0)
-			{
-				FVector2D Dir;
-				Dir = Ball->Dir.Reflect(FVector2D::RIGHT);
-	
-				Ball->Dir = Dir;
-	
-				//ABall::Ball->Dir.X *= -1;
-			}
-		}
-		else
-		{
-			UEngineDebug::OutPutString("Top");
-			if (Ball->Dir.Y > 0)
-			{
-				if (BallTrans.Location.X < VausTrans.Location.X + ((VausSize.X / 2) * 0.2))
-				{
-					FVector2D Dir;
-					Dir.Radian(30.0f);
-
-					Ball->Dir = Dir;
-					//ChangeState(PlayerState::Laser);
-				}
-				else if (BallTrans.Location.X < VausTrans.Location.X + ((VausSize.X / 2) * 0.6))
-				{
-					FVector2D Dir;
-					Dir.Radian(45.0f);
-
-					Ball->Dir = Dir;
-					//ChangeState(PlayerState::Laser);
-				}
-				else
-				{
-					FVector2D Dir;
-					Dir.Radian(60.0f);
-
-					Ball->Dir = Dir;
-					//ChangeState(PlayerState::Laser);
-				}
-			}
-		}
-	}
-	
-	if (BallTrans.Location.X > VausTrans.Location.X && BallTrans.Location.X < (VausTrans.Location.X + (VausSize.X / 2)) &&
-		BallTrans.Location.Y < (VausTrans.Location.Y + (VausSize.Y / 2)) && BallTrans.Location.Y > VausTrans.Location.Y)
-	{
-		Line = (-Ratio) * (BallTrans.Location.X - VausTrans.Location.X);
-	
-		if ((Line) < (VausTrans.Location.Y - BallTrans.Location.Y))
-		{
-			UEngineDebug::OutPutString("Right");
-			if (Ball->Dir.X < 0)
-			{
-				FVector2D Dir;
-				Ball->Dir.Reflect(FVector2D::RIGHT);
-	
-				Ball->Dir = Dir;
-	
-				//ABall::Ball->Dir.X *= -1;
-			}
-		}
-		else
-		{
-			UEngineDebug::OutPutString("Bottom");
-			if (Ball->Dir.Y < 0)
-			{
-				FVector2D Dir;
-				Dir = Ball->Dir.Reflect(FVector2D::DOWN);
-	
-				Ball->Dir = Dir;
-	
-				//ABall::Ball->Dir.Y *= -1;
-			}
-		}
-	}
 
 	switch (CurPlayerState)
 	{

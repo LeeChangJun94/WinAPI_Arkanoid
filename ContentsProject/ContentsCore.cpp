@@ -7,6 +7,7 @@
 #include <EngineBase/EngineDebug.h>
 #include <EngineBase/EngineFile.h>
 #include <EngineCore/ImageManager.h>
+#include <EnginePlatform/EngineSound.h>
 
 #include "TitleGameMode.h"
 #include "PlayGameMode.h"
@@ -25,27 +26,40 @@ ContentsCore::~ContentsCore()
 // 엔진이 실행되고 단 1번 실행된다.
 void ContentsCore::BeginPlay()
 {
-	// UEngineDirectory Dir = "C:\\AAA";
-
-	UEngineDirectory Dir;
-
-	// 상대경로가 중요하다.
-	// 상대 경로의 핵심은 이것이다.
-	// 내가 어디서 실행됐는지는 중요하지 않아야 한다.
-	if (false == Dir.MoveParentToDirectory("Resources"))
 	{
-		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
-		return;
+		UEngineDirectory Dir;
+
+		if (false == Dir.MoveParentToDirectory("Resources"))
+		{
+			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			return;
+		}
+
+		Dir.Append("Image");
+
+		std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+		for (size_t i = 0; i < ImageFiles.size(); i++)
+		{
+			std::string FilePath = ImageFiles[i].GetPathToString();
+			UImageManager::GetInst().Load(FilePath);
+		}
+
 	}
 
-	//Dir.Append("Image");
-
-	std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
-
-	for (size_t i = 0; i < ImageFiles.size(); i++)
 	{
-		std::string FilePath = ImageFiles[i].GetPathToString();
-		UImageManager::GetInst().Load(FilePath);
+		UEngineDirectory Dir;
+		if (false == Dir.MoveParentToDirectory("Resources"))
+		{
+			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			return;
+		}
+		Dir.Append("Sound");
+		std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+		for (size_t i = 0; i < ImageFiles.size(); i++)
+		{
+			std::string FilePath = ImageFiles[i].GetPathToString();
+			UEngineSound::Load(FilePath);
+		}
 	}
 
 
@@ -55,7 +69,7 @@ void ContentsCore::BeginPlay()
 
 		UEngineDirectory Dir;
 		Dir.MoveParentToDirectory("Resources");
-		Dir.Append("Text");
+		Dir.Append("Image\\Text");
 
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
 
@@ -67,6 +81,7 @@ void ContentsCore::BeginPlay()
 		UImageManager::GetInst().CuttingSprite("UI_TOP.png", { 672, 48 });
 		UImageManager::GetInst().CuttingSprite("Title1.png", { 672, 768 });
 		UImageManager::GetInst().CuttingSprite("Title2.png", { 672, 168 });
+		UImageManager::GetInst().CuttingSprite("DethLine.png", { 672, 2 });
 	}
 	
 	{

@@ -60,14 +60,11 @@ void AItem::ItemSlowEffect()
 	Ball->SetBallSpeed(500.0f);
 }
 
-
-
 void AItem::ItemCatch()
 {
 	SpriteRenderer1->ChangeAnimation("Catch");
 	//APlayer* Vaus = GetWorld()->GetPawn<APlayer>();
 	//ABall::Ball->SetActorLocation({ Vaus->GetActorLocation().X + 5.0f, Vaus->GetActorLocation().Y - ABall::Ball->GetBallScale().Y });
-
 }
 
 void AItem::ItemCatchEffect()
@@ -105,12 +102,12 @@ void AItem::ItemDisruption()
 
 void AItem::ItemDisruptionEffect()
 {
-	//for (int i = 0; i < 2; ++i)
-	//{
-	//	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
-	//	Player->SetBall(BallActor);
-	//	BallPtr.push_back(BallActor);
-	//}
+	for (int i = 0; i < 2; ++i)
+	{
+		ABall* BallActor = GetWorld()->SpawnActor<ABall>();
+		BallActor->SetActorLocation(GetActorLocation());
+		//Vaus->SetBall(BallActor);
+	}
 }
 
 void AItem::ItemBreak()

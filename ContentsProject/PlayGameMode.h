@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/GameMode.h>
+#include <EnginePlatform/EngineSound.h>
 #include <vector>
 
 #include "TileMap.h"
@@ -34,7 +35,7 @@ private:
 	//class AScore* Score;
 
 	//ABall* BallActor = nullptr;
-	APlayer* Player = nullptr;
-
+	APlayer* Vaus = nullptr;
+	USoundPlayer BGMPlayer;
 };
 

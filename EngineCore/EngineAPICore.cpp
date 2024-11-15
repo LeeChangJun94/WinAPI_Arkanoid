@@ -3,6 +3,7 @@
 #include <EnginePlatform/EngineInput.h>
 
 #include <EnginePlatform/EngineWindow.h>
+#include <EnginePlatform/EngineSound.h>
 #include <EngineBase/EngineDelegate.h>
 #include <EngineBase/EngineDebug.h>
 
@@ -42,6 +43,8 @@ UEngineAPICore::~UEngineAPICore()
 	}
 
 	Levels.clear();
+
+	UEngineSound::Release();
 }
 
 
@@ -72,6 +75,8 @@ void UEngineAPICore::EngineBeginPlay()
 // 이 함수가 1초에 몇번 실행되냐가 프레임입니다.
 void UEngineAPICore::EngineTick()
 {
+
+
 	//AXVidio NewVidio;
 	//NewVidio.Play("AAAA.avi");
 
@@ -92,6 +97,15 @@ void UEngineAPICore::EngineTick()
 
 void UEngineAPICore::Tick()
 {
+	if (true == IsCurLevelReset)
+	{
+		delete CurLevel;
+		CurLevel = nullptr;
+		IsCurLevelReset = false;
+	}
+
+
+
 	if (nullptr != NextLevel)
 	{
 		// 레벨들을 왔다갔다 할때가 있기 때문에.
@@ -114,6 +128,9 @@ void UEngineAPICore::Tick()
 	// 시간을 잴겁니다. 현재시간 
 	DeltaTimer.TimeCheck();
 	float DeltaTime = DeltaTimer.GetDeltaTime();
+
+	// 꼭해줘야 한다.
+	UEngineSound::Update();
 
 	// 키체크
 	UEngineInput::GetInst().KeyCheck(DeltaTime);
@@ -139,30 +156,18 @@ void UEngineAPICore::Tick()
 
 void UEngineAPICore::OpenLevel(std::string_view _LevelName)
 {
-	std::string ChangeName = _LevelName.data();
+	std::string UpperName = UEngineString::ToUpper(_LevelName);
 
-	//if (true == Levels.contains(ChangeName))
-	//{
-	//	MSGASSERT(ChangeName + "라는 이름의 레벨은 존재하지 않습니다.");
-	//	return;
-	//}
 
-	//// 최신 방식
-	// 주의할 점이 하나가 있다.
-	// 없으면 노드를 insert까지 해버린다.
-	// 내부에서 없으면 만든다까지 겸하고 있다.
-	// CurLevel = Levels[ChangeName];
-
-	std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(ChangeName);
+	std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(UpperName);
 	std::map<std::string, class ULevel*>::iterator EndIter = Levels.end();
 
 	if (EndIter == FindIter)
 	{
-		MSGASSERT(ChangeName + "라는 이름의 레벨은 존재하지 않습니다.");
+		MSGASSERT(UpperName + " 라는 이름의 레벨은 존재하지 않습니다.");
 		return;
 	}
 
-	// 절대 안됨
-	// 이걸 어디서 호출할까요?
 	NextLevel = FindIter->second;
+
 }

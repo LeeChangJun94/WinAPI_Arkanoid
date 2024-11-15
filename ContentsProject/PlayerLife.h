@@ -1,6 +1,9 @@
 #pragma once
 #include <EngineCore/Actor.h>
-#include "Ball.h"
+
+
+class ABall;
+class USpriteRenderer;
 
 // Ό³Έν :
 class APlayerLife : public AActor
@@ -43,15 +46,15 @@ public:
 		Ball = _Ball;
 	}
 	
-	
+	std::list<ABall*> BallList;
 
 protected:
 
 private:
 	int LifeCount = 2;
 
-	class ABall* Ball;
-	class USpriteRenderer* SpriteRenderer;
+	ABall* Ball = nullptr;
+	USpriteRenderer* SpriteRenderer = nullptr;
 
 	//APlayerLife* PlayerLife = nullptr;
 

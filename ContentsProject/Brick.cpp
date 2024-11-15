@@ -268,7 +268,7 @@ void ABrick::Tick(float _DeltaTime)
 	//line = ratio * (BallTrans.Location.X / 2) - (BrickSize.Y / 2);
 
 
-	AActor* ResultBall = CollisionComponent->CollisionOnce(ECollisionGroup::Ball);
+	ABall* ResultBall = reinterpret_cast<ABall*>(CollisionComponent->CollisionOnce(ECollisionGroup::Ball));
 
 	if (nullptr != ResultBall)
 	{

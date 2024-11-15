@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "PlayerLife.h"
 #include "Fade.h"
+#include "DethLine.h"
 
 #include "ContentsEnum.h"
 
@@ -25,7 +26,9 @@ void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	Player = GetWorld()->GetPawn<APlayer>();
+	//BGMPlayer = UEngineSound::Play("anipang_ingame_wav.wav");
+
+	Vaus = GetWorld()->GetPawn<APlayer>();
 	//
 	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
 
@@ -59,12 +62,15 @@ void APlayGameMode::BeginPlay()
 		HighScore->SetTextScale({ 24, 24 });
 		HighScore->SetActorLocation({ 396, 36 });
 	}
+	ADethLine* DethLineActor = GetWorld()->SpawnActor<ADethLine>();
 
 	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
-	Player->SetBall(BallActor);
+	
+	//Vaus->SetBall(BallActor);
 	
 	APlayerLife* PlayerLifeActor = GetWorld()->SpawnActor<APlayerLife>();
 	PlayerLifeActor->SetBall(BallActor);
+	PlayerLifeActor->BallList.push_back(BallActor);
 
 	for (int i = 0; i < 11; ++i)
 	{

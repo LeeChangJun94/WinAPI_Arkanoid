@@ -45,7 +45,11 @@ bool APlayerLife::DeathCheck()
 	{
 		return false;
 	}
-	LifeCount -= 1;
+	if (5 > LifeCount)
+	{
+		LifeCount -= 1;
+	}
+	
 	Ball->ReStart(0.0f);
 	return true;
 }
