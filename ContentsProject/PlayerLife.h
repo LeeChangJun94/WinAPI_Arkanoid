@@ -3,6 +3,7 @@
 
 
 class ABall;
+class ADethLine;
 class USpriteRenderer;
 
 // Ό³Έν :
@@ -45,6 +46,11 @@ public:
 	{
 		Ball = _Ball;
 	}
+
+	void SetDethLine(ADethLine* _DethLine)
+	{
+		DethLine = _DethLine;
+	}
 	
 	std::list<ABall*> BallList;
 
@@ -54,6 +60,7 @@ private:
 	int LifeCount = 2;
 
 	ABall* Ball = nullptr;
+	ADethLine* DethLine = nullptr;
 	USpriteRenderer* SpriteRenderer = nullptr;
 
 	//APlayerLife* PlayerLife = nullptr;

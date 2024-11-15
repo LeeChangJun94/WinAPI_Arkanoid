@@ -2,6 +2,7 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
 
+class ABall;
 class USpriteRenderer;
 class U2DCollision;
 
@@ -18,6 +19,13 @@ public:
 	ADethLine(ADethLine&& _Other) noexcept = delete;
 	ADethLine& operator=(const ADethLine& _Other) = delete;
 	ADethLine& operator=(ADethLine&& _Other) noexcept = delete;
+
+	U2DCollision* GetCollisionComponent()
+	{
+		return CollisionComponent;
+	}
+
+	ABall* GetCollisionCheck();
 
 protected:
 

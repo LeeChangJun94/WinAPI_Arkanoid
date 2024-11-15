@@ -259,14 +259,11 @@ void ABrick::Tick(float _DeltaTime)
 	//
 	//return;
 
-	//BallTrans.Location = { Ball->GetActorLocation().X, Ball->GetActorLocation().Y };
 	BrickTrans.Location = { GetActorLocation() };
 
 	FVector2D BrickSize = SpriteRenderer->GetComponentScale();
 
 	Ratio = (BrickSize.Y / 2) / (BrickSize.X / 2);
-	//line = ratio * (BallTrans.Location.X / 2) - (BrickSize.Y / 2);
-
 
 	ABall* ResultBall = reinterpret_cast<ABall*>(CollisionComponent->CollisionOnce(ECollisionGroup::Ball));
 

@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "PlayerLife.h"
+#include "DethLine.h"
 #include "Ball.h"
 
 #include <EngineCore/SpriteRenderer.h>
@@ -7,6 +8,7 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/Level.h>
 #include <EnginePlatform/EngineWindow.h>
+#include <EngineCore/2DCollision.h>
 #include "ContentsEnum.h"
 
 
@@ -39,19 +41,24 @@ void APlayerLife::BeginPlay()
 
 bool APlayerLife::DeathCheck()
 {
-	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
-	float BallY = Ball->GetActorLocation().Y;
-	if (WindowSize.Y > BallY)
-	{
-		return false;
-	}
-	if (5 > LifeCount)
-	{
-		LifeCount -= 1;
-	}
+	//FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+	//float BallY = Ball->GetActorLocation().Y;
 	
-	Ball->ReStart(0.0f);
-	return true;
+	ABall* BallResult = reinterpret_cast<ABall*>(DethLine->GetCollisionComponent()->CollisionOnce(ECollisionGroup::Ball));
+
+	if (nullptr != BallResult)
+	{
+		BallList.remove(BallResult);
+		BallResult->Destroy();
+		return true;
+	}
+
+	return false;
+	//if (WindowSize.Y > BallY)
+	//{
+	//	return false;
+	//}
+	//Ball->ReStart(0.0f);
 }
 
 void APlayerLife::LifeCheck()
@@ -88,8 +95,19 @@ void APlayerLife::Tick(float _DeltaTime)
 
 	if (true == DeathCheck())
 	{
-		LifeCheck();
+		if (0 == BallList.size())
+		{
+			ABall* BallActor = GetWorld()->SpawnActor<ABall>();
+			BallList.push_back(BallActor);
+		}
+
+		if (0 <= LifeCount)
+		{
+			LifeCount -= 1;
+		}
+		//Ball->ReStart(0.0f);
 	}
+	LifeCheck();
 }
 
 

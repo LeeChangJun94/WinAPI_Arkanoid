@@ -105,8 +105,7 @@ void AItem::ItemDisruptionEffect()
 	for (int i = 0; i < 2; ++i)
 	{
 		ABall* BallActor = GetWorld()->SpawnActor<ABall>();
-		BallActor->SetActorLocation(GetActorLocation());
-		//Vaus->SetBall(BallActor);
+
 	}
 }
 
@@ -126,7 +125,11 @@ void AItem::ItemPlayer()
 
 void AItem::ItemPlayerEffect()
 {
-	PlayerLife->SetLifeCount(1);
+	if (5 > PlayerLife->GetLifeCount())
+	{
+		PlayerLife->SetLifeCount(1);
+	}
+	
 	PlayerLife->LifeCheck();
 }
 

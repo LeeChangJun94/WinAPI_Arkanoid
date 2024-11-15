@@ -38,6 +38,10 @@ ABall::ABall()
 	CollisionComponent->SetCollisionGroup(ECollisionGroup::Ball);
 	CollisionComponent->SetCollisionType(ECollisionType::CirCle);
 
+	
+	Dir.Radian(30.f);
+	Dir.Normalize();
+
 }
 
 ABall::~ABall()
@@ -116,16 +120,13 @@ void ABall::BeginPlay()
 	Super::BeginPlay();
 
 	Vaus = GetWorld()->GetPawn<APlayer>();
-	SetActorLocation({ Vaus->GetActorLocation().X, Vaus->GetActorLocation().Y - SpriteRenderer->GetComponentScale().Y});
-	Dir.Radian(30.f);
-	Dir.Normalize();
+	SetActorLocation({ Vaus->GetActorLocation().X, Vaus->GetActorLocation().Y - SpriteRenderer->GetComponentScale().Y });
 }
 
 void ABall::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	APlayer* Vaus = GetWorld()->GetPawn<APlayer>();
 	CheckTime += _DeltaTime;
 
 	AddActorLocation(Dir * _DeltaTime * Speed);

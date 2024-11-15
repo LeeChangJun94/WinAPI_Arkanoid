@@ -3,6 +3,7 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/2DCollision.h>
 #include "ContentsEnum.h"
+#include "Ball.h"
 
 ADethLine::ADethLine()
 {
@@ -15,7 +16,7 @@ ADethLine::ADethLine()
 	SpriteRenderer->SetComponentLocation({ WindowSize.Half().X, WindowSize.Y - 1 });
 
 	CollisionComponent = CreateDefaultSubObject<U2DCollision>();
-	CollisionComponent->SetComponentLocation({ 0, 0 });
+	CollisionComponent->SetComponentLocation({ WindowSize.Half().X, WindowSize.Y - 1 });
 	CollisionComponent->SetComponentScale({ 672, 2 });
 	CollisionComponent->SetCollisionGroup(ECollisionGroup::DethLine);
 	CollisionComponent->SetCollisionType(ECollisionType::Rect);
@@ -23,5 +24,11 @@ ADethLine::ADethLine()
 
 ADethLine::~ADethLine()
 {
+}
+
+ABall* ADethLine::GetCollisionCheck()
+{
+	ABall* BallResult = reinterpret_cast<ABall*>(CollisionComponent->CollisionOnce(ECollisionGroup::Ball));
+	return BallResult;
 }
 

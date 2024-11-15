@@ -70,6 +70,7 @@ void APlayGameMode::BeginPlay()
 	
 	APlayerLife* PlayerLifeActor = GetWorld()->SpawnActor<APlayerLife>();
 	PlayerLifeActor->SetBall(BallActor);
+	PlayerLifeActor->SetDethLine(DethLineActor);
 	PlayerLifeActor->BallList.push_back(BallActor);
 
 	for (int i = 0; i < 11; ++i)
