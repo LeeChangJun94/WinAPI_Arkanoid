@@ -5,6 +5,7 @@
 class APlayer;
 class APlayerLife;
 class U2DCollision;
+class USpriteRenderer;
 
 // Ό³Έν :
 class ABall : public AActor
@@ -59,19 +60,39 @@ public:
 	//{
 	//	PlayerLife = _PlayerLife;
 	//}
+	void SetBallDir(float _DIr1, float _Dir2);
 
+	void SetStarTime(bool _StartTime)
+	{
+		StartTime = _StartTime;
+	}
+
+	USpriteRenderer* GetSpriteRenderer()
+	{
+		return SpriteRenderer;
+	}
+
+	U2DCollision* GetCollisionComponent()
+	{
+		return CollisionComponent;
+	}
+	bool BallCatch = false;
+
+	//float GetBallRadian()
+	//{
+	//	return Radian;
+	//}
 
 protected:
 
 private:
 	float Speed = 800.0f;
-	float radian = 0.0f;
+	//float Radian = 30.0f;
 	float CheckTime = 0.0f;
 	bool StartTime = true;
-
 	APlayerLife* PlayerLife = nullptr;
 	APlayer* Vaus = nullptr;
-	class USpriteRenderer* SpriteRenderer;
+	USpriteRenderer* SpriteRenderer;
 	U2DCollision* CollisionComponent = nullptr;
 };
 

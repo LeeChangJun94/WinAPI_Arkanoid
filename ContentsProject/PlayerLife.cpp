@@ -93,17 +93,19 @@ void APlayerLife::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	UEngineDebug::CoreOutPutString("PlayerLife : " + std::to_string(LifeCount));
+
 	if (true == DeathCheck())
 	{
 		if (0 == BallList.size())
 		{
 			ABall* BallActor = GetWorld()->SpawnActor<ABall>();
 			BallList.push_back(BallActor);
-		}
 
-		if (0 <= LifeCount)
-		{
-			LifeCount -= 1;
+			if (0 <= LifeCount)
+			{
+				LifeCount -= 1;
+			}
 		}
 		//Ball->ReStart(0.0f);
 	}

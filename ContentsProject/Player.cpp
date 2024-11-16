@@ -98,7 +98,7 @@ void APlayer::Tick(float _DeltaTime)
 
 	//UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 	//UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
-	//UEngineDebug::CoreOutPutString("Bullet count : " + std::to_string(BulletCount));
+	//UEngineDebug::CoreOutPutString("PlayerLife : " + std::to_string(PlayerLife->GetLifeCount()));
 
 	if (true == UEngineInput::GetInst().IsDown('R'))
 	{
@@ -379,6 +379,7 @@ void APlayer::Idle(float _DeltaTime)
 void APlayer::LaserStart()
 {
 	SpriteRenderer->SetComponentScale({ 96, 24 });
+	CollisionComponent->SetComponentScale({ 96, 24 });
 	SpriteRenderer->ChangeAnimation("Vaus_TLaser");
 }
 
@@ -404,6 +405,7 @@ void APlayer::Laser(float _DeltaTime)
 void APlayer::EnlargeStart()
 {
 	SpriteRenderer->SetComponentScale({ 144, 24 });
+	CollisionComponent->SetComponentScale({ 144, 24 });
 	SpriteRenderer->ChangeAnimation("Vaus_TEnlarge");
 }
 

@@ -96,12 +96,19 @@ public:
 		Ball = _Ball;
 	}
 
+	U2DCollision* GetCollisionComponent()
+	{
+		return CollisionComponent;
+	}
 
+	bool CatchEffect = false;
 protected:
 
 private:
 	float Speed = 300.0f;
-	float radian = 0.f;
+	float radian = 0.0f;
+	
+
 	int MySpriteIndex = 0;
 	//bool IsTransformEnd = false;
 	int BulletCount = 0;

@@ -57,7 +57,13 @@ void AItem::ItemSlow()
 
 void AItem::ItemSlowEffect()
 {
-	Ball->SetBallSpeed(500.0f);
+	std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
+	std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
+	for (; BalliterStart != BalliterEnd; ++BalliterStart)
+	{
+		(*BalliterStart)->SetBallSpeed(500.0f);
+	}
+	//Ball->SetBallSpeed(500.0f);
 }
 
 void AItem::ItemCatch()
@@ -69,10 +75,15 @@ void AItem::ItemCatch()
 
 void AItem::ItemCatchEffect()
 {
-	if (true == UEngineInput::GetInst().IsDown('J'))
-	{
-		//AddActorLocation(ABall::Ball->Dir * _DeltaTime * Speed);
-	}
+	//std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
+	//std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
+	//for (; BalliterStart != BalliterEnd; ++BalliterStart)
+	//{
+	//	(*BalliterStart)->BallCatch = true;
+	//}
+
+	Vaus->CatchEffect = true;
+
 }
 
 void AItem::ItemLaser()
@@ -102,10 +113,18 @@ void AItem::ItemDisruption()
 
 void AItem::ItemDisruptionEffect()
 {
+	UEngineRandom Random;
+	
 	for (int i = 0; i < 2; ++i)
 	{
-		ABall* BallActor = GetWorld()->SpawnActor<ABall>();
+		float RandomValue = Random.Randomfloat(-1.0f, 1.0f);
 
+		ABall* BallActor = GetWorld()->SpawnActor<ABall>();
+		PlayerLife->BallList.push_back(BallActor);
+		BallActor->SetStarTime(false);
+		std::list<ABall*>::iterator Balliter = PlayerLife->BallList.begin();
+		BallActor->SetActorLocation((*Balliter)->GetActorLocation());
+		BallActor->SetBallDir((*Balliter)->GetBallDir().X + RandomValue, (*Balliter)->GetBallDir().Y + RandomValue);
 	}
 }
 
@@ -252,6 +271,27 @@ void AItem::Tick(float _DeltaTime)
 
 	ItemCollisionCheck();
 
+	
+	ABall* Result = reinterpret_cast<ABall*>(Vaus->GetCollisionComponent()->CollisionOnce(ECollisionGroup::Ball));
+	if (nullptr != Result)
+	{
+		if (true == Vaus->CatchEffect)
+		{
+			std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
+			std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
+			for (; BalliterStart != BalliterEnd; ++BalliterStart)
+			{
+				(*BalliterStart)->BallCatch = true;
+			}
+			//Result->SetActorLocation({ Vaus->GetActorLocation().X, Vaus->GetActorLocation().Y });
+			if (true == UEngineInput::GetInst().IsDown('J'))
+			{
+				Result->BallCatch = false;
+			}
+		}
+		Result = nullptr;
+	}
+	
 	
 }
 

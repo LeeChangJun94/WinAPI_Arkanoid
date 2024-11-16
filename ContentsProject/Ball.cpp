@@ -39,8 +39,8 @@ ABall::ABall()
 	CollisionComponent->SetCollisionType(ECollisionType::CirCle);
 
 	
-	Dir.Radian(30.f);
-	Dir.Normalize();
+	Dir.Radian(30.0f);
+
 
 }
 
@@ -115,21 +115,32 @@ void ABall::SetBallDir(FVector2D _Dir)
 	Dir = _Dir;
 }
 
+void ABall::SetBallDir(float _Dir1, float _Dir2)
+{
+	Dir.X += _Dir1;
+	Dir.Y += _Dir2;
+}
+
 void ABall::BeginPlay()
 {
 	Super::BeginPlay();
 
 	Vaus = GetWorld()->GetPawn<APlayer>();
-	SetActorLocation({ Vaus->GetActorLocation().X, Vaus->GetActorLocation().Y - SpriteRenderer->GetComponentScale().Y });
+	//SetActorLocation({ Vaus->GetActorLocation().X + 5.0f, Vaus->GetActorLocation().Y - SpriteRenderer->GetComponentScale().Y });
 }
 
 void ABall::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	CheckTime += _DeltaTime;
 
-	AddActorLocation(Dir * _DeltaTime * Speed);
+	CheckTime += _DeltaTime;
+	Dir.Normalize();
+
+	if (false == BallCatch)
+	{
+		AddActorLocation(Dir * _DeltaTime * Speed);
+	}
 
 	BorderReflect(_DeltaTime);
 
