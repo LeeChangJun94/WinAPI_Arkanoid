@@ -87,7 +87,7 @@ public:
 protected:
 
 private:
-	float Speed = 800.0f;
+	float Speed = 700.0f;
 	//float Radian = 30.0f;
 	float CheckTime = 0.0f;
 	bool StartTime = true;

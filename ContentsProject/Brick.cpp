@@ -22,15 +22,29 @@
 //	{0, -1},					// DOWN,
 //};
 
+
+
 ABrick::ABrick()
 {
 	//SetActorLocation({ 600, 300});
 	//SetActorScale({ 32, 16 });
 
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	SpriteRenderer->SetSprite("Bricks1.png");
+	SpriteRenderer->SetSprite("Bricks.png");
 	SpriteRenderer->SetComponentScale({ 48, 24 });
-	//SetActorScale(SpriteRenderer->GetComponentScale());
+	
+	SpriteRenderer->CreateAnimation("White", "Bricks.png", 0, 0, 0.0f);
+	SpriteRenderer->CreateAnimation("Orange", "Bricks.png", 1, 1, 0.0f);
+	SpriteRenderer->CreateAnimation("Skyblue", "Bricks.png", 2, 2, 0.0f);
+	SpriteRenderer->CreateAnimation("Green", "Bricks.png", 3, 3, 0.0f);
+	SpriteRenderer->CreateAnimation("Red", "Bricks.png", 6, 6, 0.0f);
+	SpriteRenderer->CreateAnimation("Blue", "Bricks.png", 7, 7, 0.0f);
+	SpriteRenderer->CreateAnimation("Pink", "Bricks.png", 8, 8, 0.0f);
+	SpriteRenderer->CreateAnimation("Yellow", "Bricks.png", 9, 9, 0.0f);
+	SpriteRenderer->CreateAnimation("Silver", "Bricks.png", 12, 17, 0.2f);
+	SpriteRenderer->CreateAnimation("Gold", "Bricks.png", 18, 23, 0.2f);
+
+	//SpriteRenderer->ChangeAnimation("Silver");
 
 	CollisionComponent = CreateDefaultSubObject<U2DCollision>();
 	CollisionComponent->SetComponentLocation({ 0, 0 });
@@ -47,6 +61,42 @@ ABrick::~ABrick()
 void ABrick::BeginPlay()
 {
 	Vaus = GetWorld()->GetPawn<APlayer>();
+
+	switch (BrickType)
+	{
+	case EBrickType::WHITE:
+		WhiteBrick();
+		break;
+	case EBrickType::ORANGE:
+		OrangeBrick();
+		break;
+	case EBrickType::SKYBLUE:
+		SkyBlueBrick();
+		break;
+	case EBrickType::GREEN:
+		GreenBrick();
+		break;
+	case EBrickType::RED:
+		RedBrick();
+		break;
+	case EBrickType::BLUE:
+		BlueBrick();
+		break;
+	case EBrickType::PINK:
+		PinkBrick();
+		break;
+	case EBrickType::YELLOW:
+		YellowBrick();
+		break;
+	case EBrickType::SILVER:
+		SilverBrick();
+		break;
+	case EBrickType::GOLD:
+		GoldBrick();
+		break;
+	default:
+		break;
+	}
 }
 
 //bool ABrick::RectCheck()
@@ -265,7 +315,7 @@ void ABrick::Tick(float _DeltaTime)
 
 	Ratio = (BrickSize.Y / 2) / (BrickSize.X / 2);
 
-	ABall* ResultBall = reinterpret_cast<ABall*>(CollisionComponent->CollisionOnce(ECollisionGroup::Ball));
+	ResultBall = reinterpret_cast<ABall*>(CollisionComponent->CollisionOnce(ECollisionGroup::Ball));
 
 	if (nullptr != ResultBall)
 	{
@@ -281,19 +331,9 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Left");
 				if (ResultBall->GetBallDir().X > 0)
 				{
-					FVector2D Dir;
-					Dir = ResultBall->GetBallDir().Reflect(FVector2D::LEFT);
+					BallReflect();
 
-					//ABall::Ball->BallReflection(FVector2D::LEFT);
-
-					ResultBall->SetBallDir(Dir);
-
-					this->Destroy();
-
-					Vaus->AddPlayerScore(80);
-
-					//APlayer::Ball->Dir.X *= -1;
-
+					BrickDestroyCheck();
 				}
 			}
 			else
@@ -301,17 +341,10 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Top");
 				if (ResultBall->GetBallDir().Y > 0)
 				{
-					FVector2D Dir;
-					Dir = ResultBall->GetBallDir().Reflect(FVector2D::UP);
+					BallReflect();
 
-					ResultBall->SetBallDir(Dir);
-
-					this->Destroy();
-					Vaus->AddPlayerScore(80);
-					//ABall::Ball->Dir.Y *= -1;
-
+					BrickDestroyCheck();
 				}
-
 			}
 		}
 
@@ -325,15 +358,9 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Left");
 				if (ResultBall->GetBallDir().X > 0)
 				{
-					FVector2D Dir;
-					Dir = ResultBall->GetBallDir().Reflect(FVector2D::LEFT);
+					BallReflect();
 
-					ResultBall->SetBallDir(Dir);
-
-					this->Destroy();
-					Vaus->AddPlayerScore(80);
-					//ABall::Ball->Dir.X *= -1;
-
+					BrickDestroyCheck();
 				}
 			}
 			else
@@ -341,20 +368,9 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Bottom");
 				if (ResultBall->GetBallDir().Y < 0)
 				{
-					FVector2D Dir;
-					Dir = ResultBall->GetBallDir().Reflect(FVector2D::DOWN);
+					BallReflect();
 
-					ResultBall->SetBallDir(Dir);
-
-					AItem* Ptr = GetWorld()->SpawnActor<AItem>();
-					Ptr->SetActorLocation(GetActorLocation());
-					Ptr->SetPlayerLife(PlayerLife);
-					Ptr->SetBall(ResultBall);
-
-					this->Destroy();
-					Vaus->AddPlayerScore(80);
-					//Ptr->USpriteRenderer::ChangeAnimation("Player");
-					//APlayer::Ball->Dir.Y *= -1;
+					BrickDestroyCheck();
 				}
 			}
 		}
@@ -371,14 +387,9 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Right");
 				if (ResultBall->GetBallDir().X < 0)
 				{
-					FVector2D Dir;
-					Dir = ResultBall->GetBallDir().Reflect(FVector2D::RIGHT);
+					BallReflect();
 
-					ResultBall->SetBallDir(Dir);
-
-					this->Destroy();
-					Vaus->AddPlayerScore(80);
-					//ABall::Ball->Dir.X *= -1;
+					BrickDestroyCheck();
 				}
 			}
 			else
@@ -386,14 +397,9 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Top");
 				if (ResultBall->GetBallDir().Y > 0)
 				{
-					FVector2D Dir;
-					Dir = ResultBall->GetBallDir().Reflect(FVector2D::UP);
+					BallReflect();
 
-					ResultBall->SetBallDir(Dir);
-
-					this->Destroy();
-					Vaus->AddPlayerScore(80);
-					//ABall::Ball->Dir.Y *= -1;
+					BrickDestroyCheck();
 				}
 			}
 		}
@@ -408,14 +414,9 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Right");
 				if (ResultBall->GetBallDir().X < 0)
 				{
-					FVector2D Dir;
-					Dir = ResultBall->GetBallDir().Reflect(FVector2D::RIGHT);
+					BallReflect();
 
-					ResultBall->SetBallDir(Dir);
-
-					this->Destroy();
-					Vaus->AddPlayerScore(80);
-					//ABall::Ball->Dir.X *= -1;
+					BrickDestroyCheck();
 				}
 			}
 			else
@@ -423,27 +424,106 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Bottom");
 				if (ResultBall->GetBallDir().Y < 0)
 				{
-					FVector2D Dir;
-					Dir = ResultBall->GetBallDir().Reflect(FVector2D::DOWN);
+					BallReflect();
 
-					ResultBall->SetBallDir(Dir);
-
-					AItem* Ptr = GetWorld()->SpawnActor<AItem>();
-					Ptr->SetActorLocation(GetActorLocation());
-					Ptr->SetPlayerLife(PlayerLife);
-					Ptr->SetBall(ResultBall);
-
-
-					this->Destroy();
-					Vaus->AddPlayerScore(80);
-					//Ptr->USpriteRenderer::SpriteRenderer2
-					//Ptr->USpriteRenderer::ChangeAnimation("Player");
-
-					//ABall::Ball->Dir.Y *= -1;
+					BrickDestroyCheck();
 				}
 			}
 		}
 	}
-
 }
 
+void ABrick::BrickDestroyCheck()
+{
+	BrickHP -= 1;
+
+	if (0 == BrickHP)
+	{
+		this->Destroy();
+
+		AItem* Ptr = GetWorld()->SpawnActor<AItem>();
+		Ptr->SetActorLocation(GetActorLocation());
+		Ptr->SetPlayerLife(PlayerLife);
+		Ptr->SetBall(ResultBall);
+
+		Vaus->AddPlayerScore(Score);
+	}
+}
+
+void ABrick::BallReflect()
+{
+	FVector2D Dir;
+	Dir = ResultBall->GetBallDir().Reflect(FVector2D::DOWN);
+
+	ResultBall->SetBallDir(Dir);
+}
+
+void ABrick::WhiteBrick()
+{
+	SpriteRenderer->ChangeAnimation("White");
+	Score = 50;
+	BrickHP = 1;
+}
+
+void ABrick::OrangeBrick()
+{
+	SpriteRenderer->ChangeAnimation("Orange");
+	Score = 60;
+	BrickHP = 1;
+}
+
+void ABrick::SkyBlueBrick()
+{
+	SpriteRenderer->ChangeAnimation("SkyBlue");
+	Score = 70;
+	BrickHP = 1;
+}
+
+void ABrick::GreenBrick()
+{
+	SpriteRenderer->ChangeAnimation("Green");
+	Score = 80;
+	BrickHP = 1;
+}
+
+void ABrick::RedBrick()
+{
+	SpriteRenderer->ChangeAnimation("Red");
+	Score = 90;
+	BrickHP = 1;
+}
+
+void ABrick::BlueBrick()
+{
+	SpriteRenderer->ChangeAnimation("Blue");
+	Score = 100;
+	BrickHP = 1;
+}
+
+void ABrick::PinkBrick()
+{
+	SpriteRenderer->ChangeAnimation("Pink");
+	Score = 110;
+	BrickHP = 1;
+}
+
+void ABrick::YellowBrick()
+{
+	SpriteRenderer->ChangeAnimation("Yellow");
+	Score = 120;
+	BrickHP = 1;
+}
+
+void ABrick::SilverBrick()
+{
+	SpriteRenderer->ChangeAnimation("Silver");
+	Score = 50;
+	BrickHP = 2;
+}
+
+void ABrick::GoldBrick()
+{
+	SpriteRenderer->ChangeAnimation("Gold");
+	Score = 0;
+	BrickHP = -1;
+}

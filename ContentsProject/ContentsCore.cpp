@@ -105,7 +105,8 @@ void ContentsCore::BeginPlay()
 	{
 		UImageManager::GetInst().CuttingSprite("Ball.png", { 10, 8 });
 		UImageManager::GetInst().CuttingSprite("Bullet.png", { 48, 24 });
-		UImageManager::GetInst().CuttingSprite("Bricks1.png", { 48, 24 });
+		UImageManager::GetInst().CuttingSprite("Bricks.png", { 48, 24 });
+		//UImageManager::GetInst().CuttingSprite("Bricks2.png", { 48, 24 });
 		UImageManager::GetInst().CuttingSprite("Item1.png", { 32, 14 });
 		UImageManager::GetInst().CuttingSprite("Item2.png", { 32, 14 });
 	}
@@ -152,9 +153,10 @@ void ContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
 
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
+	
+	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 	//UEngineAPICore::GetCore()->CreateLevel("End");
-	//UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
-
+	
 	UEngineAPICore::GetCore()->OpenLevel("Title");
 
 	//UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");

@@ -29,7 +29,7 @@ ABall::ABall()
 
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetSprite("Ball.png");
-	SpriteRenderer->SetComponentScale({ 20, 16 });
+	SpriteRenderer->SetComponentScale({ 25, 20 });
 	SpriteRenderer->SetOrder(ERenderOrder::BALL);
 
 	CollisionComponent = CreateDefaultSubObject<U2DCollision>();

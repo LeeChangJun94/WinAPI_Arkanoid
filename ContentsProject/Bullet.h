@@ -30,7 +30,9 @@ protected:
 private:
 	USpriteRenderer* SpriteRenderer = nullptr;
 	U2DCollision* CollisionComponent = nullptr;
-	APlayer* Player = nullptr;
+	APlayer* Vaus = nullptr;
+
+	int AttackCheck = 2;
 	
 	float Speed = 600.0f;
 };

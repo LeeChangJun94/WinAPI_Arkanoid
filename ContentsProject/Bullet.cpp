@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Bullet.h"
 #include "Player.h"
+#include "Brick.h"
 #include <EngineCore/2DCollision.h>
 #include "ContentsEnum.h"
 
@@ -18,6 +19,9 @@ ABullet::ABullet()
 	CollisionComponent->SetComponentScale({ 48, 24 });
 	CollisionComponent->SetCollisionGroup(ECollisionGroup::Bullet);
 	CollisionComponent->SetCollisionType(ECollisionType::Rect);
+
+	
+	
 }
 
 ABullet::~ABullet()
@@ -26,12 +30,17 @@ ABullet::~ABullet()
 
 void ABullet::Attack()
 {
-	AActor* Result = CollisionComponent->CollisionOnce(ECollisionGroup::Brick);
-	if (nullptr != Result)
+	ABrick* BrickResult = reinterpret_cast<ABrick*>(CollisionComponent->CollisionOnce(ECollisionGroup::Brick));
+	if (nullptr != BrickResult)
 	{
-		Result->Destroy();
-		this->Speed = 0.0f;
-		SpriteRenderer->ChangeAnimation("BulletDone");
+		if (0 != AttackCheck)
+		{
+			BrickResult->BrickDestroyCheck();
+			//this->SetActorLocation({ GetActorLocation().X, GetActorLocation().Y});
+			this->Speed = 0.0f;
+			SpriteRenderer->ChangeAnimation("BulletDone");
+			AttackCheck -= 1;
+		}
 	}
 }
 
@@ -43,23 +52,19 @@ void ABullet::AttackDone()
 	}
 
 	this->Destroy();
-	//APlayer::Vaus->SetBulletCount(-1);
-	std::list<ABullet*>& List = Player->GetBulletPtr();
+
+	std::list<ABullet*>& List = Vaus->GetBulletPtr();
 	List.remove(this);
 
-	///*std::list<ABullet*>::iterator*/auto StartIter = List.begin();
-	///*std::list<ABullet*>::iterator*/auto EndIter = List.end();
-	//for (; StartIter != EndIter; )
-	//{
-	//	if (this != *StartIter)
-	//	{
-	//		StartIter++;
-	//		continue;
-	//	}
-	//
-	//	List.erase(StartIter);
-	//	break;
-	//}
+}
+
+void ABullet::BeginPlay()
+{
+	Super::BeginPlay();
+
+	Vaus = GetWorld()->GetPawn<APlayer>();
+
+	SetActorLocation(Vaus->GetActorLocation());
 }
 
 void ABullet::Tick(float _DeltaTime)
@@ -73,14 +78,7 @@ void ABullet::Tick(float _DeltaTime)
 	if (84 > GetActorLocation().Y)
 	{
 		this->Speed = 0.0f;
-		//APlayer::Vaus->SetBulletCount(-1);
 		SpriteRenderer->ChangeAnimation("BulletDone");
 	}
 }
 
-void ABullet::BeginPlay()
-{
-	Super::BeginPlay();
-
-	Player = GetWorld()->GetPawn<APlayer>();
-}

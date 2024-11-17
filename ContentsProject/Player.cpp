@@ -93,10 +93,11 @@ void APlayer::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsDown('Z'))
 	{
 		//ChangeState(PlayerState::Enlarge);
-		DestroyStart();
+		//DestroyStart();
+		ChangeState(PlayerState::Laser);
 	}
 
-	//UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 	//UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
 	//UEngineDebug::CoreOutPutString("PlayerLife : " + std::to_string(PlayerLife->GetLifeCount()));
 
@@ -440,7 +441,7 @@ void APlayer::Laser(float _DeltaTime)
 		if (2 >= BulletPtr.size())
 		{
  			ABullet* Ptr = GetWorld()->SpawnActor<ABullet>();
-			Ptr->SetActorLocation(GetActorLocation());
+			//Ptr->SetActorLocation(GetActorLocation());
 			BulletPtr.push_back(Ptr);
 		}
 	}

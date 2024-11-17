@@ -1,12 +1,14 @@
 #include "PreCompile.h"
 #include "TileMapGameMode.h"
 #include "Brick.h"
+#include "PlayMap.h"
 #include <EngineCore/Level.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
 #include <EngineBase/EngineFile.h>
 #include <EngineBase/EngineDirectory.h>
 #include <EngineBase/EngineRandom.h>
+
 
 ATileMapGameMode::ATileMapGameMode()
 {
@@ -25,6 +27,7 @@ void ATileMapGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
 	//{
 	//	GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
 	//	//GroundTileMap->Create("TileSet", { 100, 100 }, { 32, 32 });

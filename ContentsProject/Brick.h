@@ -12,6 +12,20 @@ enum class EReflectionDir
 	MAX,
 };
 
+enum class EBrickType
+{
+	WHITE,
+	ORANGE,
+	SKYBLUE,
+	GREEN,
+	RED,
+	BLUE,
+	PINK,
+	YELLOW,
+	SILVER,
+	GOLD,
+};
+
 class APlayer;
 class APlayerLife;
 class ABall;
@@ -57,6 +71,27 @@ public:
 	//ModeState ItemStats;
 	inline void SetPlayerLife(APlayerLife* _Player) { PlayerLife = _Player; }
 
+	void BrickDestroyCheck();
+	void BallReflect();
+
+
+	void WhiteBrick();
+	void OrangeBrick();
+	void SkyBlueBrick();
+	void GreenBrick();
+	void RedBrick();
+	void BlueBrick();
+	void PinkBrick();
+	void YellowBrick();
+	void SilverBrick();
+	void GoldBrick();
+
+	void SetBrickType(EBrickType _BrickType)
+	{
+		BrickType = _BrickType;
+	}
+
+
 protected:
 
 private:
@@ -76,12 +111,15 @@ private:
 	float Ratio = 0;
 	float Line = 0;
 
-	int PlayerScore = 0;
+	int Score = 0;
+	int BrickHP = 0;
+	EBrickType BrickType;
+	//bool CollisionCheck = false;
 	
 	U2DCollision* CollisionComponent = nullptr;
 
 	APlayer* Vaus = nullptr;
-	//ABall* Ball = nullptr;
+	ABall* ResultBall = nullptr;
 	APlayerLife* PlayerLife = nullptr;
 
 };
