@@ -164,6 +164,18 @@ void APlayer::Tick(float _DeltaTime)
 						//ChangeState(PlayerState::Laser);
 					}
 
+					if (true == CatchEffect)
+					{
+						std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
+						std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
+						for (; BalliterStart != BalliterEnd; ++BalliterStart)
+						{
+							(*BalliterStart)->BallCatch = true;
+							(*BalliterStart)->Distance = GetActorLocation().X - (*BalliterStart)->GetActorLocation().X;
+						}
+						//Result->SetActorLocation({ Vaus->GetActorLocation().X, Vaus->GetActorLocation().Y });
+
+					}
 
 					//ABall::Ball->Dir.Y *= -1;
 				}
@@ -253,6 +265,17 @@ void APlayer::Tick(float _DeltaTime)
 						ResultBall->SetBallDir(Dir);
 						//ChangeState(PlayerState::Laser);
 					}
+
+					if (true == CatchEffect)
+					{
+						std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
+						std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
+						for (; BalliterStart != BalliterEnd; ++BalliterStart)
+						{
+							(*BalliterStart)->BallCatch = true;
+							(*BalliterStart)->Distance = GetActorLocation().X - (*BalliterStart)->GetActorLocation().X;
+						}
+					}
 				}
 			}
 		}
@@ -330,6 +353,27 @@ void APlayer::Tick(float _DeltaTime)
 		}
 	}
 	
+	std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
+	std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
+
+	if (true == (*BalliterStart)->BallCatch)
+	{
+		if (true == UEngineInput::GetInst().IsDown('J'))
+		{
+			for (; BalliterStart != BalliterEnd; ++BalliterStart)
+			{
+				(*BalliterStart)->BallCatch = false;
+			}
+		}
+
+		for (; BalliterStart != BalliterEnd; ++BalliterStart)
+		{
+			(*BalliterStart)->SetActorLocation({ GetActorLocation().X - (*BalliterStart)->Distance, (*BalliterStart)->GetActorLocation().Y });
+		}
+	}
+
+
+
 }
 
 void APlayer::ChangeState(PlayerState _CurPlayerState)

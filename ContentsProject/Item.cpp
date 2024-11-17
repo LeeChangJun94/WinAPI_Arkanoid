@@ -241,6 +241,10 @@ void AItem::BeginPlay()
 		ItemSlow();
 		break;
 	case ModeState::Catch:
+		if (2 <= PlayerLife->BallList.size() || true == Vaus->CatchEffect)
+		{
+			this->Destroy();
+		}
 		ItemCatch();
 		break;
 	case ModeState::Laser:
@@ -250,12 +254,20 @@ void AItem::BeginPlay()
 		ItemEnlarge();
 		break;
 	case ModeState::Disruption:
+		if (2 <= PlayerLife->BallList.size())
+		{
+			this->Destroy();
+		}
 		ItemDisruption();
 		break;
 	case ModeState::Break:
 		ItemBreak();
 		break;
 	case ModeState::Player:
+		if (5 == PlayerLife->GetLifeCount())
+		{
+			this->Destroy();
+		}
 		ItemPlayer();
 		break;
 	default:
@@ -271,28 +283,6 @@ void AItem::Tick(float _DeltaTime)
 
 	ItemCollisionCheck();
 
-	
-	ABall* Result = reinterpret_cast<ABall*>(Vaus->GetCollisionComponent()->CollisionOnce(ECollisionGroup::Ball));
-	if (nullptr != Result)
-	{
-		if (true == Vaus->CatchEffect)
-		{
-			std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
-			std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
-			for (; BalliterStart != BalliterEnd; ++BalliterStart)
-			{
-				(*BalliterStart)->BallCatch = true;
-			}
-			//Result->SetActorLocation({ Vaus->GetActorLocation().X, Vaus->GetActorLocation().Y });
-			if (true == UEngineInput::GetInst().IsDown('J'))
-			{
-				Result->BallCatch = false;
-			}
-		}
-		Result = nullptr;
-	}
-	
-	
 }
 
 

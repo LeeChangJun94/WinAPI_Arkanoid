@@ -78,6 +78,7 @@ public:
 	}
 	bool BallCatch = false;
 
+	float Distance = 0.0f;
 	//float GetBallRadian()
 	//{
 	//	return Radian;

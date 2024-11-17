@@ -91,6 +91,11 @@ public:
 		return PlayerLife;
 	}
 
+	void SetPlayerLife(APlayerLife* _PlayerLife)
+	{
+		PlayerLife = _PlayerLife;
+	}
+
 	void SetBall(ABall* _Ball)
 	{
 		Ball = _Ball;
@@ -116,7 +121,7 @@ private:
 
 	PlayerState CurPlayerState = PlayerState::Idle;
 
-	class APlayerLife* PlayerLife = nullptr;
+	APlayerLife* PlayerLife = nullptr;
 	ABall* Ball = nullptr;
 
 	FTransform BallTrans;

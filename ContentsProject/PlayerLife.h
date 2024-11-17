@@ -1,7 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
-
+class APlayer;
 class ABall;
 class ADethLine;
 class USpriteRenderer;
@@ -52,6 +52,7 @@ public:
 		DethLine = _DethLine;
 	}
 	
+
 	std::list<ABall*> BallList;
 
 protected:
@@ -59,6 +60,7 @@ protected:
 private:
 	int LifeCount = 2;
 
+	APlayer* Vaus = nullptr;
 	ABall* Ball = nullptr;
 	ADethLine* DethLine = nullptr;
 	USpriteRenderer* SpriteRenderer = nullptr;

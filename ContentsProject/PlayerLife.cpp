@@ -1,4 +1,5 @@
 #include "PreCompile.h"
+#include "Player.h"
 #include "PlayerLife.h"
 #include "DethLine.h"
 #include "Ball.h"
@@ -36,7 +37,7 @@ APlayerLife::~APlayerLife()
 void APlayerLife::BeginPlay()
 {
 	Super::BeginPlay();
-
+	Vaus = GetWorld()->GetPawn<APlayer>();
 }
 
 bool APlayerLife::DeathCheck()
@@ -94,6 +95,7 @@ void APlayerLife::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	UEngineDebug::CoreOutPutString("PlayerLife : " + std::to_string(LifeCount));
+	UEngineDebug::CoreOutPutString("BallListCount : " + std::to_string(BallList.size()));
 
 	if (true == DeathCheck())
 	{
@@ -101,6 +103,7 @@ void APlayerLife::Tick(float _DeltaTime)
 		{
 			ABall* BallActor = GetWorld()->SpawnActor<ABall>();
 			BallList.push_back(BallActor);
+			Vaus->CatchEffect = false;
 
 			if (0 <= LifeCount)
 			{

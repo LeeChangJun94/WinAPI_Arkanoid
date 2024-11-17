@@ -73,6 +73,8 @@ void APlayGameMode::BeginPlay()
 	PlayerLifeActor->SetDethLine(DethLineActor);
 	PlayerLifeActor->BallList.push_back(BallActor);
 
+	Vaus->SetPlayerLife(PlayerLifeActor);
+
 	for (int i = 0; i < 10; ++i)
 	{
 		for (int j = 0; j < 5; ++j)
