@@ -11,7 +11,7 @@
 
 #include "TitleGameMode.h"
 #include "PlayGameMode.h"
-#include "TileMapGameMode.h"
+#include "TileMapEditor.h"
 #include "Player.h"
 
 
@@ -154,12 +154,12 @@ void ContentsCore::BeginPlay()
 
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
 	
-	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
+	UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
 	//UEngineAPICore::GetCore()->CreateLevel("End");
 	
-	UEngineAPICore::GetCore()->OpenLevel("Title");
+	UEngineAPICore::GetCore()->OpenLevel("Tile");
 
-	//UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
+	//UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
 
 	//UEngineAPICore::GetCore()->OpenLevel("Tile");
 

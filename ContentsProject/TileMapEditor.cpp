@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "TileMapGameMode.h"
+#include "TileMapEditor.h"
 #include "Brick.h"
 #include "PlayMap.h"
 #include <EngineCore/Level.h>
@@ -10,7 +10,7 @@
 #include <EngineBase/EngineRandom.h>
 
 
-ATileMapGameMode::ATileMapGameMode()
+ATileMapEditor::ATileMapEditor()
 {
 	//SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	//SpriteRenderer->SetSprite("Bricks.png");
@@ -18,74 +18,56 @@ ATileMapGameMode::ATileMapGameMode()
 
 }
 
-ATileMapGameMode::~ATileMapGameMode()
+ATileMapEditor::~ATileMapEditor()
 {
 }
 
 // 타일찍고 저장할 수 있는 레벨
-void ATileMapGameMode::BeginPlay()
+void ATileMapEditor::BeginPlay()
 {
 	Super::BeginPlay();
 
 	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
-	//{
-	//	GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
-	//	//GroundTileMap->Create("TileSet", { 100, 100 }, { 32, 32 });
-	//
-	//	//for (int y = 0; y < 20; y++)
-	//	//{
-	//	//	for (int x = 0; x < 20; x++)
-	//	//	{
-	//	//		GroundTileMap->SetTileIndex({ y,x }, 0);
-	//	//	}
-	//	//}
-	//}
-	//
-	//{
-	//	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
-	//	WallTileMap->Create("TileSet", { 100, 100 }, { 32, 32 });
-	//
-	//	for (int y = 0; y < 20; y++)
-	//	{
-	//		for (int x = 0; x < 20; x++)
-	//		{
-	//			WallTileMap->SetTileIndex({ y,x }, { 0, -6 }, { 32, 44 }, 2);
-	//		}
-	//	}
-	//}
-
-	//BrickTile = GetWorld()->SpawnActor<ATileMap>();
-	//for (int i = 0; i < 10; ++i)
-	//{
-	//	for (int j = 0; j < 5; ++j)
-	//	{
-	//
-	//		BrickTile->SetTileIndex({ 64 + (64 * i), 160 + (32 * j) } , 1);
-	//	}
-	//}
-
+	{
+		BrickTile = GetWorld()->SpawnActor<ABrick>();
+		BrickTile->Create("Bricks.png", { 13, 18 }, { 48, 24 });
+	
+		for (int x = 0; x < 13; x++)
+		{
+			for (int y = 0; y < 18; y++)
+			{
+				BrickTile->SetTileIndex({ x, y }, { 0, 0 }, { 48, 24 }, 0);
+				//BrickTile->SetBrickType(EBrickType::GOLD);
+			}
+		}
+	}
 }
 
-void ATileMapGameMode::Tick(float _DeltaTime)
+void ATileMapEditor::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	//if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
-	//{
-	//	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-	//	WallTileMap->SetTileLocation(MousePos, 1);
-	//}
-	//
-	//if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
-	//{
-	//	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-	//	Tile* Tile = WallTileMap->GetTileRef(MousePos);
-	//	if (nullptr != Tile->SpriteRenderer)
-	//	{
-	//		Tile->SpriteRenderer->Destroy(5.0f);
-	//		Tile->SpriteRenderer = nullptr;
-	//	}
-	//}
+	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
+	{
+		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+		BrickTile->SetTileLocation(MousePos, 1);
+	}
+	
+	if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
+	{
+		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+		Tile* Tile = BrickTile->GetTileRef(MousePos);
+		if (nullptr != Tile->SpriteRenderer)
+		{
+			Tile->SpriteRenderer->Destroy();
+			Tile->SpriteRenderer = nullptr;
+		}
+	}
+
+
+
+
+
 	//
 	//
 	//if (true == UEngineInput::GetInst().IsPress('R'))
@@ -147,22 +129,22 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 	//// 이동할 필요가 없다. 예로 보여주는것
 	//if (true == UEngineInput::GetInst().IsPress('A'))
 	//{
-	//	WallTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
+	//	BrickTile->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
 	//}
 	//
 	//if (true == UEngineInput::GetInst().IsPress('D'))
 	//{
-	//	WallTileMap->AddActorLocation(FVector2D::RIGHT * _DeltaTime * 100.0f);
+	//	BrickTile->AddActorLocation(FVector2D::RIGHT * _DeltaTime * 100.0f);
 	//}
 	//
 	//if (true == UEngineInput::GetInst().IsPress('W'))
 	//{
-	//	WallTileMap->AddActorLocation(FVector2D::UP * _DeltaTime * 100.0f);
+	//	BrickTile->AddActorLocation(FVector2D::UP * _DeltaTime * 100.0f);
 	//}
 	//
 	//if (true == UEngineInput::GetInst().IsPress('S'))
 	//{
-	//	WallTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
+	//	BrickTile->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
 	//}
 
 }

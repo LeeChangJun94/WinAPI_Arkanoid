@@ -38,7 +38,7 @@
     <ClInclude Include="TileMap.h">
       <Filter>Tilemap</Filter>
     </ClInclude>
-    <ClInclude Include="TileMapGameMode.h">
+    <ClInclude Include="TileMapEditor.h">
       <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
     <ClInclude Include="Score.h">
@@ -90,7 +90,7 @@
     <ClCompile Include="TileMap.cpp">
       <Filter>Tilemap</Filter>
     </ClCompile>
-    <ClCompile Include="TileMapGameMode.cpp">
+    <ClCompile Include="TileMapEditor.cpp">
       <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">

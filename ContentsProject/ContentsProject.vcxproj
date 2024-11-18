@@ -170,6 +170,10 @@
     <ClInclude Include="TileMap.h">
       <SubType>
       </SubType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Item.h">
       <SubType>
@@ -205,7 +209,7 @@
     </ClInclude>
     <ClInclude Include="Player.h" />
     <ClInclude Include="PreCompile.h" />
-    <ClInclude Include="TileMapGameMode.h">
+    <ClInclude Include="TileMapEditor.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -238,6 +242,10 @@
     <ClCompile Include="TileMap.cpp">
       <SubType>
       </SubType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <SubType>
@@ -276,7 +284,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TileMapGameMode.cpp">
+    <ClCompile Include="TileMapEditor.cpp">
       <SubType>
       </SubType>
     </ClCompile>
