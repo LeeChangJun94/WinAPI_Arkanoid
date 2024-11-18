@@ -11,6 +11,7 @@
 
 #include "TitleGameMode.h"
 #include "PlayGameMode.h"
+#include "BossStage.h"
 #include "TileMapEditor.h"
 #include "Player.h"
 
@@ -155,14 +156,15 @@ void ContentsCore::BeginPlay()
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 672, 768 });
 
-	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
+	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Stage1");
+	UEngineAPICore::GetCore()->CreateLevel<ABossStage, APlayer>("Boss");
 
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
 	
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
 	//UEngineAPICore::GetCore()->CreateLevel("End");
 	
-	UEngineAPICore::GetCore()->OpenLevel("Tile");
+	UEngineAPICore::GetCore()->OpenLevel("Boss");
 
 	//UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
 

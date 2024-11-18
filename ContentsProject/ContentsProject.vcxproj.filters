@@ -54,6 +54,9 @@
     <ClInclude Include="BossStage.h">
       <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>ContentsObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -108,6 +111,9 @@
     </ClCompile>
     <ClCompile Include="BossStage.cpp">
       <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>ContentsObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

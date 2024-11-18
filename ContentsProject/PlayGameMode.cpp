@@ -31,7 +31,7 @@ void APlayGameMode::BeginPlay()
 	Vaus = GetWorld()->GetPawn<APlayer>();
 	//
 	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
-
+	Stage1->SetPlayMapType(EPlayMapType::TYPE_1);
 	//{
 	//	ANewPlayer* Actor = GetWorld()->GetPawn<ANewPlayer>();
 	//	Actor->SetColImage("bg001_Col.png");

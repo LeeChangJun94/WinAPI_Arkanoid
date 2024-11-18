@@ -31,7 +31,8 @@ void ATileMapEditor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
+	APlayMap* PlayMap = GetWorld()->SpawnActor<APlayMap>();
+	PlayMap->SetPlayMapType(EPlayMapType::TYPE_1);
 
 	Bricks.resize(UGlobalValue::BrickY);
 

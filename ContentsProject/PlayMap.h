@@ -1,6 +1,16 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+enum class EPlayMapType
+{
+	TYPE_NONE,
+	TYPE_1,
+	TYPE_2,
+	TYPE_3,
+	TYPE_4,
+	TYPE_BOSS,
+};
+
 // Ό³Έν :
 class APlayMap : public AActor
 {
@@ -15,9 +25,27 @@ public:
 	APlayMap& operator=(const APlayMap& _Other) = delete;
 	APlayMap& operator=(APlayMap&& _Other) noexcept = delete;
 
+	void BeginPlay();
+
+	void SetPlayMapType(EPlayMapType _PlayMapType)
+	{
+		PlayMapType = _PlayMapType;
+	}
+
+	//void PlayMapTYPE_1();
+	//void PlayMapTYPE_2();
+	//void PlayMapTYPE_3();
+	//void PlayMapTYPE_4();
+	//void PlayMapTYPE_Boss();
+
+
+
+
+
 protected:
 
 private:
-
+	EPlayMapType PlayMapType = EPlayMapType::TYPE_NONE;
+	USpriteRenderer* SpriteRenderer1 = nullptr;
 };
 
