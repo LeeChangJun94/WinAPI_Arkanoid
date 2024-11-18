@@ -61,7 +61,7 @@ void AScore::SetValue(int _Score = 0)
 
 	FVector2D Pos = FVector2D::ZERO;
 
-	for (int i = Number.size() - 1; i >= 0; i--)
+	for (int i = static_cast<int>(Number.size()) - 1; i >= 0; i--)
 	{
 		char Value = Number[i] - '0';
 		Renders[i]->SetSprite(TextSpriteName, Value);

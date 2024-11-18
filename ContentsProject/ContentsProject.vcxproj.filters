@@ -35,9 +35,6 @@
       <Filter>ContentsObject</Filter>
     </ClInclude>
     <ClInclude Include="Item.h" />
-    <ClInclude Include="TileMap.h">
-      <Filter>Tilemap</Filter>
-    </ClInclude>
     <ClInclude Include="TileMapEditor.h">
       <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
@@ -50,6 +47,12 @@
     <ClInclude Include="Fade.h" />
     <ClInclude Include="DethLine.h">
       <Filter>ContentsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalValue.h">
+      <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectBrick.h">
+      <Filter>ContentsObject\Brick</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -87,9 +90,6 @@
       <Filter>ContentsObject</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="TileMap.cpp">
-      <Filter>Tilemap</Filter>
-    </ClCompile>
     <ClCompile Include="TileMapEditor.cpp">
       <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
@@ -102,6 +102,12 @@
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="DethLine.cpp">
       <Filter>ContentsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalValue.cpp">
+      <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectBrick.cpp">
+      <Filter>ContentsObject\Brick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,9 +134,6 @@
     </Filter>
     <Filter Include="ContentsObject\Title">
       <UniqueIdentifier>{a83ec8ee-ad55-427e-a338-ac45dac2dda7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tilemap">
-      <UniqueIdentifier>{423538cd-9bfb-4f53-b2d7-e7e89a45463d}</UniqueIdentifier>
     </Filter>
     <Filter Include="ContentsObject\Global">
       <UniqueIdentifier>{ff599378-e4fd-4f08-8c83-c53b4f212876}</UniqueIdentifier>

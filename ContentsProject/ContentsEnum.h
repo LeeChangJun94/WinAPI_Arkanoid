@@ -20,4 +20,5 @@ enum class ECollisionGroup
 	Item,
 	Vaus,
 	DethLine,
+	MousePoint,
 };

@@ -83,9 +83,6 @@ void APlayGameMode::BeginPlay()
 			Ptr->SetActorLocation({ 48 + (48 * i), 160 + (24 * j) });
 			Ptr->SetBrickType(EBrickType::SILVER);
 			Ptr->SetPlayerLife(PlayerLifeActor);
-			//Ptr->SetBall(BallActor);
-			//Ptr->SetBallActor(this->BallActor);
-
 			BrickPtr.push_back(Ptr);
 		}
 	}

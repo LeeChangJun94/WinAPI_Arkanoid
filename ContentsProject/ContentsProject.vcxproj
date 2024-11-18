@@ -159,6 +159,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GlobalValue.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PlayerLife.h">
       <SubType>
       </SubType>
@@ -166,14 +170,6 @@
     <ClInclude Include="Score.h">
       <SubType>
       </SubType>
-    </ClInclude>
-    <ClInclude Include="TileMap.h">
-      <SubType>
-      </SubType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Item.h">
       <SubType>
@@ -209,6 +205,10 @@
     </ClInclude>
     <ClInclude Include="Player.h" />
     <ClInclude Include="PreCompile.h" />
+    <ClInclude Include="SelectBrick.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TileMapEditor.h">
       <SubType>
       </SubType>
@@ -231,6 +231,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GlobalValue.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PlayerLife.cpp">
       <SubType>
       </SubType>
@@ -238,14 +242,6 @@
     <ClCompile Include="Score.cpp">
       <SubType>
       </SubType>
-    </ClCompile>
-    <ClCompile Include="TileMap.cpp">
-      <SubType>
-      </SubType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <SubType>
@@ -283,6 +279,10 @@
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SelectBrick.cpp">
+      <SubType>
+      </SubType>
     </ClCompile>
     <ClCompile Include="TileMapEditor.cpp">
       <SubType>
