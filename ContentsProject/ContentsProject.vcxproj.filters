@@ -51,9 +51,6 @@
     <ClInclude Include="GlobalValue.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
-    <ClInclude Include="SelectBrick.h">
-      <Filter>ContentsObject\Brick</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -105,9 +102,6 @@
     </ClCompile>
     <ClCompile Include="GlobalValue.cpp">
       <Filter>ContentsObject\Global</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectBrick.cpp">
-      <Filter>ContentsObject\Brick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

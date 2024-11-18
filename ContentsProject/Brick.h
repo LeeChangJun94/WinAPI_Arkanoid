@@ -13,6 +13,19 @@ enum class EReflectionDir
 	MAX,
 };
 
+enum class EBrickType
+{
+	WHITE,
+	ORANGE,
+	SKYBLUE,
+	GREEN,
+	RED,
+	BLUE,
+	PINK,
+	YELLOW,
+	SILVER,
+	GOLD,
+};
 
 
 class APlayer;
@@ -24,19 +37,6 @@ class U2DCollision;
 class ABrick : public AActor, public ISerializObject
 {
 public:
-	enum class EBrickType
-	{
-		WHITE,
-		ORANGE,
-		SKYBLUE,
-		GREEN,
-		RED,
-		BLUE,
-		PINK,
-		YELLOW,
-		SILVER,
-		GOLD,
-	};
 		// constrcuter destructer
 	ABrick();
 	~ABrick();
@@ -91,6 +91,11 @@ public:
 	void SetBrickType(EBrickType _BrickType)
 	{
 		BrickType = _BrickType;
+	}
+
+	EBrickType GetBrickType()
+	{
+		return BrickType;
 	}
 
 	// 데이터를 직렬화(압축)

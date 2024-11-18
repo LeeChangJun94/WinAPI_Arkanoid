@@ -24,9 +24,10 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	USpriteRenderer* SpriteRenderer;
+	USpriteRenderer* SpriteRenderer = nullptr;
 	U2DCollision* CollisionComponent = nullptr;
 	std::vector<std::vector<ABrick*>> Bricks;
 	ABrick* CurBrick = nullptr;
+	EBrickType CurBrickType;
 };
 

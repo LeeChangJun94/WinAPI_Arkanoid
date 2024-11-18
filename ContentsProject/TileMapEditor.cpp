@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "TileMapEditor.h"
-#include "SelectBrick.h"
+//#include "SelectBrick.h"
 #include "Brick.h"
 #include "PlayMap.h"
 #include "GlobalValue.h"
@@ -17,7 +17,7 @@
 ATileMapEditor::ATileMapEditor()
 {
 	CollisionComponent = CreateDefaultSubObject<U2DCollision>();
-	CollisionComponent->SetComponentScale({ 1, 1 });
+	CollisionComponent->SetComponentScale({ 10, 10 });
 	CollisionComponent->SetCollisionGroup(ECollisionGroup::MousePoint);
 	CollisionComponent->SetCollisionType(ECollisionType::CirCle);
 }
@@ -53,6 +53,13 @@ void ATileMapEditor::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 	CollisionComponent->SetComponentLocation(UEngineAPICore::GetCore()->GetMainWindow().GetMousePos());
 
+	CurBrick = reinterpret_cast<ABrick*>(CollisionComponent->CollisionOnce(ECollisionGroup::Brick));
+
+	if (true == UEngineInput::GetInst().IsDown('S') && nullptr != CurBrick)
+	{
+		CurBrickType = CurBrick->GetBrickType();
+	}
+
 	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
 	{
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
@@ -80,7 +87,7 @@ void ATileMapEditor::Tick(float _DeltaTime)
 
 		ABrick* Print = GetWorld()->SpawnActor<ABrick>();
 		Print->SetActorLocation(CreatePos + UGlobalValue::BrickSize.Half());
-		Print->SetBrickType(EBrickType::GOLD);
+		Print->SetBrickType(CurBrickType);
 		Bricks[TilePoint.Y][TilePoint.X] = Print;
 	}
 	
@@ -107,8 +114,11 @@ void ATileMapEditor::Tick(float _DeltaTime)
 		if (nullptr != Bricks[TilePoint.Y][TilePoint.X])
 		{
 			Bricks[TilePoint.Y][TilePoint.X]->Destroy();
+			Bricks[TilePoint.Y][TilePoint.X] = nullptr;
 		}
 	}
+
+
 }
 
 bool ATileMapEditor::IndexOver(FIntPoint _TilePoint)
