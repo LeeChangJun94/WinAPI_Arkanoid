@@ -51,6 +51,9 @@
     <ClInclude Include="GlobalValue.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
+    <ClInclude Include="BossStage.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -102,6 +105,9 @@
     </ClCompile>
     <ClCompile Include="GlobalValue.cpp">
       <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="BossStage.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

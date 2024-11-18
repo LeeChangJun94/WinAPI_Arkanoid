@@ -77,7 +77,11 @@ void ContentsCore::BeginPlay()
 	//UImageManager::GetInst().CuttingSprite("Text.png", { 24, 24 });
 
 	{
-		UImageManager::GetInst().CuttingSprite("Fields2.png", { 224, 240 });
+		UImageManager::GetInst().CuttingSprite("BackGround_TYPE1.png", { 672, 720 });
+		UImageManager::GetInst().CuttingSprite("BackGround_TYPE2.png", { 672, 720 });
+		UImageManager::GetInst().CuttingSprite("BackGround_TYPE3.png", { 672, 720 });
+		UImageManager::GetInst().CuttingSprite("BackGround_TYPE4.png", { 672, 720 });
+		UImageManager::GetInst().CuttingSprite("BackGround_Boss.png", { 672, 720 });
 		UImageManager::GetInst().CuttingSprite("UI_TOP.png", { 672, 48 });
 		UImageManager::GetInst().CuttingSprite("Title1.png", { 672, 768 });
 		UImageManager::GetInst().CuttingSprite("Title2.png", { 672, 168 });
@@ -105,6 +109,7 @@ void ContentsCore::BeginPlay()
 	{
 		UImageManager::GetInst().CuttingSprite("Ball.png", { 10, 8 });
 		UImageManager::GetInst().CuttingSprite("Bullet.png", { 48, 24 });
+		UImageManager::GetInst().CuttingSprite("BossAttack.png", { 24, 24 });
 		UImageManager::GetInst().CuttingSprite("Bricks.png", { 48, 24 });
 		//UImageManager::GetInst().CuttingSprite("Bricks2.png", { 48, 24 });
 		UImageManager::GetInst().CuttingSprite("Item1.png", { 32, 14 });

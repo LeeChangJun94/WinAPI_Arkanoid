@@ -51,13 +51,18 @@ void ATileMapEditor::BeginPlay()
 void ATileMapEditor::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	CollisionComponent->SetComponentLocation(UEngineAPICore::GetCore()->GetMainWindow().GetMousePos());
+	
 
-	CurBrick = reinterpret_cast<ABrick*>(CollisionComponent->CollisionOnce(ECollisionGroup::Brick));
-
-	if (true == UEngineInput::GetInst().IsDown('S') && nullptr != CurBrick)
+	if (true == UEngineInput::GetInst().IsDown('S'))
 	{
-		CurBrickType = CurBrick->GetBrickType();
+		CollisionComponent->SetComponentLocation(UEngineAPICore::GetCore()->GetMainWindow().GetMousePos());
+
+		CurBrick = reinterpret_cast<ABrick*>(CollisionComponent->CollisionOnce(ECollisionGroup::Brick));
+
+		if (nullptr != CurBrick)
+		{
+			CurBrickType = CurBrick->GetBrickType();
+		}
 	}
 
 	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))

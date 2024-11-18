@@ -151,6 +151,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BossStage.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="DethLine.h">
       <SubType>
       </SubType>
@@ -219,6 +223,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BossStage.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="DethLine.cpp">
       <SubType>
       </SubType>
