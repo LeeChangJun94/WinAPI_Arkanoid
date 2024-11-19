@@ -143,7 +143,6 @@ void ATileMapEditor::Tick(float _DeltaTime)
 
 		Dir.Append("Data");
 
-
 		UEngineWindow& Window = UEngineAPICore::GetCore()->GetMainWindow();
 
 		OPENFILENAME OFN;

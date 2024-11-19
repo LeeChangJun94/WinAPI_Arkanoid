@@ -29,31 +29,12 @@ void APlayGameMode::BeginPlay()
 	Super::BeginPlay();
 	
 	//BGMPlayer = UEngineSound::Play("anipang_ingame_wav.wav");
-
-	Bricks.resize(UGlobalValue::BrickY);
-
-	for (int i = 0; i < UGlobalValue::BrickY; ++i)
-	{
-		Bricks[i].resize(UGlobalValue::BrickX);
-	}
-
+	
 	Vaus = GetWorld()->GetPawn<APlayer>();
-	//
+
 	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
 	Stage1->SetPlayMapType(EPlayMapType::TYPE_1);
-	//{
-	//	ANewPlayer* Actor = GetWorld()->GetPawn<ANewPlayer>();
-	//	Actor->SetColImage("bg001_Col.png");
-	//}
-	//
-	//{
-	//	APlayMap* Actor = GetWorld()->SpawnActor<APlayMap>();
-	//}
-	//
-	//{
-	//	AFade* Actor = GetWorld()->SpawnActor<AFade>();
-	//}
-
+	
 	{
 		AScore* Score = GetWorld()->SpawnActor<AScore>();
 
@@ -75,8 +56,6 @@ void APlayGameMode::BeginPlay()
 
 	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
 	
-	//Vaus->SetBall(BallActor);
-	
 	APlayerLife* PlayerLifeActor = GetWorld()->SpawnActor<APlayerLife>();
 	PlayerLifeActor->SetBall(BallActor);
 	PlayerLifeActor->SetDethLine(DethLineActor);
@@ -84,6 +63,17 @@ void APlayGameMode::BeginPlay()
 
 	Vaus->SetPlayerLife(PlayerLifeActor);
 
+	LoadBrick("Stage1", PlayerLifeActor);
+}
+
+void APlayGameMode::LoadBrick(std::string _Stage, APlayerLife* _PlayerLifeActor)
+{
+	Bricks.resize(UGlobalValue::BrickY);
+
+	for (int i = 0; i < UGlobalValue::BrickY; ++i)
+	{
+		Bricks[i].resize(UGlobalValue::BrickX);
+	}
 
 	UEngineDirectory Dir;
 
@@ -97,7 +87,7 @@ void APlayGameMode::BeginPlay()
 
 	UEngineSerializer Ser;
 
-	std::string FilePath = Dir.GetPathToString() + "\\Stage1.BDATA";
+	std::string FilePath = Dir.GetPathToString() + "\\" + _Stage + ".BData";
 
 	UEngineFile File = FilePath;
 	File.FileOpen("rb");
@@ -122,21 +112,7 @@ void APlayGameMode::BeginPlay()
 		ABrick* Print = GetWorld()->SpawnActor<ABrick>();
 		Print->SetActorLocation(CreatePos + UGlobalValue::BrickSize.Half());
 		Print->SetBrickType(static_cast<EBrickType>(Types[i]));
-		Print->SetPlayerLife(PlayerLifeActor);
+		Print->SetPlayerLife(_PlayerLifeActor);
 		Bricks[TilePoint.Y][TilePoint.X] = Print;
 	}
-
-
-	//for (int i = 0; i < 10; ++i)
-	//{
-	//	for (int j = 0; j < 5; ++j)
-	//	{
-	//		ABrick* Ptr = GetWorld()->SpawnActor<ABrick>();
-	//		Ptr->SetActorLocation({ 48 + (48 * i), 160 + (24 * j) });
-	//		Ptr->SetBrickType(EBrickType::WHITE);
-	//		Ptr->SetPlayerLife(PlayerLifeActor);
-	//		BrickPtr.push_back(Ptr);
-	//	}
-	//}
 }
-

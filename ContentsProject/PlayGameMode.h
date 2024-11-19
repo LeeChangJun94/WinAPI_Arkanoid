@@ -23,6 +23,8 @@ public:
 
 	void BeginPlay();
 
+	void LoadBrick(std::string _Stage, APlayerLife* _PlayerLifeActor);
+
 	std::list<ABrick*> BrickPtr;
 
 protected:

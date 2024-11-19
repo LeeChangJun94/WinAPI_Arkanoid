@@ -18,8 +18,6 @@ APlayMap::APlayMap()
 	SpriteRenderer1->CreateAnimation("BackGround_TYPE4", "BackGround_TYPE4.png", 0, 0, 0.0f, false);
 	SpriteRenderer1->CreateAnimation("BackGround_Boss", "BackGround_Boss.png", 0, 0, 0.0f, false);*/
 
-	
-
 	USpriteRenderer* SpriteRenderer2 = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer2->SetOrder(ERenderOrder::BACKGROUND);
 	SpriteRenderer2->SetSprite("UI_TOP.png");
@@ -34,7 +32,6 @@ APlayMap::~APlayMap()
 void APlayMap::BeginPlay()
 {
 	Super::BeginPlay();
-
 
 	//switch (PlayMapType)
 	//{
