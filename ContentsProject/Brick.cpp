@@ -102,9 +102,11 @@ void ABrick::Tick(float _DeltaTime)
 
 	ResultBall = reinterpret_cast<ABall*>(CollisionComponent->CollisionOnce(ECollisionGroup::Ball));
 
-	if (nullptr != ResultBall)
+	if (nullptr != ResultBall && true != CollisionCheck)
 	{
+
 		BallTrans.Location = { ResultBall->GetActorLocation() };
+		
 		//Brick ¿ÞÂÊ
 		if (BallTrans.Location.X < BrickTrans.Location.X && BallTrans.Location.X >(BrickTrans.Location.X - (BrickSize.X / 2)) &&
 			BallTrans.Location.Y > (BrickTrans.Location.Y - (BrickSize.Y / 2)) && BallTrans.Location.Y < BrickTrans.Location.Y)
@@ -116,7 +118,7 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Left");
 				if (ResultBall->GetBallDir().X > 0)
 				{
-					BallReflect();
+					BallReflect(FVector2D::LEFT);
 
 					BrickDestroyCheck();
 				}
@@ -126,7 +128,7 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Top");
 				if (ResultBall->GetBallDir().Y > 0)
 				{
-					BallReflect();
+					BallReflect(FVector2D::UP);
 
 					BrickDestroyCheck();
 				}
@@ -143,7 +145,7 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Left");
 				if (ResultBall->GetBallDir().X > 0)
 				{
-					BallReflect();
+					BallReflect(FVector2D::LEFT);
 
 					BrickDestroyCheck();
 				}
@@ -153,7 +155,7 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Bottom");
 				if (ResultBall->GetBallDir().Y < 0)
 				{
-					BallReflect();
+					BallReflect(FVector2D::DOWN);
 
 					BrickDestroyCheck();
 				}
@@ -172,7 +174,7 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Right");
 				if (ResultBall->GetBallDir().X < 0)
 				{
-					BallReflect();
+					BallReflect(FVector2D::RIGHT);
 
 					BrickDestroyCheck();
 				}
@@ -182,7 +184,7 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Top");
 				if (ResultBall->GetBallDir().Y > 0)
 				{
-					BallReflect();
+					BallReflect(FVector2D::UP);
 
 					BrickDestroyCheck();
 				}
@@ -199,7 +201,7 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Right");
 				if (ResultBall->GetBallDir().X < 0)
 				{
-					BallReflect();
+					BallReflect(FVector2D::RIGHT);
 
 					BrickDestroyCheck();
 				}
@@ -209,12 +211,13 @@ void ABrick::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Bottom");
 				if (ResultBall->GetBallDir().Y < 0)
 				{
-					BallReflect();
+					BallReflect(FVector2D::DOWN);
 
 					BrickDestroyCheck();
 				}
 			}
 		}
+		int a = 0;
 	}
 }
 
@@ -238,6 +241,8 @@ void ABrick::BrickDestroyCheck()
 
 	if (0 == BrickHP)
 	{
+		CollisionCheck = true;
+
 		this->Destroy();
 
 		AItem* Ptr = GetWorld()->SpawnActor<AItem>();
@@ -249,10 +254,10 @@ void ABrick::BrickDestroyCheck()
 	}
 }
 
-void ABrick::BallReflect()
+void ABrick::BallReflect(FVector2D _Vector)
 {
 	FVector2D Dir;
-	Dir = ResultBall->GetBallDir().Reflect(FVector2D::DOWN);
+	Dir = ResultBall->GetBallDir().Reflect(_Vector);
 
 	ResultBall->SetBallDir(Dir);
 }

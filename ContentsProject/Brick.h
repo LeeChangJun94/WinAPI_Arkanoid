@@ -65,7 +65,7 @@ public:
 	inline void SetPlayerLife(APlayerLife* _Player) { PlayerLife = _Player; }
 
 	void BrickDestroyCheck();
-	void BallReflect();
+	void BallReflect(FVector2D _Vector);
 
 
 	void WhiteBrick();
@@ -113,7 +113,7 @@ private:
 	int Score = 0;
 	int BrickHP = 0;
 	EBrickType BrickType;
-	//bool CollisionCheck = false;
+	bool CollisionCheck = false;
 	
 	U2DCollision* CollisionComponent = nullptr;
 

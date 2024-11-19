@@ -84,6 +84,8 @@ public:
 	//	return Radian;
 	//}
 
+	std::list<FVector2D> BallLocationList;
+
 protected:
 
 private:
@@ -91,6 +93,7 @@ private:
 	//float Radian = 30.0f;
 	float CheckTime = 0.0f;
 	bool StartTime = true;
+
 	APlayerLife* PlayerLife = nullptr;
 	APlayer* Vaus = nullptr;
 	USpriteRenderer* SpriteRenderer;
