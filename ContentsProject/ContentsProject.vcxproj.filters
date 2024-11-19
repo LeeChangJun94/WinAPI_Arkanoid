@@ -7,9 +7,6 @@
     <ClInclude Include="ContentsCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="PlayGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ContentsObject\Player</Filter>
     </ClInclude>
@@ -51,11 +48,107 @@
     <ClInclude Include="GlobalValue.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
-    <ClInclude Include="BossStage.h">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClInclude>
     <ClInclude Include="Boss.h">
       <Filter>ContentsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_002.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_003.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_004.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_005.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_006.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_007.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_008.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_009.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_010.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_011.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_012.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_013.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_014.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_015.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_016.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_017.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_018.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_019.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_020.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_021.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_022.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_023.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_024.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_025.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_026.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_027.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_028.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_029.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_030.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_031.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_032.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_Boss.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_001.h">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -64,9 +157,6 @@
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>ContentsObject\Player</Filter>
@@ -109,11 +199,107 @@
     <ClCompile Include="GlobalValue.cpp">
       <Filter>ContentsObject\Global</Filter>
     </ClCompile>
-    <ClCompile Include="BossStage.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClCompile>
     <ClCompile Include="Boss.cpp">
       <Filter>ContentsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_002.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_003.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_004.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_005.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_006.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_007.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_008.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_009.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_010.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_011.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_012.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_013.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_014.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_015.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_016.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_017.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_018.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_019.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_020.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_021.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_022.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_023.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_024.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_025.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_026.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_027.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_028.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_029.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_030.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_031.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_032.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_Boss.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_001.cpp">
+      <Filter>ContentsObject\GameMode\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +329,9 @@
     </Filter>
     <Filter Include="ContentsObject\Global">
       <UniqueIdentifier>{ff599378-e4fd-4f08-8c83-c53b4f212876}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\GameMode\Stage">
+      <UniqueIdentifier>{29456b82-17ca-4b4c-9e8c-005cc3315682}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

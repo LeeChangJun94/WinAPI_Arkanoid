@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "PlayGameMode.h"
+#include "Stage_003.h"
 
 #include <EngineCore/Level.h>
 #include "GlobalValue.h"
@@ -14,27 +14,28 @@
 #include "ContentsEnum.h"
 #include <EngineBase/EngineFile.h>
 #include <EngineBase/EngineDirectory.h>
+#include <EnginePlatform/EngineInput.h>
+#include <EngineCore/EngineAPICore.h>
 
-
-APlayGameMode::APlayGameMode()
+AStage_003::AStage_003()
 {
 }
 
-APlayGameMode::~APlayGameMode()
+AStage_003::~AStage_003()
 {
 }
 
-void APlayGameMode::BeginPlay()
+void AStage_003::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	//BGMPlayer = UEngineSound::Play("anipang_ingame_wav.wav");
-	
+
 	Vaus = GetWorld()->GetPawn<APlayer>();
 
 	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
-	Stage1->SetPlayMapType(EPlayMapType::TYPE_1);
-	
+	Stage1->SetPlayMapType(EPlayMapType::TYPE_3);
+
 	{
 		AScore* Score = GetWorld()->SpawnActor<AScore>();
 
@@ -52,10 +53,11 @@ void APlayGameMode::BeginPlay()
 		HighScore->SetTextScale({ 24, 24 });
 		HighScore->SetActorLocation({ 396, 36 });
 	}
+
 	ADethLine* DethLineActor = GetWorld()->SpawnActor<ADethLine>();
 
 	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
-	
+
 	APlayerLife* PlayerLifeActor = GetWorld()->SpawnActor<APlayerLife>();
 	PlayerLifeActor->SetBall(BallActor);
 	PlayerLifeActor->SetDethLine(DethLineActor);
@@ -63,10 +65,25 @@ void APlayGameMode::BeginPlay()
 
 	Vaus->SetPlayerLife(PlayerLifeActor);
 
-	LoadBrick("Stage1", PlayerLifeActor);
+	LoadBrick("Stage3", PlayerLifeActor);
 }
 
-void APlayGameMode::LoadBrick(std::string _Stage, APlayerLife* _PlayerLifeActor)
+void AStage_003::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+	if (true == UEngineInput::GetInst().IsDown('N'))
+	{
+		UEngineAPICore::GetCore()->OpenLevel("Stage_002");
+	}
+
+	if (true == UEngineInput::GetInst().IsDown('M'))
+	{
+		UEngineAPICore::GetCore()->OpenLevel("Stage_004");
+	}
+}
+
+void AStage_003::LoadBrick(std::string _Stage, APlayerLife* _PlayerLifeActor)
 {
 	Bricks.resize(UGlobalValue::BrickY);
 

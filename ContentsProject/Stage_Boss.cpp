@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "BossStage.h"
+#include "Stage_Boss.h"
 
 #include <EngineCore/Level.h>
 #include "PlayMap.h"
@@ -10,19 +10,20 @@
 #include "PlayerLife.h"
 #include "Fade.h"
 #include "DethLine.h"
-
 #include "ContentsEnum.h"
+#include <EnginePlatform/EngineInput.h>
+#include <EngineCore/EngineAPICore.h>
 
-ABossStage::ABossStage()
+AStage_Boss::AStage_Boss()
 {
 	//243, 120
 }
 
-ABossStage::~ABossStage()
+AStage_Boss::~AStage_Boss()
 {
 }
 
-void ABossStage::BeginPlay()
+void AStage_Boss::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -62,4 +63,21 @@ void ABossStage::BeginPlay()
 
 	Vaus->SetPlayerLife(PlayerLifeActor);
 }
+
+void AStage_Boss::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+	if (true == UEngineInput::GetInst().IsDown('N'))
+	{
+		UEngineAPICore::GetCore()->OpenLevel("Stage_032");
+	}
+
+	/*if (true == UEngineInput::GetInst().IsDown('M'))
+	{
+		UEngineAPICore::GetCore()->OpenLevel("Stage_003");
+	}*/
+}
+
+
 

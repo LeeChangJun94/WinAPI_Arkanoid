@@ -133,6 +133,7 @@ void ABall::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	UEngineDebug::CoreOutPutString("Dir : " + Dir.ToString());
 
 	CheckTime += _DeltaTime;
 	Dir.Normalize();

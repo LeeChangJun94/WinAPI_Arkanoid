@@ -4,6 +4,7 @@
 #include <EngineBase/EngineMath.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/2DCollision.h>
+#include <EngineCore/EngineCoreDebug.h>
 #include "ContentsEnum.h"
 #include "Brick.h"
 #include "Player.h"

@@ -55,8 +55,8 @@ void ATitleGameMode::Tick(float _DeltaTime)
 	}
 
 	
-	if (true == UEngineInput::GetInst().IsDown('R'))
+	if (true == UEngineInput::GetInst().IsDown('M'))
 	{
-		UEngineAPICore::GetCore()->OpenLevel("Stage1");
+		UEngineAPICore::GetCore()->OpenLevel("Stage_001");
 	}
 }

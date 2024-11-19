@@ -8,20 +8,21 @@
 class APlayer;
 
 // Ό³Έν :
-class APlayGameMode : public AGameMode
+class AStage_010 : public AGameMode
 {
 public:
 	// constrcuter destructer
-	APlayGameMode();
-	~APlayGameMode();
+	AStage_010();
+	~AStage_010();
 
 	// delete Function
-	APlayGameMode(const APlayGameMode& _Other) = delete;
-	APlayGameMode(APlayGameMode&& _Other) noexcept = delete;
-	APlayGameMode& operator=(const APlayGameMode& _Other) = delete;
-	APlayGameMode& operator=(APlayGameMode&& _Other) noexcept = delete;
+	AStage_010(const AStage_010& _Other) = delete;
+	AStage_010(AStage_010&& _Other) noexcept = delete;
+	AStage_010& operator=(const AStage_010& _Other) = delete;
+	AStage_010& operator=(AStage_010&& _Other) noexcept = delete;
 
 	void BeginPlay();
+	void Tick(float _DeltaTime);
 
 	void LoadBrick(std::string _Stage, APlayerLife* _PlayerLifeActor);
 
