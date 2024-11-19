@@ -63,7 +63,8 @@ void AItem::ItemSlowEffect()
 	{
 		(*BalliterStart)->SetBallSpeed(500.0f);
 	}
-	//Ball->SetBallSpeed(500.0f);
+
+	Vaus->SlowEffect = true;
 }
 
 void AItem::ItemCatch()
@@ -115,7 +116,7 @@ void AItem::ItemDisruptionEffect()
 {
 	UEngineRandom Random;
 	
-	for (int i = 0; i < 2; ++i)
+	for (size_t i = PlayerLife->BallList.size(); i < 3; ++i)
 	{
 		float RandomValue = Random.Randomfloat(-5.0f, 5.0f);
 
@@ -192,32 +193,32 @@ void AItem::ItemCollisionCheck()
 ModeState AItem::RandomItemCreate()
 {
 	UEngineRandom Random;
-	int RandomValue = Random.RandomInt(1, 100);
-	if (70 < RandomValue)
+	int RandomValue = Random.RandomInt(1, 40);
+	if (28 < RandomValue)
 	{
 		ItemState = ModeState::None;
 	}
-	else if (60 < RandomValue)
+	else if (24 < RandomValue)
 	{
 		ItemState = ModeState::Slow;
 	}
-	else if (50 < RandomValue)
+	else if (20 < RandomValue)
 	{
 		ItemState = ModeState::Catch;
 	}
-	else if (40 < RandomValue)
+	else if (16 < RandomValue)
 	{
 		ItemState = ModeState::Laser;
 	}
-	else if (30 < RandomValue)
+	else if (12 < RandomValue)
 	{
 		ItemState = ModeState::Enlarge;
 	}
-	else if (20 < RandomValue)
+	else if (8 < RandomValue)
 	{
 		ItemState = ModeState::Disruption;
 	}
-	else if (10 < RandomValue)
+	else if (6 < RandomValue)
 	{
 		ItemState = ModeState::Break;
 	}
@@ -238,6 +239,10 @@ void AItem::BeginPlay()
 		this->Destroy();
 		break;
 	case ModeState::Slow:
+		if (true == Vaus->SlowEffect)
+		{
+			this->Destroy();
+		}
 		ItemSlow();
 		break;
 	case ModeState::Catch:
@@ -248,13 +253,21 @@ void AItem::BeginPlay()
 		ItemCatch();
 		break;
 	case ModeState::Laser:
+		if (PlayerState::Laser == Vaus->GetCurPlayerState())
+		{
+			this->Destroy();
+		}
 		ItemLaser();
 		break;
 	case ModeState::Enlarge:
+		if (PlayerState::Enlarge == Vaus->GetCurPlayerState())
+		{
+			this->Destroy();
+		}
 		ItemEnlarge();
 		break;
 	case ModeState::Disruption:
-		if (2 <= PlayerLife->BallList.size())
+		if (2 <= PlayerLife->BallList.size() || true == Vaus->CatchEffect)
 		{
 			this->Destroy();
 		}

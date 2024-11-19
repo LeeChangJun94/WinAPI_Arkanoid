@@ -45,22 +45,12 @@ public:
 	{
 		PlayerScore += _PlayerScore;
 	}
-	//void MoveFunction(FVector2D _Dir);
+			
+	PlayerState GetCurPlayerState()
+	{
+		return CurPlayerState;
+	}
 
-	//void LeftMove(float _DeltaTime);
-	//void RightMove(float _DeltaTime);
-	//void UpMove(float _DeltaTime);
-	//void DownMove(float _DeltaTime);
-
-	//void Normalize(FVector2D& _Vector)
-	//{
-	//	_Vector.X * _Vector.X;
-	//	_Vector.Y * _Vector.Y;
-	//	float Sqrt = std::sqrt(_Vector.X * _Vector.X + _Vector.Y * _Vector.Y);
-	//	_Vector.X = _Vector.X / Sqrt;
-	//	_Vector.Y = _Vector.Y / Sqrt;
-	//}
-		
 	FVector2D Dir = { 0.f , 0.f };
 
 	std::list<ABullet*> BulletPtr;
@@ -76,16 +66,8 @@ public:
 		return BulletPtr;
 	}
 
-	void SetBulletCount(int _BulletCount)
-	{
-		BulletCount += _BulletCount;
-	}
 	void ChangeState(PlayerState CurPlayerState);
 
-	//inline void SetPlayerLife(APlayerLife* _PlayerLife)
-	//{
-	//	PlayerLife = _PlayerLife;
-	//}
 	APlayerLife* GetPlayerLife()
 	{
 		return PlayerLife;
@@ -107,13 +89,14 @@ public:
 	}
 
 	bool CatchEffect = false;
+	bool SlowEffect = false;
+
 protected:
 
 private:
 	float Speed = 300.0f;
 	float radian = 0.0f;
 	
-
 	int MySpriteIndex = 0;
 	//bool IsTransformEnd = false;
 	int BulletCount = 0;
@@ -142,8 +125,6 @@ private:
 	void CreateDone();
 	
 	U2DCollision* CollisionComponent;
-	
-	
 
 	void IdleStart();
 	void Idle(float _DeltaTime);
@@ -152,33 +133,5 @@ private:
 	void Enlarge(float _DeltaTime);
 	void CatchStart();
 	void Catch(float _DeltaTime);
-	//inline void AnimationEnd() { IsTransformEnd = true; }
-	// class std::vector< USpriteRenderer* LeftRenderer;
-
-	//PlayerState CurPlayerState = PlayerState::Idle;
-
-	//// 점프
-	//// 공격
-	//// 점프공격
-	//// 
-
-	//void ChangeState(PlayerState CurPlayerState);
-
-	//void IdleStart();
-	//void Idle(float _DeltaTime);
-	//void MoveStart();
-	//void Move(float _DeltaTime);
-	//void Fly(float _DeltaTime);
-
-	//// 상태는 아니지만 도움이나 체크에 처리되는 함수
-	//void Gravity()
-	//{
-
-	//}
-
-
-	//// void Jump();
-
-
 };
 
