@@ -28,13 +28,9 @@ public:
 protected:
 
 private:
-	//FVector2D BrickScale = { 32, 16 };
-	//ATileMap* BrickTileMap = nullptr;
-	//AScore* Score = nullptr;
-	//class AScore* Score;
-
-	//ABall* BallActor = nullptr;
 	APlayer* Vaus = nullptr;
+	std::vector<std::vector<ABrick*>> Bricks;
 	USoundPlayer BGMPlayer;
+
 };
 

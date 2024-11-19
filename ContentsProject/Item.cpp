@@ -117,7 +117,7 @@ void AItem::ItemDisruptionEffect()
 	
 	for (int i = 0; i < 2; ++i)
 	{
-		float RandomValue = Random.Randomfloat(-1.0f, 1.0f);
+		float RandomValue = Random.Randomfloat(-5.0f, 5.0f);
 
 		ABall* BallActor = GetWorld()->SpawnActor<ABall>();
 		PlayerLife->BallList.push_back(BallActor);
