@@ -9,7 +9,7 @@ UEngineSerializer::~UEngineSerializer()
 {
 }
 
-void UEngineSerializer::Write(void* _Data, unsigned int _Size)
+void UEngineSerializer::Write(const void* _Data, unsigned int _Size)
 {
 	// vector밖에 없다.
 	// 
@@ -30,6 +30,16 @@ void UEngineSerializer::Write(void* _Data, unsigned int _Size)
 	// [C][V][V][V][V][]
 	memcpy_s(&Data[WriteOffset], _Size, _Data, _Size);
 	WriteOffset += _Size;
+}
+
+void UEngineSerializer::operator<<(class ISerializObject* _Data)
+{
+	if (nullptr == _Data)
+	{
+		return;
+	}
+
+	_Data->Serialize(*this);
 }
 
 void UEngineSerializer::operator<<(ISerializObject& _Data)

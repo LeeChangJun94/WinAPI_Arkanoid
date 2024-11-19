@@ -7,6 +7,7 @@ class UEnginePath
 public:
 	// constrcuter destructer
 	UEnginePath();
+	UEnginePath(const char* _Path);
 	UEnginePath(std::string_view _Path);
 	UEnginePath(std::filesystem::path _Path);
 	~UEnginePath();

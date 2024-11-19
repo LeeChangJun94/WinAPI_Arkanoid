@@ -4,15 +4,6 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineBase/EngineSerializer.h>
 
-enum class EReflectionDir
-{
-	LEFT,
-	RIGHT,
-	UP,
-	DOWN,
-	MAX,
-};
-
 enum class EBrickType
 {
 	WHITE,
@@ -109,18 +100,12 @@ public:
 protected:
 
 private:
-	static FVector2D ReflectionVector[static_cast<int>(EReflectionDir::MAX)];
 	
 	FTransform BallTrans;
 
 	FTransform BrickTrans;
 	
 	USpriteRenderer* SpriteRenderer;
-
-	bool LeftTop = false;
-	bool LeftBottom = false;
-	bool RightTop = false;
-	bool RightBottom = false;
 
 	float Ratio = 0;
 	float Line = 0;

@@ -7,6 +7,12 @@ UEnginePath::UEnginePath()
 {
 }
 
+UEnginePath::UEnginePath(const char* _Path)
+	: Path(_Path)
+{
+
+}
+
 UEnginePath::UEnginePath(std::string_view _Path)
 	: Path(_Path)
 {

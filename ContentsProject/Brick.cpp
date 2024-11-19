@@ -15,19 +15,9 @@
 #include <EngineCore/ImageManager.h>
 #include <EngineBase/EngineRandom.h>
 
-//FVector2D ABrick::ReflectionVector[static_cast<int>(EReflectionDir::MAX)] = {
-//	{1, 0},	// LEFT,
-//	{-1, 0},	// RIGHT,
-//	{0, 1},					// UP,
-//	{0, -1},					// DOWN,
-//};
-
-
 
 ABrick::ABrick()
 {
-	//SetActorLocation({ 600, 300});
-	//SetActorScale({ 32, 16 });
 
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetSprite("Bricks.png");
@@ -99,215 +89,9 @@ void ABrick::BeginPlay()
 	}
 }
 
-//bool ABrick::RectCheck()
-//{
-//	// 필요한 값들을 다 모아서 정렬한다.
-//	FTransform BallTransform = ABall::Ball->GetTransform();
-//	FTransform BrickTransform = SpriteRenderer->GetActorTransform();
-//
-//	FVector2D LeftTop = BrickTransform.CenterLeftTop();
-//	FVector2D RatioPos = BallTransform.Location - LeftTop;
-//
-//	// 계산값들을 미리 계산해 놓는다.
-//	RatioPos.X /= 48;
-//	RatioPos.Y /= 24;
-//
-//	// 절대 아닌 사항리턴하기 시작한다.
-//
-//	if (0.0f > RatioPos.X)
-//	{
-//		return false;
-//	}
-//
-//	if (0.0f > RatioPos.Y)
-//	{
-//		return false;
-//	}
-//
-//	if (1.0f < RatioPos.X)
-//	{
-//		return false;
-//	}
-//
-//	if (1.0f < RatioPos.Y)
-//	{
-//		return false;
-//	}
-//
-//	return true;
-//}
-
-//bool ABrick::RectCheck()
-//{
-//	FTransform BallTransform = Ball->GetTransform();
-//	FTransform BrickTransform = SpriteRenderer->GetActorTransform();
-//
-//	if (BallTransform.Location.X < BrickTransform.Location.X && BallTransform.Location.X > (BrickTransform.Location.X - (BrickTransform.Scale.X / 2)) &&
-//		BallTransform.Location.Y > (BrickTransform.Location.Y - (BrickTransform.Scale.Y / 2)) && BallTransform.Location.Y < BrickTransform.Location.Y)
-//	{
-//		LeftTop = true;
-//		return LeftTop;
-//	}
-//	
-//	if (BallTransform.Location.X < BrickTransform.Location.X && BallTransform.Location.X >(BrickTransform.Location.X - (BrickTransform.Scale.X / 2)) &&
-//		BallTransform.Location.Y < (BrickTransform.Location.Y + (BrickTransform.Scale.Y / 2)) && BallTransform.Location.Y > BrickTransform.Location.Y)
-//	{
-//		LeftBottom = true;
-//		return LeftBottom;
-//	}
-//
-//	if (BallTransform.Location.X > BrickTransform.Location.X && BallTransform.Location.X < (BrickTransform.Location.X + (BrickTransform.Scale.X / 2)) &&
-//		BallTransform.Location.Y > (BrickTransform.Location.Y - (BrickTransform.Scale.Y / 2)) && BallTransform.Location.Y < BrickTransform.Location.Y)
-//	{
-//		RightTop = true;
-//		return RightTop;
-//	}
-//
-//	if (BallTransform.Location.X > BrickTransform.Location.X && BallTransform.Location.X < (BrickTransform.Location.X + (BrickTransform.Scale.X / 2)) &&
-//		BallTransform.Location.Y < (BrickTransform.Location.Y + (BrickTransform.Scale.Y / 2)) && BallTransform.Location.Y > BrickTransform.Location.Y)
-//	{
-//		RightBottom = true;
-//		return RightBottom;
-//	}
-//
-//	LeftTop = false;
-//	LeftBottom = false;
-//	RightTop = false;
-//	RightBottom = false;
-//
-//	return false;
-//}
-
-//EReflectionDir ABrick::ReflectionDirCheck()
-//{
-//	FTransform BallTransform = ABall::Ball->GetTransform();
-//	FTransform BrickTransform = SpriteRenderer->GetActorTransform();
-//
-//	FVector2D LeftTop = BrickTransform.CenterLeftTop();
-//	FVector2D LRRatioPos = BallTransform.Location - LeftTop;
-//
-//	// 계산값들을 미리 계산해 놓는다.
-//	LRRatioPos.X /= 48;
-//	LRRatioPos.Y /= 24;
-//
-//	// 에러 값으로 세팅해 놓는다.
-//	// 만약에 내가 아래쪽 코드를 잘못 짰다면
-//	EReflectionDir Dir = EReflectionDir::MAX;
-//
-//	// 오른쪽 삼각형
-//	if (LRRatioPos.X > LRRatioPos.Y)
-//	{
-//		Dir = EReflectionDir::RIGHT;
-//	}
-//	else 
-//	{
-//		Dir = EReflectionDir::LEFT;
-//	}
-//
-//	FVector2D BTRatioPos = LRRatioPos;
-//	BTRatioPos.X = 1.0f - BTRatioPos.X;
-//	BTRatioPos.Y = 1.0f - BTRatioPos.Y;
-//
-//	if (BTRatioPos.X < BTRatioPos.Y)
-//	{
-//		if (Dir == EReflectionDir::RIGHT)
-//		{
-//			Dir = EReflectionDir::UP;
-//		}
-//	}
-//	else 
-//	{
-//		if (Dir == EReflectionDir::LEFT)
-//		{
-//			Dir = EReflectionDir::DOWN;
-//		}
-//	}
-//
-//	return Dir;
-//}
-
-//EReflectionDir ABrick::ReflectionDirCheck()
-//{
-//	FTransform BallTransform = //Ball->GetTransform();
-//	FTransform BrickTransform = SpriteRenderer->GetActorTransform();
-//
-//	float Ratio = (BrickTransform.Scale.Y / 2) / (BrickTransform.Scale.X / 2);
-//
-//	float LeftLine = (-Ratio) * (BallTrans.Location.X - BrickTrans.Location.X);
-//	float RightLine = Ratio * (BallTrans.Location.X - BrickTrans.Location.X);
-//
-//	EReflectionDir Dir = EReflectionDir::MAX;
-//
-//	if (true == LeftTop)
-//	{
-//		if (LeftLine > (BrickTrans.Location.Y - BallTrans.Location.Y))
-//		{
-//			Dir = EReflectionDir::LEFT;
-//		}
-//		else
-//		{
-//			Dir = EReflectionDir::UP;
-//		}
-//	}
-//	
-//	if (true == LeftBottom)
-//	{
-//		if (RightLine > (BrickTrans.Location.Y - BallTrans.Location.Y))
-//		{
-//			Dir = EReflectionDir::LEFT;
-//		}
-//		else
-//		{
-//			Dir = EReflectionDir::DOWN;
-//		}
-//	}
-//
-//	if (true == RightTop)
-//	{
-//		if (RightLine > (BrickTrans.Location.Y - BallTrans.Location.Y))
-//		{
-//			Dir = EReflectionDir::RIGHT;
-//		}
-//		else
-//		{
-//			Dir = EReflectionDir::UP;
-//		}
-//	}
-//
-//	if (true == RightBottom)
-//	{
-//		if (LeftLine < (BrickTrans.Location.Y - BallTrans.Location.Y))
-//		{
-//			Dir = EReflectionDir::RIGHT;
-//		}
-//		else
-//		{
-//			Dir = EReflectionDir::DOWN;
-//		}
-//	}
-//
-//	return Dir;
-//}
-
 void ABrick::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-
-	//if (true == RectCheck())
-	//{
-	//	EReflectionDir Dir = ReflectionDirCheck();
-	//
-	//	FVector2D DirVector = ReflectionVector[static_cast<int>(Dir)];
-	//
-	//	DirVector = ABall::Ball->Dir.Reflect(DirVector);
-	//
-	//	ABall::Ball->Dir = DirVector;
-	//
-	//	this->Destroy();
-	//
-	//}
-	//
-	//return;
 
 	BrickTrans.Location = { GetActorLocation() };
 
@@ -436,12 +220,14 @@ void ABrick::Tick(float _DeltaTime)
 // 데이터를 직렬화(압축)
 void ABrick::Serialize(UEngineSerializer& _Ser)
 {
+	_Ser << GetActorLocation();
+	//_Ser << BrickType;
 
 }
 // 데이터를 복구(할때)
 void ABrick::DeSerialize(UEngineSerializer& _Ser)
 {
-
+	int a = 0;
 }
 
 

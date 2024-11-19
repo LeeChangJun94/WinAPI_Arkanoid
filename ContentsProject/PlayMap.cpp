@@ -8,7 +8,7 @@ APlayMap::APlayMap()
 {
 	USpriteRenderer* SpriteRenderer1 = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer1->SetOrder(ERenderOrder::BACKGROUND);
-	SpriteRenderer1->SetSprite("BackGround_Boss.png");
+	SpriteRenderer1->SetSprite("BackGround_TYPE1.png");
 	SpriteRenderer1->SetComponentScale({ 672, 720 });
 	SpriteRenderer1->SetComponentLocation({ 336, 408 });
 

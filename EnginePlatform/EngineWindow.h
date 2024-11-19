@@ -50,6 +50,12 @@ public:
 	{
 		return BackBufferImage;
 	}
+	
+	inline HWND GetWindowHandle() const
+	{
+		return WindowHandle;
+	}
+
 
 	// 실력이 낮을수록 남과 공유하려고 안한다.
 	// 자기만 아는걸 대명사처럼 말하고.

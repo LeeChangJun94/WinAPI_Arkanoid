@@ -164,7 +164,7 @@ void ContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
 	//UEngineAPICore::GetCore()->CreateLevel("End");
 	
-	UEngineAPICore::GetCore()->OpenLevel("Boss");
+	UEngineAPICore::GetCore()->OpenLevel("Tile");
 
 	//UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
 

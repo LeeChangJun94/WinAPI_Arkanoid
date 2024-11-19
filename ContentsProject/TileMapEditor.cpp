@@ -52,7 +52,7 @@ void ATileMapEditor::BeginPlay()
 void ATileMapEditor::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	
+
 
 	if (true == UEngineInput::GetInst().IsDown('S'))
 	{
@@ -75,7 +75,7 @@ void ATileMapEditor::Tick(float _DeltaTime)
 		FVector2D IndexPos = MousePos / UGlobalValue::BrickSize;
 
 		FIntPoint TilePoint = IndexPos.ConvertToPoint();
-		
+
 		if (IndexOver(TilePoint))
 		{
 			return;
@@ -85,7 +85,7 @@ void ATileMapEditor::Tick(float _DeltaTime)
 		{
 			return;
 		}
-		
+
 		FVector2D CreatePos;
 		CreatePos.X = TilePoint.X * UGlobalValue::BrickSize.X;
 		CreatePos.Y = TilePoint.Y * UGlobalValue::BrickSize.Y;
@@ -96,7 +96,7 @@ void ATileMapEditor::Tick(float _DeltaTime)
 		Print->SetBrickType(CurBrickType);
 		Bricks[TilePoint.Y][TilePoint.X] = Print;
 	}
-	
+
 	if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
 	{
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
@@ -124,6 +124,108 @@ void ATileMapEditor::Tick(float _DeltaTime)
 		}
 	}
 
+	if (true == UEngineInput::GetInst().IsPress('Q'))
+	{
+		for (size_t y = 0; y < Bricks.size(); y++)
+		{
+			for (size_t x = 0; x < Bricks[y].size(); x++)
+			{
+				if (nullptr != Bricks[y][x])
+				{
+					Bricks[y][x]->Destroy();
+					Bricks[y][x] = nullptr;
+				}
+			}
+		}
+	}
+
+	if (true == UEngineInput::GetInst().IsPress('O'))
+	{
+		UEngineWindow& Window = UEngineAPICore::GetCore()->GetMainWindow();
+
+		OPENFILENAME OFN;
+		char filePathName[100] = "";
+		char lpstrFile[100] = "";
+		static char filter[] = "*.BData";
+
+		memset(&OFN, 0, sizeof(OPENFILENAME));
+		OFN.lStructSize = sizeof(OPENFILENAME);
+		OFN.hwndOwner = Window.GetWindowHandle();
+		OFN.lpstrFilter = filter;
+		OFN.lpstrFile = lpstrFile;
+		OFN.nMaxFile = 100;
+		OFN.lpstrInitialDir = ".";
+
+		if (GetOpenFileNameA(&OFN) != 0) 
+		{
+			std::string FilePath = OFN.lpstrFile;
+		}
+
+	}
+
+	if (true == UEngineInput::GetInst().IsPress('P'))
+	{
+		UEngineDirectory Dir;
+
+		if (false == Dir.MoveParentToDirectory("Resources"))
+		{
+			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			return;
+		}
+
+		Dir.Append("Data");
+
+
+		UEngineWindow& Window = UEngineAPICore::GetCore()->GetMainWindow();
+
+		OPENFILENAME OFN;
+		char filePathName[100] = "";
+		char lpstrFile[100] = "";
+
+		memset(&OFN, 0, sizeof(OPENFILENAME));
+		OFN.lStructSize = sizeof(OFN);
+		OFN.hwndOwner = Window.GetWindowHandle();
+		OFN.lpstrFile = lpstrFile;
+		OFN.lpstrFile[0] = '\0';
+		OFN.nMaxFile = sizeof(lpstrFile);
+		OFN.lpstrFilter = "Brick Data (*.BData)\0*.BData\0";
+		OFN.nFilterIndex = 1;
+		OFN.lpstrFileTitle = NULL;
+		OFN.nMaxFileTitle = 0;
+		OFN.lpstrInitialDir = NULL;
+		// OFN.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT | OFN_EXPLORER | OFN_ENABLEHOOK;
+
+		std::string Path = Dir.GetPathToString();
+
+		OFN.lpstrInitialDir = Path.c_str();
+
+		
+
+		if (GetSaveFileNameA(&OFN) != 0)
+		{
+			UEnginePath Path = lpstrFile;
+			std::string Ext = Path.GetExtension();
+			std::string UpperExt = UEngineString::ToUpper(Ext);
+			if (UpperExt != ".BDATA")
+			{
+				std::string FileName = Path.GetFileName();
+				FileName += ".BData";
+				Path.MoveParent();
+				Path.Append(FileName);
+			}
+
+			UEngineSerializer Ser;
+
+			Ser << Bricks;
+
+			UEngineFile File;
+
+		}
+
+	}
+
+
+
 
 }
 
@@ -133,7 +235,7 @@ bool ATileMapEditor::IndexOver(FIntPoint _TilePoint)
 	{
 		return true;
 	}
-	
+
 	if (0 > _TilePoint.Y)
 	{
 		return true;
