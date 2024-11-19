@@ -126,21 +126,24 @@ void ATileMapEditor::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsPress('Q'))
 	{
-		for (size_t y = 0; y < Bricks.size(); y++)
-		{
-			for (size_t x = 0; x < Bricks[y].size(); x++)
-			{
-				if (nullptr != Bricks[y][x])
-				{
-					Bricks[y][x]->Destroy();
-					Bricks[y][x] = nullptr;
-				}
-			}
-		}
+		ClearBrick();
 	}
 
 	if (true == UEngineInput::GetInst().IsPress('O'))
 	{
+		ClearBrick();
+
+		UEngineDirectory Dir;
+
+		if (false == Dir.MoveParentToDirectory("Resources"))
+		{
+			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			return;
+		}
+
+		Dir.Append("Data");
+
+
 		UEngineWindow& Window = UEngineAPICore::GetCore()->GetMainWindow();
 
 		OPENFILENAME OFN;
@@ -154,13 +157,42 @@ void ATileMapEditor::Tick(float _DeltaTime)
 		OFN.lpstrFilter = filter;
 		OFN.lpstrFile = lpstrFile;
 		OFN.nMaxFile = 100;
-		OFN.lpstrInitialDir = ".";
+		
+		std::string Path = Dir.GetPathToString();
+		OFN.lpstrInitialDir = Path.c_str();
 
-		if (GetOpenFileNameA(&OFN) != 0) 
+		if (GetOpenFileNameA(&OFN) != 0)
 		{
 			std::string FilePath = OFN.lpstrFile;
-		}
 
+
+			UEngineSerializer Ser;
+			UEngineFile File = FilePath;
+			File.FileOpen("rb");
+			File.Read(Ser);
+
+			std::vector<FVector2D> Positions;
+			std::vector<int> Types;
+
+			Ser >> Positions;
+			Ser >> Types;
+
+			for (size_t i = 0; i < Positions.size(); i++)
+			{
+				FVector2D IndexPos = (Positions[i] - UGlobalValue::StartBrickPos) / UGlobalValue::BrickSize;
+				FIntPoint TilePoint = IndexPos.ConvertToPoint();
+
+				FVector2D CreatePos;
+				CreatePos.X = TilePoint.X * UGlobalValue::BrickSize.X;
+				CreatePos.Y = TilePoint.Y * UGlobalValue::BrickSize.Y;
+				CreatePos += UGlobalValue::StartBrickPos;
+
+				ABrick* Print = GetWorld()->SpawnActor<ABrick>();
+				Print->SetActorLocation(CreatePos + UGlobalValue::BrickSize.Half());
+				Print->SetBrickType(static_cast<EBrickType>(Types[i]));
+				Bricks[TilePoint.Y][TilePoint.X] = Print;
+			}
+		}
 	}
 
 	if (true == UEngineInput::GetInst().IsPress('P'))
@@ -199,7 +231,7 @@ void ATileMapEditor::Tick(float _DeltaTime)
 
 		OFN.lpstrInitialDir = Path.c_str();
 
-		
+
 
 		if (GetSaveFileNameA(&OFN) != 0)
 		{
@@ -214,19 +246,31 @@ void ATileMapEditor::Tick(float _DeltaTime)
 				Path.Append(FileName);
 			}
 
+			std::vector<FVector2D> Positions;
+			std::vector<int> Types;
+
+			for (size_t y = 0; y < Bricks.size(); y++)
+			{
+				for (size_t x = 0; x < Bricks[y].size(); x++)
+				{
+					if (nullptr != Bricks[y][x])
+					{
+						Positions.push_back(Bricks[y][x]->GetActorLocation());
+						Types.push_back(static_cast<int>(Bricks[y][x]->GetBrickType()));
+					}
+				}
+			}
+
 			UEngineSerializer Ser;
+			Ser << Positions;
+			Ser << Types;
 
-			Ser << Bricks;
-
-			UEngineFile File;
+			UEngineFile File = Path.GetFileName();
+			File.FileOpen("wb");
+			File.Write(Ser);
 
 		}
-
 	}
-
-
-
-
 }
 
 bool ATileMapEditor::IndexOver(FIntPoint _TilePoint)
@@ -252,4 +296,19 @@ bool ATileMapEditor::IndexOver(FIntPoint _TilePoint)
 	}
 
 	return false;
+}
+
+void ATileMapEditor::ClearBrick()
+{
+	for (size_t y = 0; y < Bricks.size(); y++)
+	{
+		for (size_t x = 0; x < Bricks[y].size(); x++)
+		{
+			if (nullptr != Bricks[y][x])
+			{
+				Bricks[y][x]->Destroy();
+				Bricks[y][x] = nullptr;
+			}
+		}
+	}
 }

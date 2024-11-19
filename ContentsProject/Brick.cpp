@@ -221,7 +221,7 @@ void ABrick::Tick(float _DeltaTime)
 void ABrick::Serialize(UEngineSerializer& _Ser)
 {
 	_Ser << GetActorLocation();
-	//_Ser << BrickType;
+	_Ser << static_cast<int>(BrickType);
 
 }
 // 데이터를 복구(할때)

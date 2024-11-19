@@ -18,6 +18,8 @@ public:
 
 	bool IndexOver(FIntPoint _TilePoint);
 
+	void ClearBrick();
+
 protected:
 	void BeginPlay() override;
 
