@@ -31,10 +31,10 @@ void AStage_002::BeginPlay()
 
 	//BGMPlayer = UEngineSound::Play("anipang_ingame_wav.wav");
 
-	Vaus = GetWorld()->GetPawn<APlayer>();
+	//Vaus = GetWorld()->GetPawn<APlayer>();
 
-	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
-	Stage1->SetPlayMapType(EPlayMapType::TYPE_2);
+	APlayMap* Map = GetWorld()->SpawnActor<APlayMap>();
+	Map->SetPlayMapType(EPlayMapType::TYPE_DARK);
 
 	{
 		AScore* Score = GetWorld()->SpawnActor<AScore>();
@@ -54,33 +54,35 @@ void AStage_002::BeginPlay()
 		HighScore->SetActorLocation({ 396, 36 });
 	}
 
-	ADethLine* DethLineActor = GetWorld()->SpawnActor<ADethLine>();
+	//ADethLine* DethLineActor = GetWorld()->SpawnActor<ADethLine>();
 
-	ABall* BallActor = GetWorld()->SpawnActor<ABall>();
+	//ABall* BallActor = GetWorld()->SpawnActor<ABall>();
 
-	APlayerLife* PlayerLifeActor = GetWorld()->SpawnActor<APlayerLife>();
-	PlayerLifeActor->SetBall(BallActor);
-	PlayerLifeActor->SetDethLine(DethLineActor);
-	PlayerLifeActor->BallList.push_back(BallActor);
+	//APlayerLife* PlayerLifeActor = GetWorld()->SpawnActor<APlayerLife>();
+	//PlayerLifeActor->SetBall(BallActor);
+	//PlayerLifeActor->SetDethLine(DethLineActor);
+	//PlayerLifeActor->BallList.push_back(BallActor);
 
-	Vaus->SetPlayerLife(PlayerLifeActor);
+	//Vaus->SetPlayerLife(PlayerLifeActor);
 
-	LoadBrick("Stage2", PlayerLifeActor);
+	//LoadBrick("Stage2", PlayerLifeActor);
 }
 
 void AStage_002::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (true == UEngineInput::GetInst().IsDown('N'))
-	{
-		UEngineAPICore::GetCore()->OpenLevel("Stage_001");
-	}
+	UEngineAPICore::GetCore()->OpenLevel("Stage_001");
 
-	if (true == UEngineInput::GetInst().IsDown('M'))
-	{
-		UEngineAPICore::GetCore()->OpenLevel("Stage_003");
-	}
+	//if (true == UEngineInput::GetInst().IsDown('N'))
+	//{
+	//	UEngineAPICore::GetCore()->OpenLevel("Stage_001");
+	//}
+	//
+	//if (true == UEngineInput::GetInst().IsDown('M'))
+	//{
+	//	UEngineAPICore::GetCore()->OpenLevel("Stage_003");
+	//}
 }
 
 void AStage_002::LoadBrick(std::string _Stage, APlayerLife* _PlayerLifeActor)

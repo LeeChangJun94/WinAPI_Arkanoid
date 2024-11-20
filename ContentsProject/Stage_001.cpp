@@ -19,10 +19,18 @@
 #include <EngineBase/EngineDirectory.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
+#include <EngineCore/EngineCoreDebug.h>
 
+std::list<ABrick*> AStage_001::BrickList;
 
 AStage_001::AStage_001()
 {
+	Bricks.resize(UGlobalValue::BrickY);
+
+	for (int i = 0; i < UGlobalValue::BrickY; ++i)
+	{
+		Bricks[i].resize(UGlobalValue::BrickX);
+	}
 }
 
 AStage_001::~AStage_001()
@@ -37,8 +45,8 @@ void AStage_001::BeginPlay()
 	
 	Vaus = GetWorld()->GetPawn<APlayer>();
 
-	APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
-	Stage1->SetPlayMapType(EPlayMapType::TYPE_1);
+	//APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
+	//Stage1->SetPlayMapType(static_cast<EPlayMapType>(Stage % 4));
 	
 	{
 		AScore* Score = GetWorld()->SpawnActor<AScore>();
@@ -82,17 +90,13 @@ void AStage_001::BeginPlay()
 		Text3->SetTextScale({ 24, 24 });
 		Text3->SetActorLocation({ 380, 572 });
 		Text3->SetText("READY");
-		
 	}
 
 	ADethLine* DethLineActor = GetWorld()->SpawnActor<ADethLine>();
 
-	
-	
 	PlayerLifeActor = GetWorld()->SpawnActor<APlayerLife>();
 	PlayerLifeActor->SetDethLine(DethLineActor);
 	
-
 	Vaus->SetPlayerLife(PlayerLifeActor);
 
 	Text1->SetActive(false);
@@ -101,30 +105,68 @@ void AStage_001::BeginPlay()
 	//Vaus->SetActive(false);
 	//BallActor->SetActive(false);
 
-	LoadBrick("Stage1", PlayerLifeActor);
+	//LoadBrick(Stage, PlayerLifeActor);
 }
 
 void AStage_001::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	
+	UEngineDebug::CoreOutPutString("BrickListSize : " + std::to_string(BrickList.size()));
+
+	if (true != StageSetting)
+	{
+		Map = GetWorld()->SpawnActor<APlayMap>();
+		Map->SetPlayMapType(static_cast<EPlayMapType>(Stage % 4));
+		LoadBrick(Stage, PlayerLifeActor);
+	}
+
 	if (true == Vaus->GetStartSwitch())
 	{
-		StageStart();
 		Vaus->SetStartSwitch(false);
+		StageStart();
+	}
+
+	if (0 == BrickList.size())
+	{
+		Stage += 1;
+		
+		//LoadBrick(Stage, PlayerLifeActor);
 	}
 
 	if (true == UEngineInput::GetInst().IsDown('N'))
 	{
-		UEngineAPICore::GetCore()->OpenLevel("Title");
+		if (1 != Stage)
+		{
+			Stage -= 1;
+			StageSetting = false;
+			Vaus->SetStartSwitch(true);
+			BrickList.clear();
+			Map->Destroy();
+			UEngineAPICore::GetCore()->OpenLevel("Stage_002");
+		}
+		else
+		{
+			UEngineAPICore::GetCore()->OpenLevel("Title");
+		}
 	}
 
 	if (true == UEngineInput::GetInst().IsDown('M'))
 	{
-		UEngineAPICore::GetCore()->OpenLevel("Stage_002");
+		if (32 != Stage)
+		{
+			Stage += 1;
+			StageSetting = false;
+			Vaus->SetStartSwitch(true);
+			BrickList.clear();
+			Map->Destroy();
+			UEngineAPICore::GetCore()->OpenLevel("Stage_002");
+		}
+		else
+		{
+			UEngineAPICore::GetCore()->OpenLevel("Stage_Boss");
+		}
 	}
-
-	
 }
 
 void AStage_001::TextOFF()
@@ -167,14 +209,11 @@ void AStage_001::ActorSpawn()
 	PlayerLifeActor->BallList.push_back(BallActor);
 }
 
-void AStage_001::LoadBrick(std::string _Stage, APlayerLife* _PlayerLifeActor)
+void AStage_001::LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor)
 {
-	Bricks.resize(UGlobalValue::BrickY);
+	StageSetting = true;
 
-	for (int i = 0; i < UGlobalValue::BrickY; ++i)
-	{
-		Bricks[i].resize(UGlobalValue::BrickX);
-	}
+	ClearBrick();
 
 	UEngineDirectory Dir;
 
@@ -188,7 +227,9 @@ void AStage_001::LoadBrick(std::string _Stage, APlayerLife* _PlayerLifeActor)
 
 	UEngineSerializer Ser;
 
-	std::string FilePath = Dir.GetPathToString() + "\\" + _Stage + ".BData";
+	std::string CurStage = std::to_string(_Stage);
+
+	std::string FilePath = Dir.GetPathToString() + "\\" + "Stage" + CurStage + ".BData";
 
 	UEngineFile File = FilePath;
 	File.FileOpen("rb");
@@ -215,5 +256,24 @@ void AStage_001::LoadBrick(std::string _Stage, APlayerLife* _PlayerLifeActor)
 		Print->SetBrickType(static_cast<EBrickType>(Types[i]));
 		Print->SetPlayerLife(_PlayerLifeActor);
 		Bricks[TilePoint.Y][TilePoint.X] = Print;
+		if (Types[i] < 8)
+		{
+			BrickList.push_back(Print);
+		}
+	}
+}
+
+void AStage_001::ClearBrick()
+{
+	for (size_t y = 0; y < Bricks.size(); y++)
+	{
+		for (size_t x = 0; x < Bricks[y].size(); x++)
+		{
+			if (nullptr != Bricks[y][x])
+			{
+				Bricks[y][x]->Destroy();
+				Bricks[y][x] = nullptr;
+			}
+		}
 	}
 }

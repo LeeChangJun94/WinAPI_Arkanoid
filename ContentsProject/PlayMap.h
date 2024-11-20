@@ -3,12 +3,12 @@
 
 enum class EPlayMapType
 {
-	TYPE_NONE,
+	TYPE_4,
 	TYPE_1,
 	TYPE_2,
 	TYPE_3,
-	TYPE_4,
 	TYPE_BOSS,
+	TYPE_DARK,
 };
 
 // Ό³Έν :
@@ -45,7 +45,7 @@ public:
 protected:
 
 private:
-	EPlayMapType PlayMapType = EPlayMapType::TYPE_NONE;
+	EPlayMapType PlayMapType = EPlayMapType::TYPE_DARK;
 	USpriteRenderer* SpriteRenderer1 = nullptr;
 };
 

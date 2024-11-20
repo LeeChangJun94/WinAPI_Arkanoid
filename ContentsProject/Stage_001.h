@@ -11,6 +11,7 @@ class AText;
 class ANumber;
 class AScore;
 class APlayerLife;
+class APlayMap;
 
 // Ό³Έν :
 class AStage_001 : public AGameMode
@@ -32,9 +33,10 @@ public:
 	void StageStart();
 	void ActorSpawn();
 
-	void LoadBrick(std::string _Stage, APlayerLife* _PlayerLifeActor);
+	void LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor);
+	void ClearBrick();
 
-	std::list<ABrick*> BrickPtr;
+	static std::list<ABrick*> BrickList;
 
 	
 
@@ -42,7 +44,10 @@ protected:
 
 private:
 	int Stage = 1;
+	bool StageSetting = false;
+	//int BrickCount = 0;
 	
+	APlayMap* Map = nullptr;
 	APlayer* Vaus = nullptr;
 	ABall* BallActor = nullptr;
 	AText* Text1 = nullptr;

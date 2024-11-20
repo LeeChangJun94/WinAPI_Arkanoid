@@ -6,6 +6,7 @@
 #include <EngineCore/2DCollision.h>
 #include <EngineCore/EngineCoreDebug.h>
 #include "ContentsEnum.h"
+#include "Stage_001.h"
 #include "Brick.h"
 #include "Player.h"
 #include "Ball.h"
@@ -242,7 +243,7 @@ void ABrick::BrickDestroyCheck()
 	if (0 == BrickHP)
 	{
 		CollisionCheck = true;
-
+		AStage_001::BrickList.remove(this);
 		this->Destroy();
 
 		AItem* Ptr = GetWorld()->SpawnActor<AItem>();

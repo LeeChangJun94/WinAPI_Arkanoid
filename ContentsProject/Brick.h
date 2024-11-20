@@ -19,10 +19,12 @@ enum class EBrickType
 };
 
 
+
 class APlayer;
 class APlayerLife;
 class ABall;
 class U2DCollision;
+//class AStage_001;
 
 // Ό³Έν :
 class ABrick : public AActor, public ISerializObject
