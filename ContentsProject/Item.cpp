@@ -20,7 +20,7 @@ AItem::AItem()
 	SpriteRenderer2 = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer1->SetSprite("Item1.png");
 	SpriteRenderer2->SetSprite("Item2.png");
-	SpriteRenderer1->SetComponentScale({ 32, 14 });
+	SpriteRenderer1->SetComponentScale({ 48, 21 });
 	SpriteRenderer2->SetComponentScale(SpriteRenderer1->GetComponentScale());
 	SpriteRenderer2->SetComponentLocation({ SpriteRenderer1->GetComponentLocation().X + 1.0f, SpriteRenderer1->GetComponentLocation().Y + 1.0f});
 	//SetActorScale(SpriteRenderer1->GetComponentScale());
@@ -61,7 +61,7 @@ void AItem::ItemSlowEffect()
 	std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
 	for (; BalliterStart != BalliterEnd; ++BalliterStart)
 	{
-		(*BalliterStart)->SetBallSpeed(500.0f);
+		(*BalliterStart)->SetBallSpeed(300.0f);
 	}
 
 	Vaus->SlowEffect = true;

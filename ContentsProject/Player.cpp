@@ -28,8 +28,8 @@ APlayer::APlayer()
 	//SetActorLocation({300, 700});
 
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	//SpriteRenderer->SetSprite("Vaus_Idle.png");
-	//SpriteRenderer->SetComponentScale({ 96, 24 });
+	SpriteRenderer->SetSprite("Vaus_Idle.png");
+	SpriteRenderer->SetComponentScale({ 96, 24 });
 	SetActorLocation({ 336,700 });
 	//SetActorScale(SpriteRenderer->GetComponentScale());
 
@@ -328,9 +328,6 @@ void APlayer::Tick(float _DeltaTime)
 	case PlayerState::Enlarge:
 		Enlarge(_DeltaTime);
 		break;
-	case PlayerState::Catch:
-		Catch(_DeltaTime);
-		break;
 	default:
 		break;
 	}
@@ -392,8 +389,8 @@ void APlayer::ChangeState(PlayerState _CurPlayerState)
 		break;
 	case PlayerState::Enlarge:
 		EnlargeStart();
-		break;
-	case PlayerState::Catch:
+	case PlayerState::Destroy:
+		DestroyStart();
 		break;
 	default:
 		break;
@@ -472,9 +469,7 @@ void APlayer::DestroyDone()
 
 void APlayer::VausReset()
 {
-	SetActorLocation({ 336,700 });
-	SpriteRenderer->SetComponentScale({ 96, 24 });
-	SpriteRenderer->ChangeAnimation("Vaus_Create");
+	StartSwitch = true;
 }
 
 void APlayer::CreateDone()

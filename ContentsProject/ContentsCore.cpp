@@ -94,19 +94,29 @@ void ContentsCore::BeginPlay()
 		}
 	}
 
-
-	// 일반 텍스처가 다 로딩되면
-	// 자르는 작업을 아래서 해주는게 좋다.
 	{
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources");
+		Dir.Append("Image\\Score");
 
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+	}
+	
+	{
 		UEngineDirectory Dir;
 		Dir.MoveParentToDirectory("Resources");
 		Dir.Append("Image\\Text");
 
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
-
 	}
-	//UImageManager::GetInst().CuttingSprite("Text.png", { 24, 24 });
+
+	{
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources");
+		Dir.Append("Image\\Number");
+
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+	}
 
 	{
 		UImageManager::GetInst().CuttingSprite("BackGround_TYPE1.png", { 672, 720 });

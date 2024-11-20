@@ -151,6 +151,14 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Number.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Stage_023.h">
       <SubType>
       </SubType>
@@ -351,6 +359,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Number.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Stage_023.cpp">
       <SubType>
       </SubType>

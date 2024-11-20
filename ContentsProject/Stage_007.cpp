@@ -39,7 +39,7 @@ void AStage_007::BeginPlay()
 	{
 		AScore* Score = GetWorld()->SpawnActor<AScore>();
 
-		Score->SetTextSpriteName("Text");
+		Score->SetTextSpriteName("Score");
 		Score->SetOrder(ERenderOrder::UI);
 		Score->SetTextScale({ 24, 24 });
 		Score->SetActorLocation({ 156, 36 });
@@ -48,7 +48,7 @@ void AStage_007::BeginPlay()
 	{
 		AScore* HighScore = GetWorld()->SpawnActor<AScore>();
 
-		HighScore->SetTextSpriteName("Text");
+		HighScore->SetTextSpriteName("Score");
 		HighScore->SetOrder(ERenderOrder::UI);
 		HighScore->SetTextScale({ 24, 24 });
 		HighScore->SetActorLocation({ 396, 36 });

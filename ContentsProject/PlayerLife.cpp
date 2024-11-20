@@ -101,10 +101,10 @@ void APlayerLife::Tick(float _DeltaTime)
 	{
 		if (0 == BallList.size())
 		{
-			ABall* BallActor = GetWorld()->SpawnActor<ABall>();
-			BallList.push_back(BallActor);
-			Vaus->CatchEffect = false;
-			Vaus->SlowEffect = false;
+			//ABall* BallActor = GetWorld()->SpawnActor<ABall>();
+			//BallList.push_back(BallActor);
+			//Vaus->CatchEffect = false;
+			//Vaus->SlowEffect = false;
 			if (0 <= LifeCount)
 			{
 				LifeCount -= 1;

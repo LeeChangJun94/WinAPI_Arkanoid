@@ -14,6 +14,7 @@ enum class PlayerState
 	Laser,
 	Enlarge,
 	Catch,
+	Destroy,
 };
 
 
@@ -88,6 +89,16 @@ public:
 		return CollisionComponent;
 	}
 
+	bool GetStartSwitch()
+	{
+		return StartSwitch;
+	}
+
+	void SetStartSwitch(bool _StartSwitch)
+	{
+		StartSwitch = _StartSwitch;
+	}
+
 	bool CatchEffect = false;
 	bool SlowEffect = false;
 
@@ -112,6 +123,8 @@ private:
 
 	float Ratio = 0;
 	float Line = 0;
+
+	bool StartSwitch = true;
 
 	int PlayerScore = 0;
 

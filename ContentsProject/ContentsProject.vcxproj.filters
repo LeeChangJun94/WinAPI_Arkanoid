@@ -150,6 +150,12 @@
     <ClInclude Include="Stage_001.h">
       <Filter>ContentsObject\GameMode\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Number.h">
+      <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -300,6 +306,12 @@
     </ClCompile>
     <ClCompile Include="Stage_001.cpp">
       <Filter>ContentsObject\GameMode\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Number.cpp">
+      <Filter>ContentsObject\Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
