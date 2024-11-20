@@ -98,7 +98,7 @@ void AStage_001::BeginPlay()
 	Text1->SetActive(false);
 	Text2->SetActive(false);
 	Text3->SetActive(false);
-	Vaus->SetActive(false);
+	//Vaus->SetActive(false);
 	//BallActor->SetActive(false);
 
 	LoadBrick("Stage1", PlayerLifeActor);
@@ -127,11 +127,11 @@ void AStage_001::Tick(float _DeltaTime)
 	
 }
 
-void AStage_001::TextDestroy()
+void AStage_001::TextOFF()
 {
-	Text1->Destroy();
-	Text2->Destroy();
-	Text3->Destroy();
+	Text1->SetActive(false);
+	Text2->SetActive(false);
+	Text3->SetActive(false);
 }
 
 void AStage_001::StageStart()
@@ -154,7 +154,7 @@ void AStage_001::StageStart()
 		}
 	, false, false);
 
-	TimeEventer.PushEvent(1.5f, std::bind(&AStage_001::TextDestroy, this), false, false);
+	TimeEventer.PushEvent(1.5f, std::bind(&AStage_001::TextOFF, this), false, false);
 
 	TimeEventer.PushEvent(2.0f, std::bind(&AStage_001::ActorSpawn, this), false, false);
 }

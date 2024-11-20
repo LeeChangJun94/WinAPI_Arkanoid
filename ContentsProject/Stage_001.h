@@ -28,7 +28,7 @@ public:
 
 	void BeginPlay();
 	void Tick(float _DeltaTime);
-	void TextDestroy();
+	void TextOFF();
 	void StageStart();
 	void ActorSpawn();
 

@@ -28,8 +28,8 @@ APlayer::APlayer()
 	//SetActorLocation({300, 700});
 
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	SpriteRenderer->SetSprite("Vaus_Idle.png");
-	SpriteRenderer->SetComponentScale({ 96, 24 });
+	//SpriteRenderer->SetSprite("Vaus_Idle.png");
+	//SpriteRenderer->SetComponentScale({ 96, 24 });
 	SetActorLocation({ 336,700 });
 	//SetActorScale(SpriteRenderer->GetComponentScale());
 
@@ -354,19 +354,22 @@ void APlayer::Tick(float _DeltaTime)
 	std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
 	std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
 
-	if (true == (*BalliterStart)->BallCatch)
+	if (BalliterEnd != BalliterStart)
 	{
-		if (true == UEngineInput::GetInst().IsDown('J'))
+		if (true == (*BalliterStart)->BallCatch)
 		{
+			if (true == UEngineInput::GetInst().IsDown('J'))
+			{
+				for (; BalliterStart != BalliterEnd; ++BalliterStart)
+				{
+					(*BalliterStart)->BallCatch = false;
+				}
+			}
+
 			for (; BalliterStart != BalliterEnd; ++BalliterStart)
 			{
-				(*BalliterStart)->BallCatch = false;
+				(*BalliterStart)->SetActorLocation({ GetActorLocation().X - (*BalliterStart)->Distance, (*BalliterStart)->GetActorLocation().Y });
 			}
-		}
-
-		for (; BalliterStart != BalliterEnd; ++BalliterStart)
-		{
-			(*BalliterStart)->SetActorLocation({ GetActorLocation().X - (*BalliterStart)->Distance, (*BalliterStart)->GetActorLocation().Y });
 		}
 	}
 
@@ -459,6 +462,7 @@ void APlayer::EnlargeDone()
 void APlayer::DestroyStart()
 {
 	SpriteRenderer->ChangeAnimation("Vaus_Destroy1");
+
 }
 
 void APlayer::DestroyDone()
@@ -469,7 +473,11 @@ void APlayer::DestroyDone()
 
 void APlayer::VausReset()
 {
+	SetActorLocation({ 336,700 });
+	SpriteRenderer->SetComponentScale({ 96, 24 });
+	SpriteRenderer->ChangeAnimation("Vaus_Create");
 	StartSwitch = true;
+	SetActive(false);
 }
 
 void APlayer::CreateDone()

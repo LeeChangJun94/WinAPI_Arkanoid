@@ -101,6 +101,9 @@ void APlayerLife::Tick(float _DeltaTime)
 	{
 		if (0 == BallList.size())
 		{
+			BallList.clear();
+			Vaus->ChangeState(PlayerState::Destroy);
+
 			//ABall* BallActor = GetWorld()->SpawnActor<ABall>();
 			//BallList.push_back(BallActor);
 			//Vaus->CatchEffect = false;
