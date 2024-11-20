@@ -70,8 +70,6 @@ void AItem::ItemSlowEffect()
 void AItem::ItemCatch()
 {
 	SpriteRenderer1->ChangeAnimation("Catch");
-	//APlayer* Vaus = GetWorld()->GetPawn<APlayer>();
-	//ABall::Ball->SetActorLocation({ Vaus->GetActorLocation().X + 5.0f, Vaus->GetActorLocation().Y - ABall::Ball->GetBallScale().Y });
 }
 
 void AItem::ItemCatchEffect()
@@ -295,6 +293,11 @@ void AItem::Tick(float _DeltaTime)
 	AddActorLocation(FVector2D::DOWN * _DeltaTime * Speed);
 
 	ItemCollisionCheck();
+
+	if (true == Vaus->GetStartSwitch())
+	{
+		SetActive(false);
+	}
 
 }
 

@@ -7,6 +7,12 @@ class APlayerLife;
 class U2DCollision;
 class USpriteRenderer;
 
+enum class StartLocationType
+{
+	RIGHT,
+	LEFT,
+};
+
 // Ό³Έν :
 class ABall : public AActor
 {
@@ -34,7 +40,7 @@ public:
 	void RunSoundPlay();
 
 	void BorderReflect(float _DeltaTime);
-	void ReStart(float _DeltaTime);
+	//void ReStart(float _DeltaTime);
 	
 
 	FVector2D GetBallScale()
@@ -76,7 +82,16 @@ public:
 	{
 		return CollisionComponent;
 	}
-	bool BallCatch = false;
+
+	bool GetBallCatch()
+	{
+		return BallCatch;
+	}
+
+	void SetBallCatch(bool _BallCatch)
+	{
+		BallCatch = _BallCatch;
+	}
 
 	float Distance = 0.0f;
 	//float GetBallRadian()
@@ -92,8 +107,10 @@ private:
 	float Speed = 500.0f;
 	//float Radian = 30.0f;
 	float CheckTime = 0.0f;
+	bool BallCatch = false;
 	bool StartTime = true;
 
+	StartLocationType StartLocation = StartLocationType::RIGHT;
 	APlayerLife* PlayerLife = nullptr;
 	APlayer* Vaus = nullptr;
 	USpriteRenderer* SpriteRenderer;

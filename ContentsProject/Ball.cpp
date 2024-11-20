@@ -74,31 +74,24 @@ void ABall::BorderReflect(float _DeltaTime)
 		{
 			Dir = Dir.Reflect(FVector2D::DOWN);
 		}
-
-	}
-
-	if (WindowSize.Y < GetActorLocation().Y)
-	{
-		//APlayerLife::PlayerLife->SetLifeCount(-1);
-		//ReStart(_DeltaTime);
 	}
 }
 
-void ABall::ReStart(float _DeltaTime)
-{
-	StartTime = true;
-	CheckTime = 0.0f;
-	CheckTime += _DeltaTime;
-	if (CheckTime < 5.0f && true == StartTime)
-	{
-		APlayer* Vaus = GetWorld()->GetPawn<APlayer>();
-		SetActorLocation({ Vaus->GetActorLocation().X + 5.0f, Vaus->GetActorLocation().Y - SpriteRenderer->GetComponentScale().Y });
-		if (true == UEngineInput::GetInst().IsDown('J'))
-		{
-			StartTime = false;
-		}
-	}
-}
+//void ABall::ReStart(float _DeltaTime)
+//{
+//	StartTime = true;
+//	CheckTime = 0.0f;
+//	CheckTime += _DeltaTime;
+//	if (CheckTime < 5.0f && true == StartTime)
+//	{
+//		APlayer* Vaus = GetWorld()->GetPawn<APlayer>();
+//		SetActorLocation({ Vaus->GetActorLocation().X + 5.0f, Vaus->GetActorLocation().Y - SpriteRenderer->GetComponentScale().Y });
+//		if (true == UEngineInput::GetInst().IsDown('J'))
+//		{
+//			StartTime = false;
+//		}
+//	}
+//}
 
 void ABall::SetBallSpeed(float _Speed)
 {
@@ -126,7 +119,7 @@ void ABall::BeginPlay()
 	Super::BeginPlay();
 
 	Vaus = GetWorld()->GetPawn<APlayer>();
-	//SetActorLocation({ Vaus->GetActorLocation().X + 5.0f, Vaus->GetActorLocation().Y - SpriteRenderer->GetComponentScale().Y });
+	//SetActorLocation({ Vaus->GetActorLocation().X + 15.0f, Vaus->GetActorLocation().Y - 15.0f/*SpriteRenderer->GetComponentScale().Y*/ });
 }
 
 void ABall::Tick(float _DeltaTime)
@@ -147,10 +140,32 @@ void ABall::Tick(float _DeltaTime)
 
 	if (CheckTime < 5.0f && true == StartTime)
 	{
-		SetActorLocation({ Vaus->GetActorLocation().X + 5.0f, Vaus->GetActorLocation().Y - SpriteRenderer->GetComponentScale().Y});
+		switch (StartLocation)
+		{
+		case StartLocationType::RIGHT:
+			SetActorLocation({ Vaus->GetActorLocation().X + 15.0f, Vaus->GetActorLocation().Y - 15.0f });
+			break;
+		case StartLocationType::LEFT:
+			SetActorLocation({ Vaus->GetActorLocation().X - 15.0f, Vaus->GetActorLocation().Y - 15.0f });
+			break;
+		default:
+			break;
+		}
+
+		if (true == UEngineInput::GetInst().IsDown('A'))
+		{
+			StartLocation = StartLocationType::LEFT;
+		}
+
+		if (true == UEngineInput::GetInst().IsDown('D'))
+		{
+			StartLocation = StartLocationType::RIGHT;
+		}
+
 		if (true == UEngineInput::GetInst().IsDown('J'))
 		{
 			StartTime = false;
 		}
+
 	}
 }

@@ -75,6 +75,8 @@ void APlayer::BeginPlay()
 	//PlayerLifeActor->SetPlayerLife(this);
 
 	ChangeState(PlayerState::Create);
+	
+	
 	//Dir.Radian(30.f);
 	//Dir.Normalize();
 
@@ -171,7 +173,7 @@ void APlayer::Tick(float _DeltaTime)
 						std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
 						for (; BalliterStart != BalliterEnd; ++BalliterStart)
 						{
-							(*BalliterStart)->BallCatch = true;
+							(*BalliterStart)->SetBallCatch(true);
 							(*BalliterStart)->Distance = GetActorLocation().X - (*BalliterStart)->GetActorLocation().X;
 						}
 						//Result->SetActorLocation({ Vaus->GetActorLocation().X, Vaus->GetActorLocation().Y });
@@ -273,7 +275,7 @@ void APlayer::Tick(float _DeltaTime)
 						std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
 						for (; BalliterStart != BalliterEnd; ++BalliterStart)
 						{
-							(*BalliterStart)->BallCatch = true;
+							(*BalliterStart)->SetBallCatch(true);
 							(*BalliterStart)->Distance = GetActorLocation().X - (*BalliterStart)->GetActorLocation().X;
 						}
 					}
@@ -356,13 +358,13 @@ void APlayer::Tick(float _DeltaTime)
 
 	if (BalliterEnd != BalliterStart)
 	{
-		if (true == (*BalliterStart)->BallCatch)
+		if (true == (*BalliterStart)->GetBallCatch())
 		{
 			if (true == UEngineInput::GetInst().IsDown('J'))
 			{
 				for (; BalliterStart != BalliterEnd; ++BalliterStart)
 				{
-					(*BalliterStart)->BallCatch = false;
+					(*BalliterStart)->SetBallCatch(false);
 				}
 			}
 
@@ -392,6 +394,7 @@ void APlayer::ChangeState(PlayerState _CurPlayerState)
 		break;
 	case PlayerState::Enlarge:
 		EnlargeStart();
+		break;
 	case PlayerState::Destroy:
 		DestroyStart();
 		break;
@@ -477,6 +480,8 @@ void APlayer::VausReset()
 	SpriteRenderer->SetComponentScale({ 96, 24 });
 	SpriteRenderer->ChangeAnimation("Vaus_Create");
 	StartSwitch = true;
+	CatchEffect = false;
+	SlowEffect = false;
 	SetActive(false);
 }
 

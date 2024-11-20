@@ -25,7 +25,7 @@ public:
 		return CollisionComponent;
 	}
 
-	ABall* GetCollisionCheck();
+	//ABall* GetCollisionCheck();
 
 protected:
 

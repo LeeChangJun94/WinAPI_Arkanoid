@@ -26,9 +26,9 @@ ADethLine::~ADethLine()
 {
 }
 
-ABall* ADethLine::GetCollisionCheck()
-{
-	ABall* BallResult = reinterpret_cast<ABall*>(CollisionComponent->CollisionOnce(ECollisionGroup::Ball));
-	return BallResult;
-}
+//ABall* ADethLine::GetCollisionCheck()
+//{
+//	ABall* BallResult = reinterpret_cast<ABall*>(CollisionComponent->CollisionOnce(ECollisionGroup::Ball));
+//	return BallResult;
+//}
 

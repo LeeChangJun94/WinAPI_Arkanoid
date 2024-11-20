@@ -112,7 +112,7 @@ private:
 
 	int Score = 0;
 	int BrickHP = 0;
-	EBrickType BrickType;
+	EBrickType BrickType = EBrickType::WHITE;
 	bool CollisionCheck = false;
 	
 	U2DCollision* CollisionComponent = nullptr;
