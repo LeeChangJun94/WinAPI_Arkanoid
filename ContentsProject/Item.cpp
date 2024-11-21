@@ -296,9 +296,8 @@ void AItem::Tick(float _DeltaTime)
 
 	if (true == Vaus->GetStartSwitch())
 	{
-		SetActive(false);
+		Destroy();
 	}
-
 }
 
 

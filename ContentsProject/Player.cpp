@@ -465,7 +465,7 @@ void APlayer::EnlargeDone()
 void APlayer::DestroyStart()
 {
 	SpriteRenderer->ChangeAnimation("Vaus_Destroy1");
-
+	CollisionComponent->SetActive(false);
 }
 
 void APlayer::DestroyDone()

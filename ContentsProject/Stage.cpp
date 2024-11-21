@@ -16,6 +16,7 @@
 #include "DethLine.h"
 #include "ContentsEnum.h"
 #include <EngineBase/EngineFile.h>
+#include <EngineCore/2DCollision.h>
 #include <EngineBase/EngineDirectory.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
@@ -207,6 +208,7 @@ void AStage::StageStart()
 void AStage::ActorSpawn()
 {
 	Vaus->SetActive(true);
+	Vaus->GetCollisionComponent()->SetActive(true);
 	BallActor = GetWorld()->SpawnActor<ABall>();
 	PlayerLifeActor->SetBall(BallActor);
 	PlayerLifeActor->BallList.push_back(BallActor);
@@ -259,7 +261,7 @@ void AStage::LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor)
 		Print->SetBrickType(static_cast<EBrickType>(Types[i]));
 		Print->SetPlayerLife(_PlayerLifeActor);
 		Bricks[TilePoint.Y][TilePoint.X] = Print;
-		if (Types[i] < 8)
+		if (Types[i] < 9)
 		{
 			BrickList.push_back(Print);
 		}
