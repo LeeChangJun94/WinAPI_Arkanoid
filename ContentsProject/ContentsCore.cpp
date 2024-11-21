@@ -10,8 +10,8 @@
 #include <EnginePlatform/EngineSound.h>
 
 #include "TitleGameMode.h"
-#include "Stage_001.h"
-#include "stage_002.h"
+#include "Stage.h"
+#include "Stage_Dark.h"
 //#include "stage_003.h"
 //#include "stage_004.h"
 //#include "stage_005.h"
@@ -200,8 +200,8 @@ void ContentsCore::BeginPlay()
 
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
 
-	UEngineAPICore::GetCore()->CreateLevel<AStage_001, APlayer>("Stage_001");
-	UEngineAPICore::GetCore()->CreateLevel<AStage_002, APlayer>("Stage_002");
+	UEngineAPICore::GetCore()->CreateLevel<AStage, APlayer>("Stage");
+	UEngineAPICore::GetCore()->CreateLevel<AStage_Dark, APlayer>("Stage_Dark");
 	//UEngineAPICore::GetCore()->CreateLevel<AStage_003, APlayer>("Stage_003");
 	//UEngineAPICore::GetCore()->CreateLevel<AStage_004, APlayer>("Stage_004");
 	//UEngineAPICore::GetCore()->CreateLevel<AStage_005, APlayer>("Stage_005");

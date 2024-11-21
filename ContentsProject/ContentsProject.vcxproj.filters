@@ -51,13 +51,13 @@
     <ClInclude Include="Boss.h">
       <Filter>ContentsObject</Filter>
     </ClInclude>
-    <ClInclude Include="Stage_002.h">
+    <ClInclude Include="Stage_Dark.h">
       <Filter>ContentsObject\GameMode\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Stage_Boss.h">
       <Filter>ContentsObject\GameMode\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Stage_001.h">
+    <ClInclude Include="Stage.h">
       <Filter>ContentsObject\GameMode\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Text.h">
@@ -118,13 +118,13 @@
     <ClCompile Include="Boss.cpp">
       <Filter>ContentsObject</Filter>
     </ClCompile>
-    <ClCompile Include="Stage_002.cpp">
+    <ClCompile Include="Stage_Dark.cpp">
       <Filter>ContentsObject\GameMode\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Stage_Boss.cpp">
       <Filter>ContentsObject\GameMode\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Stage_001.cpp">
+    <ClCompile Include="Stage.cpp">
       <Filter>ContentsObject\GameMode\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Text.cpp">

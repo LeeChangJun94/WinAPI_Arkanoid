@@ -14,18 +14,18 @@ class APlayerLife;
 class APlayMap;
 
 // Ό³Έν :
-class AStage_001 : public AGameMode
+class AStage : public AGameMode
 {
 public:
 	// constrcuter destructer
-	AStage_001();
-	~AStage_001();
+	AStage();
+	~AStage();
 
 	// delete Function
-	AStage_001(const AStage_001& _Other) = delete;
-	AStage_001(AStage_001&& _Other) noexcept = delete;
-	AStage_001& operator=(const AStage_001& _Other) = delete;
-	AStage_001& operator=(AStage_001&& _Other) noexcept = delete;
+	AStage(const AStage& _Other) = delete;
+	AStage(AStage&& _Other) noexcept = delete;
+	AStage& operator=(const AStage& _Other) = delete;
+	AStage& operator=(AStage&& _Other) noexcept = delete;
 
 	void BeginPlay();
 	void Tick(float _DeltaTime);
@@ -43,8 +43,6 @@ public:
 
 	static std::list<ABrick*> BrickList;
 
-	
-
 protected:
 
 private:
@@ -52,8 +50,6 @@ private:
 	float CountTime = 0.0f;
 
 	bool StageSetting = false;
-	
-	//int BrickCount = 0;
 	
 	APlayMap* Map = nullptr;
 	APlayer* Vaus = nullptr;

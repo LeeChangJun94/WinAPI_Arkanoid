@@ -159,7 +159,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Stage_002.h">
+    <ClInclude Include="Stage_Dark.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -215,7 +215,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Stage_001.h">
+    <ClInclude Include="Stage.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -247,7 +247,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Stage_002.cpp">
+    <ClCompile Include="Stage_Dark.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -303,7 +303,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Stage_001.cpp">
+    <ClCompile Include="Stage.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "Stage_001.h"
+#include "Stage.h"
 
 #include <EngineCore/Level.h>
 #include <EngineBase/TimeEvent.h>
@@ -21,9 +21,9 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/EngineCoreDebug.h>
 
-std::list<ABrick*> AStage_001::BrickList;
+std::list<ABrick*> AStage::BrickList;
 
-AStage_001::AStage_001()
+AStage::AStage()
 {
 	Bricks.resize(UGlobalValue::BrickY);
 
@@ -33,11 +33,11 @@ AStage_001::AStage_001()
 	}
 }
 
-AStage_001::~AStage_001()
+AStage::~AStage()
 {
 }
 
-void AStage_001::BeginPlay()
+void AStage::BeginPlay()
 {
 	Super::BeginPlay();
 	
@@ -108,7 +108,7 @@ void AStage_001::BeginPlay()
 	//LoadBrick(Stage, PlayerLifeActor);
 }
 
-void AStage_001::Tick(float _DeltaTime)
+void AStage::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	
@@ -135,21 +135,8 @@ void AStage_001::Tick(float _DeltaTime)
 	if (0 == BrickList.size())
 	{
 		StageResetSetting(1);
-		//Stage += 1;
-		//StageSetting = false;
-		//Vaus->SetStartSwitch(true);
-		//Vaus->SetActive(false);
-		//Vaus->ChangeState(PlayerState::Create);
-		//CountTime = 0.0f;
-		//BrickList.clear();
-		//Map->Destroy();
-		//Text2->SetNumber(Stage);
-		//if (nullptr != BallActor)
-		//{
-		//	BallActor->Destroy();
-		//}
-		UEngineAPICore::GetCore()->OpenLevel("Stage_002");
-		//LoadBrick(Stage, PlayerLifeActor);
+
+		UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
 	}
 
 	if (true == UEngineInput::GetInst().IsDown('N'))
@@ -157,30 +144,13 @@ void AStage_001::Tick(float _DeltaTime)
 		if (1 != Stage)
 		{
 			StageResetSetting(-1);
-			//Stage -= 1;
-			//StageSetting = false;
-			//Vaus->SetStartSwitch(true);
-			//Vaus->SetActive(false);
-			//Vaus->ChangeState(PlayerState::Create);
-			//CountTime = 0.0f;
-			//BrickList.clear();
-			//Map->Destroy();
-			//Text2->SetNumber(Stage);
-			//std::list<ABall*>::iterator BalliterStart = PlayerLifeActor->BallList.begin();
-			//std::list<ABall*>::iterator BalliterEnd = PlayerLifeActor->BallList.end();
-			//for (; BalliterStart != BalliterEnd; ++BalliterStart)
-			//{
-			//	(*BalliterStart)->Destroy();
-			//	(*BalliterStart) = nullptr;
-			//}
-			//if (nullptr != BallActor)
-			//{
-			//	BallActor->Destroy();
-			//}
-			UEngineAPICore::GetCore()->OpenLevel("Stage_002");
+			
+			UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
 		}
 		else
 		{
+			StageResetSetting(0);
+
 			UEngineAPICore::GetCore()->OpenLevel("Title");
 		}
 	}
@@ -190,36 +160,26 @@ void AStage_001::Tick(float _DeltaTime)
 		if (32 != Stage)
 		{
 			StageResetSetting(1);
-			//Stage += 1;
-			//StageSetting = false;
-			//CountTime = 0.0f;
-			//Vaus->SetStartSwitch(true);
-			//Vaus->SetActive(false);
-			//Vaus->ChangeState(PlayerState::Create);
-			//BrickList.clear();
-			//Map->Destroy();
-			//Text2->SetNumber(Stage);
-			//if (nullptr != BallActor)
-			//{
-			//	BallActor->Destroy();
-			//}
-			UEngineAPICore::GetCore()->OpenLevel("Stage_002");
+
+			UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
 		}
 		else
 		{
+			StageResetSetting(0);
+
 			UEngineAPICore::GetCore()->OpenLevel("Stage_Boss");
 		}
 	}
 }
 
-void AStage_001::TextOFF()
+void AStage::TextOFF()
 {
 	Text1->SetActive(false);
 	Text2->SetActive(false);
 	Text3->SetActive(false);
 }
 
-void AStage_001::StageStart()
+void AStage::StageStart()
 {
 	//TimeEventer.PushEvent(0.5f, [this]()
 	//	{
@@ -244,7 +204,7 @@ void AStage_001::StageStart()
 	//TimeEventer.PushEvent(2.0f, std::bind(&AStage_001::ActorSpawn, this), false, false);
 }
 
-void AStage_001::ActorSpawn()
+void AStage::ActorSpawn()
 {
 	Vaus->SetActive(true);
 	BallActor = GetWorld()->SpawnActor<ABall>();
@@ -252,7 +212,7 @@ void AStage_001::ActorSpawn()
 	PlayerLifeActor->BallList.push_back(BallActor);
 }
 
-void AStage_001::LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor)
+void AStage::LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor)
 {
 	StageSetting = true;
 
@@ -306,7 +266,7 @@ void AStage_001::LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor)
 	}
 }
 
-void AStage_001::ClearBrick()
+void AStage::ClearBrick()
 {
 	for (size_t y = 0; y < Bricks.size(); y++)
 	{
@@ -321,7 +281,7 @@ void AStage_001::ClearBrick()
 	}
 }
 
-bool AStage_001::Timer(float _CountTime, float _SetTime, float _EndTime)
+bool AStage::Timer(float _CountTime, float _SetTime, float _EndTime)
 {
 	if (_SetTime < _CountTime && _EndTime > _CountTime)
 	{
@@ -330,7 +290,7 @@ bool AStage_001::Timer(float _CountTime, float _SetTime, float _EndTime)
 	return false;
 }
 
-bool AStage_001::Timer(float _CountTime, float _SetTime)
+bool AStage::Timer(float _CountTime, float _SetTime)
 {
 	if (_SetTime < _CountTime)
 	{
@@ -339,7 +299,7 @@ bool AStage_001::Timer(float _CountTime, float _SetTime)
 	return false;
 }
 
-void AStage_001::StageResetSetting(int _StageCount)
+void AStage::StageResetSetting(int _StageCount)
 {
 	Stage += _StageCount;
 	StageSetting = false;
