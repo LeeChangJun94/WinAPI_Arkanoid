@@ -34,6 +34,10 @@ public:
 	void ActorSpawn();
 
 	void StageResetSetting(int _StageCount);
+	void SetCountTime(float _CountTime)
+	{
+		CountTime = _CountTime;
+	}
 
 	void LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor);
 	void ClearBrick();

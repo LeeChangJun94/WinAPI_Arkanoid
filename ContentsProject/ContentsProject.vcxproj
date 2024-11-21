@@ -151,6 +151,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Enemies.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Number.h">
       <SubType>
       </SubType>
@@ -239,6 +243,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Enemies.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Number.cpp">
       <SubType>
       </SubType>

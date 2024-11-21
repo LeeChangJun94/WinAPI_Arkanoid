@@ -5,6 +5,7 @@
 #include "Bullet.h"
 #include "Item.h"
 #include "PlayerLife.h"
+#include "Stage.h"
 
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
@@ -482,6 +483,8 @@ void APlayer::VausReset()
 	StartSwitch = true;
 	CatchEffect = false;
 	SlowEffect = false;
+	AStage* Stage = reinterpret_cast<AStage*>(GetWorld()->GetGameMode());
+	Stage->SetCountTime(0.0f);
 	SetActive(false);
 }
 

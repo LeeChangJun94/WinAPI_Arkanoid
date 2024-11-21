@@ -48,9 +48,6 @@
     <ClInclude Include="GlobalValue.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
-    <ClInclude Include="Boss.h">
-      <Filter>ContentsObject</Filter>
-    </ClInclude>
     <ClInclude Include="Stage_Dark.h">
       <Filter>ContentsObject\GameMode\Stage</Filter>
     </ClInclude>
@@ -65,6 +62,12 @@
     </ClInclude>
     <ClInclude Include="Number.h">
       <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemies.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -115,9 +118,6 @@
     <ClCompile Include="GlobalValue.cpp">
       <Filter>ContentsObject\Global</Filter>
     </ClCompile>
-    <ClCompile Include="Boss.cpp">
-      <Filter>ContentsObject</Filter>
-    </ClCompile>
     <ClCompile Include="Stage_Dark.cpp">
       <Filter>ContentsObject\GameMode\Stage</Filter>
     </ClCompile>
@@ -132,6 +132,12 @@
     </ClCompile>
     <ClCompile Include="Number.cpp">
       <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemies.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +170,9 @@
     </Filter>
     <Filter Include="ContentsObject\GameMode\Stage">
       <UniqueIdentifier>{29456b82-17ca-4b4c-9e8c-005cc3315682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monster">
+      <UniqueIdentifier>{c8f09036-ec94-4c44-92ea-6508b207b9fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

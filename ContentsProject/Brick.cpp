@@ -242,8 +242,12 @@ void ABrick::BrickDestroyCheck()
 
 	if (0 == BrickHP)
 	{
-		//CollisionCheck = true;
+		CollisionCheck = true;
 		AStage::BrickList.remove(this);
+
+		//GetWorld()->GetGameMode<AStage>();
+
+		//AStage::allbriack[Myindex.y][Myindex.x] = nullptr;
 		this->Destroy();
 
 		AItem* Ptr = GetWorld()->SpawnActor<AItem>();

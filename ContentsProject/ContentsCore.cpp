@@ -12,36 +12,6 @@
 #include "TitleGameMode.h"
 #include "Stage.h"
 #include "Stage_Dark.h"
-//#include "stage_003.h"
-//#include "stage_004.h"
-//#include "stage_005.h"
-//#include "stage_006.h"
-//#include "stage_007.h"
-//#include "stage_008.h"
-//#include "stage_009.h"
-//#include "stage_010.h"
-//#include "stage_011.h"
-//#include "stage_012.h"
-//#include "stage_013.h"
-//#include "stage_014.h"
-//#include "stage_015.h"
-//#include "stage_016.h"
-//#include "stage_017.h"
-//#include "stage_018.h"
-//#include "stage_019.h"
-//#include "stage_020.h"
-//#include "stage_021.h"
-//#include "stage_022.h"
-//#include "stage_023.h"
-//#include "stage_024.h"
-//#include "stage_025.h"
-//#include "stage_026.h"
-//#include "stage_027.h"
-//#include "stage_028.h"
-//#include "stage_029.h"
-//#include "stage_030.h"
-//#include "Stage_031.h"
-//#include "Stage_032.h"
 #include "Stage_Boss.h"
 #include "TileMapEditor.h"
 #include "Player.h"
@@ -154,95 +124,30 @@ void ContentsCore::BeginPlay()
 		UImageManager::GetInst().CuttingSprite("Bullet.png", { 48, 24 });
 		UImageManager::GetInst().CuttingSprite("BossAttack.png", { 24, 24 });
 		UImageManager::GetInst().CuttingSprite("Bricks.png", { 48, 24 });
-		//UImageManager::GetInst().CuttingSprite("Bricks2.png", { 48, 24 });
 		UImageManager::GetInst().CuttingSprite("Item1.png", { 32, 14 });
 		UImageManager::GetInst().CuttingSprite("Item2.png", { 32, 14 });
 	}
 
-	//{
-	//
-	//	UEngineDirectory BombDir;
-	//	BombDir.MoveParentToDirectory("Resources");
-	//	BombDir.Append("bomb");
-	//
-	//	UImageManager::GetInst().LoadFolder(BombDir.GetPathToString());
-	//
-	//}
-
-	//{
-	//	// 타일셋 로드
-	//	UEngineDirectory Dir;
-	//	Dir.MoveParentToDirectory("Resources");
-	//	Dir.Append("TileMap//TileSet");
-	//
-	//	UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
-	//
-	//}
-
-	//UEngineDirectroy Dir;
-
-	//Dir.SetPath("C:\\Resources");
-
-	//std::vector<UEngineFile> AllFile = Dir.GetAllFile("*.Bmp", "*.Png");
-
-	//for (size_t i = 0; i < AllFile.size(); i++)
-	//{
-	//	ImageManager::Load(AllFile[i].GetPath());
-	//}
-
-
-
-
-	//UEngineAPICore::GetCore()->CreateLevel("Title");
+	{
+		UImageManager::GetInst().CuttingSprite("Enemies_Type1.png", { 48, 48 });
+		UImageManager::GetInst().CuttingSprite("Enemies_Type2.png", { 48, 48 });
+		UImageManager::GetInst().CuttingSprite("Enemies_Type3.png", { 48, 48 });
+		UImageManager::GetInst().CuttingSprite("Enemies_Type4.png", { 48, 48 });
+		UImageManager::GetInst().CuttingSprite("Enemies_Destroy.png", { 48, 48 });
+	}
+	
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("Arkanoid");
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 672, 768 });
 
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
-
 	UEngineAPICore::GetCore()->CreateLevel<AStage, APlayer>("Stage");
 	UEngineAPICore::GetCore()->CreateLevel<AStage_Dark, APlayer>("Stage_Dark");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_003, APlayer>("Stage_003");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_004, APlayer>("Stage_004");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_005, APlayer>("Stage_005");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_006, APlayer>("Stage_006");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_007, APlayer>("Stage_007");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_008, APlayer>("Stage_008");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_009, APlayer>("Stage_009");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_010, APlayer>("Stage_010");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_011, APlayer>("Stage_011");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_012, APlayer>("Stage_012");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_013, APlayer>("Stage_013");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_014, APlayer>("Stage_014");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_015, APlayer>("Stage_015");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_016, APlayer>("Stage_016");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_017, APlayer>("Stage_017");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_018, APlayer>("Stage_018");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_019, APlayer>("Stage_019");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_020, APlayer>("Stage_020");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_021, APlayer>("Stage_021");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_022, APlayer>("Stage_022");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_023, APlayer>("Stage_023");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_024, APlayer>("Stage_024");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_025, APlayer>("Stage_025");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_026, APlayer>("Stage_026");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_027, APlayer>("Stage_027");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_028, APlayer>("Stage_028");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_029, APlayer>("Stage_029");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_030, APlayer>("Stage_030");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_031, APlayer>("Stage_031");
-	//UEngineAPICore::GetCore()->CreateLevel<AStage_032, APlayer>("Stage_032");
 	UEngineAPICore::GetCore()->CreateLevel<AStage_Boss, APlayer>("Stage_Boss");
-	
+			
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
-	//UEngineAPICore::GetCore()->CreateLevel("End");
-	
+
 	UEngineAPICore::GetCore()->OpenLevel("Title");
-
-	//UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
-
-	//UEngineAPICore::GetCore()->OpenLevel("Tile");
-
 }
 
 void ContentsCore::Tick()

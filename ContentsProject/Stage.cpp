@@ -5,15 +5,16 @@
 #include <EngineBase/TimeEvent.h>
 #include "GlobalValue.h"
 #include "PlayMap.h"
+#include "Score.h"
 #include "Brick.h"
 #include "Ball.h"
-#include "Score.h"
 #include "Text.h"
+#include "Fade.h"
 #include "Number.h"
 #include "Player.h"
-#include "PlayerLife.h"
-#include "Fade.h"
+#include "Enemies.h"
 #include "DethLine.h"
+#include "PlayerLife.h"
 #include "ContentsEnum.h"
 #include <EngineBase/EngineFile.h>
 #include <EngineCore/2DCollision.h>
@@ -92,6 +93,8 @@ void AStage::BeginPlay()
 		Text3->SetActorLocation({ 380, 572 });
 		Text3->SetText("READY");
 	}
+	//AEnemies* Enemies = GetWorld()->SpawnActor<AEnemies>();
+	//Enemies->SetActorLocation({ 50,50 });
 
 	ADethLine* DethLineActor = GetWorld()->SpawnActor<ADethLine>();
 
@@ -136,8 +139,10 @@ void AStage::Tick(float _DeltaTime)
 	if (0 == BrickList.size())
 	{
 		StageResetSetting(1);
-
-		UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
+		TimeEventer.PushEvent(0.5f, []()
+			{
+				UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
+			});
 	}
 
 	if (true == UEngineInput::GetInst().IsDown('N'))
@@ -312,6 +317,7 @@ void AStage::StageResetSetting(int _StageCount)
 	BrickList.clear();
 	Map->Destroy();
 	Text2->SetNumber(Stage);
+	Vaus->BulletPtr.clear();
 	std::list<ABall*>::iterator BalliterStart = PlayerLifeActor->BallList.begin();
 	std::list<ABall*>::iterator BalliterEnd = PlayerLifeActor->BallList.end();
 	for (; BalliterStart != BalliterEnd; )

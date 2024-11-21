@@ -22,7 +22,7 @@ AItem::AItem()
 	SpriteRenderer2->SetSprite("Item2.png");
 	SpriteRenderer1->SetComponentScale({ 48, 21 });
 	SpriteRenderer2->SetComponentScale(SpriteRenderer1->GetComponentScale());
-	SpriteRenderer2->SetComponentLocation({ SpriteRenderer1->GetComponentLocation().X + 1.0f, SpriteRenderer1->GetComponentLocation().Y + 1.0f});
+	SpriteRenderer2->SetComponentLocation({ SpriteRenderer1->GetComponentLocation().X + 2.0f, SpriteRenderer1->GetComponentLocation().Y + 2.0f});
 	//SetActorScale(SpriteRenderer1->GetComponentScale());
 	
 	SpriteRenderer1->SetOrder(1);
@@ -39,7 +39,7 @@ AItem::AItem()
 
 	CollisionComponent = CreateDefaultSubObject<U2DCollision>();
 	CollisionComponent->SetComponentLocation({ 0, 0 });
-	CollisionComponent->SetComponentScale({ 32, 14 });
+	CollisionComponent->SetComponentScale({ 48, 21 });
 	CollisionComponent->SetCollisionGroup(ECollisionGroup::Item);
 	CollisionComponent->SetCollisionType(ECollisionType::Rect);
 

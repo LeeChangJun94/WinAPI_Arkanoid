@@ -102,6 +102,7 @@ public:
 protected:
 
 private:
+	FIntPoint Myindex;
 	
 	FTransform BallTrans;
 
