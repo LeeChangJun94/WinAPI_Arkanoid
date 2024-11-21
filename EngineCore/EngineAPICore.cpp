@@ -128,6 +128,8 @@ void UEngineAPICore::Tick()
 	// 시간을 잴겁니다. 현재시간 
 	DeltaTimer.TimeCheck();
 	float DeltaTime = DeltaTimer.GetDeltaTime();
+	
+	DeltaTime *= GlobalTimeScale;
 
 	// 꼭해줘야 한다.
 	UEngineSound::Update();

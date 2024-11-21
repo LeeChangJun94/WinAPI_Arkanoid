@@ -8,8 +8,10 @@
 enum class PivotType
 {
 	Center,
+	Left,
 	Bot,
 	Top,
+	LeftTop,
 };
 
 // 설명 :
@@ -37,6 +39,7 @@ public:
 			CurIndex = 0;
 			CurTime = 0;
 			ResultIndex = 0;
+			IsEnd = false;
 		}
 	};
 
@@ -101,10 +104,7 @@ public:
 		IsCameraEffect = _Value;
 	}
 
-	void SetPivot(FVector2D _Pivot)
-	{
-		Pivot = _Pivot;
-	}
+	void SetPivotValue(FVector2D _Value);
 
 	void SetPivotType(PivotType _Type);
 
@@ -123,7 +123,6 @@ public:
 	{
 		Alpha = _Value;
 	}
-
 	void SetAnimationSpeed(float _Speed)
 	{
 		CurAnimationSpeed = _Speed;
@@ -153,10 +152,12 @@ private:
 	float CameraEffectScale = 1.0f;
 	float CurAnimationSpeed = 1.0f;
 
+
 	// 다이렉트는 모든 색상을 0~1.0f로 표현한다.
 	unsigned char Alpha = 255;
 
-	FVector2D Pivot = FVector2D::ZERO;
+	FVector2D Pivot = FVector2D(0.5f, 0.5f);
+	// FVector2D PivotRealScale = FVector2D::ZERO;
 
 	class UEngineSprite* Sprite = nullptr;
 

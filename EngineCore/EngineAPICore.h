@@ -131,7 +131,10 @@ public:
 
 	void OpenLevel(std::string_view _LevelName);
 
-
+	void SetGlobalTimeScale(float _Scale)
+	{
+		GlobalTimeScale = _Scale;
+	}
 
 protected:
 
@@ -155,6 +158,8 @@ private:
 	class ULevel* CurLevel = nullptr;
 	class ULevel* NextLevel = nullptr;
 	bool IsCurLevelReset = false;
+
+	float GlobalTimeScale = 1.0f;
 
 	void Tick();
 
