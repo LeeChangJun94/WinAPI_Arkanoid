@@ -27,16 +27,16 @@ ABullet::~ABullet()
 
 void ABullet::Attack()
 {
-	ABrick* BrickResult = reinterpret_cast<ABrick*>(CollisionComponent->CollisionOnce(ECollisionGroup::Brick));
-	if (nullptr != BrickResult)
+	std::vector<AActor*> BrickResult = CollisionComponent->CollisionAll(ECollisionGroup::Brick, FVector2D::ZERO);
+	if (0 != BrickResult.size())
 	{
-		if (0 != AttackCheck)
+		CollisionComponent->SetActive(false);
+		for (size_t i = 0; i < BrickResult.size(); i++)
 		{
-			BrickResult->BrickDestroyCheck();
-			//this->SetActorLocation({ GetActorLocation().X, GetActorLocation().Y});
+			ABrick* Brick = reinterpret_cast<ABrick*>(BrickResult[i]);
+			Brick->BrickDestroyCheck();
 			this->Speed = 0.0f;
 			SpriteRenderer->ChangeAnimation("BulletDone");
-			AttackCheck -= 1;
 		}
 	}
 }

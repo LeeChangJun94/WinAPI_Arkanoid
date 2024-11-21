@@ -32,7 +32,7 @@ private:
 	U2DCollision* CollisionComponent = nullptr;
 	APlayer* Vaus = nullptr;
 
-	int AttackCheck = 2;
+	//int AttackCheck = 2;
 	
 	float Speed = 600.0f;
 };

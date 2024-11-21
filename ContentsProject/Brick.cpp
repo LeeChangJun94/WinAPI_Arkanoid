@@ -242,7 +242,7 @@ void ABrick::BrickDestroyCheck()
 
 	if (0 == BrickHP)
 	{
-		CollisionCheck = true;
+		//CollisionCheck = true;
 		AStage::BrickList.remove(this);
 		this->Destroy();
 
