@@ -33,8 +33,13 @@ public:
 	void StageStart();
 	void ActorSpawn();
 
+	void StageResetSetting(int _StageCount);
+
 	void LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor);
 	void ClearBrick();
+
+	bool Timer(float _CountTime, float _SetTime, float _EndTime);
+	bool Timer(float _CountTime, float _SetTime);
 
 	static std::list<ABrick*> BrickList;
 
@@ -44,7 +49,10 @@ protected:
 
 private:
 	int Stage = 1;
+	float CountTime = 0.0f;
+
 	bool StageSetting = false;
+	
 	//int BrickCount = 0;
 	
 	APlayMap* Map = nullptr;

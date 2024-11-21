@@ -36,23 +36,23 @@ void AStage_002::BeginPlay()
 	APlayMap* Map = GetWorld()->SpawnActor<APlayMap>();
 	Map->SetPlayMapType(EPlayMapType::TYPE_DARK);
 
-	{
-		AScore* Score = GetWorld()->SpawnActor<AScore>();
-
-		Score->SetTextSpriteName("Score");
-		Score->SetOrder(ERenderOrder::UI);
-		Score->SetTextScale({ 24, 24 });
-		Score->SetActorLocation({ 156, 36 });
-	}
-
-	{
-		AScore* HighScore = GetWorld()->SpawnActor<AScore>();
-
-		HighScore->SetTextSpriteName("Score");
-		HighScore->SetOrder(ERenderOrder::UI);
-		HighScore->SetTextScale({ 24, 24 });
-		HighScore->SetActorLocation({ 396, 36 });
-	}
+	//{
+	//	AScore* Score = GetWorld()->SpawnActor<AScore>();
+	//
+	//	Score->SetTextSpriteName("Score");
+	//	Score->SetOrder(ERenderOrder::UI);
+	//	Score->SetTextScale({ 24, 24 });
+	//	Score->SetActorLocation({ 156, 36 });
+	//}
+	//
+	//{
+	//	AScore* HighScore = GetWorld()->SpawnActor<AScore>();
+	//
+	//	HighScore->SetTextSpriteName("Score");
+	//	HighScore->SetOrder(ERenderOrder::UI);
+	//	HighScore->SetTextScale({ 24, 24 });
+	//	HighScore->SetActorLocation({ 396, 36 });
+	//}
 
 	//ADethLine* DethLineActor = GetWorld()->SpawnActor<ADethLine>();
 

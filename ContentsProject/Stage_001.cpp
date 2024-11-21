@@ -113,6 +113,11 @@ void AStage_001::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 	
 	UEngineDebug::CoreOutPutString("BrickListSize : " + std::to_string(BrickList.size()));
+	CountTime += _DeltaTime;
+
+	Text1->SetActive(Timer(CountTime, 0.5f, 1.5f));
+	Text2->SetActive(Timer(CountTime, 0.5f, 1.5f));
+	Text3->SetActive(Timer(CountTime, 1.0f, 1.5f));
 
 	if (true != StageSetting)
 	{
@@ -121,16 +126,29 @@ void AStage_001::Tick(float _DeltaTime)
 		LoadBrick(Stage, PlayerLifeActor);
 	}
 
-	if (true == Vaus->GetStartSwitch())
+	if (true == Timer(CountTime, 2.0f) && true == Vaus->GetStartSwitch())
 	{
 		Vaus->SetStartSwitch(false);
-		StageStart();
+		ActorSpawn();
 	}
 
 	if (0 == BrickList.size())
 	{
-		Stage += 1;
-		
+		StageResetSetting(1);
+		//Stage += 1;
+		//StageSetting = false;
+		//Vaus->SetStartSwitch(true);
+		//Vaus->SetActive(false);
+		//Vaus->ChangeState(PlayerState::Create);
+		//CountTime = 0.0f;
+		//BrickList.clear();
+		//Map->Destroy();
+		//Text2->SetNumber(Stage);
+		//if (nullptr != BallActor)
+		//{
+		//	BallActor->Destroy();
+		//}
+		UEngineAPICore::GetCore()->OpenLevel("Stage_002");
 		//LoadBrick(Stage, PlayerLifeActor);
 	}
 
@@ -138,11 +156,27 @@ void AStage_001::Tick(float _DeltaTime)
 	{
 		if (1 != Stage)
 		{
-			Stage -= 1;
-			StageSetting = false;
-			Vaus->SetStartSwitch(true);
-			BrickList.clear();
-			Map->Destroy();
+			StageResetSetting(-1);
+			//Stage -= 1;
+			//StageSetting = false;
+			//Vaus->SetStartSwitch(true);
+			//Vaus->SetActive(false);
+			//Vaus->ChangeState(PlayerState::Create);
+			//CountTime = 0.0f;
+			//BrickList.clear();
+			//Map->Destroy();
+			//Text2->SetNumber(Stage);
+			//std::list<ABall*>::iterator BalliterStart = PlayerLifeActor->BallList.begin();
+			//std::list<ABall*>::iterator BalliterEnd = PlayerLifeActor->BallList.end();
+			//for (; BalliterStart != BalliterEnd; ++BalliterStart)
+			//{
+			//	(*BalliterStart)->Destroy();
+			//	(*BalliterStart) = nullptr;
+			//}
+			//if (nullptr != BallActor)
+			//{
+			//	BallActor->Destroy();
+			//}
 			UEngineAPICore::GetCore()->OpenLevel("Stage_002");
 		}
 		else
@@ -155,11 +189,20 @@ void AStage_001::Tick(float _DeltaTime)
 	{
 		if (32 != Stage)
 		{
-			Stage += 1;
-			StageSetting = false;
-			Vaus->SetStartSwitch(true);
-			BrickList.clear();
-			Map->Destroy();
+			StageResetSetting(1);
+			//Stage += 1;
+			//StageSetting = false;
+			//CountTime = 0.0f;
+			//Vaus->SetStartSwitch(true);
+			//Vaus->SetActive(false);
+			//Vaus->ChangeState(PlayerState::Create);
+			//BrickList.clear();
+			//Map->Destroy();
+			//Text2->SetNumber(Stage);
+			//if (nullptr != BallActor)
+			//{
+			//	BallActor->Destroy();
+			//}
 			UEngineAPICore::GetCore()->OpenLevel("Stage_002");
 		}
 		else
@@ -178,27 +221,27 @@ void AStage_001::TextOFF()
 
 void AStage_001::StageStart()
 {
-	TimeEventer.PushEvent(0.5f, [this]()
-		{
-			Text1->SetActive(true);
-		}
-	, false, false);
+	//TimeEventer.PushEvent(0.5f, [this]()
+	//	{
+	//		Text1->SetActive(true);
+	//	}
+	//, false, false);
+	//
+	//TimeEventer.PushEvent(0.5f, [this]()
+	//	{
+	//		Text2->SetActive(true);
+	//	}
+	//, false, false);
+	//
+	//TimeEventer.PushEvent(1.0f, [this]()
+	//	{
+	//		Text3->SetActive(true);
+	//	}
+	//, false, false);
 
-	TimeEventer.PushEvent(0.5f, [this]()
-		{
-			Text2->SetActive(true);
-		}
-	, false, false);
+	//TimeEventer.PushEvent(1.5f, std::bind(&AStage_001::TextOFF, this), false, false);
 
-	TimeEventer.PushEvent(1.0f, [this]()
-		{
-			Text3->SetActive(true);
-		}
-	, false, false);
-
-	TimeEventer.PushEvent(1.5f, std::bind(&AStage_001::TextOFF, this), false, false);
-
-	TimeEventer.PushEvent(2.0f, std::bind(&AStage_001::ActorSpawn, this), false, false);
+	//TimeEventer.PushEvent(2.0f, std::bind(&AStage_001::ActorSpawn, this), false, false);
 }
 
 void AStage_001::ActorSpawn()
@@ -275,5 +318,44 @@ void AStage_001::ClearBrick()
 				Bricks[y][x] = nullptr;
 			}
 		}
+	}
+}
+
+bool AStage_001::Timer(float _CountTime, float _SetTime, float _EndTime)
+{
+	if (_SetTime < _CountTime && _EndTime > _CountTime)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool AStage_001::Timer(float _CountTime, float _SetTime)
+{
+	if (_SetTime < _CountTime)
+	{
+		return true;
+	}
+	return false;
+}
+
+void AStage_001::StageResetSetting(int _StageCount)
+{
+	Stage += _StageCount;
+	StageSetting = false;
+	Vaus->SetStartSwitch(true);
+	Vaus->SetActive(false);
+	Vaus->ChangeState(PlayerState::Create);
+	CountTime = 0.0f;
+	BrickList.clear();
+	Map->Destroy();
+	Text2->SetNumber(Stage);
+	std::list<ABall*>::iterator BalliterStart = PlayerLifeActor->BallList.begin();
+	std::list<ABall*>::iterator BalliterEnd = PlayerLifeActor->BallList.end();
+	for (; BalliterStart != BalliterEnd; )
+	{
+		(*BalliterStart)->Destroy();
+		(*BalliterStart) = nullptr;
+		BalliterStart = PlayerLifeActor->BallList.erase(BalliterStart);
 	}
 }

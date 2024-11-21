@@ -19,9 +19,6 @@ ABullet::ABullet()
 	CollisionComponent->SetComponentScale({ 48, 24 });
 	CollisionComponent->SetCollisionGroup(ECollisionGroup::Bullet);
 	CollisionComponent->SetCollisionType(ECollisionType::Rect);
-
-	
-	
 }
 
 ABullet::~ABullet()
@@ -70,6 +67,11 @@ void ABullet::BeginPlay()
 void ABullet::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	if (true == Vaus->GetStartSwitch())
+	{
+		Destroy();
+	}
 
 	AddActorLocation(FVector2D::UP * _DeltaTime * Speed);
 	
