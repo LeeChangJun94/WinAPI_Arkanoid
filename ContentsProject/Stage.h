@@ -46,6 +46,7 @@ public:
 	bool Timer(float _CountTime, float _SetTime);
 
 	static std::list<ABrick*> BrickList;
+	static std::list<ABrick*> Bricks;
 
 protected:
 
@@ -62,7 +63,7 @@ private:
 	ANumber* Text2 = nullptr;
 	AText* Text3 = nullptr;
 	APlayerLife* PlayerLifeActor = nullptr;
-	std::vector<std::vector<ABrick*>> Bricks;
+	//std::vector<std::vector<ABrick*>> Bricks;
 	USoundPlayer BGMPlayer;
 
 };

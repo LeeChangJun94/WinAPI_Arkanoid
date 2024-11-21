@@ -16,7 +16,9 @@
 
 AStage_Boss::AStage_Boss()
 {
-	//243, 120
+
+	//Boss_Brick 144 280
+	//Boss 	243 120
 }
 
 AStage_Boss::~AStage_Boss()

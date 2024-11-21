@@ -244,7 +244,7 @@ void ABrick::BrickDestroyCheck()
 	{
 		CollisionCheck = true;
 		AStage::BrickList.remove(this);
-
+		AStage::Bricks.remove(this);
 		//GetWorld()->GetGameMode<AStage>();
 
 		//AStage::allbriack[Myindex.y][Myindex.x] = nullptr;

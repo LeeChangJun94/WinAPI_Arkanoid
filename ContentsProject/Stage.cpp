@@ -24,15 +24,17 @@
 #include <EngineCore/EngineCoreDebug.h>
 
 std::list<ABrick*> AStage::BrickList;
+std::list<ABrick*> AStage::Bricks;
+
 
 AStage::AStage()
 {
-	Bricks.resize(UGlobalValue::BrickY);
-
-	for (int i = 0; i < UGlobalValue::BrickY; ++i)
-	{
-		Bricks[i].resize(UGlobalValue::BrickX);
-	}
+	//Bricks.resize(UGlobalValue::BrickY);
+	//
+	//for (int i = 0; i < UGlobalValue::BrickY; ++i)
+	//{
+	//	Bricks[i].resize(UGlobalValue::BrickX);
+	//}
 }
 
 AStage::~AStage()
@@ -265,7 +267,7 @@ void AStage::LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor)
 		Print->SetActorLocation(CreatePos + UGlobalValue::BrickSize.Half());
 		Print->SetBrickType(static_cast<EBrickType>(Types[i]));
 		Print->SetPlayerLife(_PlayerLifeActor);
-		Bricks[TilePoint.Y][TilePoint.X] = Print;
+		Bricks.push_back(Print);
 		if (Types[i] < 9)
 		{
 			BrickList.push_back(Print);
@@ -275,17 +277,31 @@ void AStage::LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor)
 
 void AStage::ClearBrick()
 {
-	for (size_t y = 0; y < Bricks.size(); y++)
+	
+	std::list<ABrick*>::iterator BricksStart = Bricks.begin();
+	std::list<ABrick*>::iterator BricksEnd = Bricks.end();
+	
+	for (; BricksStart != BricksEnd; )
 	{
-		for (size_t x = 0; x < Bricks[y].size(); x++)
+		if (nullptr != (*BricksStart))
 		{
-			if (nullptr != Bricks[y][x])
-			{
-				Bricks[y][x]->Destroy();
-				Bricks[y][x] = nullptr;
-			}
+			(*BricksStart)->Destroy();
+			(*BricksStart) = nullptr;
+			BricksStart = Bricks.erase(BricksStart);
 		}
 	}
+
+	//for (size_t y = 0; y < Bricks.size(); y++)
+	//{
+	//	for (size_t x = 0; x < Bricks[y].size(); x++)
+	//	{
+	//		if (nullptr != Bricks[y][x])
+	//		{
+	//			Bricks[y][x]->Destroy();
+	//			Bricks[y][x] = nullptr;
+	//		}
+	//	}
+	//}
 }
 
 bool AStage::Timer(float _CountTime, float _SetTime, float _EndTime)

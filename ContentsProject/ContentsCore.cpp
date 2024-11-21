@@ -134,6 +134,8 @@ void ContentsCore::BeginPlay()
 		UImageManager::GetInst().CuttingSprite("Enemies_Type3.png", { 48, 48 });
 		UImageManager::GetInst().CuttingSprite("Enemies_Type4.png", { 48, 48 });
 		UImageManager::GetInst().CuttingSprite("Enemies_Destroy.png", { 48, 48 });
+		UImageManager::GetInst().CuttingSprite("Boss.png", { 192, 288 });
+		UImageManager::GetInst().CuttingSprite("Boss_Brick.png", { 144, 280 });
 	}
 	
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("Arkanoid");
