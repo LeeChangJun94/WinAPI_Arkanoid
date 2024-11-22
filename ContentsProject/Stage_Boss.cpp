@@ -10,12 +10,12 @@
 #include "Boss.h"
 #include "Ball.h"
 #include "Text.h"
-#include "Fade.h"
 #include "Number.h"
 #include "Player.h"
 #include "Enemies.h"
 #include "DethLine.h"
 #include "PlayerLife.h"
+#include "BossBullet.h"
 #include "ContentsEnum.h"
 #include <EngineBase/EngineFile.h>
 #include <EngineCore/2DCollision.h>
@@ -42,6 +42,10 @@ void AStage_Boss::BeginPlay()
 
 	ABoss* Boss = GetWorld()->SpawnActor<ABoss>();
 	Boss->SetActorLocation({ 336, 312 });
+
+	
+	//BossBullet->SetBossBulletDir()
+
 
 	Vaus = GetWorld()->GetPawn<APlayer>();
 
@@ -117,10 +121,38 @@ void AStage_Boss::Tick(float _DeltaTime)
 	UEngineDebug::CoreOutPutString("BossHP : " + std::to_string(BossHP));
 	CountTime += _DeltaTime;
 
-	//Text1->SetActive(Timer(CountTime, 0.5f, 1.5f));
-	//Text2->SetActive(Timer(CountTime, 0.5f, 1.5f));
-	//Text3->SetActive(Timer(CountTime, 1.0f, 1.5f));
+	if (3 == (static_cast<int>(CountTime) % 4) && true != BossAttack)
+	{
+		BossAttack = true;
 
+		TimeEventer.PushEvent(0.0f, [this]()
+			{
+				ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+				BossBullet->SetActorLocation({ 336, 312 });
+			});
+		TimeEventer.PushEvent(0.5f, [this]()
+			{
+				ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+				BossBullet->SetActorLocation({ 336, 312 });
+			});
+		TimeEventer.PushEvent(1.0f, [this]()
+			{
+				ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+				BossBullet->SetActorLocation({ 336, 312 });
+			});
+		TimeEventer.PushEvent(1.5f, [this]()
+			{
+				ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+				BossBullet->SetActorLocation({ 336, 312 });
+			});
+		TimeEventer.PushEvent(2.0f, [this]()
+			{
+				ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+				BossBullet->SetActorLocation({ 336, 312 });
+				BossAttack = false;
+			});
+	}
+	
 	if (true != StageSetting)
 	{
 		Map = GetWorld()->SpawnActor<APlayMap>();
@@ -216,6 +248,23 @@ void AStage_Boss::StageResetSetting(int _StageCount)
 	Map->Destroy();
 	Text2->SetNumber(Stage);
 	Vaus->BulletPtr.clear();
+	std::list<ABall*>::iterator BalliterStart = PlayerLifeActor->BallList.begin();
+	std::list<ABall*>::iterator BalliterEnd = PlayerLifeActor->BallList.end();
+	for (; BalliterStart != BalliterEnd; )
+	{
+		(*BalliterStart)->Destroy();
+		(*BalliterStart) = nullptr;
+		BalliterStart = PlayerLifeActor->BallList.erase(BalliterStart);
+	}
+}
+
+void AStage_Boss::StageResetSetting()
+{
+	StageSetting = false;
+	Vaus->SetStartSwitch(true);
+	Vaus->ChangeState(PlayerState::Destroy);
+	CountTime = 0.0f;
+	Map->Destroy();
 	std::list<ABall*>::iterator BalliterStart = PlayerLifeActor->BallList.begin();
 	std::list<ABall*>::iterator BalliterEnd = PlayerLifeActor->BallList.end();
 	for (; BalliterStart != BalliterEnd; )

@@ -67,7 +67,10 @@
       <Filter>Monster</Filter>
     </ClInclude>
     <ClInclude Include="Boss.h">
-      <Filter>Monster</Filter>
+      <Filter>Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossBullet.h">
+      <Filter>Monster\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -136,8 +139,11 @@
     <ClCompile Include="Enemies.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
+    <ClCompile Include="BossBullet.cpp">
+      <Filter>Monster\Boss</Filter>
+    </ClCompile>
     <ClCompile Include="Boss.cpp">
-      <Filter>Monster</Filter>
+      <Filter>Monster\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +179,9 @@
     </Filter>
     <Filter Include="Monster">
       <UniqueIdentifier>{c8f09036-ec94-4c44-92ea-6508b207b9fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monster\Boss">
+      <UniqueIdentifier>{e1d546a4-ea86-4df6-9485-cd903baa71f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

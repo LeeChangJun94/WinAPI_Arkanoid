@@ -11,15 +11,19 @@
 ABoss::ABoss()
 {
 	SpriteRenderer1 = CreateDefaultSubObject<USpriteRenderer>();
+	SpriteRenderer1->SetSprite("Boss.png");
 	SpriteRenderer1->SetComponentScale({ 192, 288 });
 	SpriteRenderer1->SetOrder(ERenderOrder::ENEMIES);
-	SpriteRenderer1->CreateAnimation("Boss_Normal", "Boss.png", 0, 3, 0.1f);
+	SpriteRenderer1->CreateAnimation("Boss_Normal", "Boss.png", 0, 3, 0.1f, false);
 	SpriteRenderer1->CreateAnimation("Boss_Hit", "Boss.png", 4, 7, 0.2f);
 	SpriteRenderer1->CreateAnimation("Boss_Dying", "Boss.png", 8, 19, 0.2f);
 	SpriteRenderer1->CreateAnimation("Boss_Death", "Boss.png", 20, 29, 0.2f);
 	SpriteRenderer1->CreateAnimation("Boss_RNormal", "Boss.png", 3, 0, 0.1f);
 
-	SpriteRenderer1->ChangeAnimation("Boss_Normal");
+
+	//SpriteRenderer1->SetAnimationEvent("Boss_Noraml", 3, )
+
+	//SpriteRenderer1->ChangeAnimation("Boss_Normal");
 
 	SpriteRenderer2 = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer2->SetSprite("Boss_Brick.png");

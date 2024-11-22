@@ -34,6 +34,7 @@ public:
 	void ActorSpawn();
 
 	void StageResetSetting(int _StageCount);
+	void StageResetSetting();
 	void SetCountTime(float _CountTime)
 	{
 		CountTime = _CountTime;
@@ -54,6 +55,7 @@ private:
 	int BossHP = 10;
 
 	bool StageSetting = false;
+	bool BossAttack = false;
 
 	APlayMap* Map = nullptr;
 	APlayer* Vaus = nullptr;

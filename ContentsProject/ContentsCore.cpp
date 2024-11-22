@@ -122,7 +122,6 @@ void ContentsCore::BeginPlay()
 	{
 		UImageManager::GetInst().CuttingSprite("Ball.png", { 10, 8 });
 		UImageManager::GetInst().CuttingSprite("Bullet.png", { 48, 24 });
-		UImageManager::GetInst().CuttingSprite("BossAttack.png", { 24, 24 });
 		UImageManager::GetInst().CuttingSprite("Bricks.png", { 48, 24 });
 		UImageManager::GetInst().CuttingSprite("Item1.png", { 32, 14 });
 		UImageManager::GetInst().CuttingSprite("Item2.png", { 32, 14 });
@@ -136,6 +135,7 @@ void ContentsCore::BeginPlay()
 		UImageManager::GetInst().CuttingSprite("Enemies_Destroy.png", { 48, 48 });
 		UImageManager::GetInst().CuttingSprite("Boss.png", { 192, 288 });
 		UImageManager::GetInst().CuttingSprite("Boss_Brick.png", { 144, 280 });
+		UImageManager::GetInst().CuttingSprite("BossBullet.png", { 24, 24 });
 	}
 	
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("Arkanoid");
@@ -149,7 +149,7 @@ void ContentsCore::BeginPlay()
 			
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Title");
+	UEngineAPICore::GetCore()->OpenLevel("Stage_Boss");
 }
 
 void ContentsCore::Tick()

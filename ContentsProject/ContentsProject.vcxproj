@@ -151,6 +151,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BossBullet.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Enemies.h">
       <SubType>
       </SubType>
@@ -243,6 +247,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BossBullet.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Enemies.cpp">
       <SubType>
       </SubType>

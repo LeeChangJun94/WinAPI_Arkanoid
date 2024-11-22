@@ -18,6 +18,7 @@ enum class ECollisionGroup
 	Brick,
 	Ball,
 	Bullet,
+	BossBullet,
 	Item,
 	Vaus,
 	Enemies,
