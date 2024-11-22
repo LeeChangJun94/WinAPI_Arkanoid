@@ -21,6 +21,7 @@ public:
 
 	FVector2D Dir = { 0.f , 0.f };
 
+
 protected:
 
 private:

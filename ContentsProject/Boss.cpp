@@ -13,10 +13,11 @@ ABoss::ABoss()
 	SpriteRenderer1 = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer1->SetComponentScale({ 192, 288 });
 	SpriteRenderer1->SetOrder(ERenderOrder::ENEMIES);
-	SpriteRenderer1->CreateAnimation("Boss_Normal", "Boss.png", 0, 3, 0.2f);
+	SpriteRenderer1->CreateAnimation("Boss_Normal", "Boss.png", 0, 3, 0.1f);
 	SpriteRenderer1->CreateAnimation("Boss_Hit", "Boss.png", 4, 7, 0.2f);
 	SpriteRenderer1->CreateAnimation("Boss_Dying", "Boss.png", 8, 19, 0.2f);
 	SpriteRenderer1->CreateAnimation("Boss_Death", "Boss.png", 20, 29, 0.2f);
+	SpriteRenderer1->CreateAnimation("Boss_RNormal", "Boss.png", 3, 0, 0.1f);
 
 	SpriteRenderer1->ChangeAnimation("Boss_Normal");
 
@@ -24,7 +25,8 @@ ABoss::ABoss()
 	SpriteRenderer2->SetSprite("Boss_Brick.png");
 	SpriteRenderer2->SetComponentScale({ 144, 280 });
 	SpriteRenderer2->SetOrder(ERenderOrder::BACKGROUND);
-	
+	SpriteRenderer2->SetComponentLocation(SpriteRenderer2->GetComponentLocation());
+
 	CollisionComponent = CreateDefaultSubObject<U2DCollision>();
 	CollisionComponent->SetComponentLocation({ 0, 0 });
 	CollisionComponent->SetComponentScale({ 144, 280 });

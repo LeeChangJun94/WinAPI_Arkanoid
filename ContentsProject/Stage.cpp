@@ -141,7 +141,7 @@ void AStage::Tick(float _DeltaTime)
 	if (0 == BrickList.size())
 	{
 		StageResetSetting(1);
-		TimeEventer.PushEvent(0.5f, []()
+		TimeEventer.PushEvent(1.0f, []()
 			{
 				UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
 			});
