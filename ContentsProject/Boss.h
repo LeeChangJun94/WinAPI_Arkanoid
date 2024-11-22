@@ -21,6 +21,10 @@ public:
 
 	FVector2D Dir = { 0.f , 0.f };
 
+	USpriteRenderer* GetSpriteRenderer()
+	{
+		return SpriteRenderer1;
+	}
 
 protected:
 

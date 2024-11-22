@@ -13,7 +13,7 @@ ABossBullet::ABossBullet()
 	SpriteRenderer->SetComponentScale({ 24, 24 });
 	SpriteRenderer->CreateAnimation("BossBullet", "BossBullet.png", 0, 7, 0.1f);
 	//SpriteRenderer->CreateAnimation("BulletDone", "Bullet.png", 0, 2, 0.1f);
-	
+
 	SpriteRenderer->ChangeAnimation("BossBullet");
 
 	CollisionComponent = CreateDefaultSubObject<U2DCollision>();

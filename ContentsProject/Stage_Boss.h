@@ -10,6 +10,7 @@ class ABall;
 class AText;
 class ANumber;
 class AScore;
+class ABoss;
 class APlayerLife;
 class APlayMap;
 
@@ -60,9 +61,7 @@ private:
 	APlayMap* Map = nullptr;
 	APlayer* Vaus = nullptr;
 	ABall* BallActor = nullptr;
-	AText* Text1 = nullptr;
-	ANumber* Text2 = nullptr;
-	AText* Text3 = nullptr;
+	ABoss* Boss = nullptr;
 	APlayerLife* PlayerLifeActor = nullptr;
 	//std::vector<std::vector<ABrick*>> Bricks;
 	USoundPlayer BGMPlayer;

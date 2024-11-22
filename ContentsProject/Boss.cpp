@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 #include "Boss.h"
 #include "Ball.h"
+#include "BossBullet.h"
+#include <EngineBase/TimeEvent.h>
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineCoreDebug.h>
@@ -15,11 +17,48 @@ ABoss::ABoss()
 	SpriteRenderer1->SetComponentScale({ 192, 288 });
 	SpriteRenderer1->SetOrder(ERenderOrder::ENEMIES);
 	SpriteRenderer1->CreateAnimation("Boss_Normal", "Boss.png", 0, 3, 0.1f, false);
+	SpriteRenderer1->CreateAnimation("Boss_RNormal", "Boss.png", 3, 0, 0.1f, false);
 	SpriteRenderer1->CreateAnimation("Boss_Hit", "Boss.png", 4, 7, 0.2f);
 	SpriteRenderer1->CreateAnimation("Boss_Dying", "Boss.png", 8, 19, 0.2f);
 	SpriteRenderer1->CreateAnimation("Boss_Death", "Boss.png", 20, 29, 0.2f);
-	SpriteRenderer1->CreateAnimation("Boss_RNormal", "Boss.png", 3, 0, 0.1f);
 
+	SpriteRenderer1->SetAnimationEvent("Boss_Normal", 2, [this]()
+		{
+			TimeEventer.PushEvent(0.0f, [this]()
+				{
+					ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+					BossBullet->SetActorLocation({ 336, 312 });
+				});
+			TimeEventer.PushEvent(0.5f, [this]()
+				{
+					ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+					BossBullet->SetActorLocation({ 336, 312 });
+				});
+			TimeEventer.PushEvent(1.0f, [this]()
+				{
+					ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+					BossBullet->SetActorLocation({ 336, 312 });
+				});
+			TimeEventer.PushEvent(1.5f, [this]()
+				{
+					ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+					BossBullet->SetActorLocation({ 336, 312 });
+				});
+			TimeEventer.PushEvent(2.0f, [this]()
+				{
+					ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+					BossBullet->SetActorLocation({ 336, 312 });
+					SpriteRenderer1->ChangeAnimation("Boss_RNormal");
+				});
+		});
+
+	SpriteRenderer1->SetAnimationEvent("Boss_RNormal", 2, [this]()
+		{
+			TimeEventer.PushEvent(2.0f, [this]()
+				{
+					SpriteRenderer1->ChangeAnimation("Boss_Normal");
+				});
+		});
 
 	//SpriteRenderer1->SetAnimationEvent("Boss_Noraml", 3, )
 
@@ -51,6 +90,7 @@ void ABoss::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	
 
 	ABall* ResultBall = reinterpret_cast<ABall*>(CollisionComponent->CollisionOnce(ECollisionGroup::Ball));
 

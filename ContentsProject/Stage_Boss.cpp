@@ -40,7 +40,7 @@ void AStage_Boss::BeginPlay()
 
 	//BGMPlayer = UEngineSound::Play("anipang_ingame_wav.wav");
 
-	ABoss* Boss = GetWorld()->SpawnActor<ABoss>();
+	Boss = GetWorld()->SpawnActor<ABoss>();
 	Boss->SetActorLocation({ 336, 312 });
 
 	
@@ -121,43 +121,48 @@ void AStage_Boss::Tick(float _DeltaTime)
 	UEngineDebug::CoreOutPutString("BossHP : " + std::to_string(BossHP));
 	CountTime += _DeltaTime;
 
-	if (3 == (static_cast<int>(CountTime) % 4) && true != BossAttack)
-	{
-		BossAttack = true;
+	
+	
+	//if (3 == (static_cast<int>(CountTime) % 4) && true != BossAttack)
+	//{
+	//	BossAttack = true;
 
-		TimeEventer.PushEvent(0.0f, [this]()
-			{
-				ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
-				BossBullet->SetActorLocation({ 336, 312 });
-			});
-		TimeEventer.PushEvent(0.5f, [this]()
-			{
-				ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
-				BossBullet->SetActorLocation({ 336, 312 });
-			});
-		TimeEventer.PushEvent(1.0f, [this]()
-			{
-				ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
-				BossBullet->SetActorLocation({ 336, 312 });
-			});
-		TimeEventer.PushEvent(1.5f, [this]()
-			{
-				ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
-				BossBullet->SetActorLocation({ 336, 312 });
-			});
-		TimeEventer.PushEvent(2.0f, [this]()
-			{
-				ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
-				BossBullet->SetActorLocation({ 336, 312 });
-				BossAttack = false;
-			});
-	}
+	//	TimeEventer.PushEvent(0.0f, [this]()
+	//		{
+	//			ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+	//			BossBullet->SetActorLocation({ 336, 312 });
+	//		});
+	//	TimeEventer.PushEvent(0.5f, [this]()
+	//		{
+	//			ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+	//			BossBullet->SetActorLocation({ 336, 312 });
+	//		});
+	//	TimeEventer.PushEvent(1.0f, [this]()
+	//		{
+	//			ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+	//			BossBullet->SetActorLocation({ 336, 312 });
+	//		});
+	//	TimeEventer.PushEvent(1.5f, [this]()
+	//		{
+	//			ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+	//			BossBullet->SetActorLocation({ 336, 312 });
+	//		});
+	//	TimeEventer.PushEvent(2.0f, [this]()
+	//		{
+	//			ABossBullet* BossBullet = GetWorld()->SpawnActor<ABossBullet>();
+	//			BossBullet->SetActorLocation({ 336, 312 });
+	//			BossAttack = false;
+	//		});
+	//}
 	
 	if (true != StageSetting)
 	{
 		Map = GetWorld()->SpawnActor<APlayMap>();
 		Map->SetPlayMapType(EPlayMapType::TYPE_BOSS);
-		//LoadBrick(Stage, PlayerLifeActor);
+		TimeEventer.PushEvent(2.0f, [this]()
+			{
+				Boss->GetSpriteRenderer()->ChangeAnimation("Boss_Normal");
+			});
 		StageSetting = true;
 	}
 
@@ -246,7 +251,7 @@ void AStage_Boss::StageResetSetting(int _StageCount)
 	CountTime = 0.0f;
 	//BrickList.clear();
 	Map->Destroy();
-	Text2->SetNumber(Stage);
+	//Text2->SetNumber(Stage);
 	Vaus->BulletPtr.clear();
 	std::list<ABall*>::iterator BalliterStart = PlayerLifeActor->BallList.begin();
 	std::list<ABall*>::iterator BalliterEnd = PlayerLifeActor->BallList.end();
