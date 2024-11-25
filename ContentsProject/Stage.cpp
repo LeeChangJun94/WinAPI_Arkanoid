@@ -77,7 +77,7 @@ void AStage::BeginPlay()
 		Text1->SetOrder(ERenderOrder::UI);
 		Text1->SetTextScale({ 24, 24 });
 		Text1->SetActorLocation({ 350, 524 });
-		Text1->SetText("ROUND");
+		Text1->SetText("ROUND", 0.0f, true);
 
 		Text2 = GetWorld()->SpawnActor<ANumber>();
 
@@ -93,7 +93,7 @@ void AStage::BeginPlay()
 		Text3->SetOrder(ERenderOrder::UI);
 		Text3->SetTextScale({ 24, 24 });
 		Text3->SetActorLocation({ 380, 572 });
-		Text3->SetText("READY");
+		Text3->SetText("READY", 0.0f, true);
 	}
 	//AEnemies* Enemies = GetWorld()->SpawnActor<AEnemies>();
 	//Enemies->SetActorLocation({ 50,50 });

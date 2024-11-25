@@ -10,9 +10,6 @@
     <ClInclude Include="Player.h">
       <Filter>ContentsObject\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>ContentsObject</Filter>
-    </ClInclude>
     <ClInclude Include="Brick.h">
       <Filter>ContentsObject\Brick</Filter>
     </ClInclude>
@@ -72,6 +69,21 @@
     <ClInclude Include="BossBullet.h">
       <Filter>Monster\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>ContentsObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro.h">
+      <Filter>ContentsObject\GameMode\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro_Laser.h">
+      <Filter>ContentsObject\GameMode\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro_StarShip.h">
+      <Filter>ContentsObject\GameMode\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro_LaserEffect.h">
+      <Filter>ContentsObject\GameMode\Intro</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -82,9 +94,6 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>ContentsObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>ContentsObject</Filter>
     </ClCompile>
     <ClCompile Include="Brick.cpp">
       <Filter>ContentsObject\Brick</Filter>
@@ -145,6 +154,21 @@
     <ClCompile Include="Boss.cpp">
       <Filter>Monster\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>ContentsObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro.cpp">
+      <Filter>ContentsObject\GameMode\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro_Laser.cpp">
+      <Filter>ContentsObject\GameMode\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro_StarShip.cpp">
+      <Filter>ContentsObject\GameMode\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro_LaserEffect.cpp">
+      <Filter>ContentsObject\GameMode\Intro</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -182,6 +206,9 @@
     </Filter>
     <Filter Include="Monster\Boss">
       <UniqueIdentifier>{e1d546a4-ea86-4df6-9485-cd903baa71f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\GameMode\Intro">
+      <UniqueIdentifier>{03cae834-e0fc-4419-a6b3-96b670b472f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -5,6 +5,13 @@
 #include <EngineCore/ImageManager.h>
 #include <EngineCore/SpriteRenderer.h>
 
+enum class ETextValue_Index
+{
+	DOT = 26,
+	DOUBLEQUOTES = 27,
+	SPACE = 28,
+};
+
 // Ό³Έν :
 class AText : public AActor
 {
@@ -34,7 +41,10 @@ public:
 
 	void SetOrder(int _Order);
 
-	void SetText(std::string _Text);
+	void SetText(std::string _Text, float _Time, bool _Reverse);
+	void ShowText(float _DeltaTime);
+
+	int CharToTextIndex(char _C);
 
 protected:
 	void BeginPlay() override;
@@ -44,6 +54,9 @@ private:
 	std::string TextSpriteName;
 	FVector2D TextScale;
 	std::vector<class USpriteRenderer*> Renders;
+	float Time = 0.0f;
+	float CurTime = 0.0f;
+	int CurCount = 0;
 
 	class APlayer* Vaus = nullptr;
 

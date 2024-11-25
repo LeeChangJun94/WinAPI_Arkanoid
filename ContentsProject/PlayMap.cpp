@@ -46,6 +46,8 @@ void APlayMap::BeginPlay()
 	case EPlayMapType::TYPE_DARK:
 		SpriteRenderer1->SetSprite("Dark.png");
 		break;
+	case EPlayMapType::TYPE_INTRO:
+		SpriteRenderer1->SetSprite("BackGround_Intro.png");
 	default:
 		break;
 	}

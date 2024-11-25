@@ -151,11 +151,27 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Intro_LaserEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Intro_Laser.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Intro.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BossBullet.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Enemies.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Intro_StarShip.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -247,11 +263,27 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Intro_LaserEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Intro_Laser.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Intro.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BossBullet.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="Enemies.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Intro_StarShip.cpp">
       <SubType>
       </SubType>
     </ClCompile>
