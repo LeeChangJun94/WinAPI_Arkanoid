@@ -8,7 +8,6 @@
 AIntro_Enemies::AIntro_Enemies()
 {
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	//SpriteRenderer->SetSprite("StarShip.png");
 	SpriteRenderer->SetComponentScale({ 64, 64 });
 	SpriteRenderer->CreateAnimation("Intro_Enemies", "Intro_Enemies.png", 0, 15, 0.2f, false);
 	SetActorLocation(P0);

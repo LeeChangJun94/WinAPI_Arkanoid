@@ -16,6 +16,7 @@
 #include "TileMapEditor.h"
 #include "Player.h"
 #include "Intro.h"
+#include "Ending.h"
 
 
 ContentsCore::ContentsCore()
@@ -95,7 +96,7 @@ void ContentsCore::BeginPlay()
 		UImageManager::GetInst().CuttingSprite("BackGround_TYPE3.png", { 672, 720 });
 		UImageManager::GetInst().CuttingSprite("BackGround_TYPE4.png", { 672, 720 });
 		UImageManager::GetInst().CuttingSprite("BackGround_Boss.png", { 672, 720 });
-		UImageManager::GetInst().CuttingSprite("BackGround_Intro.png", { 672, 720 });
+		UImageManager::GetInst().CuttingSprite("BackGround_Space.png", { 672, 720 });
 		UImageManager::GetInst().CuttingSprite("Dark.png", { 672, 720 });
 		UImageManager::GetInst().CuttingSprite("UI_TOP.png", { 672, 48 });
 		UImageManager::GetInst().CuttingSprite("Title1.png", { 672, 768 });
@@ -109,6 +110,10 @@ void ContentsCore::BeginPlay()
 		UImageManager::GetInst().CuttingSprite("StarShip.png", { 573, 249 });
 		UImageManager::GetInst().CuttingSprite("Intro_Enemies.png", { 64, 64 });
 		UImageManager::GetInst().CuttingSprite("Intro_Vaus.png", { 33, 11 });
+	}
+
+	{
+		UImageManager::GetInst().CuttingSprite("Ending_Vaus.png", { 64, 16 });
 	}
 
 	{
@@ -157,10 +162,10 @@ void ContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<AStage, APlayer>("Stage");
 	UEngineAPICore::GetCore()->CreateLevel<AStage_Dark, APlayer>("Stage_Dark");
 	UEngineAPICore::GetCore()->CreateLevel<AStage_Boss, APlayer>("Stage_Boss");
-			
+	UEngineAPICore::GetCore()->CreateLevel<AEnding, APlayer>("Ending");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Intro");
+	UEngineAPICore::GetCore()->OpenLevel("Ending");
 }
 
 void ContentsCore::Tick()

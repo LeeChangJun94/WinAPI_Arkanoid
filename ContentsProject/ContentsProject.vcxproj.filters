@@ -90,6 +90,15 @@
     <ClInclude Include="Intro_Enemies.h">
       <Filter>ContentsObject\GameMode\Intro</Filter>
     </ClInclude>
+    <ClInclude Include="Ending.h">
+      <Filter>ContentsObject\GameMode\Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Ending_Vaus.h">
+      <Filter>ContentsObject\GameMode\Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Ending_StarShip.h">
+      <Filter>ContentsObject\GameMode\Ending</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -181,6 +190,15 @@
     <ClCompile Include="Intro_Enemies.cpp">
       <Filter>ContentsObject\GameMode\Intro</Filter>
     </ClCompile>
+    <ClCompile Include="Ending.cpp">
+      <Filter>ContentsObject\GameMode\Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Ending_Vaus.cpp">
+      <Filter>ContentsObject\GameMode\Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Ending_StarShip.cpp">
+      <Filter>ContentsObject\GameMode\Ending</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -221,6 +239,9 @@
     </Filter>
     <Filter Include="ContentsObject\GameMode\Intro">
       <UniqueIdentifier>{03cae834-e0fc-4419-a6b3-96b670b472f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\GameMode\Ending">
+      <UniqueIdentifier>{872b466c-dcd1-4b16-8a02-4cd15529d353}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

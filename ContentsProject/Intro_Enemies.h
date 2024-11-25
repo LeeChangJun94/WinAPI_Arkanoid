@@ -28,7 +28,7 @@ private:
 	FVector2D Bezier = { 0, 0 };
 
 	FVector2D P0 = { 333, 126 };
-	FVector2D P1 = { 750, 70 };
+	FVector2D P1 = { 750, 60 };
 	FVector2D P2 = { 750, 750 };
 	FVector2D P3 = { 60, 200 };
 

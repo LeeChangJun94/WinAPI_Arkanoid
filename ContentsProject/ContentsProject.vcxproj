@@ -151,6 +151,18 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Ending.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Ending_StarShip.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Ending_Vaus.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Intro_Enemies.h">
       <SubType>
       </SubType>
@@ -271,6 +283,18 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ending.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Ending_StarShip.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Ending_Vaus.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Intro_Enemies.cpp">
       <SubType>
       </SubType>

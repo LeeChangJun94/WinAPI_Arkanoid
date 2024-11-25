@@ -1,12 +1,10 @@
 #include "PreCompile.h"
-#include "Intro.h"
+#include "Ending.h"
 #include "Score.h"
 #include "PlayMap.h"
-#include "Intro_Laser.h"
 #include "Text.h"
-#include "Intro_Vaus.h"
-#include "Intro_StarShip.h"
-#include "Intro_Enemies.h"
+#include "Ending_Vaus.h"
+#include "Ending_StarShip.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
@@ -16,25 +14,25 @@
 
 #include "TitleLogo.h"
 
-AIntro::AIntro()
+AEnding::AEnding()
 {
 }
 
-AIntro::~AIntro()
+AEnding::~AEnding()
 {
 }
 
-void AIntro::BeginPlay()
+void AEnding::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	TitleLogo* NewActor = GetWorld()->SpawnActor<TitleLogo>();
 	Map = GetWorld()->SpawnActor<APlayMap>();
 	Map->SetPlayMapType(EPlayMapType::TYPE_SPACE);
 
 	TimeEventer.PushEvent(4.1f, [this]()
 		{
-			Laser = GetWorld()->SpawnActor<AIntro_Laser>();
+			Laser = GetWorld()->SpawnActor<AEnding_Laser>();
 			Laser->SetActorLocation({ 440, 420 });
 			Laser->SetStarShip(Intro_StarShip);
 		});
@@ -52,7 +50,7 @@ void AIntro::BeginPlay()
 	Text2->SetTextScale({ 24, 24 });
 	Text2->SetActorLocation({ 48, 144 });
 	Text2->SetText("THIS STORY IS UNKNOWN.", 0.1f, false);
-	
+
 	TimeEventer.PushEvent(4.2f, [this]()
 		{
 			Text1->SetActive(false);
@@ -86,7 +84,7 @@ void AIntro::BeginPlay()
 	Text6->SetTextScale({ 24, 24 });
 	Text6->SetActorLocation({ 48, 240 });
 	Text6->SetText("SCRAMBLED AWAY FROM IT.", 0.1f, false);
-	
+
 	TimeEventer.PushEvent(13.4f, [this]()
 		{
 			Text3->SetActive(false);
@@ -116,19 +114,19 @@ void AIntro::BeginPlay()
 	Text9->SetActorLocation({ 48, 192 });
 	Text9->SetText("BY SOMEONE........", 0.1f, false);
 
-	Intro_StarShip = GetWorld()->SpawnActor<AIntro_StarShip>();
+	Intro_StarShip = GetWorld()->SpawnActor<AEnding_StarShip>();
 	Intro_StarShip->SetActorLocation({ 303, 600 });
 
 	TimeEventer.PushEvent(2.0f, [this]()
 		{
-			AIntro_Enemies* Intro_Enemies = GetWorld()->SpawnActor<AIntro_Enemies>();
+			AEnding_Enemies* Intro_Enemies = GetWorld()->SpawnActor<AEnding_Enemies>();
 		});
 
 
 }
 
 
-void AIntro::Tick(float _DeltaTime)
+void AEnding::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
@@ -148,7 +146,7 @@ void AIntro::Tick(float _DeltaTime)
 	{
 		Text3->ShowText(_DeltaTime);
 	}
-	
+
 	if (6.4f < CheckTime)
 	{
 		Text4->ShowText(_DeltaTime);

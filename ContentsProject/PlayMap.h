@@ -9,7 +9,7 @@ enum class EPlayMapType
 	TYPE_3,
 	TYPE_BOSS,
 	TYPE_DARK,
-	TYPE_INTRO,
+	TYPE_SPACE,
 };
 
 // Ό³Έν :
