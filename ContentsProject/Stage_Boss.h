@@ -51,10 +51,9 @@ public:
 protected:
 
 private:
-	int Stage = 1;
+	int Stage = 33;
 	float CountTime = 0.0f;
-	int BossHP = 10;
-
+	
 	bool StageSetting = false;
 	bool BossAttack = false;
 

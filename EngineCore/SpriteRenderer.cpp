@@ -237,9 +237,9 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 		Inter = (_Start - _End) + 1;
 		for (size_t i = 0; i < Inter; i++)
 		{
-			Indexs.push_back(_End);
+			Indexs.push_back(_Start);
 			Times.push_back(Time);
-			++_End;
+			--_Start;
 		}
 	}
 
@@ -279,7 +279,7 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 
 	if (nullptr == FindSprite)
 	{
-		MSGASSERT("로드하지 않은 스프라이트를 애니메이션 생서에 사용하려고 했습니다" + std::string(UpperName));
+		MSGASSERT("로드하지 않은 스프라이트를 애니메이션 생성에 사용하려고 했습니다" + std::string(UpperName));
 		return;
 	}
 

@@ -99,6 +99,11 @@ public:
 		return Sprite->GetName();
 	}
 
+	int GetCurSpriteIndex()
+	{
+		return CurIndex;
+	}
+
 	void SetCameraEffect(bool _Value)
 	{
 		IsCameraEffect = _Value;

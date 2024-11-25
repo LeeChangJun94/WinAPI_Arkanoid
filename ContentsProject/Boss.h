@@ -3,6 +3,13 @@
 
 class ABall;
 
+enum class BossState
+{
+	IDLE,
+	ATTACK,
+	DESTROY,
+};
+
 class ABoss : public AActor
 {
 public:
@@ -26,6 +33,25 @@ public:
 		return SpriteRenderer1;
 	}
 
+	BossState GetCurBossState()
+	{
+		return CurBossState;
+	}
+
+	void ChangeBossState(BossState _CurBossState)
+	{
+		CurBossState = _CurBossState;
+	}
+
+	void SetCountTime(float _CountTime)
+	{
+		CountTime = _CountTime;
+	}
+
+	void Idle(float _DeltaTime);
+	void Attack(float _DeltaTime);
+	void Destroy(float _DeltaTime);
+
 protected:
 
 private:
@@ -34,8 +60,14 @@ private:
 	USpriteRenderer* SpriteRenderer2 = nullptr;
 	U2DCollision* CollisionComponent = nullptr;
 
+	BossState CurBossState = BossState::IDLE;
+
+	int BossHP = 10;
 	float Ratio = 0;
 	float Line = 0;
+	float CountTime = 0.0f;
+	bool BossDeath = false;
+	bool BossAttack = true;
 
 	FTransform BallTrans;
 	FTransform BossTrans;
