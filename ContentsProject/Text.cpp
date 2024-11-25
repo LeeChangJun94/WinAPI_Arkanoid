@@ -71,7 +71,7 @@ void AText::SetText(std::string _Text, float _Time, bool _Reverse)
 			Renders[i]->SetComponentScale(TextScale);
 			Renders[i]->SetComponentLocation(Pos);
 			Pos.X += TextScale.X;
-			Renders[i]->SetActive(true);
+			Renders[i]->SetActive(false);
 		}
 	}
 	else
@@ -84,7 +84,7 @@ void AText::SetText(std::string _Text, float _Time, bool _Reverse)
 			Renders[i]->SetComponentScale(TextScale);
 			Renders[i]->SetComponentLocation(Pos);
 			Pos.X -= TextScale.X;
-			Renders[i]->SetActive(true);
+			Renders[i]->SetActive(false);
 		}
 	}
 
@@ -127,7 +127,9 @@ int AText::CharToTextIndex(char _C)
 	if (_C >= 'A' && _C <= 'Z') {
 		return (_C - 'A');
 	}
-	switch (_C) {
+	switch (_C)
+	{
+	case ',': return static_cast<int>(ETextValue_Index::COMMA);
 	case '.': return static_cast<int>(ETextValue_Index::DOT);
 	case '"': return static_cast<int>(ETextValue_Index::DOUBLEQUOTES);
 	case ' ': return static_cast<int>(ETextValue_Index::SPACE);

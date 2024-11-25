@@ -7,9 +7,10 @@
 
 enum class ETextValue_Index
 {
-	DOT = 26,
-	DOUBLEQUOTES = 27,
-	SPACE = 28,
+	COMMA = 26,
+	DOT = 27,
+	DOUBLEQUOTES = 28,
+	SPACE = 29,
 };
 
 // Ό³Έν :

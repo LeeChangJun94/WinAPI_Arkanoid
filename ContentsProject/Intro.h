@@ -26,7 +26,15 @@ protected:
 private:
 	USpriteRenderer* SpriteRenderer = nullptr;
 	APlayMap* Map = nullptr;
-	AText* Text = nullptr;
+	AText* Text1 = nullptr;
+	AText* Text2 = nullptr;
+	AText* Text3 = nullptr;
+	AText* Text4 = nullptr;
+	AText* Text5 = nullptr;
+	AText* Text6 = nullptr;
+
+
+
 
 	float CheckTime = 0.0f;
 };
