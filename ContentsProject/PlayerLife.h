@@ -3,7 +3,7 @@
 
 class APlayer;
 class ABall;
-class ADethLine;
+class ADeathLine;
 class USpriteRenderer;
 
 // Ό³Έν :
@@ -47,9 +47,9 @@ public:
 		Ball = _Ball;
 	}
 
-	void SetDethLine(ADethLine* _DethLine)
+	void SetDeathLine(ADeathLine* _DeathLine)
 	{
-		DethLine = _DethLine;
+		DeathLine = _DeathLine;
 	}
 	
 
@@ -62,7 +62,7 @@ private:
 
 	APlayer* Vaus = nullptr;
 	ABall* Ball = nullptr;
-	ADethLine* DethLine = nullptr;
+	ADeathLine* DeathLine = nullptr;
 	USpriteRenderer* SpriteRenderer = nullptr;
 
 	//APlayerLife* PlayerLife = nullptr;

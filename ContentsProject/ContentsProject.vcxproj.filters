@@ -39,7 +39,7 @@
       <Filter>ContentsObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="Fade.h" />
-    <ClInclude Include="DethLine.h">
+    <ClInclude Include="DeathLine.h">
       <Filter>ContentsObject</Filter>
     </ClInclude>
     <ClInclude Include="GlobalValue.h">
@@ -84,6 +84,12 @@
     <ClInclude Include="Intro_LaserEffect.h">
       <Filter>ContentsObject\GameMode\Intro</Filter>
     </ClInclude>
+    <ClInclude Include="Intro_Vaus.h">
+      <Filter>ContentsObject\GameMode\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro_Enemies.h">
+      <Filter>ContentsObject\GameMode\Intro</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -124,7 +130,7 @@
       <Filter>ContentsObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="Fade.cpp" />
-    <ClCompile Include="DethLine.cpp">
+    <ClCompile Include="DeathLine.cpp">
       <Filter>ContentsObject</Filter>
     </ClCompile>
     <ClCompile Include="GlobalValue.cpp">
@@ -167,6 +173,12 @@
       <Filter>ContentsObject\GameMode\Intro</Filter>
     </ClCompile>
     <ClCompile Include="Intro_LaserEffect.cpp">
+      <Filter>ContentsObject\GameMode\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro_Vaus.cpp">
+      <Filter>ContentsObject\GameMode\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro_Enemies.cpp">
       <Filter>ContentsObject\GameMode\Intro</Filter>
     </ClCompile>
   </ItemGroup>

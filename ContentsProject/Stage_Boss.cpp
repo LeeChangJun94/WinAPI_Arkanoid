@@ -13,7 +13,7 @@
 #include "Number.h"
 #include "Player.h"
 #include "Enemies.h"
-#include "DethLine.h"
+#include "DeathLine.h"
 #include "PlayerLife.h"
 #include "BossBullet.h"
 #include "ContentsEnum.h"
@@ -98,10 +98,10 @@ void AStage_Boss::BeginPlay()
 	//AEnemies* Enemies = GetWorld()->SpawnActor<AEnemies>();
 	//Enemies->SetActorLocation({ 50,50 });
 
-	ADethLine* DethLineActor = GetWorld()->SpawnActor<ADethLine>();
+	ADeathLine* DeathLineActor = GetWorld()->SpawnActor<ADeathLine>();
 
 	PlayerLifeActor = GetWorld()->SpawnActor<APlayerLife>();
-	PlayerLifeActor->SetDethLine(DethLineActor);
+	PlayerLifeActor->SetDeathLine(DeathLineActor);
 
 	Vaus->SetPlayerLife(PlayerLifeActor);
 }

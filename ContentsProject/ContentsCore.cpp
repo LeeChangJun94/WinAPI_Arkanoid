@@ -106,7 +106,9 @@ void ContentsCore::BeginPlay()
 	{
 		UImageManager::GetInst().CuttingSprite("Intro_Laser.png", { 384, 288 });
 		UImageManager::GetInst().CuttingSprite("Intro_LaserEffect.png", { 128, 96 });
-
+		UImageManager::GetInst().CuttingSprite("StarShip.png", { 573, 249 });
+		UImageManager::GetInst().CuttingSprite("Intro_Enemies.png", { 64, 64 });
+		UImageManager::GetInst().CuttingSprite("Intro_Vaus.png", { 33, 11 });
 	}
 
 	{

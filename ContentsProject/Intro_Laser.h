@@ -2,6 +2,7 @@
 #include <EngineCore/Actor.h>
 
 class USpriteRenderer;
+class AIntro_StarShip;
 
 // Ό³Έν :
 class AIntro_Laser : public AActor
@@ -17,14 +18,19 @@ public:
 	AIntro_Laser& operator=(const AIntro_Laser& _Other) = delete;
 	AIntro_Laser& operator=(AIntro_Laser&& _Other) noexcept = delete;
 
+	void SetStarShip(AIntro_StarShip* _StarShip)
+	{
+		StarShip = _StarShip;
+	}
+
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 protected:
 
 private:
-	USpriteRenderer* SpriteRenderer1 = nullptr;
-	USpriteRenderer* SpriteRenderer2 = nullptr;
+	USpriteRenderer* SpriteRenderer = nullptr;
+	AIntro_StarShip* StarShip = nullptr;
 
 };
 

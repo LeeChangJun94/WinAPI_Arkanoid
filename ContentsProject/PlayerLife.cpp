@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "PlayerLife.h"
-#include "DethLine.h"
+#include "DeathLine.h"
 #include "Ball.h"
 
 #include <EngineCore/SpriteRenderer.h>
@@ -45,7 +45,7 @@ bool APlayerLife::DeathCheck()
 	//FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 	//float BallY = Ball->GetActorLocation().Y;
 	
-	ABall* BallResult = reinterpret_cast<ABall*>(DethLine->GetCollisionComponent()->CollisionOnce(ECollisionGroup::Ball));
+	ABall* BallResult = reinterpret_cast<ABall*>(DeathLine->GetCollisionComponent()->CollisionOnce(ECollisionGroup::Ball));
 
 	if (nullptr != BallResult)
 	{

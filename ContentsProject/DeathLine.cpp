@@ -1,11 +1,11 @@
 #include "PreCompile.h"
-#include "DethLine.h"
+#include "DeathLine.h"
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/2DCollision.h>
 #include "ContentsEnum.h"
 #include "Ball.h"
 
-ADethLine::ADethLine()
+ADeathLine::ADeathLine()
 {
 	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 	USpriteRenderer* SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
@@ -22,7 +22,7 @@ ADethLine::ADethLine()
 	CollisionComponent->SetCollisionType(ECollisionType::Rect);
 }
 
-ADethLine::~ADethLine()
+ADeathLine::~ADeathLine()
 {
 }
 

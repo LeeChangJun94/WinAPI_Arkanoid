@@ -151,6 +151,14 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Intro_Enemies.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Intro_Vaus.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Intro_LaserEffect.h">
       <SubType>
       </SubType>
@@ -195,7 +203,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="DethLine.h">
+    <ClInclude Include="DeathLine.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -263,6 +271,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Intro_Enemies.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Intro_Vaus.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Intro_LaserEffect.cpp">
       <SubType>
       </SubType>
@@ -307,7 +323,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="DethLine.cpp">
+    <ClCompile Include="DeathLine.cpp">
       <SubType>
       </SubType>
     </ClCompile>

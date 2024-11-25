@@ -4,6 +4,9 @@
 #include "PlayMap.h"
 #include "Intro_Laser.h"
 #include "Text.h"
+#include "Intro_Vaus.h"
+#include "Intro_StarShip.h"
+#include "Intro_Enemies.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
@@ -31,8 +34,9 @@ void AIntro::BeginPlay()
 
 	TimeEventer.PushEvent(4.1f, [this]()
 		{
-			AIntro_Laser* Laser = GetWorld()->SpawnActor<AIntro_Laser>();
+			Laser = GetWorld()->SpawnActor<AIntro_Laser>();
 			Laser->SetActorLocation({ 440, 420 });
+			Laser->SetStarShip(Intro_StarShip);
 		});
 
 	Text1 = GetWorld()->SpawnActor<AText>();
@@ -82,6 +86,45 @@ void AIntro::BeginPlay()
 	Text6->SetTextScale({ 24, 24 });
 	Text6->SetActorLocation({ 48, 240 });
 	Text6->SetText("SCRAMBLED AWAY FROM IT.", 0.1f, false);
+	
+	TimeEventer.PushEvent(13.4f, [this]()
+		{
+			Text3->SetActive(false);
+			Text4->SetActive(false);
+			Text5->SetActive(false);
+			Text6->SetActive(false);
+		});
+
+	Text7 = GetWorld()->SpawnActor<AText>();
+	Text7->SetTextSpriteName("Text");
+	Text7->SetOrder(ERenderOrder::UI);
+	Text7->SetTextScale({ 24, 24 });
+	Text7->SetActorLocation({ 48, 96 });
+	Text7->SetText("BUT ONLY TO BE", 0.1f, false);
+
+	Text8 = GetWorld()->SpawnActor<AText>();
+	Text8->SetTextSpriteName("Text");
+	Text8->SetOrder(ERenderOrder::UI);
+	Text8->SetTextScale({ 24, 24 });
+	Text8->SetActorLocation({ 48, 144 });
+	Text8->SetText("TRAPPED IN SPACE WARPED", 0.1f, false);
+
+	Text9 = GetWorld()->SpawnActor<AText>();
+	Text9->SetTextSpriteName("Text");
+	Text9->SetOrder(ERenderOrder::UI);
+	Text9->SetTextScale({ 24, 24 });
+	Text9->SetActorLocation({ 48, 192 });
+	Text9->SetText("BY SOMEONE........", 0.1f, false);
+
+	Intro_StarShip = GetWorld()->SpawnActor<AIntro_StarShip>();
+	Intro_StarShip->SetActorLocation({ 303, 600 });
+
+	TimeEventer.PushEvent(2.0f, [this]()
+		{
+			AIntro_Enemies* Intro_Enemies = GetWorld()->SpawnActor<AIntro_Enemies>();
+		});
+
+
 }
 
 
@@ -90,6 +133,9 @@ void AIntro::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	CheckTime += _DeltaTime;
+
+
+
 
 	Text1->ShowText(_DeltaTime);
 
@@ -116,6 +162,21 @@ void AIntro::Tick(float _DeltaTime)
 	if (11.0f < CheckTime)
 	{
 		Text6->ShowText(_DeltaTime);
+	}
+
+	if (13.4f < CheckTime)
+	{
+		Text7->ShowText(_DeltaTime);
+	}
+
+	if (14.9f < CheckTime)
+	{
+		Text8->ShowText(_DeltaTime);
+	}
+
+	if (17.3f < CheckTime)
+	{
+		Text9->ShowText(_DeltaTime);
 	}
 
 	if (true == UEngineInput::GetInst().IsDown('M'))

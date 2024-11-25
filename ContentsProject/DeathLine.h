@@ -7,18 +7,18 @@ class USpriteRenderer;
 class U2DCollision;
 
 // Ό³Έν :
-class ADethLine : public AActor
+class ADeathLine : public AActor
 {
 public:
 	// constrcuter destructer
-	ADethLine();
-	~ADethLine();
+	ADeathLine();
+	~ADeathLine();
 
 	// delete Function
-	ADethLine(const ADethLine& _Other) = delete;
-	ADethLine(ADethLine&& _Other) noexcept = delete;
-	ADethLine& operator=(const ADethLine& _Other) = delete;
-	ADethLine& operator=(ADethLine&& _Other) noexcept = delete;
+	ADeathLine(const ADeathLine& _Other) = delete;
+	ADeathLine(ADeathLine&& _Other) noexcept = delete;
+	ADeathLine& operator=(const ADeathLine& _Other) = delete;
+	ADeathLine& operator=(ADeathLine&& _Other) noexcept = delete;
 
 	U2DCollision* GetCollisionComponent()
 	{

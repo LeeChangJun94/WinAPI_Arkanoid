@@ -17,6 +17,11 @@ public:
 	AIntro_StarShip& operator=(const AIntro_StarShip& _Other) = delete;
 	AIntro_StarShip& operator=(AIntro_StarShip&& _Other) noexcept = delete;
 
+	USpriteRenderer* GetSpriteRenderer()
+	{
+		return SpriteRenderer;
+	}
+
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 

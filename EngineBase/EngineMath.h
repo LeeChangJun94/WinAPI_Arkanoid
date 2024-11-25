@@ -138,6 +138,13 @@ public:
 		return;
 	}
 
+	void Bezier3(float _t, FVector2D _P0, FVector2D _P1, FVector2D _P2, FVector2D _P3)
+	{
+		X = (1 - _t) * (1 - _t) * (1 - _t) * _P0.X + 3 * (1 - _t) * (1 - _t) * _t * _P1.X + 3 * (1 - _t) * _t * _t * _P2.X + _t * _t * _t * _P3.X;
+		Y = (1 - _t) * (1 - _t) * (1 - _t) * _P0.Y + 3 * (1 - _t) * (1 - _t) * _t * _P1.Y + 3 * (1 - _t) * _t * _t * _P2.Y + _t * _t * _t * _P3.Y;
+		return;
+	}
+
 	float Dot(const FVector2D _DirVector) const
 	{
 		float Result = X * _DirVector.X + Y * _DirVector.Y;
