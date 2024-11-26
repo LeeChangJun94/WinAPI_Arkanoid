@@ -16,7 +16,7 @@
 #include "TileMapEditor.h"
 #include "Player.h"
 #include "Intro.h"
-#include "Ending.h"
+#include "Outtro.h"
 
 
 ContentsCore::ContentsCore()
@@ -105,15 +105,12 @@ void ContentsCore::BeginPlay()
 	}
 	
 	{
-		UImageManager::GetInst().CuttingSprite("Intro_Laser.png", { 384, 288 });
-		UImageManager::GetInst().CuttingSprite("Intro_LaserEffect.png", { 128, 96 });
+		UImageManager::GetInst().CuttingSprite("InOuttro_Laser.png", { 384, 288 });
+		UImageManager::GetInst().CuttingSprite("InOuttro_LaserEffect.png", { 128, 96 });
 		UImageManager::GetInst().CuttingSprite("StarShip.png", { 573, 249 });
-		UImageManager::GetInst().CuttingSprite("Intro_Enemies.png", { 64, 64 });
+		UImageManager::GetInst().CuttingSprite("InOuttro_Enemies.png", { 64, 64 });
 		UImageManager::GetInst().CuttingSprite("Intro_Vaus.png", { 33, 11 });
-	}
-
-	{
-		UImageManager::GetInst().CuttingSprite("Ending_Vaus.png", { 64, 16 });
+		UImageManager::GetInst().CuttingSprite("Outtro_Vaus.png", { 64, 16 });
 	}
 
 	{
@@ -162,10 +159,10 @@ void ContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<AStage, APlayer>("Stage");
 	UEngineAPICore::GetCore()->CreateLevel<AStage_Dark, APlayer>("Stage_Dark");
 	UEngineAPICore::GetCore()->CreateLevel<AStage_Boss, APlayer>("Stage_Boss");
-	UEngineAPICore::GetCore()->CreateLevel<AEnding, APlayer>("Ending");
+	UEngineAPICore::GetCore()->CreateLevel<AOuttro, APlayer>("Outtro");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Ending");
+	UEngineAPICore::GetCore()->OpenLevel("Intro");
 }
 
 void ContentsCore::Tick()

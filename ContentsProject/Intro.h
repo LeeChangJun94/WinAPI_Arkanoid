@@ -2,8 +2,8 @@
 #include <EngineCore/GameMode.h>
 
 class APlayMap;
-class AIntro_Laser;
-class AIntro_StarShip;
+class AInOuttro_Laser;
+class AInOuttro_StarShip;
 class AText;
 
 // Ό³Έν :
@@ -28,8 +28,8 @@ protected:
 private:
 	USpriteRenderer* SpriteRenderer = nullptr;
 	APlayMap* Map = nullptr;
-	AIntro_Laser* Laser = nullptr;
-	AIntro_StarShip* Intro_StarShip = nullptr;
+	AInOuttro_Laser* Laser = nullptr;
+	AInOuttro_StarShip* StarShip = nullptr;
 
 	AText* Text1 = nullptr;
 	AText* Text2 = nullptr;

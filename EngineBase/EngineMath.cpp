@@ -21,6 +21,17 @@ FIntPoint FVector2D::ConvertToPoint() const
 	return { iX(), iY() };
 }
 
+FVector2D FVector2D::LerpClamp(FVector2D _StartLocation, FVector2D _TargetLocation, float _t)
+{
+	if (0.0f > _t) { _t = 0.0f; }
+	if (1.0F < _t) { _t = 1.0f; }
+	return FVector2D(
+		_StartLocation.X + _t * (_TargetLocation.X - _StartLocation.X),
+		_StartLocation.Y + _t * (_TargetLocation.Y - _StartLocation.Y));
+}
+
+
+
 
 std::function<bool(const FTransform&, const FTransform&)> FTransform::AllCollisionFunction[static_cast<int>(ECollisionType::Max)][static_cast<int>(ECollisionType::Max)];
 

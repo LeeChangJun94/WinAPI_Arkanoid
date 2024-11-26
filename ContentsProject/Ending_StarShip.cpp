@@ -7,20 +7,19 @@
 AEnding_StarShip::AEnding_StarShip()
 {
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	//SpriteRenderer->SetSprite("StarShip.png");
 	SpriteRenderer->SetComponentScale({ 573, 249 });
 	SpriteRenderer->CreateAnimation("StarShip", "StarShip.png", 0, 1, 0.1f);
-	SpriteRenderer->CreateAnimation("StarShip_Broken", "StarShip.png", 2, 6, 0.2f, false);
-	SpriteRenderer->CreateAnimation("StarShip_RBroken", "StarShip.png", 6, 2, 0.2f, false);
+	SpriteRenderer->CreateAnimation("StarShip_Open", "StarShip.png", 7, 19, 0.2f, false);
+	SpriteRenderer->CreateAnimation("StarShip_Close", "StarShip.png", 19, 7, 0.2f, false);
 
-	SpriteRenderer->SetAnimationEvent("StarShip_Broken", 5, [this]()
+	SpriteRenderer->SetAnimationEvent("StarShip_Open", 12, [this]()
 		{
-			SpriteRenderer->ChangeAnimation("StarShip_RBroken");
+			SpriteRenderer->ChangeAnimation("StarShip_Close");
 		});
 
-	SpriteRenderer->SetAnimationEvent("StarShip_RBroken", 5, [this]()
+	SpriteRenderer->SetAnimationEvent("StarShip_Close", 12, [this]()
 		{
-			SpriteRenderer->ChangeAnimation("StarShip_Broken");
+			SpriteRenderer->ChangeAnimation("StarShip_Open");
 		});
 }
 

@@ -104,17 +104,16 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 
 		float CurFrameTime = Times[CurAnimation->CurIndex];
 
+		bool EventCheck = false;
+		int PrevFrame = 0;
+
 		//                           0.1 0.1 0.1
 		if (CurAnimation->CurTime > CurFrameTime)
 		{
+			EventCheck = true;
 
 			CurAnimation->CurTime -= CurFrameTime;
 			++CurAnimation->CurIndex;
-
-			if (CurAnimation->Events.contains(CurIndex))
-			{
-				CurAnimation->Events[CurIndex]();
-			}
 
 			// 애니메이션 앤드
 			if (CurAnimation->CurIndex >= Indexs.size())
@@ -144,12 +143,20 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 				}
 			}
 
+			PrevFrame = Indexs[CurAnimation->CurIndex];
 		}
 
 
 		//         2 3 4           0
 		CurIndex = Indexs[CurAnimation->CurIndex];
-		// ++CurAnimation->CurIndex;
+
+		if (true == EventCheck)
+		{
+			if (CurAnimation->Events.contains(CurIndex))
+			{
+				CurAnimation->Events[PrevFrame]();
+			}
+		}
 	}
 
 }

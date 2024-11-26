@@ -11,9 +11,9 @@ AEnding_Vaus::AEnding_Vaus()
 	SpriteRenderer->SetComponentScale({ 64, 16 });
 	SpriteRenderer->CreateAnimation("Ending_Vaus", "Ending_Vaus.png", 0, 5, 0.3f);
 
-	SpriteRenderer->SetAnimationEvent("Ending_Vaus", 23, [this]()
+	SpriteRenderer->SetAnimationEvent("Ending_Vaus", 5, [this]()
 		{
-			this->AActor::Destroy();
+			
 		});
 }
 //248 420

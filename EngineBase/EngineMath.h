@@ -278,6 +278,7 @@ public:
 		Result.Y = UEngineMath::Lerp(_A.Y, _B.Y, _Alpha);
 		return Result;
 	}
+	static FVector2D LerpClamp(FVector2D _StartLocation, FVector2D _TargetLocation, float _t);
 
 };
 

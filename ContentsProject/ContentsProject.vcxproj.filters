@@ -73,31 +73,31 @@
       <Filter>ContentsObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="Intro.h">
-      <Filter>ContentsObject\GameMode\Intro</Filter>
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClInclude>
-    <ClInclude Include="Intro_Laser.h">
-      <Filter>ContentsObject\GameMode\Intro</Filter>
+    <ClInclude Include="InOuttro_Laser.h">
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClInclude>
-    <ClInclude Include="Intro_StarShip.h">
-      <Filter>ContentsObject\GameMode\Intro</Filter>
+    <ClInclude Include="InOuttro_StarShip.h">
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClInclude>
-    <ClInclude Include="Intro_LaserEffect.h">
-      <Filter>ContentsObject\GameMode\Intro</Filter>
+    <ClInclude Include="InOuttro_LaserEffect.h">
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClInclude>
-    <ClInclude Include="Intro_Vaus.h">
-      <Filter>ContentsObject\GameMode\Intro</Filter>
+    <ClInclude Include="InOuttro_Vaus.h">
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClInclude>
-    <ClInclude Include="Intro_Enemies.h">
-      <Filter>ContentsObject\GameMode\Intro</Filter>
-    </ClInclude>
-    <ClInclude Include="Ending.h">
-      <Filter>ContentsObject\GameMode\Ending</Filter>
+    <ClInclude Include="InOuttro_Enemies.h">
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClInclude>
     <ClInclude Include="Ending_Vaus.h">
       <Filter>ContentsObject\GameMode\Ending</Filter>
     </ClInclude>
     <ClInclude Include="Ending_StarShip.h">
       <Filter>ContentsObject\GameMode\Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Outtro.h">
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -173,31 +173,31 @@
       <Filter>ContentsObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="Intro.cpp">
-      <Filter>ContentsObject\GameMode\Intro</Filter>
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClCompile>
-    <ClCompile Include="Intro_Laser.cpp">
-      <Filter>ContentsObject\GameMode\Intro</Filter>
+    <ClCompile Include="InOuttro_Laser.cpp">
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClCompile>
-    <ClCompile Include="Intro_StarShip.cpp">
-      <Filter>ContentsObject\GameMode\Intro</Filter>
+    <ClCompile Include="InOuttro_StarShip.cpp">
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClCompile>
-    <ClCompile Include="Intro_LaserEffect.cpp">
-      <Filter>ContentsObject\GameMode\Intro</Filter>
+    <ClCompile Include="InOuttro_LaserEffect.cpp">
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClCompile>
-    <ClCompile Include="Intro_Vaus.cpp">
-      <Filter>ContentsObject\GameMode\Intro</Filter>
+    <ClCompile Include="InOuttro_Vaus.cpp">
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClCompile>
-    <ClCompile Include="Intro_Enemies.cpp">
-      <Filter>ContentsObject\GameMode\Intro</Filter>
-    </ClCompile>
-    <ClCompile Include="Ending.cpp">
-      <Filter>ContentsObject\GameMode\Ending</Filter>
+    <ClCompile Include="InOuttro_Enemies.cpp">
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClCompile>
     <ClCompile Include="Ending_Vaus.cpp">
       <Filter>ContentsObject\GameMode\Ending</Filter>
     </ClCompile>
     <ClCompile Include="Ending_StarShip.cpp">
       <Filter>ContentsObject\GameMode\Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Outtro.cpp">
+      <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -237,11 +237,11 @@
     <Filter Include="Monster\Boss">
       <UniqueIdentifier>{e1d546a4-ea86-4df6-9485-cd903baa71f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ContentsObject\GameMode\Intro">
-      <UniqueIdentifier>{03cae834-e0fc-4419-a6b3-96b670b472f2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ContentsObject\GameMode\Ending">
       <UniqueIdentifier>{872b466c-dcd1-4b16-8a02-4cd15529d353}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\GameMode\InOuttro">
+      <UniqueIdentifier>{03cae834-e0fc-4419-a6b3-96b670b472f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

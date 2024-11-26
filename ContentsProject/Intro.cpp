@@ -2,11 +2,11 @@
 #include "Intro.h"
 #include "Score.h"
 #include "PlayMap.h"
-#include "Intro_Laser.h"
+#include "InOuttro_Laser.h"
 #include "Text.h"
-#include "Intro_Vaus.h"
-#include "Intro_StarShip.h"
-#include "Intro_Enemies.h"
+#include "InOuttro_Vaus.h"
+#include "InOuttro_StarShip.h"
+#include "InOuttro_Enemies.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
@@ -32,12 +32,12 @@ void AIntro::BeginPlay()
 	Map = GetWorld()->SpawnActor<APlayMap>();
 	Map->SetPlayMapType(EPlayMapType::TYPE_SPACE);
 
-	TimeEventer.PushEvent(4.1f, [this]()
-		{
-			Laser = GetWorld()->SpawnActor<AIntro_Laser>();
-			Laser->SetActorLocation({ 440, 420 });
-			Laser->SetStarShip(Intro_StarShip);
-		});
+	//TimeEventer.PushEvent(4.1f, [this]()
+	//	{
+	//		Laser = GetWorld()->SpawnActor<AIntro_Laser>();
+	//		Laser->SetActorLocation({ 440, 420 });
+	//		Laser->SetStarShip(Intro_StarShip);
+	//	});
 
 	Text1 = GetWorld()->SpawnActor<AText>();
 	Text1->SetTextSpriteName("Text");
@@ -116,14 +116,20 @@ void AIntro::BeginPlay()
 	Text9->SetActorLocation({ 48, 192 });
 	Text9->SetText("BY SOMEONE........", 0.1f, false);
 
-	Intro_StarShip = GetWorld()->SpawnActor<AIntro_StarShip>();
-	Intro_StarShip->SetActorLocation({ 303, 600 });
+	StarShip = GetWorld()->SpawnActor<AInOuttro_StarShip>();
+	StarShip->SetActorLocation({ 303, 600 });
+	StarShip->SetInOuttroType(EInOuttro_StarShip::INTRO);
 
 	TimeEventer.PushEvent(2.0f, [this]()
 		{
-			AIntro_Enemies* Intro_Enemies = GetWorld()->SpawnActor<AIntro_Enemies>();
+			AInOuttro_Enemies* Enemies = GetWorld()->SpawnActor<AInOuttro_Enemies>();
+			Enemies->SetStarShip(StarShip);
+			Enemies->SetInOuttroType(EInOuttro_Enemies::INTRO);
 		});
 
+	//AInOuttro_Vaus* InOuttro_Vaus = GetWorld()->SpawnActor<AInOuttro_Vaus>();
+	//InOuttro_Vaus->SetActorLocation({ 320, 230 });
+	//InOuttro_Vaus->SetInOuttroType(EInOuttro_Vaus::INTRO);
 
 }
 
@@ -131,6 +137,8 @@ void AIntro::BeginPlay()
 void AIntro::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+	
+	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 
 	CheckTime += _DeltaTime;
 

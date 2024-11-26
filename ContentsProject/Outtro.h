@@ -2,22 +2,22 @@
 #include <EngineCore/GameMode.h>
 
 class APlayMap;
-class AEnding_StarShip;
+class AInOuttro_StarShip;
 class AText;
 
 // Ό³Έν :
-class AEnding : public AGameMode
+class AOuttro : public AGameMode
 {
 public:
 	// constrcuter destructer
-	AEnding();
-	~AEnding();
+	AOuttro();
+	~AOuttro();
 
 	// delete Function
-	AEnding(const AEnding& _Other) = delete;
-	AEnding(AEnding&& _Other) noexcept = delete;
-	AEnding& operator=(const AEnding& _Other) = delete;
-	AEnding& operator=(AEnding&& _Other) noexcept = delete;
+	AOuttro(const AOuttro& _Other) = delete;
+	AOuttro(AOuttro&& _Other) noexcept = delete;
+	AOuttro& operator=(const AOuttro& _Other) = delete;
+	AOuttro& operator=(AOuttro&& _Other) noexcept = delete;
 
 protected:
 	void BeginPlay() override;
@@ -27,7 +27,7 @@ protected:
 private:
 	USpriteRenderer* SpriteRenderer = nullptr;
 	APlayMap* Map = nullptr;
-	AEnding_StarShip* Intro_StarShip = nullptr;
+	AInOuttro_StarShip* StarShip = nullptr;
 
 	AText* Text1 = nullptr;
 	AText* Text2 = nullptr;

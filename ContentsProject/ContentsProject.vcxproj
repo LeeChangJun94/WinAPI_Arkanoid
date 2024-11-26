@@ -151,7 +151,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Ending.h">
+    <ClInclude Include="Outtro.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -163,19 +163,19 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Intro_Enemies.h">
+    <ClInclude Include="InOuttro_Enemies.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Intro_Vaus.h">
+    <ClInclude Include="InOuttro_Vaus.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Intro_LaserEffect.h">
+    <ClInclude Include="InOuttro_LaserEffect.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Intro_Laser.h">
+    <ClInclude Include="InOuttro_Laser.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -191,7 +191,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Intro_StarShip.h">
+    <ClInclude Include="InOuttro_StarShip.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -283,7 +283,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ending.cpp">
+    <ClCompile Include="Outtro.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -295,19 +295,19 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Intro_Enemies.cpp">
+    <ClCompile Include="InOuttro_Enemies.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Intro_Vaus.cpp">
+    <ClCompile Include="InOuttro_Vaus.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Intro_LaserEffect.cpp">
+    <ClCompile Include="InOuttro_LaserEffect.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Intro_Laser.cpp">
+    <ClCompile Include="InOuttro_Laser.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -323,7 +323,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Intro_StarShip.cpp">
+    <ClCompile Include="InOuttro_StarShip.cpp">
       <SubType>
       </SubType>
     </ClCompile>
