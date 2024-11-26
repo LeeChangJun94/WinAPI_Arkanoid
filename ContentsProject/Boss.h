@@ -62,7 +62,7 @@ private:
 
 	BossState CurBossState = BossState::IDLE;
 
-	int BossHP = 10;
+	int BossHP = 5;
 	float Ratio = 0;
 	float Line = 0;
 	float CountTime = 0.0f;

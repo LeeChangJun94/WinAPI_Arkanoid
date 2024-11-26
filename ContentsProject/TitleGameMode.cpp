@@ -18,11 +18,8 @@ ATitleGameMode::~ATitleGameMode()
 {
 }
 
-
-// 언리얼에서는 MainPawn 주인공 무조건 지정하게 해요.
 void ATitleGameMode::BeginPlay()
 {
-
 	Super::BeginPlay();
 	TitleLogo* NewActor = GetWorld()->SpawnActor<TitleLogo>();
 
@@ -32,11 +29,8 @@ void ATitleGameMode::BeginPlay()
 void ATitleGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-
-	//UEngineDebug::CoreOutPutString("DeltaTime : " + std::to_string(CheckTime));
 	
 	CheckTime += _DeltaTime;
-
 
 	if (CheckTime > 0.3f)
 	{
@@ -54,9 +48,8 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		CheckTime = 0.0f;
 	}
 
-	
-	if (true == UEngineInput::GetInst().IsDown('M'))
+	if (true == UEngineInput::GetInst().IsDown(VK_RETURN))
 	{
-		UEngineAPICore::GetCore()->OpenLevel("Stage");
+		UEngineAPICore::GetCore()->OpenLevel("Intro");
 	}
 }

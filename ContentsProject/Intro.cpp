@@ -127,9 +127,7 @@ void AIntro::BeginPlay()
 			Enemies->SetInOuttroType(EInOuttro_Enemies::INTRO);
 		});
 
-	//AInOuttro_Vaus* InOuttro_Vaus = GetWorld()->SpawnActor<AInOuttro_Vaus>();
-	//InOuttro_Vaus->SetActorLocation({ 320, 230 });
-	//InOuttro_Vaus->SetInOuttroType(EInOuttro_Vaus::INTRO);
+
 
 }
 
@@ -187,7 +185,17 @@ void AIntro::Tick(float _DeltaTime)
 		Text9->ShowText(_DeltaTime);
 	}
 
-	if (true == UEngineInput::GetInst().IsDown('M'))
+	if (20.0f < CheckTime)
+	{
+		UEngineAPICore::GetCore()->OpenLevel("Stage");
+	}
+
+	if (true == UEngineInput::GetInst().IsDown(VK_SUBTRACT))
+	{
+		UEngineAPICore::GetCore()->OpenLevel("Title");
+	}
+
+	if (true == UEngineInput::GetInst().IsDown(VK_RETURN))
 	{
 		UEngineAPICore::GetCore()->OpenLevel("Stage");
 	}

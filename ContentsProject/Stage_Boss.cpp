@@ -43,14 +43,7 @@ void AStage_Boss::BeginPlay()
 	Boss = GetWorld()->SpawnActor<ABoss>();
 	Boss->SetActorLocation({ 336, 312 });
 
-	
-	//BossBullet->SetBossBulletDir()
-
-
 	Vaus = GetWorld()->GetPawn<APlayer>();
-
-	//APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
-	//Stage1->SetPlayMapType(static_cast<EPlayMapType>(Stage % 4));
 
 	{
 		AScore* Score = GetWorld()->SpawnActor<AScore>();
@@ -69,34 +62,6 @@ void AStage_Boss::BeginPlay()
 		HighScore->SetTextScale({ 24, 24 });
 		HighScore->SetActorLocation({ 396, 36 });
 	}
-
-	{
-		//Text1 = GetWorld()->SpawnActor<AText>();
-		//
-		//Text1->SetTextSpriteName("Text");
-		//Text1->SetOrder(ERenderOrder::UI);
-		//Text1->SetTextScale({ 24, 24 });
-		//Text1->SetActorLocation({ 350, 524 });
-		//Text1->SetText("ROUND");
-		//
-		//Text2 = GetWorld()->SpawnActor<ANumber>();
-		//
-		//Text2->SetNumberSpriteName("Number");
-		//Text2->SetOrder(ERenderOrder::UI);
-		//Text2->SetNumberScale({ 24, 24 });
-		//Text2->SetActorLocation({ 419, 524 });
-		//Text2->SetNumber(Stage);
-		//
-		//Text3 = GetWorld()->SpawnActor<AText>();
-		//
-		//Text3->SetTextSpriteName("Text");
-		//Text3->SetOrder(ERenderOrder::UI);
-		//Text3->SetTextScale({ 24, 24 });
-		//Text3->SetActorLocation({ 380, 572 });
-		//Text3->SetText("READY");
-	}
-	//AEnemies* Enemies = GetWorld()->SpawnActor<AEnemies>();
-	//Enemies->SetActorLocation({ 50,50 });
 
 	ADeathLine* DeathLineActor = GetWorld()->SpawnActor<ADeathLine>();
 
@@ -136,9 +101,15 @@ void AStage_Boss::Tick(float _DeltaTime)
 			(*BalliterStart) = nullptr;
 			BalliterStart = PlayerLifeActor->BallList.erase(BalliterStart);
 		}
+		
+		TimeEventer.PushEvent(2.5f, [this]()
+			{
+				UEngineAPICore::GetCore()->OpenLevel("Outtro");
+			});
+
 	}
 
-	if (true == UEngineInput::GetInst().IsDown('N'))
+	if (true == UEngineInput::GetInst().IsDown(VK_SUBTRACT))
 	{
 		if (1 != Stage)
 		{
@@ -154,9 +125,9 @@ void AStage_Boss::Tick(float _DeltaTime)
 		}
 	}
 
-	if (true == UEngineInput::GetInst().IsDown('M'))
+	if (true == UEngineInput::GetInst().IsDown(VK_ADD))
 	{
-		if (32 != Stage)
+		if (33 != Stage)
 		{
 			StageResetSetting(1);
 
@@ -166,7 +137,7 @@ void AStage_Boss::Tick(float _DeltaTime)
 		{
 			StageResetSetting(0);
 
-			UEngineAPICore::GetCore()->OpenLevel("Stage_Boss");
+			UEngineAPICore::GetCore()->OpenLevel("Outtro");
 		}
 	}
 }

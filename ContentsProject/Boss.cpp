@@ -113,6 +113,7 @@ void ABoss::Tick(float _DeltaTime)
 	{
 		BossDeath = true;
 		ChangeBossState(BossState::DESTROY);
+
 	}
 
 	switch (CurBossState)

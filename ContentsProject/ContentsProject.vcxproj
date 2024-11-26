@@ -155,14 +155,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Ending_StarShip.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Ending_Vaus.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="InOuttro_Enemies.h">
       <SubType>
       </SubType>
@@ -284,14 +276,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Outtro.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Ending_StarShip.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Ending_Vaus.cpp">
       <SubType>
       </SubType>
     </ClCompile>

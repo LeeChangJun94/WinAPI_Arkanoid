@@ -55,6 +55,7 @@ private:
 	float CountTime = 0.0f;
 
 	bool StageSetting = false;
+	bool BrickClear = true;
 	
 	APlayMap* Map = nullptr;
 	APlayer* Vaus = nullptr;

@@ -77,7 +77,7 @@ void AStage::BeginPlay()
 		Text1->SetOrder(ERenderOrder::UI);
 		Text1->SetTextScale({ 24, 24 });
 		Text1->SetActorLocation({ 350, 524 });
-		Text1->SetText("ROUND", 0.0f, true);
+		Text1->SetText("ROUND");
 
 		Text2 = GetWorld()->SpawnActor<ANumber>();
 
@@ -93,7 +93,7 @@ void AStage::BeginPlay()
 		Text3->SetOrder(ERenderOrder::UI);
 		Text3->SetTextScale({ 24, 24 });
 		Text3->SetActorLocation({ 380, 572 });
-		Text3->SetText("READY", 0.0f, true);
+		Text3->SetText("READY");
 	}
 	//AEnemies* Enemies = GetWorld()->SpawnActor<AEnemies>();
 	//Enemies->SetActorLocation({ 50,50 });
@@ -138,16 +138,17 @@ void AStage::Tick(float _DeltaTime)
 		ActorSpawn();
 	}
 
-	if (0 == BrickList.size())
+	if (0 == BrickList.size() && true == BrickClear)
 	{
-		StageResetSetting(1);
-		TimeEventer.PushEvent(1.0f, []()
+		BrickClear = false;
+		TimeEventer.PushEvent(2.0f, [this]()
 			{
+				StageResetSetting(1);
 				UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
 			});
 	}
 
-	if (true == UEngineInput::GetInst().IsDown('N'))
+	if (true == UEngineInput::GetInst().IsDown(VK_SUBTRACT))
 	{
 		if (1 != Stage)
 		{
@@ -163,7 +164,7 @@ void AStage::Tick(float _DeltaTime)
 		}
 	}
 
-	if (true == UEngineInput::GetInst().IsDown('M'))
+	if (true == UEngineInput::GetInst().IsDown(VK_ADD))
 	{
 		if (32 != Stage)
 		{
@@ -326,6 +327,7 @@ void AStage::StageResetSetting(int _StageCount)
 {
 	Stage += _StageCount;
 	StageSetting = false;
+	BrickClear = true;
 	Vaus->SetStartSwitch(true);
 	Vaus->SetActive(false);
 	Vaus->ChangeState(PlayerState::Create);

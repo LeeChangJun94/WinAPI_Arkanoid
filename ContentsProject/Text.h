@@ -43,6 +43,7 @@ public:
 	void SetOrder(int _Order);
 
 	void SetText(std::string _Text, float _Time, bool _Reverse);
+	void SetText(std::string _Text);
 	void ShowText(float _DeltaTime);
 
 	int CharToTextIndex(char _C);

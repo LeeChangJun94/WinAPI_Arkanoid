@@ -21,7 +21,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	class USpriteRenderer* SpriteRenderer;
+	class USpriteRenderer* SpriteRenderer = nullptr;;
 	float CheckTime = 0.0f;
 };
 

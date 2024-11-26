@@ -92,6 +92,34 @@ void AText::SetText(std::string _Text, float _Time, bool _Reverse)
 	{
 		Renders[i]->SetActive(false);
 	}
+}
+
+void AText::SetText(std::string _Text)
+{
+	std::string Text = _Text;
+
+	if (Renders.size() <= Text.size())
+	{
+		MSGASSERT("자리수를 넘겼습니다.");
+		return;
+	}
+
+	FVector2D Pos = FVector2D::ZERO;
+
+	for (int i = static_cast<int>(Text.size()) - 1; i >= 0; i--)
+	{
+		char Value = Text[i] - 'A';
+		Renders[i]->SetSprite(TextSpriteName, Value);
+		Renders[i]->SetComponentScale(TextScale);
+		Renders[i]->SetComponentLocation(Pos);
+		Pos.X -= TextScale.X;
+		Renders[i]->SetActive(true);
+	}
+
+	for (size_t i = Text.size(); i < Renders.size(); i++)
+	{
+		Renders[i]->SetActive(false);
+	}
 
 }
 

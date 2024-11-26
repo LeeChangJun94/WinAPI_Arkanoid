@@ -162,7 +162,7 @@ void ContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<AOuttro, APlayer>("Outtro");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Intro");
+	UEngineAPICore::GetCore()->OpenLevel("Title");
 }
 
 void ContentsCore::Tick()
