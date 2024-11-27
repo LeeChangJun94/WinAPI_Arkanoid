@@ -17,6 +17,7 @@
 #include "Player.h"
 #include "Intro.h"
 #include "Outtro.h"
+#include "GameOver.h"
 
 
 ContentsCore::ContentsCore()
@@ -77,7 +78,23 @@ void ContentsCore::BeginPlay()
 	{
 		UEngineDirectory Dir;
 		Dir.MoveParentToDirectory("Resources");
-		Dir.Append("Image\\Text");
+		Dir.Append("Image\\Text_Red");
+
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+	}
+
+	{
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources");
+		Dir.Append("Image\\Text_White");
+
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+	}
+
+	{
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources");
+		Dir.Append("Image\\Text_Yellow");
 
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
 	}
@@ -160,9 +177,10 @@ void ContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<AStage_Dark, APlayer>("Stage_Dark");
 	UEngineAPICore::GetCore()->CreateLevel<AStage_Boss, APlayer>("Stage_Boss");
 	UEngineAPICore::GetCore()->CreateLevel<AOuttro, APlayer>("Outtro");
+	UEngineAPICore::GetCore()->CreateLevel<AGameOver, APlayer>("GameOver");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Title");
+	UEngineAPICore::GetCore()->OpenLevel("GameOver");
 }
 
 void ContentsCore::Tick()

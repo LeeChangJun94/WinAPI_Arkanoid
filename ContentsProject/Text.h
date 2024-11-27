@@ -7,10 +7,10 @@
 
 enum class ETextValue_Index
 {
-	COMMA = 26,
-	DOT = 27,
-	DOUBLEQUOTES = 28,
-	SPACE = 29,
+	COMMA = 36,
+	DOT = 37,
+	DOUBLEQUOTES = 38,
+	SPACE = 39,
 };
 
 // Ό³Έν :
@@ -43,7 +43,8 @@ public:
 	void SetOrder(int _Order);
 
 	void SetText(std::string _Text, float _Time, bool _Reverse);
-	void SetText(std::string _Text);
+	void SetText(std::string _Text, bool _Reverse);
+	void SetText(int _Number, bool _Reverse);
 	void ShowText(float _DeltaTime);
 
 	int CharToTextIndex(char _C);

@@ -46,28 +46,28 @@ void AOuttro::BeginPlay()
 		});
 
 	Text1 = GetWorld()->SpawnActor<AText>();
-	Text1->SetTextSpriteName("Text");
+	Text1->SetTextSpriteName("Text_White");
 	Text1->SetOrder(ERenderOrder::UI);
 	Text1->SetTextScale({ 24, 24 });
 	Text1->SetActorLocation({ 48, 96 });
 	Text1->SetText("DIMENSION CONTROLLING FORT", 0.1f, false);
 
 	Text2 = GetWorld()->SpawnActor<AText>();
-	Text2->SetTextSpriteName("Text");
+	Text2->SetTextSpriteName("Text_White");
 	Text2->SetOrder(ERenderOrder::UI);
 	Text2->SetTextScale({ 24, 24 });
 	Text2->SetActorLocation({ 48, 144 });
 	Text2->SetText("\"DOH\" HAS NOW BEEN", 0.1f, false);
 
 	Text3 = GetWorld()->SpawnActor<AText>();
-	Text3->SetTextSpriteName("Text");
+	Text3->SetTextSpriteName("Text_White");
 	Text3->SetOrder(ERenderOrder::UI);
 	Text3->SetTextScale({ 24, 24 });
 	Text3->SetActorLocation({ 48, 192 });
 	Text3->SetText("DEMOLISHED, AND TIME", 0.1f, false);
 
 	Text4 = GetWorld()->SpawnActor<AText>();
-	Text4->SetTextSpriteName("Text");
+	Text4->SetTextSpriteName("Text_White");
 	Text4->SetOrder(ERenderOrder::UI);
 	Text4->SetTextScale({ 24, 24 });
 	Text4->SetActorLocation({ 48, 240 });
@@ -82,14 +82,14 @@ void AOuttro::BeginPlay()
 		});
 
 	Text5 = GetWorld()->SpawnActor<AText>();
-	Text5->SetTextSpriteName("Text");
+	Text5->SetTextSpriteName("Text_White");
 	Text5->SetOrder(ERenderOrder::UI);
 	Text5->SetTextScale({ 24, 24 });
 	Text5->SetActorLocation({ 48, 96 });
 	Text5->SetText("\"VAUS\" MANAGED TO ESCAPE", 0.1f, false);
 
 	Text6 = GetWorld()->SpawnActor<AText>();
-	Text6->SetTextSpriteName("Text");
+	Text6->SetTextSpriteName("Text_White");
 	Text6->SetOrder(ERenderOrder::UI);
 	Text6->SetTextScale({ 24, 24 });
 	Text6->SetActorLocation({ 48, 144 });
@@ -102,21 +102,21 @@ void AOuttro::BeginPlay()
 		});
 
 	Text7 = GetWorld()->SpawnActor<AText>();
-	Text7->SetTextSpriteName("Text");
+	Text7->SetTextSpriteName("Text_White");
 	Text7->SetOrder(ERenderOrder::UI);
 	Text7->SetTextScale({ 24, 24 });
 	Text7->SetActorLocation({ 48, 96 });
 	Text7->SetText("BUT THE REAL VOYAGE OF", 0.1f, false);
 
 	Text8 = GetWorld()->SpawnActor<AText>();
-	Text8->SetTextSpriteName("Text");
+	Text8->SetTextSpriteName("Text_White");
 	Text8->SetOrder(ERenderOrder::UI);
 	Text8->SetTextScale({ 24, 24 });
 	Text8->SetActorLocation({ 48, 144 });
 	Text8->SetText("\"ARKANOID\" IN THE GALAXY", 0.1f, false);
 
 	Text9 = GetWorld()->SpawnActor<AText>();
-	Text9->SetTextSpriteName("Text");
+	Text9->SetTextSpriteName("Text_White");
 	Text9->SetOrder(ERenderOrder::UI);
 	Text9->SetTextScale({ 24, 24 });
 	Text9->SetActorLocation({ 48, 192 });

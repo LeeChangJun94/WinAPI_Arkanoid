@@ -61,7 +61,7 @@ private:
 	APlayer* Vaus = nullptr;
 	ABall* BallActor = nullptr;
 	AText* Text1 = nullptr;
-	ANumber* Text2 = nullptr;
+	AText* Text2 = nullptr;
 	AText* Text3 = nullptr;
 	APlayerLife* PlayerLifeActor = nullptr;
 	//std::vector<std::vector<ABrick*>> Bricks;

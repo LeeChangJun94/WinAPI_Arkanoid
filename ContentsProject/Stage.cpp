@@ -29,12 +29,6 @@ std::list<ABrick*> AStage::Bricks;
 
 AStage::AStage()
 {
-	//Bricks.resize(UGlobalValue::BrickY);
-	//
-	//for (int i = 0; i < UGlobalValue::BrickY; ++i)
-	//{
-	//	Bricks[i].resize(UGlobalValue::BrickX);
-	//}
 }
 
 AStage::~AStage()
@@ -49,9 +43,6 @@ void AStage::BeginPlay()
 	
 	Vaus = GetWorld()->GetPawn<APlayer>();
 
-	//APlayMap* Stage1 = GetWorld()->SpawnActor<APlayMap>();
-	//Stage1->SetPlayMapType(static_cast<EPlayMapType>(Stage % 4));
-	
 	{
 		AScore* Score = GetWorld()->SpawnActor<AScore>();
 
@@ -73,27 +64,27 @@ void AStage::BeginPlay()
 	{
 		Text1 = GetWorld()->SpawnActor<AText>();
 
-		Text1->SetTextSpriteName("Text");
+		Text1->SetTextSpriteName("Text_White");
 		Text1->SetOrder(ERenderOrder::UI);
 		Text1->SetTextScale({ 24, 24 });
 		Text1->SetActorLocation({ 350, 524 });
-		Text1->SetText("ROUND");
+		Text1->SetText("ROUND", false);
 
-		Text2 = GetWorld()->SpawnActor<ANumber>();
+		Text2 = GetWorld()->SpawnActor<AText>();
 
-		Text2->SetNumberSpriteName("Number");
+		Text2->SetTextSpriteName("Number");
 		Text2->SetOrder(ERenderOrder::UI);
-		Text2->SetNumberScale({ 24, 24 });
+		Text2->SetTextScale({ 24, 24 });
 		Text2->SetActorLocation({ 419, 524 });
-		Text2->SetNumber(Stage);
+		Text2->SetText(Stage, false);
 
 		Text3 = GetWorld()->SpawnActor<AText>();
 
-		Text3->SetTextSpriteName("Text");
+		Text3->SetTextSpriteName("Text_White");
 		Text3->SetOrder(ERenderOrder::UI);
 		Text3->SetTextScale({ 24, 24 });
 		Text3->SetActorLocation({ 380, 572 });
-		Text3->SetText("READY");
+		Text3->SetText("READY", false);
 	}
 	//AEnemies* Enemies = GetWorld()->SpawnActor<AEnemies>();
 	//Enemies->SetActorLocation({ 50,50 });
@@ -334,7 +325,7 @@ void AStage::StageResetSetting(int _StageCount)
 	CountTime = 0.0f;
 	BrickList.clear();
 	Map->Destroy();
-	Text2->SetNumber(Stage);
+	Text2->SetText(Stage, false);
 	Vaus->BulletPtr.clear();
 	std::list<ABall*>::iterator BalliterStart = PlayerLifeActor->BallList.begin();
 	std::list<ABall*>::iterator BalliterEnd = PlayerLifeActor->BallList.end();

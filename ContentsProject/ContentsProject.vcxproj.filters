@@ -93,6 +93,9 @@
     <ClInclude Include="Outtro.h">
       <Filter>ContentsObject\GameMode\InOuttro</Filter>
     </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -186,6 +189,9 @@
     </ClCompile>
     <ClCompile Include="Outtro.cpp">
       <Filter>ContentsObject\GameMode\InOuttro</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
