@@ -48,7 +48,7 @@ void AIntro::BeginPlay()
 	Text2->SetActorLocation({ 48, 144 });
 	Text2->SetText("THIS STORY IS UNKNOWN.", 0.1f, false);
 	
-	TimeEventer.PushEvent(4.2f, [this]()
+	TimeEventer.PushEvent(4.4f, [this]()
 		{
 			Text1->SetActive(false);
 			Text2->SetActive(false);
@@ -82,7 +82,7 @@ void AIntro::BeginPlay()
 	Text6->SetActorLocation({ 48, 240 });
 	Text6->SetText("SCRAMBLED AWAY FROM IT.", 0.1f, false);
 	
-	TimeEventer.PushEvent(13.4f, [this]()
+	TimeEventer.PushEvent(14.0f, [this]()
 		{
 			Text3->SetActive(false);
 			Text4->SetActive(false);
@@ -139,42 +139,42 @@ void AIntro::Tick(float _DeltaTime)
 		Text2->ShowText(_DeltaTime);
 	}
 
-	if (4.3f < CheckTime)
+	if (4.5f < CheckTime)
 	{
 		Text3->ShowText(_DeltaTime);
 	}
 	
-	if (6.4f < CheckTime)
+	if (6.6f < CheckTime)
 	{
 		Text4->ShowText(_DeltaTime);
 	}
 
-	if (9.0f < CheckTime)
+	if (9.2f < CheckTime)
 	{
 		Text5->ShowText(_DeltaTime);
 	}
 
-	if (11.0f < CheckTime)
+	if (11.2f < CheckTime)
 	{
 		Text6->ShowText(_DeltaTime);
 	}
 
-	if (13.4f < CheckTime)
+	if (14.1f < CheckTime)
 	{
 		Text7->ShowText(_DeltaTime);
 	}
 
-	if (14.9f < CheckTime)
+	if (15.6f < CheckTime)
 	{
 		Text8->ShowText(_DeltaTime);
 	}
 
-	if (17.3f < CheckTime)
+	if (18.0f < CheckTime)
 	{
 		Text9->ShowText(_DeltaTime);
 	}
 
-	if (20.0f < CheckTime)
+	if (21.0f < CheckTime)
 	{
 		UEngineAPICore::GetCore()->OpenLevel("Stage");
 	}
