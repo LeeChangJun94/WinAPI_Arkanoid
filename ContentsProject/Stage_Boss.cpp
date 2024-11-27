@@ -5,6 +5,7 @@
 #include <EngineBase/TimeEvent.h>
 #include "GlobalValue.h"
 #include "PlayMap.h"
+#include "Stage.h"
 #include "Score.h"
 #include "Brick.h"
 #include "Boss.h"
@@ -12,6 +13,7 @@
 #include "Text.h"
 #include "Number.h"
 #include "Player.h"
+#include "Outtro.h"
 #include "Enemies.h"
 #include "DeathLine.h"
 #include "PlayerLife.h"
@@ -111,34 +113,16 @@ void AStage_Boss::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsDown(VK_SUBTRACT))
 	{
-		if (1 != Stage)
-		{
-			StageResetSetting(-1);
+		StageResetSetting(0);
 
-			UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
-		}
-		else
-		{
-			StageResetSetting(0);
-
-			UEngineAPICore::GetCore()->OpenLevel("Title");
-		}
+		UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
 	}
 
 	if (true == UEngineInput::GetInst().IsDown(VK_ADD))
 	{
-		if (33 != Stage)
-		{
-			StageResetSetting(1);
-
-			UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
-		}
-		else
-		{
-			StageResetSetting(0);
-
-			UEngineAPICore::GetCore()->OpenLevel("Outtro");
-		}
+		StageResetSetting(0);
+		UEngineAPICore::GetCore()->ResetLevel<AOuttro, AActor>("Outtro");
+		UEngineAPICore::GetCore()->OpenLevel("Outtro");
 	}
 }
 
@@ -171,15 +155,13 @@ bool AStage_Boss::Timer(float _CountTime, float _SetTime)
 
 void AStage_Boss::StageResetSetting(int _StageCount)
 {
-	Stage += _StageCount;
+	AStage::Stage += _StageCount;
 	StageSetting = false;
 	Vaus->SetStartSwitch(true);
 	Vaus->SetActive(false);
 	Vaus->ChangeState(PlayerState::Create);
 	CountTime = 0.0f;
-	//BrickList.clear();
 	Map->Destroy();
-	//Text2->SetNumber(Stage);
 	Vaus->BulletPtr.clear();
 	std::list<ABall*>::iterator BalliterStart = PlayerLifeActor->BallList.begin();
 	std::list<ABall*>::iterator BalliterEnd = PlayerLifeActor->BallList.end();

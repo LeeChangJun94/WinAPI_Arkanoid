@@ -51,7 +51,7 @@ public:
 protected:
 
 private:
-	int Stage = 33;
+	//int Stage = 33;
 	float CountTime = 0.0f;
 	
 	bool StageSetting = false;

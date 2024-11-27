@@ -7,6 +7,9 @@
 #include "InOuttro_StarShip.h"
 #include "InOuttro_Vaus.h"
 #include "InOuttro_Enemies.h"
+#include "Player.h"
+#include "Stage_Boss.h"
+#include "TitleGameMode.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
@@ -131,7 +134,11 @@ void AOuttro::BeginPlay()
 			StarShip->GetSpriteRenderer()->ChangeAnimation("StarShip_Open");
 		});
 
-
+	TimeEventer.PushEvent(22.0f, [this]()
+		{
+			UEngineAPICore::GetCore()->ResetLevel<ATitleGameMode, AActor>("Title");
+			UEngineAPICore::GetCore()->OpenLevel("Title");
+		});
 }
 
 
@@ -140,9 +147,6 @@ void AOuttro::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	CheckTime += _DeltaTime;
-
-
-
 
 	Text1->ShowText(_DeltaTime);
 
@@ -186,8 +190,15 @@ void AOuttro::Tick(float _DeltaTime)
 		Text9->ShowText(_DeltaTime);
 	}
 
-	if (true == UEngineInput::GetInst().IsDown('M'))
+	if (true == UEngineInput::GetInst().IsDown(VK_SUBTRACT))
 	{
-		UEngineAPICore::GetCore()->OpenLevel("Stage");
+		UEngineAPICore::GetCore()->ResetLevel<AStage_Boss, APlayer>("Stage_Boss");
+		UEngineAPICore::GetCore()->OpenLevel("Stage_Boss");
+	}
+
+	if (true == UEngineInput::GetInst().IsDown(VK_ADD))
+	{
+			UEngineAPICore::GetCore()->ResetLevel<ATitleGameMode, AActor>("Title");
+			UEngineAPICore::GetCore()->OpenLevel("Title");
 	}
 }

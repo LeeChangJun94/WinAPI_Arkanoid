@@ -54,11 +54,11 @@ public:
 	
 
 	std::list<ABall*> BallList;
+	static int LifeCount;
 
 protected:
 
 private:
-	int LifeCount = 2;
 
 	APlayer* Vaus = nullptr;
 	ABall* Ball = nullptr;

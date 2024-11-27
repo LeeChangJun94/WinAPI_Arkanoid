@@ -42,11 +42,8 @@ APlayer::APlayer()
 	SpriteRenderer->CreateAnimation("Vaus_TLaser", "Vaus_TLaser.png", 0, 8, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_RTLaser", "Vaus_TLaser.png", 8, 0, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_Laser", "Vaus_Laser.png", 0, 5, 0.1f);
-	//SpriteRenderer->CreateAnimation("Vaus_Lasers", "Vaus_Enlarge.png", 0, 5, 0.1f);
-	//SpriteRenderer->CreateAnimation("Vaus_Lasers", "Vaus_Enlarge.png", 0, 5, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_Destroy1", "Vaus_Destroy1.png", 0, 2, 0.2f);
 	SpriteRenderer->CreateAnimation("Vaus_Destroy2", "Vaus_Destroy2.png", 0, 3, 0.2f);
-	//IdleStart();
 
 	SpriteRenderer->SetAnimationEvent("Vaus_TEnlarge", 4, std::bind(&APlayer::EnlargeDone, this));
 	SpriteRenderer->SetAnimationEvent("Vaus_RTEnlarge", 4, std::bind(&APlayer::IdleStart, this));
@@ -483,8 +480,7 @@ void APlayer::VausReset()
 	StartSwitch = true;
 	CatchEffect = false;
 	SlowEffect = false;
-	AStage* Stage = reinterpret_cast<AStage*>(GetWorld()->GetGameMode());
-	Stage->SetCountTime(0.0f);
+	AStage::StageCountTime = 0.0f;
 	SetActive(false);
 }
 

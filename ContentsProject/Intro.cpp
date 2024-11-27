@@ -13,6 +13,8 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineCoreDebug.h>
 #include "ContentsEnum.h"
+#include "TitleGameMode.h"
+#include "Stage.h"
 
 #include "TitleLogo.h"
 
@@ -119,9 +121,6 @@ void AIntro::BeginPlay()
 			Enemies->SetStarShip(StarShip);
 			Enemies->SetInOuttroType(EInOuttro_Enemies::INTRO);
 		});
-
-
-
 }
 
 
@@ -132,9 +131,6 @@ void AIntro::Tick(float _DeltaTime)
 	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 
 	CheckTime += _DeltaTime;
-
-
-
 
 	Text1->ShowText(_DeltaTime);
 
@@ -185,11 +181,13 @@ void AIntro::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsDown(VK_SUBTRACT))
 	{
+		UEngineAPICore::GetCore()->ResetLevel<ATitleGameMode, AActor>("Title");
 		UEngineAPICore::GetCore()->OpenLevel("Title");
 	}
 
 	if (true == UEngineInput::GetInst().IsDown(VK_RETURN))
 	{
+		AStage::Stage = 1;
 		UEngineAPICore::GetCore()->OpenLevel("Stage");
 	}
 }

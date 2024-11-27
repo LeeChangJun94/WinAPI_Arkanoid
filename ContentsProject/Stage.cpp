@@ -10,12 +10,15 @@
 #include "Ball.h"
 #include "Text.h"
 #include "Fade.h"
+#include "Intro.h"
 #include "Number.h"
 #include "Player.h"
 #include "Enemies.h"
 #include "DeathLine.h"
 #include "PlayerLife.h"
+#include "Stage_Boss.h"
 #include "ContentsEnum.h"
+#include "TitleGameMode.h"
 #include <EngineBase/EngineFile.h>
 #include <EngineCore/2DCollision.h>
 #include <EngineBase/EngineDirectory.h>
@@ -25,7 +28,8 @@
 
 std::list<ABrick*> AStage::BrickList;
 std::list<ABrick*> AStage::Bricks;
-
+int AStage::Stage = 1;
+float AStage::StageCountTime = 0.0f;
 
 AStage::AStage()
 {
@@ -67,7 +71,7 @@ void AStage::BeginPlay()
 		Text1->SetTextSpriteName("Text_White");
 		Text1->SetOrder(ERenderOrder::UI);
 		Text1->SetTextScale({ 24, 24 });
-		Text1->SetActorLocation({ 350, 524 });
+		Text1->SetActorLocation({ 260, 524 });
 		Text1->SetText("ROUND", false);
 
 		Text2 = GetWorld()->SpawnActor<AText>();
@@ -75,7 +79,7 @@ void AStage::BeginPlay()
 		Text2->SetTextSpriteName("Number");
 		Text2->SetOrder(ERenderOrder::UI);
 		Text2->SetTextScale({ 24, 24 });
-		Text2->SetActorLocation({ 419, 524 });
+		Text2->SetActorLocation({ 420, 524 });
 		Text2->SetText(Stage, false);
 
 		Text3 = GetWorld()->SpawnActor<AText>();
@@ -83,11 +87,9 @@ void AStage::BeginPlay()
 		Text3->SetTextSpriteName("Text_White");
 		Text3->SetOrder(ERenderOrder::UI);
 		Text3->SetTextScale({ 24, 24 });
-		Text3->SetActorLocation({ 380, 572 });
+		Text3->SetActorLocation({ 290, 572 });
 		Text3->SetText("READY", false);
 	}
-	//AEnemies* Enemies = GetWorld()->SpawnActor<AEnemies>();
-	//Enemies->SetActorLocation({ 50,50 });
 
 	ADeathLine* DeathLineActor = GetWorld()->SpawnActor<ADeathLine>();
 
@@ -99,10 +101,6 @@ void AStage::BeginPlay()
 	Text1->SetActive(false);
 	Text2->SetActive(false);
 	Text3->SetActive(false);
-	//Vaus->SetActive(false);
-	//BallActor->SetActive(false);
-
-	//LoadBrick(Stage, PlayerLifeActor);
 }
 
 void AStage::Tick(float _DeltaTime)
@@ -110,11 +108,13 @@ void AStage::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 	
 	UEngineDebug::CoreOutPutString("BrickListSize : " + std::to_string(BrickList.size()));
-	CountTime += _DeltaTime;
+	StageCountTime += _DeltaTime;
+	
 
-	Text1->SetActive(Timer(CountTime, 0.5f, 1.5f));
-	Text2->SetActive(Timer(CountTime, 0.5f, 1.5f));
-	Text3->SetActive(Timer(CountTime, 1.0f, 1.5f));
+
+	Text1->SetActive(Timer(StageCountTime, 0.5f, 1.5f));
+	Text2->SetActive(Timer(StageCountTime, 0.5f, 1.5f));
+	Text3->SetActive(Timer(StageCountTime, 1.0f, 1.5f));
 
 	if (true != StageSetting)
 	{
@@ -123,7 +123,7 @@ void AStage::Tick(float _DeltaTime)
 		LoadBrick(Stage, PlayerLifeActor);
 	}
 
-	if (true == Timer(CountTime, 2.0f) && true == Vaus->GetStartSwitch())
+	if (true == Timer(StageCountTime, 2.0f) && true == Vaus->GetStartSwitch())
 	{
 		Vaus->SetStartSwitch(false);
 		ActorSpawn();
@@ -150,8 +150,8 @@ void AStage::Tick(float _DeltaTime)
 		else
 		{
 			StageResetSetting(0);
-
-			UEngineAPICore::GetCore()->OpenLevel("Title");
+			UEngineAPICore::GetCore()->ResetLevel<AIntro, AActor>("Intro");
+			UEngineAPICore::GetCore()->OpenLevel("Intro");
 		}
 	}
 
@@ -166,7 +166,7 @@ void AStage::Tick(float _DeltaTime)
 		else
 		{
 			StageResetSetting(0);
-
+			UEngineAPICore::GetCore()->ResetLevel<AStage_Boss, APlayer>("Stage_Boss");
 			UEngineAPICore::GetCore()->OpenLevel("Stage_Boss");
 		}
 	}
@@ -177,31 +177,6 @@ void AStage::TextOFF()
 	Text1->SetActive(false);
 	Text2->SetActive(false);
 	Text3->SetActive(false);
-}
-
-void AStage::StageStart()
-{
-	//TimeEventer.PushEvent(0.5f, [this]()
-	//	{
-	//		Text1->SetActive(true);
-	//	}
-	//, false, false);
-	//
-	//TimeEventer.PushEvent(0.5f, [this]()
-	//	{
-	//		Text2->SetActive(true);
-	//	}
-	//, false, false);
-	//
-	//TimeEventer.PushEvent(1.0f, [this]()
-	//	{
-	//		Text3->SetActive(true);
-	//	}
-	//, false, false);
-
-	//TimeEventer.PushEvent(1.5f, std::bind(&AStage_001::TextOFF, this), false, false);
-
-	//TimeEventer.PushEvent(2.0f, std::bind(&AStage_001::ActorSpawn, this), false, false);
 }
 
 void AStage::ActorSpawn()
@@ -282,18 +257,6 @@ void AStage::ClearBrick()
 			BricksStart = Bricks.erase(BricksStart);
 		}
 	}
-
-	//for (size_t y = 0; y < Bricks.size(); y++)
-	//{
-	//	for (size_t x = 0; x < Bricks[y].size(); x++)
-	//	{
-	//		if (nullptr != Bricks[y][x])
-	//		{
-	//			Bricks[y][x]->Destroy();
-	//			Bricks[y][x] = nullptr;
-	//		}
-	//	}
-	//}
 }
 
 bool AStage::Timer(float _CountTime, float _SetTime, float _EndTime)
@@ -322,7 +285,7 @@ void AStage::StageResetSetting(int _StageCount)
 	Vaus->SetStartSwitch(true);
 	Vaus->SetActive(false);
 	Vaus->ChangeState(PlayerState::Create);
-	CountTime = 0.0f;
+	StageCountTime = 0.0f;
 	BrickList.clear();
 	Map->Destroy();
 	Text2->SetText(Stage, false);

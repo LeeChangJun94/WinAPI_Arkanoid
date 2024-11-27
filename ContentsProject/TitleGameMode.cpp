@@ -7,6 +7,7 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineCoreDebug.h>
 #include "ContentsEnum.h"
+#include "Intro.h"
 
 #include "TitleLogo.h"
 
@@ -50,6 +51,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsDown(VK_RETURN))
 	{
+		UEngineAPICore::GetCore()->ResetLevel<AIntro, AActor>("Intro");
 		UEngineAPICore::GetCore()->OpenLevel("Intro");
 	}
 }

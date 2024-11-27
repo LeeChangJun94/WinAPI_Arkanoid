@@ -3,8 +3,11 @@
 #include "PlayMap.h"
 #include "Text.h"
 #include "Number.h"
+#include "Stage.h"
 #include "ContentsEnum.h"
+#include "TitleGameMode.h"
 #include <EngineCore/EngineAPICore.h>
+#include <EnginePlatform/EngineInput.h>
 
 AGameOver::AGameOver()
 {
@@ -93,7 +96,21 @@ void AGameOver::Tick(float _Deltatime)
 
 	CheckTime += _Deltatime;
 
-	if (1.0f > CheckTime)
+	if (true == UEngineInput::GetInst().IsDown('A'))
+	{
+		if (33 != AStage::Stage)
+		{
+			UEngineAPICore::GetCore()->OpenLevel("Stage");
+		}
+		else
+		{
+			UEngineAPICore::GetCore()->OpenLevel("Stage_Boss");
+		}
+	}
+
+
+
+	if (10.0f > CheckTime)
 	{
 		Text8->SetText(static_cast<int>(Time - CheckTime), false);
 		return;
@@ -115,6 +132,7 @@ void AGameOver::Tick(float _Deltatime)
 
 		TimeEventer.PushEvent(3.0f, [this]()
 			{
+				UEngineAPICore::GetCore()->ResetLevel<ATitleGameMode, AActor>("Title");
 				UEngineAPICore::GetCore()->OpenLevel("Title");
 			});
 	}

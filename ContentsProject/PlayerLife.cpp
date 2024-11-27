@@ -3,6 +3,7 @@
 #include "PlayerLife.h"
 #include "DeathLine.h"
 #include "Ball.h"
+#include "GameOver.h"
 
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineCoreDebug.h>
@@ -12,6 +13,7 @@
 #include <EngineCore/2DCollision.h>
 #include "ContentsEnum.h"
 
+int APlayerLife::LifeCount = 2;
 
 APlayerLife::APlayerLife()
 {
@@ -103,16 +105,20 @@ void APlayerLife::Tick(float _DeltaTime)
 		{
 			Vaus->ChangeState(PlayerState::Destroy);
 			
-			//ABall* BallActor = GetWorld()->SpawnActor<ABall>();
-			//BallList.push_back(BallActor);
-			//Vaus->CatchEffect = false;
-			//Vaus->SlowEffect = false;
 			if (0 <= LifeCount)
 			{
 				LifeCount -= 1;
 			}
+			if (-1 == LifeCount)
+			{
+				TimeEventer.PushEvent(1.4f, [this]()
+					{
+						UEngineAPICore::GetCore()->ResetLevel<AGameOver, AActor>("GameOver");
+						UEngineAPICore::GetCore()->OpenLevel("GameOver");
+						LifeCount = 2;
+					});
+			}
 		}
-		//Ball->ReStart(0.0f);
 	}
 	LifeCheck();
 }

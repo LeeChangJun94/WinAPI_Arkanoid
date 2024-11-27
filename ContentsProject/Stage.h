@@ -30,13 +30,13 @@ public:
 	void BeginPlay();
 	void Tick(float _DeltaTime);
 	void TextOFF();
-	void StageStart();
+	//void StageStart();
 	void ActorSpawn();
 
 	void StageResetSetting(int _StageCount);
 	void SetCountTime(float _CountTime)
 	{
-		CountTime = _CountTime;
+		StageCountTime = _CountTime;
 	}
 
 	void LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor);
@@ -47,12 +47,12 @@ public:
 
 	static std::list<ABrick*> BrickList;
 	static std::list<ABrick*> Bricks;
+	static int Stage;
+	static float StageCountTime;
 
 protected:
 
 private:
-	int Stage = 1;
-	float CountTime = 0.0f;
 
 	bool StageSetting = false;
 	bool BrickClear = true;
