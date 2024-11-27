@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
 
 class APlayer;
 class ABall;
@@ -24,12 +25,12 @@ public:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	inline void SetLifeCount(int _LifeCount)
+	void SetLifeCount(int _LifeCount)
 	{
 		LifeCount += _LifeCount;
 	}
 
-	inline int GetLifeCount()
+	int GetLifeCount()
 	{
 		return LifeCount;
 	}
@@ -59,7 +60,6 @@ public:
 protected:
 
 private:
-
 	APlayer* Vaus = nullptr;
 	ABall* Ball = nullptr;
 	ADeathLine* DeathLine = nullptr;

@@ -31,6 +31,9 @@ void AOuttro::BeginPlay()
 {
 	Super::BeginPlay();
 
+	BGMPlayer = UEngineSound::Play("04 Ending.mp3");
+	BGMPlayer.SetVolume(0.2f);
+
 	TitleLogo* NewActor = GetWorld()->SpawnActor<TitleLogo>();
 	Map = GetWorld()->SpawnActor<APlayMap>();
 	Map->SetPlayMapType(EPlayMapType::TYPE_SPACE);
@@ -136,6 +139,7 @@ void AOuttro::BeginPlay()
 
 	TimeEventer.PushEvent(22.0f, [this]()
 		{
+			BGMPlayer.Stop();
 			UEngineAPICore::GetCore()->ResetLevel<ATitleGameMode, AActor>("Title");
 			UEngineAPICore::GetCore()->OpenLevel("Title");
 		});
@@ -192,13 +196,15 @@ void AOuttro::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsDown(VK_SUBTRACT))
 	{
+		BGMPlayer.Stop();
 		UEngineAPICore::GetCore()->ResetLevel<AStage_Boss, APlayer>("Stage_Boss");
 		UEngineAPICore::GetCore()->OpenLevel("Stage_Boss");
 	}
 
-	if (true == UEngineInput::GetInst().IsDown(VK_ADD))
+	if (true == UEngineInput::GetInst().IsDown(VK_ADD) || true == UEngineInput::GetInst().IsDown(VK_RETURN))
 	{
-			UEngineAPICore::GetCore()->ResetLevel<ATitleGameMode, AActor>("Title");
-			UEngineAPICore::GetCore()->OpenLevel("Title");
+		BGMPlayer.Stop();
+		UEngineAPICore::GetCore()->ResetLevel<ATitleGameMode, AActor>("Title");
+		UEngineAPICore::GetCore()->OpenLevel("Title");
 	}
 }

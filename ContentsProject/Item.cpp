@@ -145,6 +145,8 @@ void AItem::ItemPlayerEffect()
 {
 	if (5 > PlayerLife->GetLifeCount())
 	{
+		LifeUp = UEngineSound::Play("Item_Life.wav");
+		LifeUp.SetVolume(0.2f);
 		PlayerLife->SetLifeCount(1);
 	}
 	

@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/GameMode.h>
+#include <EnginePlatform/EngineSound.h>
 
 class APlayMap;
 class AInOuttro_StarShip;
@@ -39,6 +40,7 @@ private:
 	AText* Text8 = nullptr;
 	AText* Text9 = nullptr;
 
+	USoundPlayer BGMPlayer;
 
 
 

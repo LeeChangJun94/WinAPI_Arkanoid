@@ -129,6 +129,8 @@ void AGameOver::Tick(float _Deltatime)
 		Text7->SetActive(false);
 		Text8->SetActive(false);
 		Text9->SetActive(true);
+		GameOverSound = UEngineSound::Play("05 Game Over.mp3");
+		GameOverSound.SetVolume(0.2f);
 
 		TimeEventer.PushEvent(3.0f, [this]()
 			{

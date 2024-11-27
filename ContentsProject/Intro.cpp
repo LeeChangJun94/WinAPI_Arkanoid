@@ -30,6 +30,9 @@ void AIntro::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	BGMPlayer = UEngineSound::Play("01 Story.mp3");
+	BGMPlayer.SetVolume(0.2f);
+	
 	TitleLogo* NewActor = GetWorld()->SpawnActor<TitleLogo>();
 	Map = GetWorld()->SpawnActor<APlayMap>();
 	Map->SetPlayMapType(EPlayMapType::TYPE_SPACE);
@@ -176,18 +179,21 @@ void AIntro::Tick(float _DeltaTime)
 
 	if (21.0f < CheckTime)
 	{
+		BGMPlayer.Stop();
 		UEngineAPICore::GetCore()->OpenLevel("Stage");
 	}
 
 	if (true == UEngineInput::GetInst().IsDown(VK_SUBTRACT))
 	{
+		BGMPlayer.Stop();
 		UEngineAPICore::GetCore()->ResetLevel<ATitleGameMode, AActor>("Title");
 		UEngineAPICore::GetCore()->OpenLevel("Title");
 	}
 
 	if (true == UEngineInput::GetInst().IsDown(VK_RETURN))
 	{
+		BGMPlayer.Stop();
 		AStage::Stage = 1;
-		UEngineAPICore::GetCore()->OpenLevel("Stage");
+		UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
 	}
 }

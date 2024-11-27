@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
 #include "Bullet.h"
 
 
@@ -109,7 +110,6 @@ private:
 	float radian = 0.0f;
 	
 	int MySpriteIndex = 0;
-	//bool IsTransformEnd = false;
 	int BulletCount = 0;
 	class USpriteRenderer* SpriteRenderer = nullptr;
 
@@ -120,6 +120,11 @@ private:
 
 	FTransform BallTrans;
 	FTransform VausTrans;
+
+	USoundPlayer EnlargeSound;
+	USoundPlayer LaserSound;
+	USoundPlayer Ball_VausSound;
+	USoundPlayer VausDeadSound;
 
 	float Ratio = 0;
 	float Line = 0;

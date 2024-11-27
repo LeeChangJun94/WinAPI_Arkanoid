@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/GameMode.h>
+#include <EnginePlatform/EngineSound.h>
 
 class APlayMap;
 class AInOuttro_Laser;
@@ -41,7 +42,7 @@ private:
 	AText* Text8 = nullptr;
 	AText* Text9 = nullptr;
 
-
+	USoundPlayer BGMPlayer;
 
 
 	float CheckTime = 0.0f;

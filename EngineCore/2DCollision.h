@@ -99,6 +99,7 @@ public:
 protected:
 
 private:
+	void CollisionSetRelease();
 	void CollisionEventCheck(class U2DCollision* _Other);
 
 	// 충돌체의 오더는 약간 의미가 다르다.

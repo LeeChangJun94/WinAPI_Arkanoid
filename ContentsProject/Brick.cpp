@@ -20,23 +20,32 @@
 
 ABrick::ABrick()
 {
-
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetSprite("Bricks.png");
 	SpriteRenderer->SetComponentScale({ 48, 24 });
 	
-	SpriteRenderer->CreateAnimation("White", "Bricks.png", 0, 0, 0.0f);
-	SpriteRenderer->CreateAnimation("Orange", "Bricks.png", 1, 1, 0.0f);
-	SpriteRenderer->CreateAnimation("Skyblue", "Bricks.png", 2, 2, 0.0f);
-	SpriteRenderer->CreateAnimation("Green", "Bricks.png", 3, 3, 0.0f);
-	SpriteRenderer->CreateAnimation("Red", "Bricks.png", 6, 6, 0.0f);
-	SpriteRenderer->CreateAnimation("Blue", "Bricks.png", 7, 7, 0.0f);
-	SpriteRenderer->CreateAnimation("Pink", "Bricks.png", 8, 8, 0.0f);
-	SpriteRenderer->CreateAnimation("Yellow", "Bricks.png", 9, 9, 0.0f);
-	SpriteRenderer->CreateAnimation("Silver", "Bricks.png", 12, 17, 0.2f);
-	SpriteRenderer->CreateAnimation("Gold", "Bricks.png", 18, 23, 0.2f);
+	SpriteRenderer->CreateAnimation("White", "Bricks.png", 0, 0, 0.0f, false);
+	SpriteRenderer->CreateAnimation("Orange", "Bricks.png", 1, 1, 0.0f, false);
+	SpriteRenderer->CreateAnimation("Skyblue", "Bricks.png", 2, 2, 0.0f, false);
+	SpriteRenderer->CreateAnimation("Green", "Bricks.png", 3, 3, 0.0f, false);
+	SpriteRenderer->CreateAnimation("Red", "Bricks.png", 6, 6, 0.0f, false);
+	SpriteRenderer->CreateAnimation("Blue", "Bricks.png", 7, 7, 0.0f, false);
+	SpriteRenderer->CreateAnimation("Pink", "Bricks.png", 8, 8, 0.0f, false);
+	SpriteRenderer->CreateAnimation("Yellow", "Bricks.png", 9, 9, 0.0f, false);
+	SpriteRenderer->CreateAnimation("Silver_Idle", "Bricks.png", 12, 12, 0.0f, false);
+	SpriteRenderer->CreateAnimation("Silver_Col", "Bricks.png", 12, 17, 0.2f, false);
+	SpriteRenderer->CreateAnimation("Gold_Idle", "Bricks.png", 18, 18, 0.0f, false);
+	SpriteRenderer->CreateAnimation("Gold_Col", "Bricks.png", 18, 23, 0.2f, false);
 
-	//SpriteRenderer->ChangeAnimation("Silver");
+	SpriteRenderer->SetAnimationEvent("Silver_Col", 17, [this]()
+		{
+			SpriteRenderer->ChangeAnimation("Silver_Idle");
+		});
+
+	SpriteRenderer->SetAnimationEvent("Gold_Col", 23, [this]()
+		{
+			SpriteRenderer->ChangeAnimation("Gold_Idle");
+		});
 
 	CollisionComponent = CreateDefaultSubObject<U2DCollision>();
 	CollisionComponent->SetComponentLocation({ 0, 0 });
@@ -196,7 +205,7 @@ void ABrick::Tick(float _DeltaTime)
 			BallTrans.Location.Y < (BrickTrans.Location.Y + (BrickSize.Y / 2)) && BallTrans.Location.Y > BrickTrans.Location.Y)
 		{
 			Line = (-Ratio) * (BallTrans.Location.X - BrickTrans.Location.X);
-
+			
 			if ((Line) < (BrickTrans.Location.Y - BallTrans.Location.Y))
 			{
 				UEngineDebug::OutPutString("Right");
@@ -218,21 +227,18 @@ void ABrick::Tick(float _DeltaTime)
 				}
 			}
 		}
-		int a = 0;
 	}
 }
 
-// 데이터를 직렬화(압축)
+
 void ABrick::Serialize(UEngineSerializer& _Ser)
 {
 	_Ser << GetActorLocation();
 	_Ser << static_cast<int>(BrickType);
-
 }
-// 데이터를 복구(할때)
+
 void ABrick::DeSerialize(UEngineSerializer& _Ser)
 {
-	int a = 0;
 }
 
 
@@ -240,14 +246,30 @@ void ABrick::BrickDestroyCheck()
 {
 	BrickHP -= 1;
 
+	if (1 == BrickHP && EBrickType::SILVER == BrickType)
+	{
+		BrickProtectSound = UEngineSound::Play("BrickProtect.wav");
+		BrickProtectSound.SetVolume(0.2f);
+		SpriteRenderer->ChangeAnimation("Silver_Col");
+		return;
+	}
+
+	if (EBrickType::GOLD == BrickType)
+	{
+		BrickProtectSound = UEngineSound::Play("BrickProtect.wav");
+		BrickProtectSound.SetVolume(0.2f);
+		SpriteRenderer->ChangeAnimation("Gold_Col");
+		return;
+	}
+
 	if (0 == BrickHP)
 	{
 		CollisionCheck = true;
 		AStage::BrickList.remove(this);
 		AStage::Bricks.remove(this);
-		//GetWorld()->GetGameMode<AStage>();
+		Ball_BrickSound = UEngineSound::Play("Ball_Brick.wav");
+		Ball_BrickSound.SetVolume(0.2f);
 
-		//AStage::allbriack[Myindex.y][Myindex.x] = nullptr;
 		this->Destroy();
 
 		AItem* Ptr = GetWorld()->SpawnActor<AItem>();
@@ -325,14 +347,14 @@ void ABrick::YellowBrick()
 
 void ABrick::SilverBrick()
 {
-	SpriteRenderer->ChangeAnimation("Silver");
-	Score = 50;
+	SpriteRenderer->ChangeAnimation("Silver_Idle");
+	Score = 50 * AStage::Stage;
 	BrickHP = 2;
 }
 
 void ABrick::GoldBrick()
 {
-	SpriteRenderer->ChangeAnimation("Gold");
+	SpriteRenderer->ChangeAnimation("Gold_Idle");
 	Score = 0;
 	BrickHP = -1;
 }

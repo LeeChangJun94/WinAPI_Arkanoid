@@ -111,9 +111,10 @@ void ABoss::Tick(float _DeltaTime)
 
 	if (0 == BossHP && true != BossDeath)
 	{
+		BossDeadSound = UEngineSound::Play("BossDead.wav");
+		BossDeadSound.SetVolume(0.2f);
 		BossDeath = true;
 		ChangeBossState(BossState::DESTROY);
-
 	}
 
 	switch (CurBossState)
@@ -144,7 +145,8 @@ void ABoss::Tick(float _DeltaTime)
 			BallTrans.Location.Y > (BossTrans.Location.Y - (BossSize.Y / 2)) && BallTrans.Location.Y < BossTrans.Location.Y)
 		{
 			Line = (-Ratio) * (BallTrans.Location.X - BossTrans.Location.X);
-
+			Ball_BossSound = UEngineSound::Play("Ball_Boss.wav");
+			Ball_BossSound.SetVolume(0.2f);
 			if ((Line) > (BossTrans.Location.Y - BallTrans.Location.Y))
 			{
 				UEngineDebug::OutPutString("Left");
@@ -153,7 +155,7 @@ void ABoss::Tick(float _DeltaTime)
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::LEFT);
 
-					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetCurSpriteIndex() + 4);
+					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetFrameIndex() + 4);
 					BossHP -= 1;
 					ResultBall->SetBallDir(Dir);
 				}
@@ -166,7 +168,7 @@ void ABoss::Tick(float _DeltaTime)
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::UP);
 
-					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetCurSpriteIndex() + 4);
+					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetFrameIndex() + 4);
 					BossHP -= 1;
 					ResultBall->SetBallDir(Dir);
 				}
@@ -177,7 +179,8 @@ void ABoss::Tick(float _DeltaTime)
 			BallTrans.Location.Y < (BossTrans.Location.Y + (BossSize.Y / 2)) && BallTrans.Location.Y > BossTrans.Location.Y)
 		{
 			Line = Ratio * (BallTrans.Location.X - BossTrans.Location.X);
-
+			Ball_BossSound = UEngineSound::Play("Ball_Boss.wav");
+			Ball_BossSound.SetVolume(0.2f);
 			if ((Line) < (BossTrans.Location.Y - BallTrans.Location.Y))
 			{
 				UEngineDebug::OutPutString("Left");
@@ -186,7 +189,7 @@ void ABoss::Tick(float _DeltaTime)
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::LEFT);
 
-					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetCurSpriteIndex() + 4);
+					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetFrameIndex() + 4);
 					BossHP -= 1;
 					ResultBall->SetBallDir(Dir);
 				}
@@ -199,20 +202,19 @@ void ABoss::Tick(float _DeltaTime)
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::DOWN);
 
-					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetCurSpriteIndex() + 4);
+					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetFrameIndex() + 4);
 					BossHP -= 1;
 					ResultBall->SetBallDir(Dir);
 				}
 			}
 		}
 
-
-
 		if (BallTrans.Location.X > BossTrans.Location.X && BallTrans.Location.X < (BossTrans.Location.X + (BossSize.X / 2)) &&
 			BallTrans.Location.Y >(BossTrans.Location.Y - (BossSize.Y / 2)) && BallTrans.Location.Y < BossTrans.Location.Y)
 		{
 			Line = Ratio * (BallTrans.Location.X - BossTrans.Location.X);
-
+			Ball_BossSound = UEngineSound::Play("Ball_Boss.wav");
+			Ball_BossSound.SetVolume(0.2f);
 			if ((Line) > (BossTrans.Location.Y - BallTrans.Location.Y))
 			{
 				UEngineDebug::OutPutString("Right");
@@ -221,7 +223,7 @@ void ABoss::Tick(float _DeltaTime)
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::RIGHT);
 
-					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetCurSpriteIndex() + 4);
+					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetFrameIndex() + 4);
 					BossHP -= 1;
 					ResultBall->SetBallDir(Dir);
 				}
@@ -234,7 +236,7 @@ void ABoss::Tick(float _DeltaTime)
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::UP);
 
-					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetCurSpriteIndex() + 4);
+					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetFrameIndex() + 4);
 					BossHP -= 1;
 					ResultBall->SetBallDir(Dir);
 				}
@@ -245,7 +247,8 @@ void ABoss::Tick(float _DeltaTime)
 			BallTrans.Location.Y < (BossTrans.Location.Y + (BossSize.Y / 2)) && BallTrans.Location.Y > BossTrans.Location.Y)
 		{
 			Line = (-Ratio) * (BallTrans.Location.X - BossTrans.Location.X);
-
+			Ball_BossSound = UEngineSound::Play("Ball_Boss.wav");
+			Ball_BossSound.SetVolume(0.2f);
 			if ((Line) < (BossTrans.Location.Y - BallTrans.Location.Y))
 			{
 				UEngineDebug::OutPutString("Right");
@@ -254,7 +257,7 @@ void ABoss::Tick(float _DeltaTime)
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::RIGHT);
 
-					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetCurSpriteIndex() + 4);
+					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetFrameIndex() + 4);
 					BossHP -= 1;
 					ResultBall->SetBallDir(Dir);
 				}
@@ -267,7 +270,7 @@ void ABoss::Tick(float _DeltaTime)
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::DOWN);
 
-					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetCurSpriteIndex() + 4);
+					SpriteRenderer1->SetSprite("Boss.png", SpriteRenderer1->GetFrameIndex() + 4);
 					BossHP -= 1;
 					ResultBall->SetBallDir(Dir);
 				}

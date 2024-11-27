@@ -30,6 +30,7 @@ std::list<ABrick*> AStage::BrickList;
 std::list<ABrick*> AStage::Bricks;
 int AStage::Stage = 1;
 float AStage::StageCountTime = 0.0f;
+bool AStage::StageStartSound = true;
 
 AStage::AStage()
 {
@@ -42,9 +43,7 @@ AStage::~AStage()
 void AStage::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	//BGMPlayer = UEngineSound::Play("anipang_ingame_wav.wav");
-	
+
 	Vaus = GetWorld()->GetPawn<APlayer>();
 
 	{
@@ -110,7 +109,12 @@ void AStage::Tick(float _DeltaTime)
 	UEngineDebug::CoreOutPutString("BrickListSize : " + std::to_string(BrickList.size()));
 	StageCountTime += _DeltaTime;
 	
-
+	if (true == StageStartSound && 0.1 > StageCountTime)
+	{
+		StageStartSound = false;
+		BGMPlayer = UEngineSound::Play("02 Round Start.mp3");
+		BGMPlayer.SetVolume(0.2f);
+	}
 
 	Text1->SetActive(Timer(StageCountTime, 0.5f, 1.5f));
 	Text2->SetActive(Timer(StageCountTime, 0.5f, 1.5f));
@@ -144,12 +148,13 @@ void AStage::Tick(float _DeltaTime)
 		if (1 != Stage)
 		{
 			StageResetSetting(-1);
-			
+			BGMPlayer.Stop();
 			UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
 		}
 		else
 		{
 			StageResetSetting(0);
+			BGMPlayer.Stop();
 			UEngineAPICore::GetCore()->ResetLevel<AIntro, AActor>("Intro");
 			UEngineAPICore::GetCore()->OpenLevel("Intro");
 		}
@@ -160,23 +165,17 @@ void AStage::Tick(float _DeltaTime)
 		if (32 != Stage)
 		{
 			StageResetSetting(1);
-
+			BGMPlayer.Stop();
 			UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
 		}
 		else
 		{
 			StageResetSetting(0);
+			BGMPlayer.Stop();
 			UEngineAPICore::GetCore()->ResetLevel<AStage_Boss, APlayer>("Stage_Boss");
 			UEngineAPICore::GetCore()->OpenLevel("Stage_Boss");
 		}
 	}
-}
-
-void AStage::TextOFF()
-{
-	Text1->SetActive(false);
-	Text2->SetActive(false);
-	Text3->SetActive(false);
 }
 
 void AStage::ActorSpawn()
@@ -280,6 +279,7 @@ bool AStage::Timer(float _CountTime, float _SetTime)
 void AStage::StageResetSetting(int _StageCount)
 {
 	Stage += _StageCount;
+	StageStartSound = true;
 	StageSetting = false;
 	BrickClear = true;
 	Vaus->SetStartSwitch(true);

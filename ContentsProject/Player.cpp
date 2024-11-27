@@ -6,6 +6,7 @@
 #include "Item.h"
 #include "PlayerLife.h"
 #include "Stage.h"
+#include "Stage_Boss.h"
 
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
@@ -70,21 +71,8 @@ void APlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//PlayerLifeActor->SetPlayerLife(this);
-
 	ChangeState(PlayerState::Create);
-	
-	
-	//Dir.Radian(30.f);
-	//Dir.Normalize();
-
-
-	// 직접 카메라 피봇을 설정해줘야 한다.
-	//FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
-	//GetWorld()->SetCameraPivot(Size.Half() * -1.0f);
 }
-
-
 
 void APlayer::Tick(float _DeltaTime)
 {
@@ -92,19 +80,14 @@ void APlayer::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsDown('Z'))
 	{
-		//ChangeState(PlayerState::Enlarge);
-		//DestroyStart();
 		ChangeState(PlayerState::Laser);
 	}
 
 	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
-	//UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
-	//UEngineDebug::CoreOutPutString("PlayerLife : " + std::to_string(PlayerLife->GetLifeCount()));
 
 	if (true == UEngineInput::GetInst().IsDown('R'))
 	{
 		UEngineAPICore::GetCore()->OpenLevel("Title");
-		//UEngineDebug::SwitchIsDebug();
 	}
 
 
@@ -127,12 +110,12 @@ void APlayer::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Left");
 				if (ResultBall->GetBallDir().X > 0)
 				{
+					Ball_VausSound = UEngineSound::Play("Ball_Vaus.wav");
+					Ball_VausSound.SetVolume(0.2f);
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::LEFT);
 
 					ResultBall->SetBallDir(Dir);
-
-					//APlayer::Ball->Dir.X *= -1;
 				}
 			}
 			else
@@ -140,29 +123,25 @@ void APlayer::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Top");
 				if (ResultBall->GetBallDir().Y > 0)
 				{
-					if (BallTrans.Location.X > VausTrans.Location.X - ((VausSize.X / 2) * 0.2))
+					Ball_VausSound = UEngineSound::Play("Ball_Vaus.wav");
+					Ball_VausSound.SetVolume(0.2f);
+					if (BallTrans.Location.X > VausTrans.Location.X - ((VausSize.X / 2) * 0.3))
 					{
 						FVector2D Dir;
 						Dir.Radian(-30.0f);
-
 						ResultBall->SetBallDir(Dir);
-						//ChangeState(PlayerState::Laser);
 					}
 					else if (BallTrans.Location.X > VausTrans.Location.X - ((VausSize.X / 2) * 0.6))
 					{
 						FVector2D Dir;
 						Dir.Radian(-45.0f);
-
 						ResultBall->SetBallDir(Dir);
-						//ChangeState(PlayerState::Laser);
 					}
 					else
 					{
 						FVector2D Dir;
 						Dir.Radian(-60.0f);
-
 						ResultBall->SetBallDir(Dir);
-						//ChangeState(PlayerState::Laser);
 					}
 
 					if (true == CatchEffect)
@@ -174,13 +153,8 @@ void APlayer::Tick(float _DeltaTime)
 							(*BalliterStart)->SetBallCatch(true);
 							(*BalliterStart)->Distance = GetActorLocation().X - (*BalliterStart)->GetActorLocation().X;
 						}
-						//Result->SetActorLocation({ Vaus->GetActorLocation().X, Vaus->GetActorLocation().Y });
-
 					}
-
-					//ABall::Ball->Dir.Y *= -1;
 				}
-
 			}
 		}
 
@@ -194,12 +168,12 @@ void APlayer::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Left");
 				if (ResultBall->GetBallDir().X > 0)
 				{
+					Ball_VausSound = UEngineSound::Play("Ball_Vaus.wav");
+					Ball_VausSound.SetVolume(0.2f);
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::LEFT);
 
 					ResultBall->SetBallDir(Dir);
-
-					//ABall::Ball->Dir.X *= -1;
 				}
 			}
 			else
@@ -207,12 +181,12 @@ void APlayer::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Bottom");
 				if (ResultBall->GetBallDir().Y < 0)
 				{
+					Ball_VausSound = UEngineSound::Play("Ball_Vaus.wav");
+					Ball_VausSound.SetVolume(0.2f);
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::DOWN);
 
 					ResultBall->SetBallDir(Dir);
-
-					//APlayer::Ball->Dir.Y *= -1;
 				}
 			}
 		}
@@ -229,12 +203,12 @@ void APlayer::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Right");
 				if (ResultBall->GetBallDir().X < 0)
 				{
+					Ball_VausSound = UEngineSound::Play("Ball_Vaus.wav");
+					Ball_VausSound.SetVolume(0.2f);
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::RIGHT);
 
 					ResultBall->SetBallDir(Dir);
-
-					//ABall::Ball->Dir.X *= -1;
 				}
 			}
 			else
@@ -242,13 +216,14 @@ void APlayer::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Top");
 				if (ResultBall->GetBallDir().Y > 0)
 				{
-					if (BallTrans.Location.X < VausTrans.Location.X + ((VausSize.X / 2) * 0.2))
+					Ball_VausSound = UEngineSound::Play("Ball_Vaus.wav");
+					Ball_VausSound.SetVolume(0.2f);
+					if (BallTrans.Location.X < VausTrans.Location.X + ((VausSize.X / 2) * 0.3))
 					{
 						FVector2D Dir;
 						Dir.Radian(30.0f);
 
 						ResultBall->SetBallDir(Dir);
-						//ChangeState(PlayerState::Laser);
 					}
 					else if (BallTrans.Location.X < VausTrans.Location.X + ((VausSize.X / 2) * 0.6))
 					{
@@ -256,7 +231,6 @@ void APlayer::Tick(float _DeltaTime)
 						Dir.Radian(45.0f);
 
 						ResultBall->SetBallDir(Dir);
-						//ChangeState(PlayerState::Laser);
 					}
 					else
 					{
@@ -264,7 +238,6 @@ void APlayer::Tick(float _DeltaTime)
 						Dir.Radian(60.0f);
 
 						ResultBall->SetBallDir(Dir);
-						//ChangeState(PlayerState::Laser);
 					}
 
 					if (true == CatchEffect)
@@ -291,12 +264,12 @@ void APlayer::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Right");
 				if (ResultBall->GetBallDir().X < 0)
 				{
+					Ball_VausSound = UEngineSound::Play("Ball_Vaus.wav");
+					Ball_VausSound.SetVolume(0.2f);
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::RIGHT);
 
 					ResultBall->SetBallDir(Dir);
-
-					//ABall::Ball->Dir.X *= -1;
 				}
 			}
 			else
@@ -304,18 +277,16 @@ void APlayer::Tick(float _DeltaTime)
 				UEngineDebug::OutPutString("Bottom");
 				if (ResultBall->GetBallDir().Y < 0)
 				{
+					Ball_VausSound = UEngineSound::Play("Ball_Vaus.wav");
+					Ball_VausSound.SetVolume(0.2f);
 					FVector2D Dir;
 					Dir = ResultBall->GetBallDir().Reflect(FVector2D::DOWN);
 
 					ResultBall->SetBallDir(Dir);
-
-					//ABall::Ball->Dir.Y *= -1;
 				}
 			}
 		}
 	}
-
-	
 
 	switch (CurPlayerState)
 	{
@@ -331,8 +302,6 @@ void APlayer::Tick(float _DeltaTime)
 	default:
 		break;
 	}
-
-	
 
 	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 
@@ -358,7 +327,7 @@ void APlayer::Tick(float _DeltaTime)
 	{
 		if (true == (*BalliterStart)->GetBallCatch())
 		{
-			if (true == UEngineInput::GetInst().IsDown('J'))
+			if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
 			{
 				for (; BalliterStart != BalliterEnd; ++BalliterStart)
 				{
@@ -372,9 +341,6 @@ void APlayer::Tick(float _DeltaTime)
 			}
 		}
 	}
-
-
-
 }
 
 void APlayer::ChangeState(PlayerState _CurPlayerState)
@@ -439,6 +405,8 @@ void APlayer::Laser(float _DeltaTime)
 {
 	if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
 	{
+		LaserSound = UEngineSound::Play("Item_Laser.wav");
+		LaserSound.SetVolume(0.2f);
 		if (2 >= BulletPtr.size())
 		{
  			ABullet* Ptr = GetWorld()->SpawnActor<ABullet>();
@@ -450,6 +418,8 @@ void APlayer::Laser(float _DeltaTime)
 
 void APlayer::EnlargeStart()
 {
+	EnlargeSound = UEngineSound::Play("Item_Enlarge.wav");
+	EnlargeSound.SetVolume(0.2f);
 	SpriteRenderer->SetComponentScale({ 144, 24 });
 	CollisionComponent->SetComponentScale({ 144, 24 });
 	SpriteRenderer->ChangeAnimation("Vaus_TEnlarge");
@@ -462,6 +432,8 @@ void APlayer::EnlargeDone()
 
 void APlayer::DestroyStart()
 {
+	VausDeadSound = UEngineSound::Play("VausDead.wav");
+	VausDeadSound.SetVolume(0.2f);
 	SpriteRenderer->ChangeAnimation("Vaus_Destroy1");
 	CollisionComponent->SetActive(false);
 }
@@ -481,6 +453,9 @@ void APlayer::VausReset()
 	CatchEffect = false;
 	SlowEffect = false;
 	AStage::StageCountTime = 0.0f;
+	AStage::StageStartSound = true;
+	AStage_Boss::BossCountTime = 0.0f;
+	AStage_Boss::BossStartSound = true;
 	SetActive(false);
 }
 

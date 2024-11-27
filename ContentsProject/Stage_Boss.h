@@ -36,23 +36,19 @@ public:
 
 	void StageResetSetting(int _StageCount);
 	void StageResetSetting();
-	void SetCountTime(float _CountTime)
-	{
-		CountTime = _CountTime;
-	}
-
 
 
 	bool Timer(float _CountTime, float _SetTime, float _EndTime);
 	bool Timer(float _CountTime, float _SetTime);
 
+	static bool BossStartSound;
+	static float BossCountTime;
 
 
 protected:
 
 private:
 	//int Stage = 33;
-	float CountTime = 0.0f;
 	
 	bool StageSetting = false;
 	bool BossAttack = false;

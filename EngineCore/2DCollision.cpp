@@ -166,6 +166,35 @@ void U2DCollision::SetCollisionEnd(std::function<void(AActor*)> _Function)
 
 }
 
+void U2DCollision::CollisionSetRelease()
+{
+	std::set<U2DCollision*>::iterator StartIter = CollisionCheckSet.begin();
+	std::set<U2DCollision*>::iterator EndIter = CollisionCheckSet.end();
+
+	for (; StartIter != EndIter; )
+	{
+		U2DCollision* ColCollison = *StartIter;
+
+		if (nullptr == ColCollison)
+		{
+			++StartIter;
+			continue;
+		}
+
+		if (false == ColCollison->IsActive() || true == ColCollison->IsDestroy())
+		{
+			if (nullptr != End)
+			{
+				End(ColCollison->GetActor());
+			}
+			StartIter = CollisionCheckSet.erase(StartIter);
+			continue;
+		}
+
+		++StartIter;
+	}
+}
+
 // 엔진 이벤트코드니까 이상한 곳에서 할필요가 없다.
 // 컨텐츠에서는 존재하는지도 몰라야 한다.
 void U2DCollision::CollisionEventCheck(class U2DCollision* _Other)

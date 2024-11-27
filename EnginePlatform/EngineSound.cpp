@@ -4,6 +4,7 @@
 #include <EngineBase/EngineDebug.h>
 
 std::map<std::string, UEngineSound*> UEngineSound::Sounds;
+std::list<USoundPlayer> UEngineSound::Players;
 
 // 사운드를 제어하기위한 핸들
 FMOD::System* SoundSystem = nullptr;
@@ -39,12 +40,65 @@ public:
 
 SoundInit SoundInitObject;
 
+void UEngineSound::AllSoundStop()
+{
+	std::list<USoundPlayer>::iterator StartIter = Players.begin();
+	std::list<USoundPlayer>::iterator EndIter = Players.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		USoundPlayer& CurSoundPlayer = *StartIter;
+		CurSoundPlayer.Stop();
+	}
+}
+
+void UEngineSound::AllSoundOn()
+{
+	std::list<USoundPlayer>::iterator StartIter = Players.begin();
+	std::list<USoundPlayer>::iterator EndIter = Players.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		USoundPlayer& CurSoundPlayer = *StartIter;
+		CurSoundPlayer.On();
+	}
+}
+
+void UEngineSound::AllSoundOff()
+{
+	std::list<USoundPlayer>::iterator StartIter = Players.begin();
+	std::list<USoundPlayer>::iterator EndIter = Players.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		USoundPlayer& CurSoundPlayer = *StartIter;
+		CurSoundPlayer.Off();
+	}
+}
+
 
 void UEngineSound::Update()
 {
 	if (nullptr == SoundSystem)
 	{
 		return;
+	}
+
+	std::list<USoundPlayer>::iterator StartIter = Players.begin();
+	std::list<USoundPlayer>::iterator EndIter = Players.end();
+
+	for (; StartIter != EndIter; )
+	{
+		USoundPlayer& CurSoundPlayer = *StartIter;
+
+		if (true == CurSoundPlayer.IsPlaying())
+		{
+			++StartIter;
+			continue;
+		}
+
+		StartIter = Players.erase(StartIter);
+
 	}
 
 	if (FMOD_RESULT::FMOD_OK != SoundSystem->update())
@@ -147,15 +201,22 @@ USoundPlayer UEngineSound::Play(std::string_view _Name)
 
 	SoundSystem->playSound(FindSound->SoundHandle, nullptr, false, &Ch);
 
+	// 이 재생에 관련된 모든 사항에 대한 
+	// WINproc => 
+	// Ch->setCallback();
+
 	// 1번 재생
 	Ch->setLoopCount(0);
 
 	// 볼륨 1로
 	Ch->setVolume(1.0f);
 
-
 	USoundPlayer NewPlayer;
 	NewPlayer.Control = Ch;
+	NewPlayer.SoundHandle = FindSound->SoundHandle;
+
+	Players.push_back(NewPlayer);
+
 	return NewPlayer;
 }
 

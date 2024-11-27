@@ -32,7 +32,7 @@ void ABossBullet::Attack()
 	
 	if (nullptr != VausResult)
 	{
-		AStage_Boss* Stage_Boss = reinterpret_cast<AStage_Boss*>(GetWorld()->GetGameMode());
+		AStage_Boss* Stage_Boss = GetWorld()->GetGameMode<AStage_Boss>();
 		Stage_Boss->StageResetSetting();
 	}
 }

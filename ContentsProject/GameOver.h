@@ -1,4 +1,5 @@
 #pragma once
+#include <EnginePlatform/EngineSound.h>
 
 class AText;
 
@@ -30,6 +31,8 @@ private:
 	AText* Text7 = nullptr;
 	AText* Text8 = nullptr;
 	AText* Text9 = nullptr;
+
+	USoundPlayer GameOverSound;
 
 	int Time = 10;
 	float CheckTime = 0.0f;

@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
 
 class ABall;
 
@@ -59,7 +60,8 @@ private:
 	USpriteRenderer* SpriteRenderer1 = nullptr;
 	USpriteRenderer* SpriteRenderer2 = nullptr;
 	U2DCollision* CollisionComponent = nullptr;
-
+	USoundPlayer Ball_BossSound;
+	USoundPlayer BossDeadSound;
 	BossState CurBossState = BossState::IDLE;
 
 	int BossHP = 5;

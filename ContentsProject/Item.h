@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
 
 class APlayer;
 class APlayerLife;
@@ -80,6 +81,7 @@ private:
 	class USpriteRenderer* SpriteRenderer1 = nullptr;
 	class USpriteRenderer* SpriteRenderer2 = nullptr;
 	
+	USoundPlayer LifeUp;
 
 	U2DCollision* CollisionComponent;
 

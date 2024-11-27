@@ -104,6 +104,11 @@ public:
 		return CurIndex;
 	}
 
+	int GetFrameIndex()
+	{
+		return CurAnimation->CurIndex;
+	}
+
 	void SetCameraEffect(bool _Value)
 	{
 		IsCameraEffect = _Value;

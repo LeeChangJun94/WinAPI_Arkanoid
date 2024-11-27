@@ -3,6 +3,7 @@
 #include <EngineBase/EngineMath.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineBase/EngineSerializer.h>
+#include <EnginePlatform/EngineSound.h>
 
 enum class EBrickType
 {
@@ -48,22 +49,6 @@ public:
 		SpriteRenderer->SetComponentScale(_Size);
 	}
 
-
-
-	//bool RectCheck();
-	//EReflectionDir ReflectionDirCheck();
-
-	//void SetBall(ABall* _Ball)
-	//{
-	//	Ball = _Ball;
-	//}
-
-	//ABall* GetBallActor()
-	//{
-	//	return this->BallActor;
-	//}
-
-	//ModeState ItemStats;
 	inline void SetPlayerLife(APlayerLife* _Player) { PlayerLife = _Player; }
 
 	void BrickDestroyCheck();
@@ -91,17 +76,15 @@ public:
 		return BrickType;
 	}
 
-	// 데이터를 직렬화(압축)
 	void Serialize(UEngineSerializer& _Ser) override;
-	// 데이터를 복구(할때)
 	void DeSerialize(UEngineSerializer& _Ser) override;
-
-
-
 
 protected:
 
 private:
+	USoundPlayer Ball_BrickSound;
+	USoundPlayer BrickProtectSound;
+
 	FIntPoint Myindex;
 	
 	FTransform BallTrans;

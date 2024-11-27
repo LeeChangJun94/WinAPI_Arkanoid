@@ -29,8 +29,6 @@ public:
 
 	void BeginPlay();
 	void Tick(float _DeltaTime);
-	void TextOFF();
-	//void StageStart();
 	void ActorSpawn();
 
 	void StageResetSetting(int _StageCount);
@@ -49,11 +47,11 @@ public:
 	static std::list<ABrick*> Bricks;
 	static int Stage;
 	static float StageCountTime;
+	static bool StageStartSound;
 
 protected:
 
 private:
-
 	bool StageSetting = false;
 	bool BrickClear = true;
 	
@@ -64,7 +62,7 @@ private:
 	AText* Text2 = nullptr;
 	AText* Text3 = nullptr;
 	APlayerLife* PlayerLifeActor = nullptr;
-	//std::vector<std::vector<ABrick*>> Bricks;
+	
 	USoundPlayer BGMPlayer;
 
 };
