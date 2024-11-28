@@ -75,11 +75,11 @@ void AStage::BeginPlay()
 
 		Text2 = GetWorld()->SpawnActor<AText>();
 
-		Text2->SetTextSpriteName("Number");
+		Text2->SetTextSpriteName("Text_White");
 		Text2->SetOrder(ERenderOrder::UI);
 		Text2->SetTextScale({ 24, 24 });
 		Text2->SetActorLocation({ 420, 524 });
-		Text2->SetText(Stage, false);
+
 
 		Text3 = GetWorld()->SpawnActor<AText>();
 
@@ -120,12 +120,7 @@ void AStage::Tick(float _DeltaTime)
 	Text2->SetActive(Timer(StageCountTime, 0.5f, 1.5f));
 	Text3->SetActive(Timer(StageCountTime, 1.0f, 1.5f));
 
-	if (true != StageSetting)
-	{
-		Map = GetWorld()->SpawnActor<APlayMap>();
-		Map->SetPlayMapType(static_cast<EPlayMapType>(Stage % 4));
-		LoadBrick(Stage, PlayerLifeActor);
-	}
+
 
 	if (true == Timer(StageCountTime, 2.0f) && true == Vaus->GetStartSwitch())
 	{
@@ -185,6 +180,25 @@ void AStage::ActorSpawn()
 	BallActor = GetWorld()->SpawnActor<ABall>();
 	PlayerLifeActor->SetBall(BallActor);
 	PlayerLifeActor->BallList.push_back(BallActor);
+}
+
+
+void AStage::LevelChangeStart()
+{
+	if (33 == Stage)
+	{
+		Stage -= 1;
+	}
+
+	Text2->SetText(Stage, false);
+
+	Map = GetWorld()->SpawnActor<APlayMap>();
+	Map->SetPlayMapType(static_cast<EPlayMapType>(Stage % 4));
+	LoadBrick(Stage, PlayerLifeActor);
+}
+
+void AStage::LevelChangeEnd()
+{
 }
 
 void AStage::LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor)

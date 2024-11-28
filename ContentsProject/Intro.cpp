@@ -180,7 +180,8 @@ void AIntro::Tick(float _DeltaTime)
 	if (21.0f < CheckTime)
 	{
 		BGMPlayer.Stop();
-		UEngineAPICore::GetCore()->OpenLevel("Stage");
+		AStage::Stage = 1;
+		UEngineAPICore::GetCore()->OpenLevel("Stage_Dark");
 	}
 
 	if (true == UEngineInput::GetInst().IsDown(VK_SUBTRACT))

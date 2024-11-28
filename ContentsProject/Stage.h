@@ -37,6 +37,9 @@ public:
 		StageCountTime = _CountTime;
 	}
 
+	virtual void LevelChangeStart() override;
+	virtual void LevelChangeEnd() override;
+
 	void LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor);
 	void ClearBrick();
 

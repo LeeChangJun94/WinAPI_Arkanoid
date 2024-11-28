@@ -96,22 +96,20 @@ void AGameOver::Tick(float _Deltatime)
 
 	CheckTime += _Deltatime;
 
-	if (true == UEngineInput::GetInst().IsDown('A'))
-	{
-		if (33 != AStage::Stage)
-		{
-			UEngineAPICore::GetCore()->OpenLevel("Stage");
-		}
-		else
-		{
-			UEngineAPICore::GetCore()->OpenLevel("Stage_Boss");
-		}
-	}
-
-
-
 	if (10.0f > CheckTime)
 	{
+		if (true == UEngineInput::GetInst().IsDown('A'))
+		{
+			if (33 != AStage::Stage)
+			{
+				UEngineAPICore::GetCore()->OpenLevel("Stage");
+			}
+			else
+			{
+				UEngineAPICore::GetCore()->OpenLevel("Stage_Boss");
+			}
+		}
+
 		Text8->SetText(static_cast<int>(Time - CheckTime), false);
 		return;
 	}

@@ -84,6 +84,7 @@ void APlayer::Tick(float _DeltaTime)
 	}
 
 	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+	UEngineDebug::CoreOutPutString("CurStage : " + std::to_string(AStage::Stage));
 
 	if (true == UEngineInput::GetInst().IsDown('R'))
 	{
@@ -305,14 +306,14 @@ void APlayer::Tick(float _DeltaTime)
 
 	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 
-	if (true == UEngineInput::GetInst().IsPress('D'))
+	if (true == UEngineInput::GetInst().IsPress('D') && 0 != PlayerLife->BallList.size())
 	{
 		if (WindowSize.X - 24 > GetActorLocation().X + VausSize.Half().X)
 		{
 			AddActorLocation(FVector2D::RIGHT * _DeltaTime * (Speed * 2));
 		}
 	}
-	if (true == UEngineInput::GetInst().IsPress('A'))
+	if (true == UEngineInput::GetInst().IsPress('A') && 0 != PlayerLife->BallList.size())
 	{
 		if (24 < GetActorLocation().X - VausSize.Half().X)
 		{
