@@ -2,31 +2,21 @@
 #include "Ball.h"
 #include "Player.h"
 #include "PlayerLife.h"
-
 #include <EngineCore/Level.h>
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineCoreDebug.h>
 #include <EngineCore/2DCollision.h>
-
 #include <EnginePlatform/EngineInput.h>
-
 #include <EnginePlatform/EngineWindow.h>
-
 #include "ContentsEnum.h"
-
-//ABall* ABall::Ball = nullptr;
 
 void ABall::RunSoundPlay()
 {
-	//UEngineDebug::OutPutString("SoundPlay");
 }
 
 ABall::ABall()
 {
-	
-	//Ball = this;
-
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetSprite("Ball.png");
 	SpriteRenderer->SetComponentScale({ 25, 20 });
@@ -37,11 +27,8 @@ ABall::ABall()
 	CollisionComponent->SetComponentScale({ 1, 1 });
 	CollisionComponent->SetCollisionGroup(ECollisionGroup::Ball);
 	CollisionComponent->SetCollisionType(ECollisionType::CirCle);
-
 	
 	Dir.Radian(30.0f);
-
-
 }
 
 ABall::~ABall()
@@ -76,22 +63,6 @@ void ABall::BorderReflect(float _DeltaTime)
 		}
 	}
 }
-
-//void ABall::ReStart(float _DeltaTime)
-//{
-//	StartTime = true;
-//	CheckTime = 0.0f;
-//	CheckTime += _DeltaTime;
-//	if (CheckTime < 5.0f && true == StartTime)
-//	{
-//		APlayer* Vaus = GetWorld()->GetPawn<APlayer>();
-//		SetActorLocation({ Vaus->GetActorLocation().X + 5.0f, Vaus->GetActorLocation().Y - SpriteRenderer->GetComponentScale().Y });
-//		if (true == UEngineInput::GetInst().IsDown('J'))
-//		{
-//			StartTime = false;
-//		}
-//	}
-//}
 
 void ABall::SetBallSpeed(float _Speed)
 {
@@ -138,7 +109,7 @@ void ABall::Tick(float _DeltaTime)
 
 	BorderReflect(_DeltaTime);
 
-	if (CheckTime < 5.0f && true == StartTime)
+	if (CheckTime < 4.0f && true == StartTime)
 	{
 		switch (StartLocation)
 		{
@@ -162,7 +133,7 @@ void ABall::Tick(float _DeltaTime)
 			StartLocation = StartLocationType::RIGHT;
 		}
 
-		if (true == UEngineInput::GetInst().IsDown('J'))
+		if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
 		{
 			StartTime = false;
 		}

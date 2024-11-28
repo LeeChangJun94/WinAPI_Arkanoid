@@ -16,24 +16,15 @@
 #include <EnginePlatform/EngineWindow.h>
 #include "ContentsEnum.h"
 
-//APlayer* APlayer::Vaus = nullptr;
 
 void APlayer::RunSoundPlay()
 {
-	//UEngineDebug::OutPutString("SoundPlay");
 }
 
 APlayer::APlayer()
 {
-	//Vaus = this;
-	
-	//SetActorLocation({300, 700});
-
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	//SpriteRenderer->SetSprite("Vaus_Idle.png");
-	//SpriteRenderer->SetComponentScale({ 96, 24 });
-	SetActorLocation({ 336,700 });
-	//SetActorScale(SpriteRenderer->GetComponentScale());
+	SetActorLocation({ 336,708 });
 
 	SpriteRenderer->CreateAnimation("Vaus_Idle", "Vaus_Idle.png", 0, 5, 0.1f);
 	SpriteRenderer->CreateAnimation("Vaus_Create", "Vaus_Create.png", 0, 4, 0.1f);
@@ -52,14 +43,12 @@ APlayer::APlayer()
 	SpriteRenderer->SetAnimationEvent("Vaus_Destroy1", 2, std::bind(&APlayer::DestroyDone, this));
 	SpriteRenderer->SetAnimationEvent("Vaus_Destroy2", 3, std::bind(&APlayer::VausReset, this));
 	SpriteRenderer->SetAnimationEvent("Vaus_Create", 4, std::bind(&APlayer::CreateDone, this));
-	//SpriteRenderer->SetAnimationEvent("Vaus_TLaser", 8, std::bind(&APlayer::LaserDone, this));
 	
 	CollisionComponent = CreateDefaultSubObject<U2DCollision>();
 	CollisionComponent->SetComponentLocation({ 0, 0 });
 	CollisionComponent->SetComponentScale({ 96, 24 });
 	CollisionComponent->SetCollisionGroup(ECollisionGroup::Vaus);
 	CollisionComponent->SetCollisionType(ECollisionType::Rect);
-
 }
 
 APlayer::~APlayer()
@@ -90,7 +79,6 @@ void APlayer::Tick(float _DeltaTime)
 	{
 		UEngineAPICore::GetCore()->OpenLevel("Title");
 	}
-
 
 	ABall* ResultBall = reinterpret_cast<ABall*>(CollisionComponent->CollisionOnce(ECollisionGroup::Ball));
 
@@ -446,7 +434,7 @@ void APlayer::DestroyDone()
 
 void APlayer::VausReset()
 {
-	SetActorLocation({ 336,700 });
+	SetActorLocation({ 336,708 });
 	SpriteRenderer->SetComponentScale({ 96, 24 });
 	SpriteRenderer->ChangeAnimation("Vaus_Create");
 	StartSwitch = true;

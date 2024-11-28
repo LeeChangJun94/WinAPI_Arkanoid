@@ -195,6 +195,7 @@ void AStage::LevelChangeStart()
 	Map = GetWorld()->SpawnActor<APlayMap>();
 	Map->SetPlayMapType(static_cast<EPlayMapType>(Stage % 4));
 	LoadBrick(Stage, PlayerLifeActor);
+	BrickClear = true;
 }
 
 void AStage::LevelChangeEnd()
@@ -295,7 +296,6 @@ void AStage::StageResetSetting(int _StageCount)
 	Stage += _StageCount;
 	StageStartSound = true;
 	StageSetting = false;
-	BrickClear = true;
 	Vaus->SetStartSwitch(true);
 	Vaus->SetActive(false);
 	Vaus->ChangeState(PlayerState::Create);

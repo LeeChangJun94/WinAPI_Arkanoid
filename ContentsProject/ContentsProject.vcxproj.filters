@@ -28,7 +28,6 @@
     <ClInclude Include="Ball.h">
       <Filter>ContentsObject</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h" />
     <ClInclude Include="TileMapEditor.h">
       <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
@@ -96,6 +95,12 @@
     <ClInclude Include="GameOver.h">
       <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>ContentsObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item_Break.h">
+      <Filter>ContentsObject\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -125,7 +130,6 @@
     <ClCompile Include="Ball.cpp">
       <Filter>ContentsObject</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp" />
     <ClCompile Include="TileMapEditor.cpp">
       <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
@@ -193,6 +197,12 @@
     <ClCompile Include="GameOver.cpp">
       <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>ContentsObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item_Break.cpp">
+      <Filter>ContentsObject\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -233,6 +243,9 @@
     </Filter>
     <Filter Include="ContentsObject\GameMode\InOuttro">
       <UniqueIdentifier>{03cae834-e0fc-4419-a6b3-96b670b472f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Item">
+      <UniqueIdentifier>{d0d81463-394c-4e10-8d36-bfe5dc1e6879}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -22,7 +22,7 @@ AItem::AItem()
 	SpriteRenderer2->SetSprite("Item2.png");
 	SpriteRenderer1->SetComponentScale({ 48, 21 });
 	SpriteRenderer2->SetComponentScale(SpriteRenderer1->GetComponentScale());
-	SpriteRenderer2->SetComponentLocation({ SpriteRenderer1->GetComponentLocation().X + 2.0f, SpriteRenderer1->GetComponentLocation().Y + 2.0f});
+	SpriteRenderer2->SetComponentLocation({ SpriteRenderer1->GetComponentLocation().X + 3.0f, SpriteRenderer1->GetComponentLocation().Y + 3.0f});
 	//SetActorScale(SpriteRenderer1->GetComponentScale());
 	
 	SpriteRenderer1->SetOrder(1);

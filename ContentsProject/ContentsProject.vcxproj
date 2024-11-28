@@ -151,6 +151,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Item_Break.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameOver.h">
       <SubType>
       </SubType>
@@ -279,6 +283,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Item_Break.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameOver.cpp">
       <SubType>
       </SubType>
