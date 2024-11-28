@@ -15,6 +15,9 @@ public:
 	AItem_Break& operator=(const AItem_Break& _Other) = delete;
 	AItem_Break& operator=(AItem_Break&& _Other) noexcept = delete;
 
+	void BeginPlay();
+	void Tick(float _DeltaTime);
+
 protected:
 
 private:
