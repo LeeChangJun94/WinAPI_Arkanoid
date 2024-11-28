@@ -180,7 +180,7 @@ void ContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<AGameOver, AActor>("GameOver");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapEditor, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Stage_Boss");
+	UEngineAPICore::GetCore()->OpenLevel("Title");
 }
 
 void ContentsCore::Tick()

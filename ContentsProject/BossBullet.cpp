@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "Stage_Boss.h"
 #include "Boss.h"
+#include "Ball.h"
+#include "PlayerLife.h"
 #include <EngineCore/2DCollision.h>
 #include <EngineBase/EngineMath.h>
 #include "ContentsEnum.h"
@@ -32,8 +34,18 @@ void ABossBullet::Attack()
 	
 	if (nullptr != VausResult)
 	{
-		AStage_Boss* Stage_Boss = GetWorld()->GetGameMode<AStage_Boss>();
-		Stage_Boss->StageResetSetting();
+		APlayerLife* PlayerLife = Vaus->GetPlayerLife();
+		std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
+		std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
+		for (; BalliterStart != BalliterEnd; )
+		{
+			(*BalliterStart)->Destroy();
+			(*BalliterStart) = nullptr;
+			BalliterStart = PlayerLife->BallList.erase(BalliterStart);
+		}
+		PlayerLife->VausDestroy = true;
+		//AStage_Boss* Stage_Boss = GetWorld()->GetGameMode<AStage_Boss>();
+		//Stage_Boss->StageResetSetting();
 	}
 }
 

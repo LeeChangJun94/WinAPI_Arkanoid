@@ -6,6 +6,7 @@ class APlayer;
 class ABall;
 class ADeathLine;
 class USpriteRenderer;
+class ABoss;
 
 // Ό³Έν :
 class APlayerLife : public AActor
@@ -53,9 +54,14 @@ public:
 		DeathLine = _DeathLine;
 	}
 	
+	void SetBoss(ABoss* _Boss)
+	{
+		Boss = _Boss;
+	}
 
 	std::list<ABall*> BallList;
 	static int LifeCount;
+	bool VausDestroy;
 
 protected:
 
@@ -64,6 +70,7 @@ private:
 	ABall* Ball = nullptr;
 	ADeathLine* DeathLine = nullptr;
 	USpriteRenderer* SpriteRenderer = nullptr;
+	ABoss* Boss = nullptr;
 
 	//APlayerLife* PlayerLife = nullptr;
 

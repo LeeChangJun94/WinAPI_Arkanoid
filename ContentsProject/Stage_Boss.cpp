@@ -40,7 +40,7 @@ AStage_Boss::~AStage_Boss()
 void AStage_Boss::BeginPlay()
 {
 	Super::BeginPlay();
-
+	AStage::Stage = 33;
 	Boss = GetWorld()->SpawnActor<ABoss>();
 	Boss->SetActorLocation({ 336, 312 });
 
@@ -68,6 +68,7 @@ void AStage_Boss::BeginPlay()
 
 	PlayerLifeActor = GetWorld()->SpawnActor<APlayerLife>();
 	PlayerLifeActor->SetDeathLine(DeathLineActor);
+	PlayerLifeActor->SetBoss(Boss);
 
 	Vaus->SetPlayerLife(PlayerLifeActor);
 }

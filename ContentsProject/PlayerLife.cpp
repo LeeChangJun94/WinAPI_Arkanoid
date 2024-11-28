@@ -3,6 +3,7 @@
 #include "PlayerLife.h"
 #include "DeathLine.h"
 #include "Ball.h"
+#include "Boss.h"
 #include "GameOver.h"
 
 #include <EngineCore/SpriteRenderer.h>
@@ -44,9 +45,6 @@ void APlayerLife::BeginPlay()
 
 bool APlayerLife::DeathCheck()
 {
-	//FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
-	//float BallY = Ball->GetActorLocation().Y;
-	
 	ABall* BallResult = reinterpret_cast<ABall*>(DeathLine->GetCollisionComponent()->CollisionOnce(ECollisionGroup::Ball));
 
 	if (nullptr != BallResult)
@@ -57,11 +55,6 @@ bool APlayerLife::DeathCheck()
 	}
 
 	return false;
-	//if (WindowSize.Y > BallY)
-	//{
-	//	return false;
-	//}
-	//Ball->ReStart(0.0f);
 }
 
 void APlayerLife::LifeCheck()
@@ -99,8 +92,13 @@ void APlayerLife::Tick(float _DeltaTime)
 	UEngineDebug::CoreOutPutString("PlayerLife : " + std::to_string(LifeCount));
 	UEngineDebug::CoreOutPutString("BallListCount : " + std::to_string(BallList.size()));
 
-	if (true == DeathCheck())
+	if (true == DeathCheck() || true == VausDestroy)
 	{
+		if (true == VausDestroy)
+		{
+			Boss->SetCountTime(-1.0f);
+		}
+		VausDestroy = false;
 		if (0 == BallList.size())
 		{
 			Vaus->ChangeState(PlayerState::Destroy);

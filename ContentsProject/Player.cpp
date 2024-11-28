@@ -410,7 +410,6 @@ void APlayer::Laser(float _DeltaTime)
 		if (2 >= BulletPtr.size())
 		{
  			ABullet* Ptr = GetWorld()->SpawnActor<ABullet>();
-			//Ptr->SetActorLocation(GetActorLocation());
 			BulletPtr.push_back(Ptr);
 		}
 	}
