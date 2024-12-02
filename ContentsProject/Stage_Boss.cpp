@@ -19,6 +19,8 @@
 #include "PlayerLife.h"
 #include "BossBullet.h"
 #include "ContentsEnum.h"
+#include "TitleGamemode.h"
+
 #include <EngineBase/EngineFile.h>
 #include <EngineCore/2DCollision.h>
 #include <EngineBase/EngineDirectory.h>
@@ -78,7 +80,14 @@ void AStage_Boss::BeginPlay()
 void AStage_Boss::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-		
+	
+	if (true == UEngineInput::GetInst().IsDown('T'))
+	{
+		BGMPlayer.Stop();
+		UEngineAPICore::GetCore()->ResetLevel<ATitleGameMode, AActor>("Title");
+		UEngineAPICore::GetCore()->OpenLevel("Title");
+	}
+
 	BossCountTime += _DeltaTime;
 	
 	if (true == BossStartSound && 0.1f > BossCountTime)

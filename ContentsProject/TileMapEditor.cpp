@@ -1,10 +1,10 @@
 #include "PreCompile.h"
 #include "TileMapEditor.h"
-//#include "SelectBrick.h"
 #include "Brick.h"
 #include "PlayMap.h"
 #include "GlobalValue.h"
 #include "ContentsEnum.h"
+#include "TitleGameMode.h"
 #include <EngineCore/Level.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
@@ -53,6 +53,11 @@ void ATileMapEditor::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	if (true == UEngineInput::GetInst().IsDown('T'))
+	{
+		UEngineAPICore::GetCore()->ResetLevel<ATitleGameMode, AActor>("Title");
+		UEngineAPICore::GetCore()->OpenLevel("Title");
+	}
 
 	if (true == UEngineInput::GetInst().IsDown('S'))
 	{

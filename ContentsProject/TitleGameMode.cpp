@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "TitleGameMode.h"
 #include "Score.h"
+#include "PlayerLife.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
@@ -11,6 +12,7 @@
 #include "Score.h"
 #include "Player.h"
 #include "TitleLogo.h"
+#include "TileMapEditor.h"
 
 ATitleGameMode::ATitleGameMode()
 {
@@ -78,12 +80,19 @@ void ATitleGameMode::Tick(float _DeltaTime)
 		UEngineAPICore::GetCore()->ResetLevel<AIntro, AActor>("Intro");
 		UEngineAPICore::GetCore()->OpenLevel("Intro");
 	}
+
+	if (true == UEngineInput::GetInst().IsDown('M'))
+	{
+		UEngineAPICore::GetCore()->ResetLevel<ATileMapEditor, AActor>("Tile");
+		UEngineAPICore::GetCore()->OpenLevel("Tile");
+	}
 }
 
 void ATitleGameMode::LevelChangeStart()
 {
 	Super::LevelChangeStart();
 	APlayer::PlayerScore = 0;
+	APlayerLife::LifeCount = 2;
 }
 
 void ATitleGameMode::LevelChangeEnd()

@@ -108,6 +108,13 @@ void AStage::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	
+	if (true == UEngineInput::GetInst().IsDown('T'))
+	{
+		BGMPlayer.Stop();
+		UEngineAPICore::GetCore()->ResetLevel<ATitleGameMode, AActor>("Title");
+		UEngineAPICore::GetCore()->OpenLevel("Title");
+	}
+
 	UEngineDebug::CoreOutPutString("BrickListSize : " + std::to_string(BrickList.size()));
 	StageCountTime += _DeltaTime;
 	
