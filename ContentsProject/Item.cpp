@@ -65,6 +65,9 @@ void AItem::ItemSlowEffect()
 	}
 
 	Vaus->SlowEffect = true;
+	Vaus->CatchEffect = false;
+
+	Vaus->ChangeState(PlayerState::Idle);
 }
 
 void AItem::ItemCatch()
@@ -74,15 +77,18 @@ void AItem::ItemCatch()
 
 void AItem::ItemCatchEffect()
 {
-	//std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
-	//std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
-	//for (; BalliterStart != BalliterEnd; ++BalliterStart)
-	//{
-	//	(*BalliterStart)->BallCatch = true;
-	//}
-
+	if (true == Vaus->SlowEffect)
+	{
+		Vaus->SlowEffect = false;
+		std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
+		std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
+		for (; BalliterStart != BalliterEnd; ++BalliterStart)
+		{
+			(*BalliterStart)->SetBallSpeed(500.0f);
+		}
+	}
 	Vaus->CatchEffect = true;
-
+	Vaus->ChangeState(PlayerState::Idle);
 }
 
 void AItem::ItemLaser()
@@ -92,7 +98,18 @@ void AItem::ItemLaser()
 
 void AItem::ItemLaserEffect()
 {
+	if (true == Vaus->SlowEffect)
+	{
+		Vaus->SlowEffect = false;
+		std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
+		std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
+		for (; BalliterStart != BalliterEnd; ++BalliterStart)
+		{
+			(*BalliterStart)->SetBallSpeed(500.0f);
+		}
+	}
 	Vaus->ChangeState(PlayerState::Laser);
+	Vaus->CatchEffect = false;
 }
 
 void AItem::ItemEnlarge()
@@ -102,7 +119,18 @@ void AItem::ItemEnlarge()
 
 void AItem::ItemEnlargeEffect()
 {
+	if (true == Vaus->SlowEffect)
+	{
+		Vaus->SlowEffect = false;
+		std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
+		std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
+		for (; BalliterStart != BalliterEnd; ++BalliterStart)
+		{
+			(*BalliterStart)->SetBallSpeed(500.0f);
+		}
+	}
 	Vaus->ChangeState(PlayerState::Enlarge);
+	Vaus->CatchEffect = false;
 }
 
 void AItem::ItemDisruption()
@@ -113,7 +141,17 @@ void AItem::ItemDisruption()
 void AItem::ItemDisruptionEffect()
 {
 	UEngineRandom Random;
-	
+	if (true == Vaus->SlowEffect)
+	{
+		Vaus->SlowEffect = false;
+		std::list<ABall*>::iterator BalliterStart = PlayerLife->BallList.begin();
+		std::list<ABall*>::iterator BalliterEnd = PlayerLife->BallList.end();
+		for (; BalliterStart != BalliterEnd; ++BalliterStart)
+		{
+			(*BalliterStart)->SetBallSpeed(500.0f);
+		}
+	}
+
 	for (size_t i = PlayerLife->BallList.size(); i < 3; ++i)
 	{
 		float RandomValue = Random.Randomfloat(-5.0f, 5.0f);
@@ -125,6 +163,8 @@ void AItem::ItemDisruptionEffect()
 		BallActor->SetActorLocation((*Balliter)->GetActorLocation());
 		BallActor->SetBallDir((*Balliter)->GetBallDir().X + RandomValue, (*Balliter)->GetBallDir().Y + RandomValue);
 	}
+	Vaus->CatchEffect = false;
+	Vaus->ChangeState(PlayerState::Idle);
 }
 
 void AItem::ItemBreak()
