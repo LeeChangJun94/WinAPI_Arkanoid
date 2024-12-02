@@ -57,8 +57,6 @@ public:
 
 	std::list<ABullet*> BulletPtr;
 
-	void RunSoundPlay();
-
 	void LevelChangeStart() override;
 
 	void LevelChangeEnd();
@@ -102,6 +100,8 @@ public:
 
 	bool CatchEffect = false;
 	bool SlowEffect = false;
+	
+	static int PlayerScore;
 
 protected:
 
@@ -131,7 +131,7 @@ private:
 
 	bool StartSwitch = true;
 
-	int PlayerScore = 0;
+
 
 	void LaserStart();
 	void LaserDone();

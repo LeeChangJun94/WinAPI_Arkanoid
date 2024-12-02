@@ -53,6 +53,7 @@ void AStage::BeginPlay()
 		Score->SetOrder(ERenderOrder::UI);
 		Score->SetTextScale({ 24, 24 });
 		Score->SetActorLocation({ 156, 36 });
+		Score->SetScoreType(EScoreType::SCORE);
 	}
 
 	{
@@ -62,6 +63,7 @@ void AStage::BeginPlay()
 		HighScore->SetOrder(ERenderOrder::UI);
 		HighScore->SetTextScale({ 24, 24 });
 		HighScore->SetActorLocation({ 396, 36 });
+		HighScore->SetScoreType(EScoreType::HIGHSCORE);
 	}
 
 	{
@@ -185,6 +187,7 @@ void AStage::ActorSpawn()
 
 void AStage::LevelChangeStart()
 {
+	Super::LevelChangeStart();
 	if (33 == Stage)
 	{
 		Stage -= 1;
@@ -200,6 +203,8 @@ void AStage::LevelChangeStart()
 
 void AStage::LevelChangeEnd()
 {
+	Super::LevelChangeEnd();
+	BGMPlayer.Stop();
 }
 
 void AStage::LoadBrick(int _Stage, APlayerLife* _PlayerLifeActor)

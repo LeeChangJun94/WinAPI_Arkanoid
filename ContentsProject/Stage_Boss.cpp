@@ -53,6 +53,7 @@ void AStage_Boss::BeginPlay()
 		Score->SetOrder(ERenderOrder::UI);
 		Score->SetTextScale({ 24, 24 });
 		Score->SetActorLocation({ 156, 36 });
+		Score->SetScoreType(EScoreType::SCORE);
 	}
 
 	{
@@ -62,6 +63,7 @@ void AStage_Boss::BeginPlay()
 		HighScore->SetOrder(ERenderOrder::UI);
 		HighScore->SetTextScale({ 24, 24 });
 		HighScore->SetActorLocation({ 396, 36 });
+		HighScore->SetScoreType(EScoreType::HIGHSCORE);
 	}
 
 	ADeathLine* DeathLineActor = GetWorld()->SpawnActor<ADeathLine>();
@@ -160,6 +162,7 @@ bool AStage_Boss::Timer(float _CountTime, float _SetTime)
 
 void AStage_Boss::StageResetSetting(int _StageCount)
 {
+	BGMPlayer.Stop();
 	AStage::Stage += _StageCount;
 	AStage::StageStartSound = true;
 	StageSetting = false;
@@ -181,6 +184,7 @@ void AStage_Boss::StageResetSetting(int _StageCount)
 
 void AStage_Boss::StageResetSetting()
 {
+	BGMPlayer.Stop();
 	StageSetting = false;
 	BossStartSound = true;
 	Vaus->SetStartSwitch(true);

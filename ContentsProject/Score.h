@@ -5,6 +5,12 @@
 #include <EngineCore/ImageManager.h>
 #include <EngineCore/SpriteRenderer.h>
 
+enum class EScoreType
+{
+	SCORE,
+	HIGHSCORE,
+};
+
 // Ό³Έν :
 class AScore : public AActor
 {
@@ -26,6 +32,11 @@ public:
 		TextScale = _TextScale;
 	}
 
+	void SetScoreType(EScoreType _ScoreType)
+	{
+		ScoreType = _ScoreType;
+	}
+
 	template<typename EnumType>
 	void SetOrder(EnumType _Order)
 	{
@@ -41,6 +52,10 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+	EScoreType ScoreType = EScoreType::SCORE;
+
+	int HighScore = 50000;
+
 	std::string TextSpriteName;
 	FVector2D TextScale;
 	std::vector<class USpriteRenderer*> Renders;

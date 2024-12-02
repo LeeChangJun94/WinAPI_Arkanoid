@@ -30,6 +30,7 @@ void AScore::SetTextSpriteName(const std::string _Text)
 
 void AScore::BeginPlay()
 {
+	Super::BeginPlay();
 	Vaus = GetWorld()->GetPawn<APlayer>();
 }
 
@@ -37,7 +38,24 @@ void AScore::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	SetValue(Vaus->GetPlayerScore());
+	switch (ScoreType)
+	{
+	case EScoreType::SCORE:
+		SetValue(Vaus->GetPlayerScore());
+		break;
+	case EScoreType::HIGHSCORE:
+		if (HighScore > Vaus->GetPlayerScore())
+		{
+			SetValue(HighScore);
+		}
+		else
+		{
+			SetValue(Vaus->GetPlayerScore());
+		}
+		break;
+	default:
+		break;
+	}
 }
 
 void AScore::SetOrder(int _Order)

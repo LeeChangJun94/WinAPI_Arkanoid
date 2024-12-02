@@ -16,6 +16,7 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineCoreDebug.h>
 #include "ContentsEnum.h"
+#include "Score.h"
 
 #include "TitleLogo.h"
 
@@ -31,6 +32,25 @@ void AOuttro::BeginPlay()
 {
 	Super::BeginPlay();
 
+	{
+		AScore* Score = GetWorld()->SpawnActor<AScore>();
+
+		Score->SetTextSpriteName("Score");
+		Score->SetOrder(ERenderOrder::UI);
+		Score->SetTextScale({ 24, 24 });
+		Score->SetActorLocation({ 156, 36 });
+		Score->SetScoreType(EScoreType::SCORE);
+	}
+
+	{
+		AScore* HighScore = GetWorld()->SpawnActor<AScore>();
+
+		HighScore->SetTextSpriteName("Score");
+		HighScore->SetOrder(ERenderOrder::UI);
+		HighScore->SetTextScale({ 24, 24 });
+		HighScore->SetActorLocation({ 396, 36 });
+		HighScore->SetScoreType(EScoreType::HIGHSCORE);
+	}
 	BGMPlayer = UEngineSound::Play("04 Ending.mp3");
 	BGMPlayer.SetVolume(0.2f);
 

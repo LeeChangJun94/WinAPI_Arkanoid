@@ -3,7 +3,7 @@
 
 AItem_Break::AItem_Break()
 {
-	SpriteRenderer = CreateDefaultSubObject<UEngineSprite>();
+	//SpriteRenderer = CreateDefaultSubObject<UEngineSprite>();
 
 }
 

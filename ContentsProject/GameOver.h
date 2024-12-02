@@ -2,6 +2,7 @@
 #include <EnginePlatform/EngineSound.h>
 
 class AText;
+class AScore;
 
 class AGameOver : public AGameMode
 {
@@ -33,6 +34,9 @@ private:
 	AText* Text9 = nullptr;
 
 	USoundPlayer GameOverSound;
+
+	AScore* Score = nullptr;
+	AScore* HighScore = nullptr;
 
 	int Time = 10;
 	float CheckTime = 0.0f;

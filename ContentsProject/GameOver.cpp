@@ -6,6 +6,7 @@
 #include "Stage.h"
 #include "ContentsEnum.h"
 #include "TitleGameMode.h"
+#include "Score.h"
 #include <EngineCore/EngineAPICore.h>
 #include <EnginePlatform/EngineInput.h>
 
@@ -20,6 +21,26 @@ AGameOver::~AGameOver()
 void AGameOver::BeginPlay()
 {
 	Super::BeginPlay();
+
+	{
+		AScore* Score = GetWorld()->SpawnActor<AScore>();
+
+		Score->SetTextSpriteName("Score");
+		Score->SetOrder(ERenderOrder::UI);
+		Score->SetTextScale({ 24, 24 });
+		Score->SetActorLocation({ 156, 36 });
+		Score->SetScoreType(EScoreType::SCORE);
+	}
+
+	{
+		AScore* HighScore = GetWorld()->SpawnActor<AScore>();
+
+		HighScore->SetTextSpriteName("Score");
+		HighScore->SetOrder(ERenderOrder::UI);
+		HighScore->SetTextScale({ 24, 24 });
+		HighScore->SetActorLocation({ 396, 36 });
+		HighScore->SetScoreType(EScoreType::HIGHSCORE);
+	}
 
 	APlayMap* Map = GetWorld()->SpawnActor<APlayMap>();
 	Map->SetPlayMapType(EPlayMapType::TYPE_DARK);

@@ -1,6 +1,8 @@
 #pragma once
 #include <EngineCore/GameMode.h>
 
+class AScore;
+
 // Ό³Έν :
 class ATitleGameMode : public AGameMode
 {
@@ -15,12 +17,17 @@ public:
 	ATitleGameMode& operator=(const ATitleGameMode& _Other) = delete;
 	ATitleGameMode& operator=(ATitleGameMode&& _Other) noexcept = delete;
 
+	virtual void LevelChangeStart() override;
+	virtual void LevelChangeEnd() override;
+
 protected:
 	void BeginPlay() override;
 
 	void Tick(float _DeltaTime) override;
 
 private:
+	AScore* Score = nullptr;
+	AScore* HighScore = nullptr;
 	class USpriteRenderer* SpriteRenderer = nullptr;;
 	float CheckTime = 0.0f;
 };

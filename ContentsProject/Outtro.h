@@ -5,6 +5,7 @@
 class APlayMap;
 class AInOuttro_StarShip;
 class AText;
+class AScore;
 
 // Ό³Έν :
 class AOuttro : public AGameMode
@@ -42,7 +43,8 @@ private:
 
 	USoundPlayer BGMPlayer;
 
-
+	AScore* Score = nullptr;
+	AScore* HighScore = nullptr;
 
 	float CheckTime = 0.0f;
 };

@@ -6,6 +6,7 @@ class APlayMap;
 class AInOuttro_Laser;
 class AInOuttro_StarShip;
 class AText;
+class AScore;
 
 // Ό³Έν :
 class AIntro : public AGameMode
@@ -44,6 +45,8 @@ private:
 
 	USoundPlayer BGMPlayer;
 
+	AScore* Score = nullptr;
+	AScore* HighScore = nullptr;
 
 	float CheckTime = 0.0f;
 };

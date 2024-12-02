@@ -174,7 +174,7 @@ void ContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
 	UEngineAPICore::GetCore()->CreateLevel<AIntro, AActor>("Intro");
 	UEngineAPICore::GetCore()->CreateLevel<AStage, APlayer>("Stage");
-	UEngineAPICore::GetCore()->CreateLevel<AStage_Dark, AActor>("Stage_Dark");
+	UEngineAPICore::GetCore()->CreateLevel<AStage_Dark, APlayer>("Stage_Dark");
 	UEngineAPICore::GetCore()->CreateLevel<AStage_Boss, APlayer>("Stage_Boss");
 	UEngineAPICore::GetCore()->CreateLevel<AOuttro, AActor>("Outtro");
 	UEngineAPICore::GetCore()->CreateLevel<AGameOver, AActor>("GameOver");

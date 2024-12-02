@@ -16,10 +16,7 @@
 #include <EnginePlatform/EngineWindow.h>
 #include "ContentsEnum.h"
 
-
-void APlayer::RunSoundPlay()
-{
-}
+int APlayer::PlayerScore = 0;
 
 APlayer::APlayer()
 {
