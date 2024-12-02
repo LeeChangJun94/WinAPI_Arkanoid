@@ -274,7 +274,8 @@ void AItem::BeginPlay()
 		ItemDisruption();
 		break;
 	case ModeState::Break:
-		ItemBreak();
+		this->Destroy();
+		//ItemBreak();
 		break;
 	case ModeState::Player:
 		if (5 == PlayerLife->GetLifeCount())
