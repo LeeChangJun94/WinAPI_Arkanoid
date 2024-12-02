@@ -391,10 +391,10 @@ void APlayer::Laser(float _DeltaTime)
 {
 	if (true == UEngineInput::GetInst().IsDown(VK_SPACE))
 	{
-		LaserSound = UEngineSound::Play("Item_Laser.wav");
-		LaserSound.SetVolume(0.2f);
 		if (2 >= BulletPtr.size())
 		{
+			LaserSound = UEngineSound::Play("Item_Laser.wav");
+			LaserSound.SetVolume(0.2f);
  			ABullet* Ptr = GetWorld()->SpawnActor<ABullet>();
 			BulletPtr.push_back(Ptr);
 		}
